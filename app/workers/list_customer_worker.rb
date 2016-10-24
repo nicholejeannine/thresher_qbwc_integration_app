@@ -1,4 +1,3 @@
-require 'qbwc'
 class ListCustomerWorker < QBWC::Worker
 
   # def should_run?
@@ -9,7 +8,6 @@ class ListCustomerWorker < QBWC::Worker
     {
         :customer_query_rq => {
             :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
-            :active_status => 'All',
             :max_returned => 100
         }
     }
