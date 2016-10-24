@@ -44,7 +44,7 @@ QBWC.configure do |c|
   c.minutes_to_run = nil
 
   # In the event of an error running requests, :stop all work or :continue with the next request?
-  c.on_error = :stop
+  c.on_error = :continue
 
   # Logger to use.
   c.logger = Rails.logger
