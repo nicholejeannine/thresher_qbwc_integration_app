@@ -23,5 +23,3 @@ Things you may want to cover:
 
 * ...
 
-* I pity the poor fool that don't use passwords!
-
