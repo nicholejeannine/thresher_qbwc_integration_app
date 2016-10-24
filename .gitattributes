@@ -1,0 +1,7 @@
+# Set default line endings
+* text=auto
+
+# Binary files should not be modified
+*.png binary
+*.jpg binary
+*.jpeg binary
