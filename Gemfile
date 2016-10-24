@@ -49,3 +49,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Quickbooks web connector
 gem 'qbwc', github: 'qbwc/qbwc'
+
+# because winblows is suck, you add this thing:
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
