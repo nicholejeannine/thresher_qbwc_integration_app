@@ -16,6 +16,7 @@ lib-cov
 capybara-*.html
 /tmp
 config/secrets.yml
+config/initializers/qbwc.rb
 .rvmrc
 .powenv
 *~
