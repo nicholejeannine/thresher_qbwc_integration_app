@@ -18,9 +18,10 @@ class ListCustomerWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
 
     response['customer_ret'].each do |qb_cus|
-      qb_id = qb_cus['list_id']
-      qb_name = qb_cus['name']
-      Rails.logger.info("#{qb_id} #{qb_name}")
+      list_id = qb_cus['list_id']
+      name = qb_cus['name']
+      Customer.create(:list_id => list_id, :name => name)
+      Rails.logger.info("#{list_id} #{name}")
     end
   end
 
