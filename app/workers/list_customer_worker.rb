@@ -1,8 +1,8 @@
 class ListCustomerWorker < QBWC::Worker
 
-  def should_run?
-    true
-  end
+  # def should_run?
+  #   true
+  # end
 
   def requests(job, session, data)
     {
