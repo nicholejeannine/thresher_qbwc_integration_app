@@ -2,7 +2,7 @@ require 'qbwc'
 namespace :quickbooks do
   desc "TODO"
   task tables: :environment do
-   queries = ['Customer', 'Estimate', 'Invoice', 'PurchaseOrder', 'SalesOrder']
+    queries = ['Customer', 'Estimate', 'Invoice', 'PurchaseOrder', 'SalesOrder']
    lines = []
    queries.each do |q|
      lines << "class Create#{q.pluralize} < ActiveRecord::Migration[5.0]"
@@ -46,5 +46,35 @@ namespace :quickbooks do
        lines << ""
       end
     puts lines
- end
+  end
+
+  desc "TODO"
+  task lookups: :environment do
+    queries = QBWC.parser.types(/Ref$/).sort!
+   lines = []
+   queries.each do |q|
+    q.remove!(/Ref$/)
+     lines << "class Create#{q.pluralize} < ActiveRecord::Migration[5.0]"
+     lines << " def change"
+     lines << "  create_table :#{q.tableize} do |t|"
+       xml = QBWC.parser.describe("#{q}Ref")
+         xml.elements.each do |x|
+        name = x.name.underscore
+        klass = x.children.text.downcase!
+           if klass === 'idtype'
+             lines << "     t.string :#{name}, :null => false, :unique => true"
+            else
+             lines << "     t.string :#{name}"
+            end
+        end
+       lines << ""
+       lines << "   t.timestamps :null => false"
+       lines << "  end"
+       lines << " end"
+       lines << "end"
+       lines << ""
+       lines << ""
+      end
+    puts lines
+  end
 end
