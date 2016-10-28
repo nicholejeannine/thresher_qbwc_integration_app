@@ -1,8 +1,8 @@
-class <%= name.titleize %>ListWorker < QBWC::Worker
+class EstimateListWorker < QBWC::Worker
 
   def requests(job, session, data)
     {
-      :<%= name.underscore %>_query_rq => {
+      :estimate_query_rq => {
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
         :max_returned => 100
       }
@@ -14,10 +14,10 @@ class <%= name.titleize %>ListWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     #return if complete
-    response['<%=name.underscore%>_ret'].each do |qb|
-      @<%=name.underscore%> = <%=name.camelize%>.find_or_create_by(:list_id => qb['list_id'], qb.from_qbxml)
-      Rails.logger.info("<%=name.camelize%>: #{qb}")
-      Rails.logger.error(@<%=name.underscore%>.errors) if @<%=name.underscore%>.errors?
+    response['estimate_ret'].each do |qb|
+      @estimate = Estimate.find_or_create_by(':list_id' => qb['list_id'], qb.from_qbxml)
+      Rails.logger.info("Estimate: #{qb}")
+      Rails.logger.error(@estimate.errors) if @estimate.errors?
     end
   end
 end
