@@ -5,3 +5,5 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+QBWC.clear_jobs
+QBWC.add_job(:list_customers, true, '', ListCustomerWorker)
