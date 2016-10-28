@@ -20,7 +20,7 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb_cus|
       list_id = qb_cus['list_id']
       name = qb_cus['name']
-      Customer.create(:list_id => list_id, :name => name)
+      Customer.create(:list_id => list_id, :notes => response)
       Rails.logger.info("#{list_id} #{name}")
     end
   end
