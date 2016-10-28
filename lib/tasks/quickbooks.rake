@@ -1,4 +1,5 @@
 require 'qbwc'
+
 namespace :quickbooks do
   desc "TODO"
   task tables: :environment do
@@ -13,13 +14,15 @@ namespace :quickbooks do
         name = x.name.underscore
         klass = x.children.text.downcase
         if name.match /ref$|address$|block$|info$|ret$|txn$/
-           lines << "   t.reftype :#{name}"
+           lines << "   t.string :#{name} # TODO references #{name}"
         else
            case klass
             when "strtype", "guidtype", "idtype"
              lines << "   t.string :#{name}"
             when "datetimetype"
              lines << "   t.datetime :#{name}"
+           when "enumtype"
+           lines << "   t.string :#{name} # TODO enum type - #{name}"
             when "inttype"
              lines << "   t.integer :#{name}"
             when "datetype"
@@ -38,7 +41,7 @@ namespace :quickbooks do
         end
        end
        lines << ""
-       lines << "   t.timestamps false"
+       lines << "   t.timestamps null: false"
        lines << "  end"
        lines << " end"
        lines << "end"
@@ -62,9 +65,9 @@ namespace :quickbooks do
         name = x.name.underscore
         klass = x.children.text.downcase!
            if klass === 'idtype'
-             lines << "     t.string :#{name}, :null => false, :unique => true"
+             lines << "     # t.string :#{name}, :null => false, :unique => true"
             else
-             lines << "     t.string :#{name}"
+             lines << "     t.string :#{name}, :null => false, :unique => true"
             end
         end
        lines << ""
@@ -77,4 +80,6 @@ namespace :quickbooks do
       end
     puts lines
   end
+
+
 end
