@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :customers
   get 'qbwc/action' => 'qbwc#_generate_wsdl'
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
