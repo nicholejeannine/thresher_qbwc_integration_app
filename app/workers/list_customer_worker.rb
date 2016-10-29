@@ -16,12 +16,20 @@ class ListCustomerWorker < QBWC::Worker
   def handle_response(response, session, job, request, data)
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
-
     response['customer_ret'].each do |qb_cus|
-      list_id = qb_cus['list_id']
-      name = qb_cus['name']
-      Customer.create(:list_id => list_id, :notes => response)
-      Rails.logger.info("#{list_id} #{name}")
+     customer = Customer.new
+     hash = qb_cus.to_hash
+     columns = Customer.column_names
+     hash.each do |key, value|
+       if columns.include?(key.to_s)
+          customer.send("#{key}=", value)
+       else
+          Rails.logger.info("#{key} not saved to customer")
+       end
+     end
+     customer.save 
+      Rails.logger.info(customer)
+    
     end
   end
 
