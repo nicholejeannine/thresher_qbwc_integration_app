@@ -1,0 +1,25 @@
+/* Add here all your CSS customizations */
+
+
+.FooterGallery img {
+    margin: auto;
+    display: inline-block;
+    padding: .2%;
+    width: 149px;
+}
+.FooterGallery {
+    padding: 5px;
+    display: inline-block;
+    width: 100%;
+}
+.MeetTeamGallery img {
+    margin: auto;
+    display: inline-block;
+    padding: .2%;
+    width: 181px;
+}
+.MeetTeamGallery {
+    padding: 5px;
+    display: inline-block;
+    width: 100%;
+}

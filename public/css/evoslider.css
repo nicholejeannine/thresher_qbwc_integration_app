@@ -1,0 +1,348 @@
+﻿/*
+Evo Slider Pro v2.1.4 - jQuery Slideshow and Content Slider Plugin
+http://evoslider.com
+
+Copyright 2013, Fikri Rakala
+*/  
+ 
+/*  _______________________________________
+
+	01 SLIDER
+    _______________________________________  */
+	
+/* Container / frame surrounding the slider */
+.evoslider
+{
+	overflow: hidden;
+}
+
+.evoslider .slideWrapper
+{
+	position: relative;
+}
+
+.evoslider dl
+{
+	position :relative ;
+    width : 100%;
+    list-style :none ;
+    overflow: hidden ;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/*
+Title bar.
+*/ 
+.evoslider dt
+{
+	position: absolute;
+	display:none;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+
+.evoslider dt .ieFix 
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.evoslider dt .ieFix .box
+{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color:  ;
+	opacity: 0; 
+	filter: alpha(opacity=0);
+
+}
+
+/* 
+The slide content area
+*/
+.evoslider dd 
+{
+	position: absolute;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	border: 0;
+    overflow: hidden;
+}
+
+.evoslider dd .evoImage img
+{
+	width: 100%;
+	height: 100%;
+}
+
+
+/*  _______________________________________
+
+	02 TOGGLE ICON/INDEX
+    _______________________________________  */
+
+/* 
+The toggle icon of title bar
+*/
+.evoslider dt .toggle_icon
+{
+	position: hidden;
+}
+
+
+/*  _______________________________________
+
+	03 CONTROL NAVIGATION (BULLETS, THUMBNAILS, ROTATOR)
+    _______________________________________  */
+
+/* The container of the control if set to outside */
+.evoslider .outer_control
+{
+	position: relative;
+	overflow: hidden;	
+}
+
+/* Control navigation container */
+.evoslider .controlNav 
+{
+	position :absolute ;
+}
+
+.evoslider .control_wrapper 
+{
+	position: relative;
+}
+
+/* Control list */
+.evoslider .controlNav ul 
+{
+	position: relative;
+	list-style: none;
+}
+
+/* The bullets control */
+.evoslider .controlNav li.bullets 
+{
+	position :relative;
+	float: left ;
+	cursor: pointer ;
+}
+
+/* The hover state of the bullets control */
+.evoslider .controlNav li.bullets:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the bullets control */
+.evoslider .controlNav li.bullets.active 
+{
+	cursor : default ;
+}
+
+/* Thumbnails carousel */
+.evoslider .controlNav li.thumbnails 
+{
+	position :relative;
+	float: left ;
+	cursor: pointer ;
+}
+
+.evoslider .controlNav li.thumbnails img 
+{
+	width: 100%;
+	height: 100%;
+}
+
+/* The hover state of the thumbnail item */
+.evoslider .controlNav li.thumbnails:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the thumbnail */
+.evoslider .controlNav li.thumbnails.active 
+{
+	cursor : default ;
+}
+
+/* Overlay effect */
+.evoslider .controlNav li.thumbnails .overlay 
+{
+	position: absolute ;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+/* Rotator list navigation */
+.evoslider .controlNav li.rotator 
+{
+	position :relative;
+	float: left ;
+	cursor: pointer ;
+	overflow: hidden;
+}
+
+/* Rotator list thumbnails */
+.evoslider .controlNav li.rotator img 
+{
+	position: relative;
+	display:inline-block;
+}
+
+.evoslider .controlNav li.rotator p
+{
+	position: relative;
+}
+
+/* The hover state of the rotator list */
+.evoslider .controlNav li.rotator:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the rotator list */
+.evoslider .controlNav li.rotator.active 
+{
+	cursor: default ;
+}
+
+
+/*  _______________________________________
+
+	04 PLAY/PAUSE BUTTON
+    _______________________________________  */
+
+/* Play button container */
+.evoslider .control_autoplay
+{
+	position:absolute;
+}
+
+/* Pause button */
+.evoslider .pause_button 
+{
+	position: absolute ;
+	display:block ;
+	top: 0;
+	left: 0;
+    cursor: pointer;
+}
+
+/* Play button */
+.evoslider .play_button 
+{
+	position: absolute ;
+	display: block;
+	top: 0;
+	left: 0;
+    cursor: pointer ;
+}
+
+/*  _______________________________________
+
+	05 CONTENT
+    _______________________________________  */
+
+/* Image container */
+.evoslider .evoImage 
+{
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+.evoslider .evoImage a
+{
+	position: relative;
+}
+
+/* Video container */
+.evoslider .evoVideo 
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+/* Embed object container */
+evoslider .evoEmbed 
+{
+	position: relative;
+	width: 100%;
+	height: 100%;
+	float: left;
+}
+
+
+/*  _______________________________________
+
+	06 TEXT DESCRIPTION
+    _______________________________________  */
+
+/* Overlay text */
+.evoslider .evoText.overlay 
+{
+	position: absolute;
+}
+
+/* Partial left */
+.evoslider .evoText.partialleft 
+{
+	position: relative;
+	float: left;
+}
+
+/* Partial right */
+.evoslider .evoText.partialright 
+{
+	position: relative;
+	float: left;
+}
+
+.evoslider .evoText.none 
+{
+	display: none;
+}
+
+/* Outer text */
+.evoslider .outerText 
+{
+	position: relative;
+}
+
+.evoslider .outerText ul 
+{
+	position: relative;
+	list-style: none;
+	width: 100%;
+	height: 100%;
+}
+
+.evoslider .outerText ul li 
+{
+	position: absolute;
+	display: none;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}

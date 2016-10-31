@@ -1,0 +1,668 @@
+﻿/*
+Evo Slider Pro v2.1.0 - jQuery slideshow and content slider plugin
+http://evoslider.com
+
+Copyright 2012, Fikri Rakala
+http://codecanyon.net/user/evoslider
+CodeCanyon Regular License
+
+Skin Name: Rotation
+*/ 
+
+/*
+TABLE OF CONTENTS
+
+01 SLIDER
+02 TOGGLE ICON/INDEX
+03 DIRECTION NAVIGATION
+04 CONTROL NAVIGATION (BULLETS, THUMBNAILS, ROTATOR)
+05 PLAY/PAUSE BUTTON
+06 CONTENT
+07 TEXT DESCRIPTION
+*/
+ 
+ 
+/*  _______________________________________
+
+	01 SLIDER
+    _______________________________________  */
+	
+/* Container / frame surrounding the slider */
+.evoslider.rotation
+{
+	position: relative;
+	width :960px; /* set width via option */
+	height :360px; /* set height via option */
+    margin: 0 auto;
+	border: 0px solid #2493d1;
+	padding: 0px;
+	background :#2493d1;
+	overflow : visible ;
+	
+	/* shadow */
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#4e4e4e, direction=120, strength=5)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#4e4e4e, direction=120, strength=5);  
+}
+
+/* Content preloader */
+.evoslider.rotation .contentLoader
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 99;
+	background: #000 url("spinner.gif") no-repeat center;
+}
+
+/* You can set up the border of the dl element here  */
+.evoslider.rotation dl
+{
+	border: 0;
+}
+
+/*
+Slider title bar.
+
+The title bar are rotated, so you will need to swap your directions.
+To change the width of the title bar, you will need to modify the height property.
+You will also need to make sure that any background imagery used is rotated horizontally.
+
+To give unique custom appearance for each title, you can give a unique class for each title, for example:
+	.evoslider dt.slide_1
+	.evoslider dt.slide_2
+	.evoslider dt.slide_3
+	etc...
+*/ 
+.evoslider.rotation dt
+{
+	height : 45px;
+    color :#4e4e4e;
+    font-family :Arial , Verdana;
+    font-size: 12px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing :1px;
+	line-height: 40px;
+	text-align : left;
+	padding-left: 70px;
+    background: #4e4e4e url('') no-repeat;
+    
+    /* text shadow */
+	text-shadow: -1px 1px 1px #9f9f9f;
+}
+
+/* The hover state of the title bar */ 
+.evoslider.rotation dt:hover
+{
+	cursor :pointer ;
+	color: #4e4e4e;
+}
+
+/* The active state of the title bar */
+.evoslider.rotation dt.active
+{
+	color: #4e4e4e;
+	background: #4e4e4e no-repeat;
+	cursor :default;
+}
+
+/* 
+The slide content area
+
+The width and height will automatically be defined by the plugin.
+*/
+.evoslider.rotation dd 
+{
+	background: #fff;
+}
+
+
+/*  _______________________________________
+
+	02 TOGGLE ICON/INDEX
+    _______________________________________  */
+
+/* 
+The toggle icon of title bar.
+
+You can specify the position of the icon by setting its left and top position.
+You can set the toggle icon for the default, hover, and active state via the background property.
+To display index, set the showToggleIndex plugin option to true.
+*/
+.evoslider.rotation dt .toggle_icon
+{
+	left : 5px;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	font-family: Arial, Verdana ;
+    font-size: 18px;
+	font-weight: bold;
+	color :#2493d1;
+	text-align: center ;
+	
+	/* text shadow*/
+	text-shadow: 0 1px 1px #9f9f9f;	
+}
+
+/* Toggle icon position for ie8+  */
+.evoslider.rotation dt .toggle_icon.ie 
+{
+	left: 0;
+	top: auto;
+	bottom: 5px;
+}
+
+/* The hover state of the toggle icon */ 
+.evoslider.rotation dt:hover .toggle_icon
+{
+	color: #4e4e4e;
+}
+
+/* The active state of the toggle icon */
+ 
+.evoslider.rotation dt.active .toggle_icon
+{
+	color : #4e4e4e;
+}
+
+
+/*  _______________________________________
+
+	03 DIRECTION NAVIGATION
+    _______________________________________  */
+
+/* The arrow next */
+.evoslider.rotation .arrow_next 
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: 0;
+	position :absolute;
+		right : 10px;
+		top : 150px;
+		width : 35px;
+		height : 34px;
+	background : url('') no-repeat -35px 0;
+		cursor : pointer;
+		margin :0;
+		padding :0;
+		text-decoration: none;
+}
+
+/* The hover state of the arrow next */
+.evoslider.rotation .arrow_next:hover
+{
+	cursor: pointer;
+}
+
+/*
+The state of the arrow next on the last item 
+when the loop option is set to false. 
+*/
+.evoslider.rotation .arrow_next.last
+{
+	cursor: default ; 
+}
+
+/* The arrow prev */
+.evoslider.rotation .arrow_prev 
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	position :absolute;
+		left: 10px;
+		top: 150px;
+		width: 35px;
+		height: 34px;
+	background : url('') no-repeat 0 0;
+		cursor :pointer;
+		margin :0;
+		padding :0;
+		text-decoration: none;
+}
+
+/* The hover state of the arrow prev */
+.evoslider.rotation .arrow_prev:hover 
+{
+	cursor: pointer;
+}
+
+/* 
+The state of the arrow prev on the first item,
+when the loop option is set to false. 
+*/
+.evoslider.rotation .arrow_prev.first
+{
+	cursor :default ;
+}
+
+
+/*  _______________________________________
+
+	04 CONTROL NAVIGATION (BULLETS, THUMBNAILS, ROTATOR)
+    _______________________________________  */
+
+/* The container of the control if set to outside */
+.evoslider.rotation .outer_control
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: #ffffff;
+}
+
+/* Control navigation container */
+.evoslider.rotation .controlNav 
+{
+	left : 10px;
+	bottom : 10px;
+	margin :0;
+	border : 0;
+}
+
+.evoslider.rotation .control_wrapper 
+{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+/* Control list */
+.evoslider.rotation .controlNav ul 
+{
+	overflow: visible;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+/* The bullets control */
+.evoslider.rotation .controlNav li.bullets 
+{
+	width : 20px;
+	height : 20px;
+	margin : 5px;
+	padding :0;
+	border :none;
+	background : #eee;
+	overflow: visible;
+	font-size: 12px;
+	text-align: center;
+	line-height: 20px;
+	color: #4e4e4e;
+}
+
+/* Bullet last item */
+.evoslider.rotation .controlNav li.bullets.last 
+{
+}
+
+/* The hover state of the bullets control */
+.evoslider.rotation .controlNav li.bullets:hover
+{
+	background: #4e4e4e;
+	color: #fafafa;
+}
+
+/* The active state of the bullets control */
+.evoslider.rotation .controlNav li.bullets.active 
+{
+	background: #4e4e4e;
+	color: #fafafa;
+}
+
+/* Thumbnails control */
+.evoslider.rotation .controlNav li.thumbnails 
+{
+	width : 113px;
+	height : 72px;
+	margin : 5px;
+	margin-bottom: 0;
+	padding :0;
+	border :none;
+	background : #eee;
+	overflow: visible;
+	
+	/* shadow */
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Color=#4e4e4e, direction=120, strength=5)";
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#4e4e4e, direction=120, strength=5); 
+}
+
+/* Thumbnail last item */
+.evoslider.rotation .controlNav li.thumbnails.last 
+{
+	margin-bottom: 5px;
+}
+
+/* The hover state of the thumbnail item */
+.evoslider.rotation .controlNav li.thumbnails:hover
+{
+	background: #4e4e4e;
+}
+
+/* The active state of the thumbnail */
+.evoslider.rotation .controlNav li.thumbnails.active 
+{
+	background: #4e4e4e;
+}
+
+/* Overlay effect */
+.evoslider.rotation .controlNav li.thumbnails .overlay 
+{
+	background-color: #000;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+}
+
+/* The hover state of the overlay effect */
+.evoslider.rotation .controlNav li.thumbnails:hover .overlay
+{
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+/* The active state of the overlay effect */
+.evoslider.rotation .controlNav li.thumbnails.active .overlay 
+{
+	opacity: 0;
+	filter: alpha(opacity=0);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}
+
+
+/* Rotator list navigation */
+.evoslider.rotation .controlNav li.rotator 
+{
+	width : 235px;
+	height : 60px;
+	margin : 0;
+	margin-bottom: 1px;
+	padding: 5px 10px;
+	padding-left: 5px;
+	border :none;
+	background : #2493d1;
+	font-size: 12px;
+	text-align: center;
+	line-height: 16px;
+}
+
+/* Rotator last item */
+.evoslider.rotation .controlNav li.rotator.last 
+{
+	margin-bottom: 0;
+}
+
+/* Rotator list thumbnails */
+.evoslider.rotation .controlNav li.rotator img 
+{
+	width: 70px;
+	height: 60px;
+	float: left;
+	margin: 10px;
+	margin-left: 5px;
+	border: solid 1px #dfdfdf; 
+}
+
+/* Rotator title */
+.evoslider.rotation .controlNav li.rotator p
+{
+	margin-top: 5px;
+	text-align: left;
+}
+
+.evoslider.rotation .controlNav li.rotator p span.title
+{
+	display: block;
+	font-weight: bold;
+	margin-top: 7px;
+}
+
+.evoslider.rotation .controlNav li.rotator p span.date
+{
+	display: block;
+	color: #db7030;
+	font-size: 11px;
+}
+
+/* The hover state of the rotator list */
+.evoslider.rotation .controlNav li.rotator:hover
+{
+	cursor: pointer;
+}
+
+/* The active state of the rotator list */
+.evoslider.rotation .controlNav li.rotator.active 
+{
+	cursor : default ;
+}
+
+.evoslider.rotation .controlNav li.rotator.active span.title
+{
+	color: #db7030;
+}
+
+.evoslider.rotation .controlNav li.rotator.active span.date
+{
+}
+
+.evoslider.rotation .controlNav li.rotator.active img 
+{
+	border: solid 2px #db7030;
+}
+
+
+/*  _______________________________________
+
+	05 PLAY/PAUSE BUTTON
+    _______________________________________  */
+
+/* Play button container */
+.evoslider.rotation .control_autoplay
+{
+	top: 10px;
+	right: 10px;
+	width: 22px;
+	height: 22px;
+	background: #fafafa;
+	border: solid 1px #d9d9d9;
+}
+
+/* Play button position on accordion mode */
+.evoslider.rotation dd .control_autoplay
+{
+	top: 5px;
+	right: 5px;
+}
+
+/* Pause button */
+.evoslider.rotation .pause_button 
+{
+    width: 22px;
+    height: 22px;
+    background: url('') no-repeat -22px 0;
+    cursor: pointer;
+}
+
+/* Play button */
+.evoslider.rotation .play_button 
+{
+    width: 22px;
+    height: 22px;
+    background: url('') no-repeat 0 0 ;
+    cursor: pointer;
+}
+
+
+/*  _______________________________________
+
+	06 CONTENT
+    _______________________________________  */
+
+/* Image container */
+.evoslider.rotation .evoImage 
+{
+	background: #ffffff url("") no-repeat center;
+}
+
+.evoslider.rotation .evoImage .videoOverlay
+{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: url(../images/slideshow/slideshow_placeholder.png) no-repeat center;
+	cursor: pointer;
+}
+
+/* Video container */
+.evoslider.rotation .evoVideo 
+{
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background: #000 url("") no-repeat center;
+}
+
+/* Embed object container */
+evoslider.rotation .evoEmbed 
+{
+	background-color: #000;
+}
+
+evoslider.rotation dd .evoEmbed img
+{
+	max-width: 100%;
+	height: 100%;
+}
+
+
+/*  _______________________________________
+
+	07 TEXT DESCRIPTION
+    _______________________________________  */
+
+/* Overlay text */
+.evoslider.rotation .evoText.overlay 
+{
+	left: 10px;
+	bottom: 10px;
+	width: 685px;
+	height: 60px;
+	background: #ffffff;
+	padding: 10px;
+	
+	opacity: 0.7;
+	filter: alpha(opacity=90);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+}
+
+.evoslider.rotation .evoText.overlay h3 {
+	color: #;
+	padding-bottom: 5px;
+	color: #f7f7f7;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.evoslider.rotation .evoText.overlay p {
+	color: #ffffff;
+}
+
+/* Partial left */
+.evoslider.rotation .evoText.partialleft 
+{
+	width: 250px;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.evoslider.rotation .evoText.partialleft h3 {
+	font-size: 14px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-weight: bold;
+	color: #4e4e4e;
+}
+
+.evoslider.rotation .evoText.partialleft p {
+	padding-bottom: 0px;
+	padding-top: 5px;
+	color: #4e4e4e;
+}
+
+/* Partial right */
+.evoslider.rotation .evoText.partialright 
+{
+	width: 250px;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.evoslider.rotation .evoText.partialright h3 {
+	font-size: 14px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-weight: bold;
+	color: #4e4e4e;
+}
+
+.evoslider.rotation .evoText.partialright p {
+	padding-bottom: 0px;
+	padding-top: 5px;
+	color: #4e4e4e;
+}
+
+/* Outer text */
+.evoslider.rotation .outerText 
+{
+	width: 250px;
+	background-color: #FAFAFA;
+	padding: 20px;
+}
+
+.evoslider.rotation .outerText h3 {
+	font-size: 16px;
+	padding-bottom: 5px;
+	margin-bottom: 0;
+	font-weight: bold;
+	color: #4e4e4e;
+}
+
+.evoslider.rotation .outerText p {
+	padding-bottom: 0px;
+	padding-top: 5px;
+	color: #4e4e4e;
+}
+
+/* =Responsive Structure
+----------------------------------------------- */
+@media (max-width: 800px) {
+       /* Smaller Resolution Desktops and Laptops */
+       [...]
+}
+@media (max-width: 650px) {
+       /* Smaller devices */
+       [...]
+}
+@media (max-width: 450px) {
+       /* Even Smaller devices */
+       [...]
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+       /* Even Smaller devices */
+       [...]
+}
