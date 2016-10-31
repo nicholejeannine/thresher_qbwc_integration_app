@@ -12,16 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20161028210957) do
 
-  create_table "customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "list_id"
+  create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.string   "name"
     t.string   "full_name"
     t.boolean  "is_active"
-    t.string   "class_ref_list_id"
-    t.string   "parent_ref_list_id"
+    t.string   "class_id"
+    t.string   "parent_id"
     t.integer  "sublevel"
     t.string   "company_name"
     t.string   "salutation"
@@ -81,17 +80,17 @@ ActiveRecord::Schema.define(version: 20161028210957) do
     t.string   "additional_contact_ref_contact_name"
     t.string   "additional_contact_ref_contact_value"
     t.string   "contacts_ret_list_id"
-    t.string   "customer_type_ref_list_id"
-    t.string   "terms_ref_list_id"
-    t.string   "sales_rep_ref_list_id"
+    t.string   "customer_type_id"
+    t.string   "terms_id"
+    t.string   "sales_rep_id"
     t.decimal  "balance",                                                precision: 15, scale: 2
     t.decimal  "total_balance",                                          precision: 15, scale: 2
-    t.string   "sales_tax_code_ref_list_id"
-    t.string   "item_sales_tax_ref_list_id"
+    t.string   "sales_tax_code_id"
+    t.string   "item_sales_tax_id"
     t.string   "resale_number"
     t.string   "account_number"
     t.decimal  "credit_limit",                                           precision: 15, scale: 2
-    t.string   "preferred_payment_method_ref_list_id"
+    t.string   "preferred_payment_method_id"
     t.string   "credit_card_info_credit_card_number"
     t.integer  "credit_card_info_expiration_month"
     t.integer  "credit_card_info_expiration_year"
@@ -103,18 +102,17 @@ ActiveRecord::Schema.define(version: 20161028210957) do
     t.date     "job_projected_end_date"
     t.date     "job_end_date"
     t.string   "job_desc"
-    t.string   "job_type_ref_list_id"
+    t.string   "job_type_id"
     t.text     "notes",                                    limit: 65535
     t.string   "additional_notes_ret_note_id"
     t.string   "preferred_delivery_method"
-    t.string   "price_level_ref_list_id"
+    t.string   "price_level_id"
     t.string   "external_guid"
-    t.string   "currency_ref_list_id"
+    t.string   "currency_id"
     t.string   "data_ext_ret_owner_id"
     t.datetime "created_at",                                                                      null: false
     t.datetime "updated_at",                                                                      null: false
-    t.index ["list_id"], name: "index_customers_on_list_id", unique: true, using: :btree
-    t.index ["parent_ref_list_id"], name: "index_customers_on_parent_ref_list_id", using: :btree
+    t.index ["parent_id"], name: "index_customers_on_parent_id", using: :btree
   end
 
   create_table "qbwc_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
