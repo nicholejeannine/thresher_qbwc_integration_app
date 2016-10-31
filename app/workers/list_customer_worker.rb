@@ -17,8 +17,6 @@ class ListCustomerWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Customer.column_names
-    # FIXME: REMOVE destroy_all call when not still figuring this part out!
-    # Customer.destroy_all
     response['customer_ret'].each do |qb_cus|
     customer = Customer.find_or_initialize_by(:id => qb_cus['list_id'])
      hash = qb_cus.to_hash
