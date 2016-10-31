@@ -40,6 +40,8 @@ group :development, :test do
   # Testing framework
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'faker'
+  gem 'fabrication'
 end
 
 group :development do
