@@ -25,8 +25,8 @@ class ListCustomerWorker < QBWC::Worker
       hash.each do |key, value|
        if columns.include?(key.to_s)
           customer.send("#{key}=", value)
-       elsif key.match /ref$/
-          customer.send("#{key}_list_id=", value['list_id'])
+       elsif key.match /ref_$/
+         customer.send("#{key.sub('ref_', '')}=", value['list_id'])
        end
      end
      customer.save
