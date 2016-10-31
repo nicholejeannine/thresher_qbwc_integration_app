@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 20161028210957) do
     t.string   "edit_sequence"
     t.string   "name"
     t.string   "full_name"
-    t.boolean  "is_active"
+    t.boolean  "is_active",                                                                       default: true, null: false
     t.string   "class_id"
     t.string   "parent_id"
-    t.integer  "sublevel"
+    t.integer  "sublevel",                                                                        default: 0,    null: false
     t.string   "company_name"
     t.string   "salutation"
     t.string   "first_name"
@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(version: 20161028210957) do
     t.string   "external_guid"
     t.string   "currency_id"
     t.string   "data_ext_ret_owner_id"
-    t.datetime "created_at",                                                                      null: false
-    t.datetime "updated_at",                                                                      null: false
+    t.datetime "created_at",                                                                                     null: false
+    t.datetime "updated_at",                                                                                     null: false
     t.index ["parent_id"], name: "index_customers_on_parent_id", using: :btree
   end
 

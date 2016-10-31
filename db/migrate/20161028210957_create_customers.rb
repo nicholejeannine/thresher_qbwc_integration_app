@@ -6,11 +6,11 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.datetime :time_modified
       t.string :edit_sequence
       t.string :name
-      t.string :full_name
-      t.boolean :is_active
+      t.string :full_name, :unique => true
+      t.boolean :is_active, :null => false, :default => true
       t.string :class_id
       t.string :parent_id
-      t.integer :sublevel
+      t.integer :sublevel, :null => false, :default => 0
       t.string :company_name
       t.string :salutation
       t.string :first_name
