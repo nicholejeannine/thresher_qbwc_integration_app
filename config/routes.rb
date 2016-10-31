@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  resources :customers
+  # Only permit index and show routes for customers
+  resources :customers, only: [:index, :show]
+  
+  # Quickbooks stuff
   get 'qbwc/action' => 'qbwc#_generate_wsdl'
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
