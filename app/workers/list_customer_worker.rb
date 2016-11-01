@@ -27,8 +27,11 @@ class ListCustomerWorker < QBWC::Worker
          customer.send("#{key.sub('ref_', '')}=", value['list_id'])
        end
      end
-     customer.save
+     if customer.save
+         Rails.logger.info("great success")
+     else
+         Rails.logger.info(customer.errors)
      end
   end
-
+ end
 end
