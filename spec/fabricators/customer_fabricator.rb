@@ -8,8 +8,8 @@ Fabricator(:customer) do
   full_name                                {Faker::Name.name}
   is_active                                 {Faker::Boolean.boolean(0.8)}
   class_id				                       {Faker::Code.isbn}
-  parent_id				                       {Faker::Code.isbn}
-  sublevel                                 {Faker::Number.between(0,4)}
+  parent_id				    
+  sublevel                                 
   company_name                            {Faker::Company.name}
   salutation                                {Faker::Name.prefix}
   first_name                               {Faker::Name.first_name}
