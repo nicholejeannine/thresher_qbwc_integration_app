@@ -26,7 +26,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'closure_tree', github: "mceachen/closure_tree"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -58,6 +57,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Quickbooks web connector
 gem 'qbwc', github: 'qbwc/qbwc'
+
+# Easily and efficiently make ActiveRecord models support hierarchies https://github.com/mceachen/closure_tree
+gem 'closure_tree', github: "mceachen/closure_tree"
 
 # because winblows is suck, you add this thing:
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
