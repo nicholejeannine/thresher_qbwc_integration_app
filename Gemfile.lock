@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/mceachen/closure_tree.git
+  revision: e8a94cbc5632f2550359782de400ed83a3dd44b3
+  specs:
+    closure_tree (6.2.0)
+      activerecord (>= 4.1.0)
+      with_advisory_lock (>= 3.0.0)
+
+GIT
   remote: git://github.com/qbwc/qbwc.git
   revision: e09e655b589ca0f61ee42462d6091813d7c83a93
   specs:
@@ -196,6 +204,9 @@ GEM
     websocket-driver (0.6.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    with_advisory_lock (3.0.0)
+      activerecord (>= 3.2)
+      thread_safe
 
 PLATFORMS
   ruby
@@ -204,6 +215,7 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   byebug
+  closure_tree!
   fabrication
   faker
   jbuilder (~> 2.5)
