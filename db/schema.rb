@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101181240) do
+ActiveRecord::Schema.define(version: 20161101210303) do
 
   create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "ancestor_id",   null: false
@@ -121,6 +121,71 @@ ActiveRecord::Schema.define(version: 20161101181240) do
     t.datetime "created_at",                                                                                     null: false
     t.datetime "updated_at",                                                                                     null: false
     t.index ["parent_id"], name: "index_customers_on_parent_id", using: :btree
+  end
+
+  create_table "estimates", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.integer  "txn_number"
+    t.string   "customer_id"
+    t.string   "class_id"
+    t.string   "template_id"
+    t.date     "txn_date"
+    t.string   "ref_number"
+    t.string   "bill_address_addr1"
+    t.string   "bill_address_addr2"
+    t.string   "bill_address_addr3"
+    t.string   "bill_address_addr4"
+    t.string   "bill_address_addr5"
+    t.string   "bill_address_city"
+    t.string   "bill_address_state"
+    t.string   "bill_address_postal_code"
+    t.string   "bill_address_country"
+    t.string   "bill_address_note"
+    t.string   "bill_address_block_addr1"
+    t.string   "bill_address_block_addr2"
+    t.string   "bill_address_block_addr3"
+    t.string   "bill_address_block_addr4"
+    t.string   "bill_address_block_addr5"
+    t.string   "ship_address_addr1"
+    t.string   "ship_address_addr2"
+    t.string   "ship_address_addr3"
+    t.string   "ship_address_addr4"
+    t.string   "ship_address_addr5"
+    t.string   "ship_address_city"
+    t.string   "ship_address_state"
+    t.string   "ship_address_postal_code"
+    t.string   "ship_address_country"
+    t.string   "ship_address_note"
+    t.string   "ship_address_block_addr1"
+    t.string   "ship_address_block_addr2"
+    t.string   "ship_address_block_addr3"
+    t.string   "ship_address_block_addr4"
+    t.string   "ship_address_block_addr5"
+    t.boolean  "is_active",                                                            default: true, null: false
+    t.string   "po_number"
+    t.string   "terms_id"
+    t.date     "due_date"
+    t.string   "sales_rep_id"
+    t.string   "fob"
+    t.decimal  "subtotal",                                    precision: 15, scale: 2
+    t.string   "item_sales_tax_id"
+    t.float    "sales_tax_percentage",          limit: 24
+    t.decimal  "sales_tax_total",                             precision: 15, scale: 2
+    t.decimal  "total_amount",                                precision: 15, scale: 2
+    t.string   "currency_id"
+    t.float    "exchange_rate",                 limit: 24
+    t.decimal  "total_amount_in_home_currency",               precision: 15, scale: 2
+    t.text     "memo",                          limit: 65535
+    t.string   "customer_msg_id"
+    t.boolean  "is_to_be_emailed"
+    t.string   "customer_sales_tax_code_id"
+    t.string   "other"
+    t.string   "external_guid"
+    t.string   "linked_txn_id"
+    t.datetime "created_at",                                                                          null: false
+    t.datetime "updated_at",                                                                          null: false
   end
 
   create_table "qbwc_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,0 +1,2 @@
+class Estimate < ApplicationRecord
+end

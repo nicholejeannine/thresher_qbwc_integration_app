@@ -1,0 +1,147 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Estimates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Txn</th>
+      <th>Time created</th>
+      <th>Time modified</th>
+      <th>Edit sequence</th>
+      <th>Txn number</th>
+      <th>Customer</th>
+      <th>Class</th>
+      <th>Template</th>
+      <th>Txn date</th>
+      <th>Ref number</th>
+      <th>Bill address addr1</th>
+      <th>Bill address addr2</th>
+      <th>Bill address addr3</th>
+      <th>Bill address addr4</th>
+      <th>Bill address addr5</th>
+      <th>Bill address city</th>
+      <th>Bill address state</th>
+      <th>Bill address postal code</th>
+      <th>Bill address country</th>
+      <th>Bill address note</th>
+      <th>Bill address block addr1</th>
+      <th>Bill address block addr2</th>
+      <th>Bill address block addr3</th>
+      <th>Bill address block addr4</th>
+      <th>Bill address block addr5</th>
+      <th>Ship address addr1</th>
+      <th>Ship address addr2</th>
+      <th>Ship address addr3</th>
+      <th>Ship address addr4</th>
+      <th>Ship address addr5</th>
+      <th>Ship address city</th>
+      <th>Ship address state</th>
+      <th>Ship address postal code</th>
+      <th>Ship address country</th>
+      <th>Ship address note</th>
+      <th>Ship address block addr1</th>
+      <th>Ship address block addr2</th>
+      <th>Ship address block addr3</th>
+      <th>Ship address block addr4</th>
+      <th>Ship address block addr5</th>
+      <th>Is active</th>
+      <th>Po number</th>
+      <th>Terms</th>
+      <th>Due date</th>
+      <th>Sales rep</th>
+      <th>Fob</th>
+      <th>Subtotal</th>
+      <th>Item sales tax</th>
+      <th>Sales tax percentage</th>
+      <th>Sales tax total</th>
+      <th>Total amount</th>
+      <th>Currency</th>
+      <th>Exchange rate</th>
+      <th>Total amount in home currency</th>
+      <th>Memo</th>
+      <th>Customer msg</th>
+      <th>Is to be emailed</th>
+      <th>Customer sales tax code</th>
+      <th>Other</th>
+      <th>External guid</th>
+      <th>Linked txn</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @estimates.each do |estimate| %>
+      <tr>
+        <td><%= estimate.txn_id %></td>
+        <td><%= estimate.time_created %></td>
+        <td><%= estimate.time_modified %></td>
+        <td><%= estimate.edit_sequence %></td>
+        <td><%= estimate.txn_number %></td>
+        <td><%= estimate.customer_id %></td>
+        <td><%= estimate.class_id %></td>
+        <td><%= estimate.template_id %></td>
+        <td><%= estimate.txn_date %></td>
+        <td><%= estimate.ref_number %></td>
+        <td><%= estimate.bill_address_addr1 %></td>
+        <td><%= estimate.bill_address_addr2 %></td>
+        <td><%= estimate.bill_address_addr3 %></td>
+        <td><%= estimate.bill_address_addr4 %></td>
+        <td><%= estimate.bill_address_addr5 %></td>
+        <td><%= estimate.bill_address_city %></td>
+        <td><%= estimate.bill_address_state %></td>
+        <td><%= estimate.bill_address_postal_code %></td>
+        <td><%= estimate.bill_address_country %></td>
+        <td><%= estimate.bill_address_note %></td>
+        <td><%= estimate.bill_address_block_addr1 %></td>
+        <td><%= estimate.bill_address_block_addr2 %></td>
+        <td><%= estimate.bill_address_block_addr3 %></td>
+        <td><%= estimate.bill_address_block_addr4 %></td>
+        <td><%= estimate.bill_address_block_addr5 %></td>
+        <td><%= estimate.ship_address_addr1 %></td>
+        <td><%= estimate.ship_address_addr2 %></td>
+        <td><%= estimate.ship_address_addr3 %></td>
+        <td><%= estimate.ship_address_addr4 %></td>
+        <td><%= estimate.ship_address_addr5 %></td>
+        <td><%= estimate.ship_address_city %></td>
+        <td><%= estimate.ship_address_state %></td>
+        <td><%= estimate.ship_address_postal_code %></td>
+        <td><%= estimate.ship_address_country %></td>
+        <td><%= estimate.ship_address_note %></td>
+        <td><%= estimate.ship_address_block_addr1 %></td>
+        <td><%= estimate.ship_address_block_addr2 %></td>
+        <td><%= estimate.ship_address_block_addr3 %></td>
+        <td><%= estimate.ship_address_block_addr4 %></td>
+        <td><%= estimate.ship_address_block_addr5 %></td>
+        <td><%= estimate.is_active %></td>
+        <td><%= estimate.po_number %></td>
+        <td><%= estimate.terms_id %></td>
+        <td><%= estimate.due_date %></td>
+        <td><%= estimate.sales_rep_id %></td>
+        <td><%= estimate.fob %></td>
+        <td><%= estimate.subtotal %></td>
+        <td><%= estimate.item_sales_tax_id %></td>
+        <td><%= estimate.sales_tax_percentage %></td>
+        <td><%= estimate.sales_tax_total %></td>
+        <td><%= estimate.total_amount %></td>
+        <td><%= estimate.currency_id %></td>
+        <td><%= estimate.exchange_rate %></td>
+        <td><%= estimate.total_amount_in_home_currency %></td>
+        <td><%= estimate.memo %></td>
+        <td><%= estimate.customer_msg_id %></td>
+        <td><%= estimate.is_to_be_emailed %></td>
+        <td><%= estimate.customer_sales_tax_code_id %></td>
+        <td><%= estimate.other %></td>
+        <td><%= estimate.external_guid %></td>
+        <td><%= estimate.linked_txn_id %></td>
+        <td><%= link_to 'Show', estimate %></td>
+        <td><%= link_to 'Edit', edit_estimate_path(estimate) %></td>
+        <td><%= link_to 'Destroy', estimate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Estimate', new_estimate_path %>

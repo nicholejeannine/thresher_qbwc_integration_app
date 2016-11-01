@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :estimates
   controller 'public' do
         root to: 'public#index'
         get '/about-us'  => 'public#about'
