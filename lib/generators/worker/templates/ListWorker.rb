@@ -1,4 +1,4 @@
-class <%= name.titleize %>ListWorker < QBWC::Worker
+class List<%=name.classify%>Worker < QBWC::Worker
 
   def requests(job, session, data)
     {
@@ -15,18 +15,19 @@ class <%= name.titleize %>ListWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = <%=name.classify%>.column_names
     response['<%=name.underscore%>_ret'].each do |qb|
-    <%=name.underscore%> = <%=name.classify%>.find_or_initialize_by(:id => qb['list_id'])
-
-      hash = qb.to_hash
-       hash.each do |key, value|
-       if columns.include?(key.to_s)
-          <%=name.underscore%>.send("#{key}=", value)
-        elsif key.match /ref_$/
-         <%=name.underscore%>.send("#{key.sub('ref_', '')}=", value['list_id'])
-       end
-    end
-      <%=name.underscore%>.save
+      id = qb['list_id'] || qb['txn_id']
+      <%=name.underscore%> = <%=name.classify%>.find_or_initialize_by(:id => id)
+      qb.to_hash.each do |key, value|
+        <%=name.underscore%>.send("#{key}=", value) if columns.include?(key.to_s)
+        if key.match /ref_$/
+          <%=name.underscore%>.send("#{key.sub('ref_', '')}=", value[id])
+        end
+      end
+      if <%=name.underscore%>.save
+        Rails.logger.info("great success")
+      else
+        Rails.logger.info(<%=name%>.errors)
+      end
      end
   end
-
 end
