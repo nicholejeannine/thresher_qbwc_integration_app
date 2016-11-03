@@ -20,3 +20,9 @@ If this completes without errors, you're good to go! In your local environment, 
   `rails s` (or `rails server`, if you're not into the whole brevity thing)
 
 Now open your browser to the location specified in the console, typicially [http://localhost:3000](http://localhost:3000)
+
+
+# A NOTE REGARDING ADDRESSES
+Quickbooks is lame. This statement applies broadly to their dealing with addresses.
+
+In order to create an interface that would change "Ship To" addresses, we would need the data found in the "Ship to adddress" array within the Customer Query response data.
