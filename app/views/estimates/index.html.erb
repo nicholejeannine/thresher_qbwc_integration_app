@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Txn</th>
+      <th>Id</th>
       <th>Time created</th>
       <th>Time modified</th>
       <th>Edit sequence</th>
@@ -25,11 +25,6 @@
       <th>Bill address postal code</th>
       <th>Bill address country</th>
       <th>Bill address note</th>
-      <th>Bill address block addr1</th>
-      <th>Bill address block addr2</th>
-      <th>Bill address block addr3</th>
-      <th>Bill address block addr4</th>
-      <th>Bill address block addr5</th>
       <th>Ship address addr1</th>
       <th>Ship address addr2</th>
       <th>Ship address addr3</th>
@@ -40,11 +35,6 @@
       <th>Ship address postal code</th>
       <th>Ship address country</th>
       <th>Ship address note</th>
-      <th>Ship address block addr1</th>
-      <th>Ship address block addr2</th>
-      <th>Ship address block addr3</th>
-      <th>Ship address block addr4</th>
-      <th>Ship address block addr5</th>
       <th>Is active</th>
       <th>Po number</th>
       <th>Terms</th>
@@ -73,7 +63,7 @@
   <tbody>
     <% @estimates.each do |estimate| %>
       <tr>
-        <td><%= estimate.txn_id %></td>
+        <td><%= estimate.id %></td>
         <td><%= estimate.time_created %></td>
         <td><%= estimate.time_modified %></td>
         <td><%= estimate.edit_sequence %></td>
@@ -93,11 +83,6 @@
         <td><%= estimate.bill_address_postal_code %></td>
         <td><%= estimate.bill_address_country %></td>
         <td><%= estimate.bill_address_note %></td>
-        <td><%= estimate.bill_address_block_addr1 %></td>
-        <td><%= estimate.bill_address_block_addr2 %></td>
-        <td><%= estimate.bill_address_block_addr3 %></td>
-        <td><%= estimate.bill_address_block_addr4 %></td>
-        <td><%= estimate.bill_address_block_addr5 %></td>
         <td><%= estimate.ship_address_addr1 %></td>
         <td><%= estimate.ship_address_addr2 %></td>
         <td><%= estimate.ship_address_addr3 %></td>
@@ -108,11 +93,6 @@
         <td><%= estimate.ship_address_postal_code %></td>
         <td><%= estimate.ship_address_country %></td>
         <td><%= estimate.ship_address_note %></td>
-        <td><%= estimate.ship_address_block_addr1 %></td>
-        <td><%= estimate.ship_address_block_addr2 %></td>
-        <td><%= estimate.ship_address_block_addr3 %></td>
-        <td><%= estimate.ship_address_block_addr4 %></td>
-        <td><%= estimate.ship_address_block_addr5 %></td>
         <td><%= estimate.is_active %></td>
         <td><%= estimate.po_number %></td>
         <td><%= estimate.terms_id %></td>
@@ -135,8 +115,6 @@
         <td><%= estimate.external_guid %></td>
         <td><%= estimate.linked_txn_id %></td>
         <td><%= link_to 'Show', estimate %></td>
-        <td><%= link_to 'Edit', edit_estimate_path(estimate) %></td>
-        <td><%= link_to 'Destroy', estimate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -144,4 +122,3 @@
 
 <br>
 
-<%= link_to 'New Estimate', new_estimate_path %>

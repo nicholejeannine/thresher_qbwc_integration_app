@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>List:</strong>
+  <strong>Id:</strong>
   <%= @customer.id %>
 </p>
 
@@ -36,12 +36,12 @@
 </p>
 
 <p>
-  <strong>Class ref list:</strong>
+  <strong>Class:</strong>
   <%= @customer.class_id %>
 </p>
 
 <p>
-  <strong>Parent ref list:</strong>
+  <strong>Parent:</strong>
   <%= @customer.parent_id %>
 </p>
 
@@ -131,31 +131,6 @@
 </p>
 
 <p>
-  <strong>Bill address block addr1:</strong>
-  <%= @customer.bill_address_block_addr1 %>
-</p>
-
-<p>
-  <strong>Bill address block addr2:</strong>
-  <%= @customer.bill_address_block_addr2 %>
-</p>
-
-<p>
-  <strong>Bill address block addr3:</strong>
-  <%= @customer.bill_address_block_addr3 %>
-</p>
-
-<p>
-  <strong>Bill address block addr4:</strong>
-  <%= @customer.bill_address_block_addr4 %>
-</p>
-
-<p>
-  <strong>Bill address block addr5:</strong>
-  <%= @customer.bill_address_block_addr5 %>
-</p>
-
-<p>
   <strong>Ship address addr1:</strong>
   <%= @customer.ship_address_addr1 %>
 </p>
@@ -181,31 +156,6 @@
 </p>
 
 <p>
-  <strong>Ship address block addr1:</strong>
-  <%= @customer.ship_address_block_addr1 %>
-</p>
-
-<p>
-  <strong>Ship address block addr2:</strong>
-  <%= @customer.ship_address_block_addr2 %>
-</p>
-
-<p>
-  <strong>Ship address block addr3:</strong>
-  <%= @customer.ship_address_block_addr3 %>
-</p>
-
-<p>
-  <strong>Ship address block addr4:</strong>
-  <%= @customer.ship_address_block_addr4 %>
-</p>
-
-<p>
-  <strong>Ship address block addr5:</strong>
-  <%= @customer.ship_address_block_addr5 %>
-</p>
-
-<p>
   <strong>Ship address city:</strong>
   <%= @customer.ship_address_city %>
 </p>
@@ -228,66 +178,6 @@
 <p>
   <strong>Ship address note:</strong>
   <%= @customer.ship_address_note %>
-</p>
-
-<p>
-  <strong>Ship to address name:</strong>
-  <%= @customer.ship_to_address_name %>
-</p>
-
-<p>
-  <strong>Ship to address addr1:</strong>
-  <%= @customer.ship_to_address_addr1 %>
-</p>
-
-<p>
-  <strong>Ship to address addr2:</strong>
-  <%= @customer.ship_to_address_addr2 %>
-</p>
-
-<p>
-  <strong>Ship to address addr3:</strong>
-  <%= @customer.ship_to_address_addr3 %>
-</p>
-
-<p>
-  <strong>Ship to address addr4:</strong>
-  <%= @customer.ship_to_address_addr4 %>
-</p>
-
-<p>
-  <strong>Ship to address addr5:</strong>
-  <%= @customer.ship_to_address_addr5 %>
-</p>
-
-<p>
-  <strong>Ship to address city:</strong>
-  <%= @customer.ship_to_address_city %>
-</p>
-
-<p>
-  <strong>Ship to address state:</strong>
-  <%= @customer.ship_to_address_state %>
-</p>
-
-<p>
-  <strong>Ship to address postal code:</strong>
-  <%= @customer.ship_to_address_postal_code %>
-</p>
-
-<p>
-  <strong>Ship to address country:</strong>
-  <%= @customer.ship_to_address_country %>
-</p>
-
-<p>
-  <strong>Ship to address note:</strong>
-  <%= @customer.ship_to_address_note %>
-</p>
-
-<p>
-  <strong>Ship to address default ship to:</strong>
-  <%= @customer.ship_to_address_default_ship_to %>
 </p>
 
 <p>
@@ -336,22 +226,22 @@
 </p>
 
 <p>
-  <strong>Contacts ret list:</strong>
-  <%= @customer.contacts_ret_list_id %>
+  <strong>Contacts:</strong>
+  <%= @customer.contacts_id %>
 </p>
 
 <p>
-  <strong>Customer type ref list:</strong>
+  <strong>Customer type:</strong>
   <%= @customer.customer_type_id %>
 </p>
 
 <p>
-  <strong>Terms ref list:</strong>
+  <strong>Terms:</strong>
   <%= @customer.terms_id %>
 </p>
 
 <p>
-  <strong>Sales rep ref list:</strong>
+  <strong>Sales rep:</strong>
   <%= @customer.sales_rep_id %>
 </p>
 
@@ -366,12 +256,12 @@
 </p>
 
 <p>
-  <strong>Sales tax code ref list:</strong>
+  <strong>Sales tax code:</strong>
   <%= @customer.sales_tax_code_id %>
 </p>
 
 <p>
-  <strong>Item sales tax ref list:</strong>
+  <strong>Item sales tax:</strong>
   <%= @customer.item_sales_tax_id %>
 </p>
 
@@ -391,7 +281,7 @@
 </p>
 
 <p>
-  <strong>Preferred payment method ref list:</strong>
+  <strong>Preferred payment method:</strong>
   <%= @customer.preferred_payment_method_id %>
 </p>
 
@@ -451,7 +341,7 @@
 </p>
 
 <p>
-  <strong>Job type ref list:</strong>
+  <strong>Job type:</strong>
   <%= @customer.job_type_id %>
 </p>
 
@@ -471,7 +361,7 @@
 </p>
 
 <p>
-  <strong>Price level ref list:</strong>
+  <strong>Price level:</strong>
   <%= @customer.price_level_id %>
 </p>
 
@@ -481,7 +371,7 @@
 </p>
 
 <p>
-  <strong>Currency ref list:</strong>
+  <strong>Currency:</strong>
   <%= @customer.currency_id %>
 </p>
 
@@ -490,4 +380,5 @@
   <%= @customer.data_ext_ret_owner_id %>
 </p>
 
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
