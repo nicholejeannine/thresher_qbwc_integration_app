@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :estimates
+  root to: 'public#index'
+  resources :estimates, :customers, only: [:index, :show]
+
   controller 'public' do
-        root to: 'public#index'
         get '/about-us'  => 'public#about'
         get '/av_design' => 'public#av_design'
         get '/careers'  => 'public#careers'
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
   # post '/portal' => 'sessions#create'
   # get '/logout' => 'sessions#destroy', as: :logout
   # Only permit index and show routes for customers
-  resources :customers, only: [:index, :show]
 
   # Quickbooks stuff
   get 'qbwc/action' => 'qbwc#_generate_wsdl'

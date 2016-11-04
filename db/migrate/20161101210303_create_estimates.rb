@@ -21,11 +21,6 @@ class CreateEstimates < ActiveRecord::Migration[5.0]
       t.string :bill_address_postal_code
       t.string :bill_address_country
       t.string :bill_address_note
-      t.string :bill_address_block_addr1
-      t.string :bill_address_block_addr2
-      t.string :bill_address_block_addr3
-      t.string :bill_address_block_addr4
-      t.string :bill_address_block_addr5
       t.string :ship_address_addr1
       t.string :ship_address_addr2
       t.string :ship_address_addr3
@@ -36,11 +31,6 @@ class CreateEstimates < ActiveRecord::Migration[5.0]
       t.string :ship_address_postal_code
       t.string :ship_address_country
       t.string :ship_address_note
-      t.string :ship_address_block_addr1
-      t.string :ship_address_block_addr2
-      t.string :ship_address_block_addr3
-      t.string :ship_address_block_addr4
-      t.string :ship_address_block_addr5
       t.boolean :is_active, :null => false, :default => true
       t.string :po_number
       t.string :terms_id
@@ -57,7 +47,7 @@ class CreateEstimates < ActiveRecord::Migration[5.0]
       t.decimal :total_amount_in_home_currency, precision: 15, scale: 2
       t.text :memo
       t.string :customer_msg_id
-      t.boolean :is_to_be_emailed
+      t.boolean :is_to_be_emailed, :null => false, :default => false
       t.string :customer_sales_tax_code_id
       t.string :other
       t.string :external_guid

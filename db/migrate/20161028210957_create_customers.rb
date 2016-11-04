@@ -5,7 +5,7 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.datetime :time_created
       t.datetime :time_modified
       t.string :edit_sequence
-      t.string :name
+      t.string :name, :null => false
       t.string :full_name, :unique => true
       t.boolean :is_active, :null => false, :default => true
       t.string :class_id
@@ -27,38 +27,16 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.string :bill_address_postal_code
       t.string :bill_address_country
       t.string :bill_address_note
-      t.string :bill_address_block_addr1
-      t.string :bill_address_block_addr2
-      t.string :bill_address_block_addr3
-      t.string :bill_address_block_addr4
-      t.string :bill_address_block_addr5
       t.string :ship_address_addr1
       t.string :ship_address_addr2
       t.string :ship_address_addr3
       t.string :ship_address_addr4
       t.string :ship_address_addr5
-      t.string :ship_address_block_addr1
-      t.string :ship_address_block_addr2
-      t.string :ship_address_block_addr3
-      t.string :ship_address_block_addr4
-      t.string :ship_address_block_addr5
       t.string :ship_address_city
       t.string :ship_address_state
       t.string :ship_address_postal_code
       t.string :ship_address_country
       t.string :ship_address_note
-      t.string :ship_to_address_name
-      t.string :ship_to_address_addr1
-      t.string :ship_to_address_addr2
-      t.string :ship_to_address_addr3
-      t.string :ship_to_address_addr4
-      t.string :ship_to_address_addr5
-      t.string :ship_to_address_city
-      t.string :ship_to_address_state
-      t.string :ship_to_address_postal_code
-      t.string :ship_to_address_country
-      t.string :ship_to_address_note
-      t.boolean :ship_to_address_default_ship_to
       t.string :phone
       t.string :alt_phone
       t.string :fax
@@ -68,7 +46,7 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.string :alt_contact
       t.string :additional_contact_ref_contact_name
       t.string :additional_contact_ref_contact_value
-      t.string :contacts_ret_list_id
+      t.string :contacts_id
       t.string :customer_type_id
       t.string :terms_id
       t.string :sales_rep_id
