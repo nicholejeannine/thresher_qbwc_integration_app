@@ -20,6 +20,7 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb_cus|
     customer = Customer.find_or_initialize_by(:id => qb_cus['list_id'])
      hash = qb_cus.to_hash
+     Rails.logger.info(hash)
       hash.each do |key, value|
        if columns.include?(key.to_s)
           customer.send("#{key}=", value)

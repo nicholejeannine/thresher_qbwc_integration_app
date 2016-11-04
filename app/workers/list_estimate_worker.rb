@@ -15,17 +15,22 @@ class ListEstimateWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Estimate.column_names
     response['estimate_ret'].each do |qb|
-    estimate = Estimate.find_or_initialize_by(:id => qb['list_id'])
+    estimate = Estimate.find_or_initialize_by(:id => qb['txn_id'])
 
       hash = qb.to_hash
+      Rails.logger.info(hash)
        hash.each do |key, value|
        if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
-        elsif key.match /ref_$/
-         estimate.send("#{key.sub('ref_', '')}=", value['list_id'])
+        elsif key.match /ref$/
+         estimate.send("#{key.sub('ref', 'id')}=", value['list_id']) 
+        end
        end
-    end
-      estimate.save
+      if estimate.save
+         Rails.logger.info("great success")
+      else
+         Rails.logger.info(estimate.errors)
+      end
      end
   end
 
