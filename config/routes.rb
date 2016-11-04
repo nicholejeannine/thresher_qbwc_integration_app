@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
   root to: 'public#index'
-  resources :estimates, :customers, only: [:index, :show]
+  resources :customers, only: [:index, :show] do
+    resources :estimates, only: [:index, :show]
+  end
+  resources :estimates, only: [:index, :show]
 
   controller 'public' do
         get '/about-us'  => 'public#about'
