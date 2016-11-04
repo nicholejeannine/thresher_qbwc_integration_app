@@ -1,5 +1,5 @@
 class EstimatesController < ApplicationController
-  before_action :set_estimate, only: [:show, :edit, :update, :destroy]
+  before_action :set_estimate, only: :show
 
   # GET /estimates
   # GET /estimates.json
@@ -11,8 +11,6 @@ class EstimatesController < ApplicationController
   # GET /estimates/1.json
   def show
   end
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_estimate

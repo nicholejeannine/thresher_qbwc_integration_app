@@ -1,3 +1,4 @@
+# For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
 
   root to: 'public#index'
@@ -22,11 +23,13 @@ Rails.application.routes.draw do
    # eventually the login page
   # post '/portal' => 'sessions#create'
   # get '/logout' => 'sessions#destroy', as: :logout
-  # Only permit index and show routes for customers
-
+  
   # Quickbooks stuff
   get 'qbwc/action' => 'qbwc#_generate_wsdl'
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+   # eventually the login page
+  # post '/portal' => 'sessions#create'
+  # get '/logout' => 'sessions#destroy', as: :logout
+  # Only permit index and show routes for customers
 end
