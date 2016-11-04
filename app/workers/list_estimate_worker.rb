@@ -23,7 +23,9 @@ class ListEstimateWorker < QBWC::Worker
        if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
         elsif key.match /ref$/
-         estimate.send("#{key.sub('ref', 'id')}=", value['list_id']) 
+         estimate.send("#{key.sub('ref', 'id')}=", value['list_id'])
+       else
+         Rails.logger.info("#{key}: #{value}")
         end
        end
       if estimate.save

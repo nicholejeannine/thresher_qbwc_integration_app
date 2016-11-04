@@ -26,6 +26,8 @@ class ListCustomerWorker < QBWC::Worker
           customer.send("#{key}=", value)
        elsif key.match /ref_$/
          customer.send("#{key.sub('ref_', '')}=", value['list_id'])
+       else
+         Rails.logger.info("#{key}: #{value}")
        end
      end
      if customer.save
