@@ -15,21 +15,19 @@ class ListCustomerWorker < QBWC::Worker
 
   def handle_response(response, session, job, request, data)
     # handle_response will get customers in groups of 100. When this is 0, we're done.
-    Rails.logger.warn("Response:  #{response} \n\n\n\n\n\n\n Session: #{session}    Job:  #{job} \n\n\n\n\n\n\n     Request: #{request} \n\n\n\n\n  Data: #{data}")
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Customer.column_names
     response['customer_ret'].each do |qb_cus|
     customer = Customer.find_or_initialize_by(:id => qb_cus['list_id'])
-     # hash = qb_cus.to_hash.gsub('ref_list_id', 'id')
-      hash.each do |key, value|
+    qb_cus.to_hash.each do |key, value|
         # If the value is also a hash, let's step into that and get the individual attributes out of it.
         if value.class == Hash
-
-            Rails.logger.warn("We have a hash here:  key #{key} and value #{value}")
-            value.keys.each do |k, v|
-              phrase = key.remove("ref").remove("ret")
-              customer.send("#{phrase}_list_id", key[value]['list_id'])
-          end
+              value.keys.each do |k, v|
+              if key.match /ref$/ 
+                 phrase = key.sub(/ref$/, 'id')
+                 customer.send("#{phrase}=", "#{value[k]['list_id']}")
+              end
+            end
        elsif columns.include?(key.to_s)
           customer.send("#{key}=", value)
        else
