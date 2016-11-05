@@ -16,14 +16,15 @@ class ListEstimateWorker < QBWC::Worker
     columns = Estimate.column_names
     response['estimate_ret'].each do |qb|
     estimate = Estimate.find_or_initialize_by(:id => qb['txn_id'])
-
-      hash = qb.to_hash
-      Rails.logger.info(hash)
-       hash.each do |key, value|
+      qb.to_hash.each do |key, value|
        if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
         elsif key.match /ref$/
          estimate.send("#{key.sub('ref', 'id')}=", value['list_id'])
+       elsif key.match /address$/
+         key.each do |k, v|
+           estimate.send("#{key}#{k}=", "#{v}")
+         end
        else
          Rails.logger.info("#{key}: #{value}")
         end
