@@ -15,25 +15,31 @@ class ListCustomerWorker < QBWC::Worker
 
   def handle_response(response, session, job, request, data)
     # handle_response will get customers in groups of 100. When this is 0, we're done.
+    Rails.logger.warn("Response:  #{response} \n\n\n\n\n\n\n Session: #{session}    Job:  #{job} \n\n\n\n\n\n\n     Request: #{request} \n\n\n\n\n  Data: #{data}")
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Customer.column_names
     response['customer_ret'].each do |qb_cus|
     customer = Customer.find_or_initialize_by(:id => qb_cus['list_id'])
-     hash = qb_cus.to_hash
-     Rails.logger.info(hash)
+     # hash = qb_cus.to_hash.gsub('ref_list_id', 'id')
       hash.each do |key, value|
-       if columns.include?(key.to_s)
+        # If the value is also a hash, let's step into that and get the individual attributes out of it.
+        if value.class == Hash
+
+            Rails.logger.warn("We have a hash here:  key #{key} and value #{value}")
+            value.keys.each do |k, v|
+              phrase = key.remove("ref").remove("ret")
+              customer.send("#{phrase}_list_id", key[value]['list_id'])
+          end
+       elsif columns.include?(key.to_s)
           customer.send("#{key}=", value)
-       elsif key.match /ref_$/
-         customer.send("#{key.sub('ref_', '')}=", value['list_id'])
        else
-         Rails.logger.info("#{key}: #{value}")
+         Rails.logger.error("#{key}: #{value}")
        end
      end
      if customer.save
          Rails.logger.info("great success")
      else
-         Rails.logger.info(customer.errors)
+         Rails.logger.info("Not saved:  #{customer.errors}")
      end
   end
  end
