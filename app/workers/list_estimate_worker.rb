@@ -20,14 +20,14 @@ class ListEstimateWorker < QBWC::Worker
        if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
         elsif key.match /ref$/
-         estimate.send("#{key.sub('ref', 'id')}=", "#{value['list_id']}")
+         estimate.send("#{key.sub('ref', 'id')}=", value['list_id'])
        elsif key.match /address$/
-         estimate.send("#{key}_addr1=", "#{value['addr1']}")
-         estimate.send("#{key}_addr2=", "#{value['addr2']}")
-         estimate.send("#{key}_city=", "#{value['city']}")
-         estimate.send("#{key}_state=", "#{value['state']}")
-         estimate.send("#{key}_postal_code=", "#{value['postal_code']}")
-         estimate.send("#{key}_note=", "#{value['note']}")
+         estimate.send("#{key}_addr1=", value['addr1'])
+         estimate.send("#{key}_addr2=", value['addr2'])
+         estimate.send("#{key}_city=", value['city'])
+         estimate.send("#{key}_state=", value['state'])
+         estimate.send("#{key}_postal_code=", value['postal_code'])
+         estimate.send("#{key}_note=", value['note'])
        else
          Rails.logger.info("ERROR SENDING #{key}: #{value}")
         end  # end conditional

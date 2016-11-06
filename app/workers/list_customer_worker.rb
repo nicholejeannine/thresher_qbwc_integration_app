@@ -23,14 +23,14 @@ class ListCustomerWorker < QBWC::Worker
       if columns.include?(key.to_s)
         customer.send("#{key}=", value)
       elsif key.match /ref$/
-        customer.send("#{key.sub('ref', 'id')}=", "#{value['list_id']}")
+        customer.send("#{key.sub('ref', 'id')}=", value['list_id'])
       elsif key.match /address$/
-        customer.send("#{key}_addr1=", "#{value['addr1']}")
-        customer.send("#{key}_addr2=", "#{value['addr2']}")
-        customer.send("#{key}_city=", "#{value['city']}")
-        customer.send("#{key}_state=", "#{value['state']}")
-        customer.send("#{key}_postal_code=", "#{value['postal_code']}")
-        customer.send("#{key}_note=", "#{value['note']}")
+        customer.send("#{key}_addr1=", value['addr1'])
+        customer.send("#{key}_addr2=", value['addr2'])
+        customer.send("#{key}_city=", value['city'])
+        customer.send("#{key}_state=", value['state'])
+        customer.send("#{key}_postal_code=", value['postal_code'])
+        customer.send("#{key}_note=", value['note'])
       else
         Rails.logger.info("ERROR SENDING #{key}: #{value}")
       end  # end conditional
