@@ -24,7 +24,7 @@ class ListCustomerWorker < QBWC::Worker
         customer.send("#{key}=", value)
       elsif key.match /ref$/
         customer.send("#{key.sub('ref', 'id')}=", value['list_id'])
-      elsif key.match /address$/
+      elsif key.match /ship_address$ | bill_address$/
         customer.send("#{key}_addr1=", value['addr1'])
         customer.send("#{key}_addr2=", value['addr2'])
         customer.send("#{key}_city=", value['city'])

@@ -21,7 +21,7 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{key}=", value)
         elsif key.match /ref$/
          estimate.send("#{key.sub('ref', 'id')}=", value['list_id'])
-       elsif key.match /address$/
+       elsif key.match /ship_address$ | bill_address$/
          estimate.send("#{key}_addr1=", value['addr1'])
          estimate.send("#{key}_addr2=", value['addr2'])
          estimate.send("#{key}_city=", value['city'])
