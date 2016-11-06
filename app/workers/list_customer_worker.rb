@@ -18,22 +18,23 @@ class ListCustomerWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Customer.column_names
     response['customer_ret'].each do |qb_cus|
-    customer = Customer.find_or_initialize_by(:id => qb_cus['list_id'])
-    qb_cus.to_hash.each do |key, value|
-        # If the value is also a hash, let's step into that and get the individual attributes out of it.
-        if value.class == Hash
-              value.keys.each do |k, v|
-              if key.match /ref$/ 
-                 phrase = key.sub(/ref$/, 'id')
-                 customer.send("#{phrase}=", "#{value[k]['list_id']}")
-              end
-            end
-       elsif columns.include?(key.to_s)
-          customer.send("#{key}=", value)
-       else
-         Rails.logger.error("#{key}: #{value}")
-       end
-     end
+    customer = Customer.find_or_initialize_by(:id => qb['list_id'])
+    qb.to_hash.each do |key, value|
+      if columns.include?(key.to_s)
+        customer.send("#{key}=", value)
+      elsif key.match /ref$/
+        customer.send("#{key.sub('ref', 'id')}=", "#{value['list_id']}")
+      elsif key.match /address$/
+        customer.send("#{key}_addr1=", "#{value['addr1']}")
+        customer.send("#{key}_addr2=", "#{value['addr2']}")
+        customer.send("#{key}_city=", "#{value['city']}")
+        customer.send("#{key}_state=", "#{value['state']}")
+        customer.send("#{key}_postal_code=", "#{value['postal_code']}")
+        customer.send("#{key}_note=", "#{value['note']}")
+      else
+        Rails.logger.info("ERROR SENDING #{key}: #{value}")
+      end  # end conditional
+    end # end for each pair
      if customer.save
          Rails.logger.info("great success")
      else
