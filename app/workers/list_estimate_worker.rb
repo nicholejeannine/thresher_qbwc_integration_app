@@ -23,10 +23,10 @@ class ListEstimateWorker < QBWC::Worker
          estimate.send("#{key.sub('ref', 'id')}=", value['list_id'])
        elsif key.match /address$/
          key.each do |k, v|
-           estimate.send("#{key}#{k}=", "#{v}")
+           estimate.send("#{key}#{addr1}=", "#{addr1}")
          end
        else
-         Rails.logger.info("#{key}: #{value}")
+         Rails.logger.info("ERROR SENDING #{key}: #{value}")
         end
        end
       if estimate.save
