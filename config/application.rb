@@ -16,13 +16,7 @@ module Railstest
       g.helper = false
       g.assets = false
       g.jbuilder = false
-      g.test_framework :rspec,
-                       fixtures: false,
-                       view_specs: false,
-                       helper_specs: false,
-                       routing_specs: true,
-                       controller_specs: true,
-                       request_specs: false
+      g.test_framework :rspec
 
     end
   end

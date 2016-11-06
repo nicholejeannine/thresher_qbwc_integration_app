@@ -30,7 +30,6 @@ class ListCustomerWorker < QBWC::Worker
         customer.send("#{key}_city=", value['city'])
         customer.send("#{key}_state=", value['state'])
         customer.send("#{key}_postal_code=", value['postal_code'])
-        customer.send("#{key}_note=", value['note'])
       else
         Rails.logger.info("ERROR SENDING #{key}: #{value}")
       end  # end conditional

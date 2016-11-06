@@ -21,7 +21,7 @@ gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+# gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -57,6 +57,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Quickbooks web connector
 gem 'qbwc', github: 'qbwc/qbwc'
+
+# Parsing xml to save to models
+gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
 
 # Easily and efficiently make ActiveRecord models support hierarchies https://github.com/mceachen/closure_tree
 gem 'closure_tree', github: "mceachen/closure_tree"
