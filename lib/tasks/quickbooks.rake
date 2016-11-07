@@ -52,7 +52,7 @@ namespace :quickbooks do
   end
 
   desc "TODO"
-  task all: :environment do
+  task generate_scaffolds: :environment do
     queries = QBWC.parser.types(/Ret$/).sort!
    lines = ""
    queries.each do |q|
