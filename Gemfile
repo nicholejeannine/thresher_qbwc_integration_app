@@ -59,6 +59,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'qbwc', github: 'qbwc/qbwc'
 
 # Parsing xml to save to models
+gem 'active_model_serializers'
 gem 'activemodel-serializers-xml', github: 'rails/activemodel-serializers-xml'
 
 # Easily and efficiently make ActiveRecord models support hierarchies https://github.com/mceachen/closure_tree
