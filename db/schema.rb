@@ -12,12 +12,61 @@
 
 ActiveRecord::Schema.define(version: 20161101210303) do
 
+  create_table "additional_notes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "note_id"
+    t.date     "date"
+    t.string   "note"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "classes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.string   "full_name"
+    t.boolean  "is_active"
+    t.string   "parent_ref_id"
+    t.integer  "sublevel"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "contact"
+    t.string   "salutation"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "job_title"
+    t.string   "additional_contact_ref"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "ancestor_id",   null: false
     t.string  "descendant_id", null: false
     t.integer "generations",   null: false
     t.index ["ancestor_id", "descendant_id", "generations"], name: "customer_anc_desc_idx", unique: true, using: :btree
     t.index ["descendant_id"], name: "customer_desc_idx", using: :btree
+  end
+
+  create_table "customer_types", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.string   "full_name"
+    t.boolean  "is_active"
+    t.string   "parent_ref"
+    t.integer  "sublevel"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -101,6 +150,15 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.index ["parent_id"], name: "index_customers_on_parent_id", using: :btree
   end
 
+  create_table "data_exts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "owner_id"
+    t.string   "data_ext_name"
+    t.string   "data_ext_type"
+    t.string   "data_ext_value"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "estimates", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
@@ -156,6 +214,57 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.datetime "updated_at",                                                                           null: false
   end
 
+  create_table "item_sales_taxes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.string   "bar_code_value"
+    t.boolean  "is_active"
+    t.string   "class_ref"
+    t.string   "item_desc"
+    t.float    "tax_rate",                  limit: 24
+    t.string   "tax_vendor_ref"
+    t.string   "sales_tax_return_line_ref"
+    t.string   "external_guid"
+    t.string   "data_ext_ret"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  create_table "job_types", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.string   "full_name"
+    t.boolean  "is_active"
+    t.string   "parent_ref"
+    t.integer  "sublevel"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "preferred_payment_methods", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "full_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "price_levels", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.boolean  "is_active"
+    t.string   "price_level_type"
+    t.float    "price_level_fixed_percentage", limit: 24
+    t.string   "price_level_per_item_ret"
+    t.string   "currency_ref"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
   create_table "qbwc_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
     t.string   "company",                          limit: 1000
@@ -182,6 +291,37 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.text     "pending_jobs", limit: 65535,             null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "sales_reps", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "initial"
+    t.boolean  "is_active"
+    t.string   "sales_rep_entity_ref"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  create_table "sales_tax_codes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.boolean  "is_active"
+    t.boolean  "is_taxable"
+    t.string   "desc"
+    t.string   "item_purchase_tax_ref"
+    t.string   "item_sales_tax_ref"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "terms", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "full_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

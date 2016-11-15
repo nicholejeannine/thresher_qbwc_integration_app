@@ -81,5 +81,150 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
       t.timestamps
     end
     add_index :customers, :parent_id
+
+  # Lookup tables
+  create_table :classes, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :name
+    t.string :full_name
+    t.boolean :is_active
+    t.string :parent_ref_id
+    t.integer :sublevel
+    t.timestamps null: false
   end
+
+  create_table :contacts, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :contact
+    t.string :salutation
+    t.string :first_name
+    t.string :middle_name
+    t.string :last_name
+    t.string :job_title
+    t.string :additional_contact_ref
+    t.timestamps null: false
+  end
+
+  create_table :customer_types, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :name
+    t.string :full_name
+    t.boolean :is_active
+    t.string :parent_ref
+    t.integer :sublevel
+    t.timestamps null: false
+  end
+
+  create_table :terms, id: false do |t|
+    t.string :id, :primary_key => true
+    t.string :full_name
+    t.timestamps null: false
+  end
+
+
+  create_table :sales_reps,  id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :initial
+    t.boolean :is_active
+    t.string :sales_rep_entity_ref
+    t.timestamps null: false
+  end
+
+
+  create_table :sales_tax_codes, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :name
+    t.boolean :is_active
+    t.boolean :is_taxable
+    t.string :desc
+    t.string :item_purchase_tax_ref
+    t.string :item_sales_tax_ref
+    t.timestamps null: false
+  end
+
+  create_table :item_sales_taxes, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :name
+    t.string :bar_code_value
+    t.boolean :is_active
+    t.string :class_ref
+    t.string :item_desc
+    t.float :tax_rate, precision: 10, scale: 2
+    t.string :tax_vendor_ref
+    t.string :sales_tax_return_line_ref
+    t.string :external_guid
+    t.string :data_ext_ret
+    t.timestamps null: false
+  end
+
+  create_table :preferred_payment_methods, id: false do |t|
+    t.string :id, :primary_key => true
+    t.string :full_name
+    t.timestamps null: false
+  end
+
+  create_table :job_types, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :name
+    t.string :full_name
+    t.boolean :is_active
+    t.string :parent_ref
+    t.integer :sublevel
+    t.timestamps null: false
+  end
+
+  create_table :additional_notes, id: false do |t|
+    t.string :id, :primary_key => true
+    t.integer :note_id
+    t.date :date
+    t.string :note
+    t.timestamps null: false
+  end
+
+  create_table :price_levels, id: false do |t|
+    t.string :id, :primary_key => true
+    t.datetime :time_created
+    t.datetime :time_modified
+    t.string :edit_sequence
+    t.string :name
+    t.boolean :is_active
+    t.string :price_level_type
+    t.float :price_level_fixed_percentage
+    t.string :price_level_per_item_ret
+    t.string :currency_ref
+    t.timestamps null: false
+  end
+
+
+  create_table :data_exts, id: false do |t|
+    t.string :id, :primary_key => true
+    t.string :owner_id
+    t.string :data_ext_name
+    t.string :data_ext_type
+    t.string :data_ext_value
+    t.timestamps null: false
+  end
+end
+
 end
