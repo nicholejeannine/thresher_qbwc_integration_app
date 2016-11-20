@@ -1,9 +1,9 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
 
-  resources :customers, only: [:index, :show] do
-    resources :estimates, only: [:index, :show]
-  end
+  resources :customers, only: [:index, :show]
+  resources :estimates, only: [:index, :show]
+  
 
   controller 'public' do
         get '/about-us'  => 'public#about'
