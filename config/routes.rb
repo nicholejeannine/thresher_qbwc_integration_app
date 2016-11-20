@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :customers, only: [:index, :show] do
     resources :estimates, only: [:index, :show]
   end
-  resources :estimates, only: [:index, :show]
 
   controller 'public' do
         get '/about-us'  => 'public#about'
@@ -23,7 +22,7 @@ Rails.application.routes.draw do
    # eventually the login page
   # post '/portal' => 'sessions#create'
   # get '/logout' => 'sessions#destroy', as: :logout
-  
+
   # Quickbooks stuff
   get 'qbwc/action' => 'qbwc#_generate_wsdl'
   get 'qbwc/qwc' => 'qbwc#qwc'
