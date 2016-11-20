@@ -1,7 +1,6 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
 
-  root to: 'public#index'
   resources :customers, only: [:index, :show] do
     resources :estimates, only: [:index, :show]
   end
@@ -29,6 +28,7 @@ Rails.application.routes.draw do
   wash_out :qbwc
    # eventually the login page
   # post '/portal' => 'sessions#create'
+  root to: 'public#index'
   # get '/logout' => 'sessions#destroy', as: :logout
   # Only permit index and show routes for customers
 end
