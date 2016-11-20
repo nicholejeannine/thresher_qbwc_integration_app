@@ -17,21 +17,9 @@ class ListItemSalesTaxWorker < QBWC::Worker
       id = qb['list_id'] || qb['txn_id']
       item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => id)
       qb.to_hash.each do |key, value|
-        if key.match /block$|xml_attributes/
-            next
-        elsif key.match /ship_address$|bill_address$/
-          item_sales_tax.send("#{key}_addr1=", value['addr1'])
-          item_sales_tax.send("#{key}_addr2=", value['addr2'])
-          item_sales_tax.send("#{key}_addr3=", value['addr3'])
-          item_sales_tax.send("#{key}_addr4=", value['addr4'])
-          item_sales_tax.send("#{key}_addr5=", value['addr5'])
-          item_sales_tax.send("#{key}_city=", value['city'])
-          item_sales_tax.send("#{key}_state=", value['state'])
-          item_sales_tax.send("#{key}_postal_code=", value['postal_code'])
-          item_sales_tax.send("#{key}_note=", value['note'])
-        elsif value.class == Qbxml::Hash
+       if value.class == Qbxml::Hash
           value.each  do |k, v|
-            if k == 'list_id' || k == 'txn_id'
+            if k == 'list_id' || k == 'owner_id'
               name = key.sub(/ref$/, "id")
               name.sub!(/ret$/, "id")
               item_sales_tax.send("#{name}=", v)

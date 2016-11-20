@@ -198,7 +198,7 @@ rails g scaffold ItemReceipt time_created:datetime time_modified:datetime edit_s
 rails g scaffold ItemSalesTaxGroup time_created:datetime time_modified:datetime edit_sequence name bar_code_value is_active:boolean item_desc external_guid item_sales_tax_id data_ext_id
 
 
-rails g scaffold ItemSalesTax time_created:datetime time_modified:datetime edit_sequence name bar_code_value is_active:boolean class_id item_desc tax_rate:float tax_vendor_id sales_tax_return_line_id external_guid data_ext_id
+rails g model ItemSalesTax time_created:datetime time_modified:datetime edit_sequence name bar_code_value is_active:boolean class_id item_desc tax_rate:float tax_vendor_id sales_tax_return_line_id external_guid data_ext_id
 
 
 rails g scaffold ItemService time_created:datetime time_modified:datetime edit_sequence name full_name bar_code_value is_active:boolean class_id parent_id sublevel:integer unit_of_measure_set_id is_tax_included:boolean sales_tax_code_id sales_or_purchase sales_and_purchase external_guid data_ext_id

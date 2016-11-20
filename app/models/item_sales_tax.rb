@@ -1,0 +1,2 @@
+class ItemSalesTax < ApplicationRecord
+end
