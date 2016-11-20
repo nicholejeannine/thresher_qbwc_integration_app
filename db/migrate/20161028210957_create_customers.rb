@@ -169,7 +169,6 @@ class CreateCustomers < ActiveRecord::Migration[5.0]
     t.string :item_desc
     t.float :tax_rate, precision: 10, scale: 2
     t.string :tax_vendor_id
-    t.string :sales_tax_return_line_id
     t.string :external_guid
     t.string :data_ext_id
     t.timestamps null: false
