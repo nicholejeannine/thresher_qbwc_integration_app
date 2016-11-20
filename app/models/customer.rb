@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
    acts_as_tree
    has_many :estimates
+   has_one :item_sales_tax
    # Scoping allows you to specify commonly-used queries which can be referenced as method calls on the association objects or models. With these scopes, you can use every method previously covered such as where, joins and includes. All scope methods will return an ActiveRecord::Relation object which will allow for further methods (such as other scopes) to be called on it.  http://guides.rubyonrails.org/active_record_querying.html#scopes
 
    #  `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".
