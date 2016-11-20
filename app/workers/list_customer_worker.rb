@@ -29,8 +29,8 @@ class ListCustomerWorker < QBWC::Worker
         customer.send("#{key}_postal_code=", value['postal_code'])
         customer.send("#{key}_note=", value['note'])
       elsif value.class == "Qbxml::Hash"
-        name = key.remove!(/ref$/).remove!(/ret$/)
-        customer.send("#{name}_id=", value['list_id'])
+        name = key.sub(/ref$/, "id").sub(/ret$/, "id")
+        customer.send("#{name}=", value['list_id'])
       elsif columns.include?(key.to_s)
         customer.send("#{key}=", value)
       else
