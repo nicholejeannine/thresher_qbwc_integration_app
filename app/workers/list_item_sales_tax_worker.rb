@@ -13,6 +13,7 @@ class ListItemSalesTaxWorker < QBWC::Worker
     # handle_response will get item_sales_taxs in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = ItemSalesTax.column_names
+    Rails.logger.warn(response['item_sales_tax_ret'].class)
     response['item_sales_tax_ret'].each do |qb|
       id = qb['list_id']
       item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => id)
