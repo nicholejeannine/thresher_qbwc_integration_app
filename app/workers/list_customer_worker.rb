@@ -29,9 +29,9 @@ class ListCustomerWorker < QBWC::Worker
         customer.send("#{key}_postal_code=", value['postal_code'])
         customer.send("#{key}_note=", value['note'])
       elsif value.class == Qbxml::Hash
-        key.remove!(/ref$|ret$/)
-        customer.send("#{key}_id=", value['list_id'])
-        Rails.logger.warn("Customer.send #{key}_id=#{value['list_id']}")
+        name = key.remove(/ref$|ret$/)
+        customer.send("#{name}_id=", value['list_id'])
+        Rails.logger.warn("Customer.send #{name}_id=#{value['list_id']}")
       elsif columns.include?(key.to_s)
         customer.send("#{key}=", value)
          Rails.logger.warn("Customer.send #{key}=#{value}")
