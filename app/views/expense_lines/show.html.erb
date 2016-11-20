@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @expense_line.account_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @expense_line.amount %>
+</p>
+
+<p>
+  <strong>Tax amount:</strong>
+  <%= @expense_line.tax_amount %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @expense_line.memo %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @expense_line.customer_id %>
+</p>
+
+<p>
+  <strong>Class:</strong>
+  <%= @expense_line.class_id %>
+</p>
+
+<p>
+  <strong>Sales tax code:</strong>
+  <%= @expense_line.sales_tax_code_id %>
+</p>
+
+<p>
+  <strong>Billable status:</strong>
+  <%= @expense_line.billable_status %>
+</p>
+
+<p>
+  <strong>Sales rep:</strong>
+  <%= @expense_line.sales_rep_id %>
+</p>
+
+<p>
+  <strong>Data ext:</strong>
+  <%= @expense_line.data_ext_id %>
+</p>
+
+<%= link_to 'Back', expense_lines_path %>

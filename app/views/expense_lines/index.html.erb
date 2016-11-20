@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Expense Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Amount</th>
+      <th>Tax amount</th>
+      <th>Memo</th>
+      <th>Customer</th>
+      <th>Class</th>
+      <th>Sales tax code</th>
+      <th>Billable status</th>
+      <th>Sales rep</th>
+      <th>Data ext</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expense_lines.each do |expense_line| %>
+      <tr>
+        <td><%= expense_line.account_id %></td>
+        <td><%= expense_line.amount %></td>
+        <td><%= expense_line.tax_amount %></td>
+        <td><%= expense_line.memo %></td>
+        <td><%= expense_line.customer_id %></td>
+        <td><%= expense_line.class_id %></td>
+        <td><%= expense_line.sales_tax_code_id %></td>
+        <td><%= expense_line.billable_status %></td>
+        <td><%= expense_line.sales_rep_id %></td>
+        <td><%= expense_line.data_ext_id %></td>
+        <td><%= link_to 'Show', expense_line %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
