@@ -11,10 +11,10 @@ class ListItemSalesTaxWorker < QBWC::Worker
 
   def handle_response(response, session, job, request, data)
     # handle_response will get item_sales_taxs in groups of 100. When this is 0, we're done.
-    # complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
+    complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = ItemSalesTax.column_names
-    response['item_sales_tax_ret'].each do |qb|
-      item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => qb['list_id'])
+    response['item_sales_tax_ret'].to_a.each do |qb|
+      item_sales_tax = ItemSalesTax.find_or_initialize_by('id': qb['list_id'])
       qb.to_hash.each do |key, value|
       if columns.include?(key.to_s)
             item_sales_tax.send("#{key}=", value)
