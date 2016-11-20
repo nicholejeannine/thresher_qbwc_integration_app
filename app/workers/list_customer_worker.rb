@@ -18,7 +18,6 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb|
     customer = Customer.find_or_initialize_by(:id => qb['list_id'])
     qb.to_hash.each do |key, value|
-      Rails.logger.info("#{key} and #{value} and #{key.class} and #{value.class}")
       if key == 'ship_address' || key == 'bill_address'
         customer.send("#{key}_addr1=", value['addr1'])
         customer.send("#{key}_addr2=", value['addr2'])
@@ -29,14 +28,15 @@ class ListCustomerWorker < QBWC::Worker
         customer.send("#{key}_state=", value['state'])
         customer.send("#{key}_postal_code=", value['postal_code'])
         customer.send("#{key}_note=", value['note'])
-      elsif value.class == "Qbxml::Hash"
-        name = key.sub(/ref$/, "id").sub(/ret$/, "id")
-        customer.send("#{name}=", value['list_id'])
+      elsif value.class == Qbxml::Hash
+        key.remove!(/ref$|ret$/)
+        customer.send("#{key}_id=", value['list_id'])
+        Rails.logger.warn("Customer.send #{key}_id=", value['list_id'])
       elsif columns.include?(key.to_s)
         customer.send("#{key}=", value)
+         Rails.logger.warn("Customer.send #{key}=", value)
       else
-        Rails.logger.info("ERROR SENDING #{key}: #{value}")
-        next
+        Rails.logger.warn("NOT SENT: #{key}:#{value}")
       end  # end conditional
     end # end for each pair
      if customer.save
