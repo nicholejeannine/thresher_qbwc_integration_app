@@ -14,15 +14,15 @@ namespace :quickbooks do
         name = x.name.underscore
         klass = x.children.text.downcase
         if name.match /ref$|address$|block$|info$|ret$|txn$/
-           lines << "   t.string :#{name} # TODO references #{name}"
+           lines << "    :#{name} # TODO references #{name}"
         else
            case klass
             when "strtype", "guidtype", "idtype"
-             lines << "   t.string :#{name}"
+             lines << "    :#{name}"
             when "datetimetype"
              lines << "   t.datetime :#{name}"
            when "enumtype"
-           lines << "   t.string :#{name} # TODO enum type - #{name}"
+           lines << "    :#{name} # TODO enum type - #{name}"
             when "inttype"
              lines << "   t.integer :#{name}"
             when "datetype"
@@ -59,11 +59,25 @@ namespace :quickbooks do
      xml = QBWC.parser.describe("#{q}")
      q.remove!(/Ret$/)
      if xml.elements.present?
-          lines += "rails g scaffold #{q.classify}"
+        lines += "rails g scaffold #{q.classify}"
           xml.elements.each do |x|
-            lines += " #{x.name.underscore}"
+            name = x.name.underscore
+            if name == "ship_address"
+              lines += " ship_address_addr1 ship_address_addr2 ship_address_addr3 ship_address_addr4 ship_address_addr5 ship_address_city ship_address_state ship_address_postal_code ship_address_country ship_address_note"
+            elsif name =="bill_address"
+              lines+= " bill_address_addr1 bill_address_addr2 bill_address_addr3 bill_address_addr4 bill_address_addr5 bill_address_city bill_address_state bill_address_postal_code bill_address_country bill_address_note"
+            else
+            name.sub!(/ref$/, "id")
+            name.sub!(/ret$/, "id")
               klass = x.children.text.downcase!
+              if klass == 'idtype'
+                next
+              else
+                lines += " #{name}"
+              end
               case klass
+              when "idtype"
+                  next
                 when "datetimetype"
                   lines += ":datetime"
                 when "inttype"
@@ -80,7 +94,8 @@ namespace :quickbooks do
                   next
               end
              end
-          lines += "\n\n\n"
+           end
+          lines += " --primary-key=string\n\n\n"
         end
       end
     puts lines
