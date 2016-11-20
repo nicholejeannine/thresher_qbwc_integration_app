@@ -14,8 +14,7 @@ class ListItemSalesTaxWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = ItemSalesTax.column_names
     response['item_sales_tax_ret'].each do |qb|
-      id = qb['list_id'] || qb['txn_id']
-      item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => id)
+      item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => qb['list_id'])
       qb.to_hash.each do |key, value|
        if value.class == Qbxml::Hash
           value.each  do |k, v|
@@ -23,7 +22,7 @@ class ListItemSalesTaxWorker < QBWC::Worker
               name = key.sub(/ref$/, "id")
               name.sub!(/ret$/, "id")
               item_sales_tax.send("#{name}=", v)
-            end  # end if k == 'list_id' || k == 'txn_id'
+            end  # end if k == 'list_id' || k == 'owner_id'
           end # end value.each do |k,v|
         elsif columns.include?(key.to_s)
             item_sales_tax.send("#{key}=", value)
