@@ -31,10 +31,10 @@ class ListCustomerWorker < QBWC::Worker
       elsif value.class == Qbxml::Hash
         key.remove!(/ref$|ret$/)
         customer.send("#{key}_id=", value['list_id'])
-        Rails.logger.warn("Customer.send #{key}_id=", value['list_id'])
+        Rails.logger.warn("Customer.send #{key}_id=#{value['list_id']}")
       elsif columns.include?(key.to_s)
         customer.send("#{key}=", value)
-         Rails.logger.warn("Customer.send #{key}=", value)
+         Rails.logger.warn("Customer.send #{key}=#{value}")
       else
         Rails.logger.warn("NOT SENT: #{key}:#{value}")
       end  # end conditional
