@@ -4,7 +4,8 @@ class ListEstimateWorker < QBWC::Worker
     {
       :estimate_query_rq => {
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
-        :max_returned => 100
+        :max_returned => 100,
+	:include_line_items => true
       }
     }
   end

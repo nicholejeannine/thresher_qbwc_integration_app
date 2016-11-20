@@ -295,16 +295,15 @@ ActiveRecord::Schema.define(version: 20161120095807) do
     t.string   "edit_sequence"
     t.string   "name"
     t.string   "bar_code_value"
-    t.boolean  "is_active",                           default: true, null: false
+    t.boolean  "is_active",                 default: true, null: false
     t.string   "class_id"
     t.string   "item_desc"
-    t.float    "tax_rate",                 limit: 24
+    t.float    "tax_rate",       limit: 24
     t.string   "tax_vendor_id"
-    t.string   "sales_tax_return_line_id"
     t.string   "external_guid"
     t.string   "data_ext_id"
-    t.datetime "created_at",                                         null: false
-    t.datetime "updated_at",                                         null: false
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
   end
 
   create_table "job_types", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
