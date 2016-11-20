@@ -18,11 +18,7 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb|
     customer = Customer.find_or_initialize_by(:id => qb['list_id'])
     qb.to_hash.each do |key, value|
-      if key.class == "Qbxml::Hash"
-        customer.send("#{key.remove!(/ref$/).remove!(/ret$/)}_id=", value['list_id'] || value['txn_id'])
-      elsif columns.include?(key.to_s)
-        customer.send("#{key}=", value)
-      elsif key.match /ship_address$ | bill_address$/
+      if key.match /ship_address$ | bill_address$/
         customer.send("#{key}_addr1=", value['addr1'])
         customer.send("#{key}_addr2=", value['addr2'])
         customer.send("#{key}_addr3=", value['addr3'])
@@ -32,6 +28,10 @@ class ListCustomerWorker < QBWC::Worker
         customer.send("#{key}_state=", value['state'])
         customer.send("#{key}_postal_code=", value['postal_code'])
         customer.send("#{key}_note=", value['note'])
+      elsif key.class == "Qbxml::Hash"
+        customer.send("#{key.remove!(/ref$/).remove!(/ret$/)}_id=", value['list_id'])
+      elsif columns.include?(key.to_s)
+        customer.send("#{key}=", value)
       else
         Rails.logger.info("ERROR SENDING #{key}: #{value}")
         next
