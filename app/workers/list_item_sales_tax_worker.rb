@@ -3,7 +3,8 @@ class ListItemSalesTaxWorker < QBWC::Worker
   def requests(job, session, data)
     {
       :item_sales_tax_query_rq => {
-        :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" }
+        :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
+        :max_returned => 100
       }
     }
   end
