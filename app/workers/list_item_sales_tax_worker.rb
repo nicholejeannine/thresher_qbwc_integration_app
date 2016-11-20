@@ -3,7 +3,7 @@ class ListItemSalesTaxWorker < QBWC::Worker
   def requests(job, session, data)
     {
       :item_sales_tax_query_rq => {
-        :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
+        :xml_attributes => { "requestID" =>"3", 'iterator'  => "Start" },
         :max_returned => 100
       }
     }
@@ -13,10 +13,11 @@ class ListItemSalesTaxWorker < QBWC::Worker
     # handle_response will get item_sales_taxs in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = ItemSalesTax.column_names
-    Rails.logger.warn(response['item_sales_tax_ret'].class)
+    Rails.logger.warn("RESPONSE!!!!!!!!")
+    Rails.logger.warn(response)
     response['item_sales_tax_ret'].each do |qb|
       id = qb['list_id']
-      item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => id)
+      item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => qb['list_id'])
       qb.to_hash.each do |key, value|
       if columns.include?(key.to_s)
             item_sales_tax.send("#{key}=", "#{value}")

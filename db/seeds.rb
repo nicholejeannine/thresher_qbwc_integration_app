@@ -8,7 +8,7 @@
 QBWC.clear_jobs
 QBWC.add_job(:list_customers, true, '', ListCustomerWorker)
 QBWC.add_job(:list_estimates, true, '', ListEstimateWorker)
-QBWC.add_job(:list_item_sales_taxes, true, '', ListItemSalesTaxWorker)
+QBWC.add_job(:list_item_sales_tax, true, '', ListItemSalesTaxWorker)
 
 # 10.times{Fabricate(:customer)}
 
