@@ -15,6 +15,10 @@ class ListEstimateWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Estimate.column_names
     response['estimate_ret'].each do |qb|
+    response['estimate_line_ret'].each do |qb|
+      Rails.logger.warn("Estimate line!")
+      Rails.logger.warn(qb)
+    end
       id = qb['list_id'] || qb['txn_id']
       estimate = Estimate.find_or_initialize_by(:id => id)
       qb.to_hash.each do |key, value|
@@ -49,9 +53,5 @@ class ListEstimateWorker < QBWC::Worker
       end # end if estimate save
     end # end for each estimate
 
-    response['estimate_line_ret'].each do |qb|
-      Rails.logger.warn("Estimate line!")
-      Rails.logger.warn(qb)
-    end
   end # end handle response
 end # end worker class
