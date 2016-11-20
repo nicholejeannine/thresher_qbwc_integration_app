@@ -16,18 +16,22 @@ class ListItemSalesTaxWorker < QBWC::Worker
     response['item_sales_tax_ret'].each do |qb|
       item_sales_tax = ItemSalesTax.find_or_initialize_by(:id => qb['list_id'])
       qb.to_hash.each do |key, value|
-       if value.class == Qbxml::Hash
+      if key.match /xml_attributes/
+        next
+      elsif columns.include?(key.to_s)
+            item_sales_tax.send("#{key}=", value)
+       elsif value.class == Qbxml::Hash
           value.each  do |k, v|
             if k == 'list_id' || k == 'owner_id'
               name = key.sub(/ref$/, "id")
               name.sub!(/ret$/, "id")
               item_sales_tax.send("#{name}=", v)
+            else
+              next
             end  # end if k == 'list_id' || k == 'owner_id'
           end # end value.each do |k,v|
-        elsif columns.include?(key.to_s)
-            item_sales_tax.send("#{key}=", value)
-        end # end if parsing ridiculousness
-      end # end for each |key, value|
+        end # end for each |key, value|
+      end # end parse
       if item_sales_tax.save
         Rails.logger.info("great success")
       else
