@@ -16,10 +16,17 @@ class ListCustomerWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Customer.column_names
     response['customer_ret'].each do |qb|
-    customer = Customer.find_or_initialize_by(:id => qb['list_id'])
-    qb.to_hash.each do |key, value|
-      Rails.logger.warn("Key: #{key}")
-      Rails.logger.warn("Value: #{value}")
+      customer = Customer.find_or_initialize_by(:id => qb['list_id'])
+      qb.to_hash.each do |key, value|
+        if value.class == Qbxml::Hash
+          value.each  do |k, v|
+            if k == 'list_id'
+              name = key.sub(/ref$/, "id")
+              name.sub!(/ret$/, "id")
+              Customer.send("#{name}=", v)
+            end
+          end
+       end
     #   if key.match /block$|xml_attributes/
     #     next
     #   elsif key.match /ship_address$|bill_address$/
@@ -42,11 +49,11 @@ class ListCustomerWorker < QBWC::Worker
     #   else
     #     Rails.logger.warn("NOT SENT: #{key}:#{value}")
     #   end  # end conditional
-    # end # end for each pair
-    #  if customer.save
-    #      Rails.logger.info("great success")
-    #  else
-    #      Rails.logger.info("Not saved:  #{customer.errors}")
+    end # end for each pair
+      if customer.save
+          Rails.logger.info("great success")
+      else
+         Rails.logger.info("Not saved:  #{customer.errors}")
      end
   end
  end
