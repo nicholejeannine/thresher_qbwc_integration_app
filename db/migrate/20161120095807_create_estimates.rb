@@ -1,6 +1,6 @@
 class CreateEstimates < ActiveRecord::Migration[5.0]
   def change
-    create_table :estimates, id: false do |t|
+create_table :estimates, id: false do |t|
       t.string :id, :primary_key => true
       t.datetime :time_created
       t.datetime :time_modified
@@ -48,13 +48,55 @@ class CreateEstimates < ActiveRecord::Migration[5.0]
       t.text :memo
       t.string :customer_msg_id
       t.boolean :is_to_be_emailed, :null => false, :default => false
+      t.boolean :is_tax_included, :null => false, :default => false
       t.string :customer_sales_tax_code_id
       t.string :other
       t.string :external_guid
-      t.string :linked_txn_id
+      t.string :linked_txn
+      t.string :estimate_line_id
+      t.string :estimate_line_group_id
+      t.string :data_ext_id
 
-      t.timestamps
+      t.timestamps null: false
     end
-    # add_index :estimates, :txn_id, unique: true
+
+     create_table :estimate_lines, id: false do |t|
+      t.string :id, :primary_key => true
+      t.string :item_id
+      t.string :desc
+      t.string :quantity
+      t.string :unit_of_measure
+      t.string :override_uom_set_id
+      t.string :rate
+      t.float :rate_percent
+      t.string :class_id
+      t.decimal :amount, precision: 15, scale: 2
+      t.decimal :tax_amount, precision: 15, scale: 2
+      t.string :inventory_site_id
+      t.string :inventory_site_location_id
+      t.string :sales_tax_code_id
+      t.string :markup_rate
+      t.float :markup_rate_percent
+      t.string :other1
+      t.string :other2
+      t.string :data_ext_id
+
+      t.timestamps null: false
+    end
+
+    create_table :estimate_line_groups, id: false do |t|
+      t.string :id, :primary_key => true
+      t.string :item_group_id
+      t.string :desc
+      t.string :quantity
+      t.string :unit_of_measure
+      t.string :override_uom_set_id
+      t.boolean :is_print_items_in_group
+      t.decimal :total_amount, precision: 15, scale: 2
+      t.string :estimate_line_id
+      t.string :data_ext_id
+
+      t.timestamps null: false
+    end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101210303) do
+ActiveRecord::Schema.define(version: 20161120095807) do
 
   create_table "additional_notes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "note_id"
@@ -43,9 +43,9 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.string   "middle_name"
     t.string   "last_name"
     t.string   "job_title"
-    t.string   "additional_contact_ref"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "additional_contact_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -62,28 +62,29 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.string   "edit_sequence"
     t.string   "name"
     t.string   "full_name"
-    t.boolean  "is_active"
-    t.string   "parent_ref"
+    t.boolean  "is_active",     default: true, null: false
+    t.string   "parent_id"
     t.integer  "sublevel"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence"
-    t.string   "name",                                                                                           null: false
+    t.string   "name",                                                                               null: false
     t.string   "full_name"
-    t.boolean  "is_active",                                                                       default: true, null: false
+    t.boolean  "is_active",                                                          default: true,  null: false
     t.string   "class_id"
     t.string   "parent_id"
-    t.integer  "sublevel",                                                                        default: 0,    null: false
+    t.integer  "sublevel",                                                           default: 0,     null: false
     t.string   "company_name"
     t.string   "salutation"
     t.string   "first_name"
     t.string   "middle_name"
     t.string   "last_name"
+    t.string   "suffix"
     t.string   "job_title"
     t.string   "bill_address_addr1"
     t.string   "bill_address_addr2"
@@ -105,49 +106,49 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.string   "ship_address_postal_code"
     t.string   "ship_address_country"
     t.string   "ship_address_note"
+    t.string   "print_as"
     t.string   "phone"
+    t.string   "mobile"
+    t.string   "pager"
     t.string   "alt_phone"
     t.string   "fax"
     t.string   "email"
     t.string   "cc"
     t.string   "contact"
     t.string   "alt_contact"
-    t.string   "additional_contact_ref_contact_name"
-    t.string   "additional_contact_ref_contact_value"
+    t.string   "additional_contact_id"
     t.string   "contacts_id"
     t.string   "customer_type_id"
     t.string   "terms_id"
     t.string   "sales_rep_id"
-    t.decimal  "balance",                                                precision: 15, scale: 2
-    t.decimal  "total_balance",                                          precision: 15, scale: 2
+    t.decimal  "balance",                                   precision: 15, scale: 2
+    t.decimal  "total_balance",                             precision: 15, scale: 2
     t.string   "sales_tax_code_id"
     t.string   "item_sales_tax_id"
+    t.string   "sales_tax_country"
     t.string   "resale_number"
     t.string   "account_number"
-    t.decimal  "credit_limit",                                           precision: 15, scale: 2
+    t.decimal  "credit_limit",                              precision: 15, scale: 2
     t.string   "preferred_payment_method_id"
-    t.string   "credit_card_info_credit_card_number"
-    t.integer  "credit_card_info_expiration_month"
-    t.integer  "credit_card_info_expiration_year"
-    t.string   "credit_card_info_name_on_card"
-    t.string   "credit_card_info_credit_card_address"
-    t.string   "credit_card_info_credit_card_postal_code"
+    t.string   "credit_card_info"
     t.string   "job_status"
     t.date     "job_start_date"
     t.date     "job_projected_end_date"
     t.date     "job_end_date"
     t.string   "job_desc"
     t.string   "job_type_id"
-    t.text     "notes",                                    limit: 65535
-    t.string   "additional_notes_ret_note_id"
+    t.text     "notes",                       limit: 65535
+    t.string   "additional_notes_id"
+    t.boolean  "is_statement_with_parent",                                           default: false, null: false
+    t.string   "delivery_method"
     t.string   "preferred_delivery_method"
     t.string   "price_level_id"
     t.string   "external_guid"
+    t.string   "tax_registration_number"
     t.string   "currency_id"
-    t.string   "data_ext_ret_owner_id"
-    t.datetime "created_at",                                                                                     null: false
-    t.datetime "updated_at",                                                                                     null: false
-    t.index ["parent_id"], name: "index_customers_on_parent_id", using: :btree
+    t.string   "data_ext_id"
+    t.datetime "created_at",                                                                         null: false
+    t.datetime "updated_at",                                                                         null: false
   end
 
   create_table "data_exts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -157,6 +158,43 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.string   "data_ext_value"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "estimate_line_groups", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "item_group_id"
+    t.string   "desc"
+    t.string   "quantity"
+    t.string   "unit_of_measure"
+    t.string   "override_uom_set_id"
+    t.boolean  "is_print_items_in_group"
+    t.decimal  "total_amount",            precision: 15, scale: 2
+    t.string   "estimate_line_id"
+    t.string   "data_ext_id"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+  end
+
+  create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "item_id"
+    t.string   "desc"
+    t.string   "quantity"
+    t.string   "unit_of_measure"
+    t.string   "override_uom_set_id"
+    t.string   "rate"
+    t.float    "rate_percent",               limit: 24
+    t.string   "class_id"
+    t.decimal  "amount",                                precision: 15, scale: 2
+    t.decimal  "tax_amount",                            precision: 15, scale: 2
+    t.string   "inventory_site_id"
+    t.string   "inventory_site_location_id"
+    t.string   "sales_tax_code_id"
+    t.string   "markup_rate"
+    t.float    "markup_rate_percent",        limit: 24
+    t.string   "other1"
+    t.string   "other2"
+    t.string   "data_ext_id"
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
   end
 
   create_table "estimates", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -206,10 +244,14 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.text     "memo",                          limit: 65535
     t.string   "customer_msg_id"
     t.boolean  "is_to_be_emailed",                                                     default: false, null: false
+    t.boolean  "is_tax_included",                                                      default: false, null: false
     t.string   "customer_sales_tax_code_id"
     t.string   "other"
     t.string   "external_guid"
-    t.string   "linked_txn_id"
+    t.string   "linked_txn"
+    t.string   "estimate_line_id"
+    t.string   "estimate_line_group_id"
+    t.string   "data_ext_id"
     t.datetime "created_at",                                                                           null: false
     t.datetime "updated_at",                                                                           null: false
   end
@@ -220,16 +262,16 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.string   "edit_sequence"
     t.string   "name"
     t.string   "bar_code_value"
-    t.boolean  "is_active"
-    t.string   "class_ref"
+    t.boolean  "is_active",                           default: true, null: false
+    t.string   "class_id"
     t.string   "item_desc"
-    t.float    "tax_rate",                  limit: 24
-    t.string   "tax_vendor_ref"
-    t.string   "sales_tax_return_line_ref"
+    t.float    "tax_rate",                 limit: 24
+    t.string   "tax_vendor_id"
+    t.string   "sales_tax_return_line_id"
     t.string   "external_guid"
-    t.string   "data_ext_ret"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.string   "data_ext_id"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
   end
 
   create_table "job_types", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -238,11 +280,11 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.string   "edit_sequence"
     t.string   "name"
     t.string   "full_name"
-    t.boolean  "is_active"
-    t.string   "parent_ref"
-    t.integer  "sublevel"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.boolean  "is_active",     default: true, null: false
+    t.string   "parent_id"
+    t.integer  "sublevel",      default: 0,    null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "preferred_payment_methods", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -256,13 +298,13 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.string   "name"
-    t.boolean  "is_active"
+    t.boolean  "is_active",                               default: true, null: false
     t.string   "price_level_type"
     t.float    "price_level_fixed_percentage", limit: 24
-    t.string   "price_level_per_item_ret"
-    t.string   "currency_ref"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.string   "price_level_per_item_id"
+    t.string   "currency_id"
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
   end
 
   create_table "qbwc_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -298,10 +340,10 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.string   "initial"
-    t.boolean  "is_active"
-    t.string   "sales_rep_entity_ref"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.boolean  "is_active",           default: true, null: false
+    t.string   "sales_rep_entity_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "sales_tax_codes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -309,13 +351,13 @@ ActiveRecord::Schema.define(version: 20161101210303) do
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.string   "name"
-    t.boolean  "is_active"
-    t.boolean  "is_taxable"
+    t.boolean  "is_active",            default: true, null: false
+    t.boolean  "is_taxable",           default: true, null: false
     t.string   "desc"
-    t.string   "item_purchase_tax_ref"
-    t.string   "item_sales_tax_ref"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.string   "item_purchase_tax_id"
+    t.string   "item_sales_tax_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   create_table "terms", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
