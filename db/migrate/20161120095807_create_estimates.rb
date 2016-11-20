@@ -98,5 +98,53 @@ create_table :estimates, id: false do |t|
 
       t.timestamps null: false
     end
+
+    # lookups
+   create_table :templates, id: false do |t|
+      t.string :id, :primary_key => true
+      t.datetime :time_created
+      t.datetime :time_modified
+      t.string :edit_sequence
+      t.string :name
+      t.boolean :is_active, :null => false, :default => true
+      t.string :template_type
+
+      t.timestamps null: false
+    end
+
+    create_table :currencies, id: false do |t|
+      t.string :id, :primary_key => true
+      t.datetime :time_created
+      t.datetime :time_modified
+      t.string :edit_sequence
+      t.string :name
+      t.boolean :is_active, :null => false, :default => true
+      t.string :currency_code
+      t.string :currency_format
+      t.boolean :is_user_defined_currency
+      t.float :exchange_rate
+      t.date :as_of_date
+
+      t.timestamps null: false
+  end
+
+  create_table :inventory_sites, id: false do |t|
+      t.string :id, :primary_key => true
+      t.datetime :time_created
+      t.datetime :time_modified
+      t.string :edit_sequence
+      t.string :name
+      t.boolean :is_active, :null => false, :default => true
+      t.string :parent_site_id
+      t.boolean :is_default_site
+      t.string :site_desc
+      t.string :contact
+      t.string :phone
+      t.string :fax
+      t.string :email
+      t.text :site_address
+
+      t.timestamps null: false
+    end
   end
 end

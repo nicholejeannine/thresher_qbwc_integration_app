@@ -48,6 +48,21 @@ ActiveRecord::Schema.define(version: 20161120095807) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "currencies", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.boolean  "is_active",                           default: true, null: false
+    t.string   "currency_code"
+    t.string   "currency_format"
+    t.boolean  "is_user_defined_currency"
+    t.float    "exchange_rate",            limit: 24
+    t.date     "as_of_date"
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
+
   create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "ancestor_id",   null: false
     t.string  "descendant_id", null: false
@@ -256,6 +271,24 @@ ActiveRecord::Schema.define(version: 20161120095807) do
     t.datetime "updated_at",                                                                           null: false
   end
 
+  create_table "inventory_sites", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.boolean  "is_active",                     default: true, null: false
+    t.string   "parent_site_id"
+    t.boolean  "is_default_site"
+    t.string   "site_desc"
+    t.string   "contact"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "email"
+    t.text     "site_address",    limit: 65535
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
+
   create_table "item_sales_taxes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
@@ -358,6 +391,17 @@ ActiveRecord::Schema.define(version: 20161120095807) do
     t.string   "item_sales_tax_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+  end
+
+  create_table "templates", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "name"
+    t.boolean  "is_active",     default: true, null: false
+    t.string   "template_type"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "terms", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
