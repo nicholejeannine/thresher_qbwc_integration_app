@@ -18,6 +18,7 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb|
     customer = Customer.find_or_initialize_by(:id => qb['list_id'])
     qb.to_hash.each do |key, value|
+      Rails.logger.info("#{key} and #{value} and #{key.class} and #{value.class}")
       if key == 'ship_address' || key == 'bill_address'
         customer.send("#{key}_addr1=", value['addr1'])
         customer.send("#{key}_addr2=", value['addr2'])
