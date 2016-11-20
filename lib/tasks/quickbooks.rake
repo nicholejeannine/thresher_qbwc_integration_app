@@ -3,19 +3,23 @@ require 'qbwc'
 namespace :quickbooks do
   desc "TODO"
   task tables: :environment do
-    queries = ['Customer', 'Estimate', 'Invoice', 'PurchaseOrder', 'SalesOrder']
+    queries = ['Customer', 'Estimate', 'Invoice', 'PurchaseOrder', 'SalesOrder', "EstimateLine", "InvoiceLine", "PurchaseOrderLine", "SalesOrderLine", "Vendor"]
    lines = []
    queries.each do |q|
      lines << "class Create#{q.pluralize} < ActiveRecord::Migration[5.0]"
      lines << " def change"
-     lines << "  create_table :#{q.tableize} do |t|"
+     lines << "  create_table :#{q.tableize}, id: false do |t|"
+     lines << "   t.string :id, :primary_key => true"
        xml = QBWC.parser.describe("#{q}Ret")
+            if xml.elements.present?
          xml.elements.each do |x|
-        name = x.name.underscore
+        name = x.name.underscore name = x.name.underscore
+       if name == "ship_address"
+              lines << "    t.string :ship_address_addr1\n t.string :ship_address_addr2\n t.string :ship_address_addr3\n t.string :ship_address_addr4\n t.string :ship_address_addr5\n t.string :ship_address_city\n t.string :ship_address_state\n t.string :ship_address_postal_code\n t.string :ship_address_country\n t.string :ship_address_note\n"elsif name =="bill_address"
+            elsif name == 'bill_address'
+              lines+= "  t.string :bill_address_addr1\n t.string :bill_address_addr2\n t.string :bill_address_addr3\n t.string :bill_address_addr4\n t.string :bill_address_addr5\n t.string :bill_address_city\n t.string :bill_address_state\n t.string :bill_address_postal_code\n t.string :bill_address_country\n t.string :bill_address_note\n"
+            else
         klass = x.children.text.downcase
-        if name.match /ref$|address$|block$|info$|ret$|txn$/
-           lines << "    :#{name} # TODO references #{name}"
-        else
            case klass
             when "strtype", "guidtype", "idtype"
              lines << "    :#{name}"
@@ -40,7 +44,6 @@ namespace :quickbooks do
             end
         end
        end
-       lines << ""
        lines << "   t.timestamps null: false"
        lines << "  end"
        lines << " end"
@@ -48,6 +51,7 @@ namespace :quickbooks do
        lines << ""
        lines << ""
       end
+  end
     puts lines
   end
 
@@ -62,7 +66,9 @@ namespace :quickbooks do
         lines += "rails g scaffold #{q.classify}"
           xml.elements.each do |x|
             name = x.name.underscore
-            if name == "ship_address"
+            if name.match /ship_to_address|block$/
+              next
+            elsif name == "ship_address"
               lines += " ship_address_addr1 ship_address_addr2 ship_address_addr3 ship_address_addr4 ship_address_addr5 ship_address_city ship_address_state ship_address_postal_code ship_address_country ship_address_note"
             elsif name =="bill_address"
               lines+= " bill_address_addr1 bill_address_addr2 bill_address_addr3 bill_address_addr4 bill_address_addr5 bill_address_city bill_address_state bill_address_postal_code bill_address_country bill_address_note"
@@ -73,7 +79,11 @@ namespace :quickbooks do
               if klass == 'idtype'
                 next
               else
+               if name.match /memo$|note$|notes$/
+                lines += " #{name}:text"
+              else
                 lines += " #{name}"
+              end
               end
               case klass
               when "idtype"
@@ -85,7 +95,7 @@ namespace :quickbooks do
                 when "datetype"
                   lines += ":date"
                 when "floattype", "percenttype"
-                  lines += ":float{'10,2'}"
+                  lines += ":float"
                 when "booltype"
                   lines += ":boolean"
                 when "amttype"
@@ -95,7 +105,7 @@ namespace :quickbooks do
               end
              end
            end
-          lines += " --primary-key=string\n\n\n"
+          lines += " \n\n\n"
         end
       end
     puts lines
