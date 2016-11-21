@@ -1,0 +1,259 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Txn:</strong>
+  <%= @invoice.txn_id %>
+</p>
+
+<p>
+  <strong>Time created:</strong>
+  <%= @invoice.time_created %>
+</p>
+
+<p>
+  <strong>Time modified:</strong>
+  <%= @invoice.time_modified %>
+</p>
+
+<p>
+  <strong>Edit sequence:</strong>
+  <%= @invoice.edit_sequence %>
+</p>
+
+<p>
+  <strong>Txn number:</strong>
+  <%= @invoice.txn_number %>
+</p>
+
+<p>
+  <strong>Customer ref:</strong>
+  <%= @invoice.customer_ref %>
+</p>
+
+<p>
+  <strong>Class ref:</strong>
+  <%= @invoice.class_ref %>
+</p>
+
+<p>
+  <strong>Ar account ref:</strong>
+  <%= @invoice.ar_account_ref %>
+</p>
+
+<p>
+  <strong>Template ref:</strong>
+  <%= @invoice.template_ref %>
+</p>
+
+<p>
+  <strong>Txn date:</strong>
+  <%= @invoice.txn_date %>
+</p>
+
+<p>
+  <strong>Ref number:</strong>
+  <%= @invoice.ref_number %>
+</p>
+
+<p>
+  <strong>Bill address:</strong>
+  <%= @invoice.bill_address %>
+</p>
+
+<p>
+  <strong>Bill address block:</strong>
+  <%= @invoice.bill_address_block %>
+</p>
+
+<p>
+  <strong>Ship address:</strong>
+  <%= @invoice.ship_address %>
+</p>
+
+<p>
+  <strong>Ship address block:</strong>
+  <%= @invoice.ship_address_block %>
+</p>
+
+<p>
+  <strong>Is pending:</strong>
+  <%= @invoice.is_pending %>
+</p>
+
+<p>
+  <strong>Is finance charge:</strong>
+  <%= @invoice.is_finance_charge %>
+</p>
+
+<p>
+  <strong>Po number:</strong>
+  <%= @invoice.po_number %>
+</p>
+
+<p>
+  <strong>Terms ref:</strong>
+  <%= @invoice.terms_ref %>
+</p>
+
+<p>
+  <strong>Due date:</strong>
+  <%= @invoice.due_date %>
+</p>
+
+<p>
+  <strong>Sales rep ref:</strong>
+  <%= @invoice.sales_rep_ref %>
+</p>
+
+<p>
+  <strong>Fob:</strong>
+  <%= @invoice.fob %>
+</p>
+
+<p>
+  <strong>Ship date:</strong>
+  <%= @invoice.ship_date %>
+</p>
+
+<p>
+  <strong>Ship method ref:</strong>
+  <%= @invoice.ship_method_ref %>
+</p>
+
+<p>
+  <strong>Subtotal:</strong>
+  <%= @invoice.subtotal %>
+</p>
+
+<p>
+  <strong>Item sales tax ref:</strong>
+  <%= @invoice.item_sales_tax_ref %>
+</p>
+
+<p>
+  <strong>Sales tax percentage:</strong>
+  <%= @invoice.sales_tax_percentage %>
+</p>
+
+<p>
+  <strong>Sales tax total:</strong>
+  <%= @invoice.sales_tax_total %>
+</p>
+
+<p>
+  <strong>Applied amount:</strong>
+  <%= @invoice.applied_amount %>
+</p>
+
+<p>
+  <strong>Balance remaining:</strong>
+  <%= @invoice.balance_remaining %>
+</p>
+
+<p>
+  <strong>Currency ref:</strong>
+  <%= @invoice.currency_ref %>
+</p>
+
+<p>
+  <strong>Exchange rate:</strong>
+  <%= @invoice.exchange_rate %>
+</p>
+
+<p>
+  <strong>Balance remaining in home currency:</strong>
+  <%= @invoice.balance_remaining_in_home_currency %>
+</p>
+
+<p>
+  <strong>Memo:</strong>
+  <%= @invoice.memo %>
+</p>
+
+<p>
+  <strong>Is paid:</strong>
+  <%= @invoice.is_paid %>
+</p>
+
+<p>
+  <strong>Customer msg ref:</strong>
+  <%= @invoice.customer_msg_ref %>
+</p>
+
+<p>
+  <strong>Is to be printed:</strong>
+  <%= @invoice.is_to_be_printed %>
+</p>
+
+<p>
+  <strong>Is to be emailed:</strong>
+  <%= @invoice.is_to_be_emailed %>
+</p>
+
+<p>
+  <strong>Is tax included:</strong>
+  <%= @invoice.is_tax_included %>
+</p>
+
+<p>
+  <strong>Customer sales tax code ref:</strong>
+  <%= @invoice.customer_sales_tax_code_ref %>
+</p>
+
+<p>
+  <strong>Suggested discount amount:</strong>
+  <%= @invoice.suggested_discount_amount %>
+</p>
+
+<p>
+  <strong>Suggested discount date:</strong>
+  <%= @invoice.suggested_discount_date %>
+</p>
+
+<p>
+  <strong>Other:</strong>
+  <%= @invoice.other %>
+</p>
+
+<p>
+  <strong>External guid:</strong>
+  <%= @invoice.external_guid %>
+</p>
+
+<p>
+  <strong>Linked txn:</strong>
+  <%= @invoice.linked_txn %>
+</p>
+
+<p>
+  <strong>Invoice line ret:</strong>
+  <%= @invoice.invoice_line_ret %>
+</p>
+
+<p>
+  <strong>Invoice line group ret:</strong>
+  <%= @invoice.invoice_line_group_ret %>
+</p>
+
+<p>
+  <strong>Discount line ret:</strong>
+  <%= @invoice.discount_line_ret %>
+</p>
+
+<p>
+  <strong>Sales tax line ret:</strong>
+  <%= @invoice.sales_tax_line_ret %>
+</p>
+
+<p>
+  <strong>Shipping line ret:</strong>
+  <%= @invoice.shipping_line_ret %>
+</p>
+
+<p>
+  <strong>Data ext ret:</strong>
+  <%= @invoice.data_ext_ret %>
+</p>
+
+<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
+<%= link_to 'Back', invoices_path %>

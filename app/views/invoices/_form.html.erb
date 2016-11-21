@@ -1,0 +1,272 @@
+<%= form_for(invoice) do |f| %>
+  <% if invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <% invoice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :txn_id %>
+    <%= f.text_field :txn_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_created %>
+    <%= f.datetime_select :time_created %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time_modified %>
+    <%= f.datetime_select :time_modified %>
+  </div>
+
+  <div class="field">
+    <%= f.label :edit_sequence %>
+    <%= f.text_field :edit_sequence %>
+  </div>
+
+  <div class="field">
+    <%= f.label :txn_number %>
+    <%= f.number_field :txn_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :customer_ref %>
+    <%= f.text_field :customer_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :class_ref %>
+    <%= f.text_field :class_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ar_account_ref %>
+    <%= f.text_field :ar_account_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :template_ref %>
+    <%= f.text_field :template_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :txn_date %>
+    <%= f.date_select :txn_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ref_number %>
+    <%= f.text_field :ref_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bill_address %>
+    <%= f.text_field :bill_address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :bill_address_block %>
+    <%= f.text_field :bill_address_block %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ship_address %>
+    <%= f.text_field :ship_address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ship_address_block %>
+    <%= f.text_field :ship_address_block %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_pending %>
+    <%= f.check_box :is_pending %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_finance_charge %>
+    <%= f.check_box :is_finance_charge %>
+  </div>
+
+  <div class="field">
+    <%= f.label :po_number %>
+    <%= f.text_field :po_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :terms_ref %>
+    <%= f.text_field :terms_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :due_date %>
+    <%= f.date_select :due_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sales_rep_ref %>
+    <%= f.text_field :sales_rep_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fob %>
+    <%= f.text_field :fob %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ship_date %>
+    <%= f.date_select :ship_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ship_method_ref %>
+    <%= f.text_field :ship_method_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :subtotal %>
+    <%= f.text_field :subtotal %>
+  </div>
+
+  <div class="field">
+    <%= f.label :item_sales_tax_ref %>
+    <%= f.text_field :item_sales_tax_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sales_tax_percentage %>
+    <%= f.text_field :sales_tax_percentage %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sales_tax_total %>
+    <%= f.text_field :sales_tax_total %>
+  </div>
+
+  <div class="field">
+    <%= f.label :applied_amount %>
+    <%= f.text_field :applied_amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :balance_remaining %>
+    <%= f.text_field :balance_remaining %>
+  </div>
+
+  <div class="field">
+    <%= f.label :currency_ref %>
+    <%= f.text_field :currency_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :exchange_rate %>
+    <%= f.text_field :exchange_rate %>
+  </div>
+
+  <div class="field">
+    <%= f.label :balance_remaining_in_home_currency %>
+    <%= f.text_field :balance_remaining_in_home_currency %>
+  </div>
+
+  <div class="field">
+    <%= f.label :memo %>
+    <%= f.text_area :memo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_paid %>
+    <%= f.check_box :is_paid %>
+  </div>
+
+  <div class="field">
+    <%= f.label :customer_msg_ref %>
+    <%= f.text_field :customer_msg_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_to_be_printed %>
+    <%= f.check_box :is_to_be_printed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_to_be_emailed %>
+    <%= f.check_box :is_to_be_emailed %>
+  </div>
+
+  <div class="field">
+    <%= f.label :is_tax_included %>
+    <%= f.check_box :is_tax_included %>
+  </div>
+
+  <div class="field">
+    <%= f.label :customer_sales_tax_code_ref %>
+    <%= f.text_field :customer_sales_tax_code_ref %>
+  </div>
+
+  <div class="field">
+    <%= f.label :suggested_discount_amount %>
+    <%= f.text_field :suggested_discount_amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :suggested_discount_date %>
+    <%= f.date_select :suggested_discount_date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :other %>
+    <%= f.text_field :other %>
+  </div>
+
+  <div class="field">
+    <%= f.label :external_guid %>
+    <%= f.text_field :external_guid %>
+  </div>
+
+  <div class="field">
+    <%= f.label :linked_txn %>
+    <%= f.text_field :linked_txn %>
+  </div>
+
+  <div class="field">
+    <%= f.label :invoice_line_ret %>
+    <%= f.text_field :invoice_line_ret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :invoice_line_group_ret %>
+    <%= f.text_field :invoice_line_group_ret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :discount_line_ret %>
+    <%= f.text_field :discount_line_ret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sales_tax_line_ret %>
+    <%= f.text_field :sales_tax_line_ret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :shipping_line_ret %>
+    <%= f.text_field :shipping_line_ret %>
+  </div>
+
+  <div class="field">
+    <%= f.label :data_ext_ret %>
+    <%= f.text_field :data_ext_ret %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

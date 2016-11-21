@@ -1,6 +1,7 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
 
+  resources :invoices
   resources :expense_lines
   resources :customers, only: [:index, :show]
   resources :estimates, only: [:index, :show]
