@@ -13,7 +13,7 @@ class ListInvoiceWorker < QBWC::Worker
     # handle_response will get invoices in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     response['invoice_ret'].each do |qb|
-      Rails.logger.warn(qb.class)
+      Rails.logger.warn("#{qb}")
 
       # invoice = Invoice.find_or_create_by(qb.to_hash)
       # if invoice.save
