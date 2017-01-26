@@ -1,3 +1,3 @@
 class ExpenseLine < ApplicationRecord
- belongs_to :estimate
+ # belongs_to :estimate
 end
