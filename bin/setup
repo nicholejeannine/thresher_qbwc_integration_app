@@ -25,7 +25,7 @@ chdir APP_ROOT do
   unless File.exist?('config/secrets.yml')
     cp 'config/secrets.yml.template', 'config/secrets.yml'
   end
-  unless File.exist?('config/qbwc.yml')
+  unless File.exist?('config/initializers/qbwc.rb')
     cp 'config/initializers/qbwc.rb.template', 'config/initializers/qbwc.rb'
   end
 
