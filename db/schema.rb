@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121053423) do
+ActiveRecord::Schema.define(version: 20161121142805) do
 
   create_table "clients", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "id"
@@ -97,6 +97,28 @@ ActiveRecord::Schema.define(version: 20161121053423) do
     t.integer  "Customers_PKEY"
   end
 
+  create_table "contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "contact"
+    t.string   "salutation"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "last_name"
+    t.string   "job_title"
+    t.string   "additional_contact_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "ancestor_id",   null: false
+    t.string  "descendant_id", null: false
+    t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "customer_anc_desc_idx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "customer_desc_idx", using: :btree
+  end
 
   create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
@@ -179,6 +201,29 @@ ActiveRecord::Schema.define(version: 20161121053423) do
     t.string   "primary_contact"
     t.string   "primary_email"
     t.string   "primary_phone"
+  end
+
+  create_table "data_exts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "owner_id"
+    t.string   "data_ext_name"
+    t.string   "data_ext_type"
+    t.string   "data_ext_value"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "estimate_line_groups", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "item_group_id"
+    t.string   "desc"
+    t.string   "quantity"
+    t.string   "unit_of_measure"
+    t.string   "override_uom_set_id"
+    t.boolean  "is_print_items_in_group"
+    t.decimal  "total_amount",            precision: 15, scale: 2
+    t.string   "estimate_line_id"
+    t.string   "data_ext_id"
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   create_table "estimate_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -708,6 +753,34 @@ ActiveRecord::Schema.define(version: 20161121053423) do
     t.decimal  "linked_txn_amount",                        precision: 15, scale: 2
   end
 
+  create_table "qbwc_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "company",                          limit: 1000
+    t.string   "worker_class",                     limit: 100
+    t.boolean  "enabled",                                        default: false, null: false
+    t.text     "request_index",                    limit: 65535
+    t.text     "requests",                         limit: 65535
+    t.boolean  "requests_provided_when_job_added",               default: false, null: false
+    t.text     "data",                             limit: 65535
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+    t.index ["company"], name: "index_qbwc_jobs_on_company", length: {"company"=>150}, using: :btree
+    t.index ["name"], name: "index_qbwc_jobs_on_name", unique: true, using: :btree
+  end
+
+  create_table "qbwc_sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "ticket"
+    t.string   "user"
+    t.string   "company",      limit: 1000
+    t.integer  "progress",                   default: 0, null: false
+    t.string   "current_job"
+    t.string   "iterator_id"
+    t.string   "error",        limit: 1000
+    t.text     "pending_jobs", limit: 65535,             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
   create_table "sales_order_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "sales_order_id"
     t.string  "item_id"
@@ -804,6 +877,17 @@ ActiveRecord::Schema.define(version: 20161121053423) do
     t.string   "linked_txn_ref_number"
     t.string   "linked_txn_link_type"
     t.decimal  "linked_txn_amount",                               precision: 15, scale: 2
+  end
+
+  create_table "sales_reps", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.string   "initial"
+    t.boolean  "is_active",           default: true, null: false
+    t.string   "sales_rep_entity_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
 end
