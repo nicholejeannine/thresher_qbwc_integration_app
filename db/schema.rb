@@ -204,7 +204,6 @@ ActiveRecord::Schema.define(version: 20161121053423) do
   end
 
   create_table "estimates", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "id"
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence"
@@ -297,7 +296,6 @@ ActiveRecord::Schema.define(version: 20161121053423) do
   end
 
   create_table "invoices", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "id"
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence"
@@ -644,7 +642,6 @@ ActiveRecord::Schema.define(version: 20161121053423) do
   end
 
   create_table "purchase_orders", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "id"
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence"
@@ -736,7 +733,6 @@ ActiveRecord::Schema.define(version: 20161121053423) do
   end
 
   create_table "sales_orders", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "id"
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence"
