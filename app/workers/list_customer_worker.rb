@@ -34,9 +34,10 @@ class ListCustomerWorker < QBWC::Worker
             customer.send("#{key}_note=", value['note'])
             customer.send("#{key}_postal_code=", value['postal_code'])
             customer.send("#{key}_note=", value['note'])
-        elsif key.remove!(/_ref$/).match /customer_type|terms|sales_rep/
-          customer.send("#{key}_id=", value['list_id'])
-          customer.send("#{key}_full_name", value['full_name'])
+        elsif key.remove(/_ref$/).match /customer_type|terms|sales_rep/
+          name = key.remove(/_ref$/)
+          customer.send("#{name}_id=", value['list_id'])
+          customer.send("#{name}_full_name", value['full_name'])
         end # end if statement
       end # end for each |key, value|
       if customer.save
