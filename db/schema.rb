@@ -97,28 +97,6 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.integer  "Customers_PKEY"
   end
 
-  create_table "contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence"
-    t.string   "contact"
-    t.string   "salutation"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "job_title"
-    t.string   "additional_contact_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
-  create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string  "ancestor_id",   null: false
-    t.string  "descendant_id", null: false
-    t.integer "generations",   null: false
-    t.index ["ancestor_id", "descendant_id", "generations"], name: "customer_anc_desc_idx", unique: true, using: :btree
-    t.index ["descendant_id"], name: "customer_desc_idx", using: :btree
-  end
 
   create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
@@ -201,15 +179,6 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.string   "primary_contact"
     t.string   "primary_email"
     t.string   "primary_phone"
-  end
-
-  create_table "data_exts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "owner_id"
-    t.string   "data_ext_name"
-    t.string   "data_ext_type"
-    t.string   "data_ext_value"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
   end
 
   create_table "estimate_line_groups", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -879,15 +848,5 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.decimal  "linked_txn_amount",                               precision: 15, scale: 2
   end
 
-  create_table "sales_reps", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence"
-    t.string   "initial"
-    t.boolean  "is_active",           default: true, null: false
-    t.string   "sales_rep_entity_id"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-  end
 
 end
