@@ -39,7 +39,7 @@ class ListCustomerWorker < QBWC::Worker
         elsif key.remove(/_ref$/).match /customer_type|terms|sales_rep/
           name = key.remove(/_ref$/)
           customer.send("#{name}_id=", value['list_id'])
-          customer.send("#{name}_full_name", value['full_name'])
+          customer.send("#{name}_full_name=", value['full_name'])
         end # end if statement
       end # end for each |key, value|
       if customer.save
