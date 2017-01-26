@@ -18,9 +18,9 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb|
       customer = Customer.find_or_initialize_by(:id => qb['list_id'])
       qb.to_hash.each do |key, value|
-        if key.match /block$|xml_attributes/
+        if key.match /xml_attributes/
             next
-        elsif key.match /ship_address$|bill_address$/
+        elsif key.match /ship_address$|bill_address$|$block$/
           customer.send("#{key}_addr1=", value['addr1'])
           customer.send("#{key}_addr2=", value['addr2'])
           customer.send("#{key}_addr3=", value['addr3'])
@@ -40,6 +40,8 @@ class ListCustomerWorker < QBWC::Worker
           end # end value.each do |k,v|
         elsif columns.include?(key.to_s)
             customer.send("#{key}=", value)
+          else
+            next
         end # end if parsing ridiculousness
       end # end for each |key, value|
       if customer.save
