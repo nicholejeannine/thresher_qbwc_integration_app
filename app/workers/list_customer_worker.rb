@@ -18,7 +18,20 @@ class ListCustomerWorker < QBWC::Worker
     response['customer_ret'].each do |qb|
       customer = Customer.find_or_initialize_by(:id => qb['list_id'])
       qb.to_hash.each do |key, value|
-         Rails.logger.info("Key: #{key} and value #{value}")
+        if columns.include?(key.to_s)
+          customer.send("#{key}=", value)
+        else
+          Rails.logger.info("Unusual key value pair.  Key: #{key} and value #{value}")
+        end
+      end # end for each |key, value|
+      if customer.save
+        Rails.logger.info("saved a customer")
+      else
+        Rails.logger.info("Not saved:  #{customer.errors}")
+      end # end if customer save
+    end # end for each customer
+  end # end handle response
+end # end class
     #     if key.match /xml_attributes/
     #         next
     #     elsif key.match /ship_address$|bill_address$|$block$/
@@ -44,12 +57,3 @@ class ListCustomerWorker < QBWC::Worker
     #       else
     #         next
     #     end # end if parsing ridiculousness
-      end # end for each |key, value|
-    #   if customer.save
-    #     Rails.logger.info("great success")
-    #   else
-    #     Rails.logger.info("Not saved:  #{customer.errors}")
-    #   end # end if customer save
-    end # end for each customer
-  end # end handle response
-end # end worker class
