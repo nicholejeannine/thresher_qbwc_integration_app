@@ -22,18 +22,20 @@ class ListCustomerWorker < QBWC::Worker
         if columns.include?(key.to_s)
           customer.send("#{key}=", value)
           # save address types
-        elsif key.match /ship_address$|bill_address$|block$|ship_address$/
+        elsif key.match /ship_address$|bill_address$|block$/
             customer.send("#{key}_addr1=", value['addr1'])
             customer.send("#{key}_addr2=", value['addr2'])
             customer.send("#{key}_addr3=", value['addr3'])
             customer.send("#{key}_addr4=", value['addr4'])
             customer.send("#{key}_addr5=", value['addr5'])
-            customer.send("#{key}_city=", value['city'])
-            customer.send("#{key}_state=", value['state'])
-            customer.send("#{key}_postal_code=", value['postal_code'])
-            customer.send("#{key}_note=", value['note'])
-            customer.send("#{key}_postal_code=", value['postal_code'])
-            customer.send("#{key}_note=", value['note'])
+            # Address blocks don't have city/state/postal)code/country/note
+            if key.match /address$/
+              customer.send("#{key}_city=", value['city'])
+              customer.send("#{key}_state=", value['state'])
+              customer.send("#{key}_postal_code=", value['postal_code'])
+              customer.send("#{key}_country=", value['country'])
+              customer.send("#{key}_note=", value['note'])
+            end
         elsif key.remove(/_ref$/).match /customer_type|terms|sales_rep/
           name = key.remove(/_ref$/)
           customer.send("#{name}_id=", value['list_id'])
