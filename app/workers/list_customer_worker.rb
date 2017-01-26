@@ -36,6 +36,8 @@ class ListCustomerWorker < QBWC::Worker
               customer.send("#{key}_country=", value['country'])
               customer.send("#{key}_note=", value['note'])
             end
+        elsif key.match(/parent_ref/)
+          customer.send("parent_id=", value['parent_ref']['list_id'])
         elsif key.remove(/_ref$/).match /parent$|customer_type$|terms$|sales_rep$/
           name = key.remove(/_ref$/)
           customer.send("#{name}_id=", value['list_id'])
