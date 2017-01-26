@@ -6,7 +6,7 @@ class ListCustomerWorker < QBWC::Worker
     {
       :customer_query_rq => {
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
-        :active_status => 'ActiveOnly',
+        :active_status => "active_only",
         :max_returned => 100
       }
     }
