@@ -22,7 +22,7 @@ class ListCustomerWorker < QBWC::Worker
         if columns.include?(key.to_s)
           customer.send("#{key}=", value)
           # save address types
-        elsif key.match /ship_address$|bill_address$|$block$|ship_address$/
+        elsif key.match /ship_address$|bill_address$|block$|ship_address$/
             customer.send("#{key}_addr1=", value['addr1'])
             customer.send("#{key}_addr2=", value['addr2'])
             customer.send("#{key}_addr3=", value['addr3'])
@@ -34,6 +34,9 @@ class ListCustomerWorker < QBWC::Worker
             customer.send("#{key}_note=", value['note'])
             customer.send("#{key}_postal_code=", value['postal_code'])
             customer.send("#{key}_note=", value['note'])
+        elsif key.remove!(/_ref$/).match /customer_type|terms|sales_rep/
+          customer.send("#{key}_id=", value['list_id'])
+          customer.send("#{key}_full_name", value['full_name'])
         end # end if statement
       end # end for each |key, value|
       if customer.save
