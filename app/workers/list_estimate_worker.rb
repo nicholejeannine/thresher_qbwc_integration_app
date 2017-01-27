@@ -21,18 +21,18 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{key}=", value)
             next
         elsif key.match /ship_address$|bill_address$|block$/
-            esimate.send("#{key}_addr1=", value['addr1'])
-            esimate.send("#{key}_addr2=", value['addr2'])
-            esimate.send("#{key}_addr3=", value['addr3'])
-            esimate.send("#{key}_addr4=", value['addr4'])
-            esimate.send("#{key}_addr5=", value['addr5'])
+            estimate.send("#{key}_addr1=", value['addr1'])
+            estimate.send("#{key}_addr2=", value['addr2'])
+            estimate.send("#{key}_addr3=", value['addr3'])
+            estimate.send("#{key}_addr4=", value['addr4'])
+            estimate.send("#{key}_addr5=", value['addr5'])
             # Address blocks don't have city/state/postal)code/country/note
             if key.match /address$/
-              esimate.send("#{key}_city=", value['city'])
-              esimate.send("#{key}_state=", value['state'])
-              esimate.send("#{key}_postal_code=", value['postal_code'])
-              esimate.send("#{key}_country=", value['country'])
-              esimate.send("#{key}_note=", value['note'])
+              estimate.send("#{key}_city=", value['city'])
+              estimate.send("#{key}_state=", value['state'])
+              estimate.send("#{key}_postal_code=", value['postal_code'])
+              estimate.send("#{key}_country=", value['country'])
+              estimate.send("#{key}_note=", value['note'])
             end
         elsif key.remove(/_ref$/).match /customer$|template$|terms$|sales_rep$|item_sales_tax$|customer_msg$|customer_sales_tax_code$/
           name = key.remove(/_ref$/)
