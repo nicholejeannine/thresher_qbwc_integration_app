@@ -1,4 +1,6 @@
 class PurchaseOrderLine < ApplicationRecord
+   # set optional to true to prevent the database foreign-key checks on quickbooks-created rows
+   belongs_to :purchase_order, optional: true
 end
 
 # == Schema Information

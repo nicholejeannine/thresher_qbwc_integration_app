@@ -1,4 +1,5 @@
 class PurchaseOrder < ApplicationRecord
+ has_many :purchase_order_lines
 end
 
 # == Schema Information
