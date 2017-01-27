@@ -11,6 +11,10 @@ class Job < ApplicationRecord
     self.jobs.count == 0 && self.projects.count == 0
   end
 
+  def active?
+    self.is_active == true
+  end
+
   def client?
     sublevel.to_i === 0
   end

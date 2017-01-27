@@ -13,6 +13,10 @@ class Project < ApplicationRecord
     false
   end
 
+  def active?
+    self.is_active == true
+  end
+
   # Included so that the url displays full_name instead of ugly quickbooks id value in url
   # e.g., `/customers/tcp` instead of `/customers/100273731-866661887 or whatever
   def to_param
