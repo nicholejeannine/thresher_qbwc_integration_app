@@ -1,278 +1,44 @@
-<%= render partial: 'customer_header' %>
-<table>
- <tbody><tr>
-  <th>
-   Customer Display Name
-  </th>
-  <td colspan="5">
-   <%= @customer.name %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Customer Full Company Name
-  </th>
-  <td colspan="5">
-   <%= @customer.company_name%>
-  </td>
- </tr>
- <tr>
-  <th>
-   Full Name
-  </th>
-  <td>
-   <%= @customer.salutation %>
-  </td>
-  <td>
-   <%= @customer.first_name %>
+<div class="row">
+<div class="col-xs-24">
+<h1 id="header" class="header"><%=@customer.full_name%></h1>
+</div>
+</div>
+<div class="row">
+<div class="col-xs-24" role="tabpanel">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs nav-justified bg-info" id="customer_header" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#customerinfo" aria-controls="customerinfo" role="tab" data-toggle="tab">Customer Info</a>
+    </li>
+    <li role="presentation">
+      <a href="#tree" aria-controls="tree" role="tab" data-toggle="tab">Tree</a>
+    </li>
+    <li role="presentation">
+      <a href="#projects" aria-controls="projects" role="tab" data-toggle="tab">Projects</a>
+    </li>
+    <li role="presentation">
+      <a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Documents</a>
+    </li>
+    <li role="presentation">
+      <a href="#tickets" aria-controls="tickets" role="tab" data-toggle="tab">Tickets</a>
+    </li>
+    <li role="presentation">
+      <a href="#schedule" aria-controls="schedule" role="tab" data-toggle="tab">Schedule</a>
+    </li>
+    <li role="presentation">
+      <a href="#rma" aria-controls="rma" role="tab" data-toggle="tab">RMA</a>
+    </li>
+  </ul>
 
-  </td>
-  <td>
-   <%= @customer.middle_name %>
-
-  </td>
-  <td>
-   <%= @customer.last_name %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Main Phone
-  </th>
-  <td>
-   <%= @customer.phone %>
-  </td>
-  <th>
-   Main Email
-  </th>
-  <td colspan="2">
-   <%= @customer.email %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Alternate Phone
-  </th>
-  <td>
-  <%= @customer.alt_phone %>
-    </td>
-  <th>
-   CC Email
-  </th>
-  <td colspan="2">
-   <%= @customer.cc %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Cell Phone
-  </th>
-  <td>
-   What the heck column is this??
-  </td>
-  <th>
-   Fax Phone
-  </th>
-  <td colspan="2">
-   <%= @customer.fax %>
-
-  </td>
- </tr>
- <tr>
-  <td colspan="5">
-  </td>
- </tr>
-</tbody></table>
-<table>
- <tbody><tr>
-  <th width="810" style="text-align: center;">
-   Accounts Payable Details
-  </th>
- </tr>
-
-
- <tr>
-  <td>
-
-    <span class="headingRightAligned">A/P Name</span>
-  <span class="inputTextBoxBillTo"><%= @customer.primary_contact%></span>
-
-  </td>
- </tr>
- <tr>
-  <td>
-
-    <span class="headingRightAligned">A/P Email</span>
-   <span class="inputTextBoxBillTo"><%= @customer.primary_email %></span>
-
-
-  </td>
- </tr>
-
- <tr>
-  <td>
-
-    <span class="headingRightAligned">A/P Phone</span>
-<span class="inputTextBoxBillTo"><%= @customer.primary_phone %></span>
-
-  </td>
-
- </tr>
-
-</tbody></table>
-<table>
-
- <tbody><tr>
-  <th width="810" colspan="5" style="text-align: center;">
-   Address Details
-  </th>
- </tr>
- <tr>
-  <th colspan="2" style="text-align: center;">
-   Invoice/Bill To
-  </th>
-  <td>
-  </td>
-  <th colspan="2" style="text-align: center;">
-   Ship To
-  </th>
- </tr>
- <tr>
-  <th>
-   Company
-  </th>
-  <td>
-   <%= @customer.company_name %>
-  </td>
-  <td>
-  </td>
-  <th>
-   Company
-  </th>
-  <td>
-  <%= @customer.company_name %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Att. Name
-  </th>
-  <td>
-   <%= @customer.primary_contact %>
-  </td>
-  <td>
-  </td>
-  <th>
-   Name
-  </th>
-  <td>
-   <%= @customer.contact %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Address
-  </th>
-  <td>
-      <%= @customer.bill_address_addr1 %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   Address
-  </th>
-  <td>
-         <%= @customer.ship_address_addr1 %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   Address2
-  </th>
-  <td>
-           <%= @customer.bill_address_addr2 %>
-
-  </td>
-  <td style="text-align: center;">
-  </td>
-  <th>
-   Address2
-  </th>
-  <td>
-            <%= @customer.ship_address_addr2 %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   City
-  </th>
-  <td>
-          <%= @customer.bill_address_city %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   City
-  </th>
-  <td>
-           <%= @customer.ship_address_city %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   State
-  </th>
-  <td>
-                 <%= @customer.bill_address_state %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   State
-  </th>
-  <td>
-          <%= @customer.ship_address_state %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   Zip
-  </th>
-  <td>
-               <%= @customer.bill_address_postal_code %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   Zip
-  </th>
-  <td>
-            <%= @customer.ship_address_postal_code %>
-
-  </td>
- </tr>
- <tr>
-  <td colspan="2">
-  </td>
- </tr>
- <tr>
-  <td>
-   <input type="checkbox"  <% unless @customer.is_active == 'true' %>
-   value="true" checked="checked"
-
-   <% end %>   > Customer is inactive
-  </td>
- </tr>
- <tr>
-  <td>
-  </td>
- </tr>
-</tbody></table>
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="customerinfo"><%= render 'info' %></div>
+    <div role="tabpanel" class="tab-pane" id="tree"><%= render partial: 'tree' %></div>
+    <div role="tabpanel" class="tab-pane" id="projects"><%= render partial: 'projects' %></div>
+    <div role="tabpanel" class="tab-pane" id="documents">Documents</div>
+    <div role="tabpanel" class="tab-pane" id="tickets">Tickets</div>
+    <div role="tabpanel" class="tab-pane" id="schedule">Schedule</div>
+    <div role="tabpanel" class="tab-pane" id="rma">RMA</div>
+  </div>
+</div>
+</div>
