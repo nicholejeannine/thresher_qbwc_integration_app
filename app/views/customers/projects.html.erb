@@ -1,0 +1,10 @@
+<%= render partial: 'customer_header' %>
+<% if @projects.nil? %>
+			<p>No projects found.</p>
+			<% else %>
+			<ul>
+<% @projects.each do |project| %>
+		<li><%= project.name %></li>
+<% end%>
+</ul>
+<% end %>

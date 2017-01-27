@@ -1,7 +1,86 @@
 class Customer < ApplicationRecord
+   self.primary_key = :id # In case customer model represents a mysql view
    has_many :estimates
    has_many :invoices
    has_many :sales_orders
+
+
+  # `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".
+  #  The -> symbol ("lambda") means the whole query is being saved to a variable, so that it can be run when it's actually needed (instead of when the program is started).
+  scope :active, ->{ where(:is_active => 'true') }
+  scope :inactive, ->{ where(:is_active => 'false') }
+  scope :clients, -> { where(:sublevel => 0)}
+  scope :jobs, -> {where("`sublevel` > 0 AND `name` NOT LIKE 'P-%'")}
+  scope :projects, -> {where("`sublevel` > 0 AND `name` LIKE 'P-%'")}
+  has_many :jobs, :class_name => 'Job', :foreign_key => 'parent_id'
+  has_many :projects, :class_name => 'Project', :foreign_key => 'parent_id', through: :jobs
+  ### INSTANCE METHODS
+
+  # With any customer, c, call c.all_projects to return all projects.
+  # For instance, if c is the Customer where full_name = 'Google', c.projects will will issue the SQL query: `SELECT * FROM customers WHERE (full_name LIKE 'Google%' AND name LIKE 'P-%')`
+  def all_projects
+    Customer.where("`full_name` LIKE '#{self.full_name}%' AND `name` LIKE 'P-%'")
+  end
+
+  # With any customer, c. call all of its children (jobs and projects) with c.children.
+  def descendants
+    Customer.where("`full_name` LIKE '#{self.full_name}:%'").order(:sublevel, :full_name)
+  end
+  # Use method borrowed from acts_as_tree gem, but without the gem
+  def leaf?
+    self.jobs.count == 0
+  end
+
+  # Returns a boolean indicating whether the instance is active
+  def active?
+    self.is_active == 'true'
+  end
+
+  # Included so that the url displays full_name instead of ugly quickbooks id value in url
+  # e.g., `/customers/tcp` instead of `/customers/100273731-866661887 or whatever
+  def to_param
+    full_name
+  end
+
+  # Returns only the immediate children of a given customer instance - should also return projects.
+  def children
+    Customer.where(:parent_id => self.id).order(:name)
+  end
+
+  # Small example of one way to call a query on all customers
+  # TODO: test if the value returned by `Customer.average_balance` gets updated in the browser when the balance of a single customer changes.
+  # def self.average_balance
+  #   Customer.average(:balance)
+  # end
+
+
+
+  ### METHODS INCLUDED FOR DISPLAY PURPOSES - CONSIDER USING DECORATORS OR HELPER METHODS?
+
+  # For use on company display page - we only need the name, sublevel, balance and total balance fields
+  def self.companies
+    select([:id, :parent_id, :name, :sublevel, :full_name, :is_active, :balance, :total_balance]).where(:sublevel => 0)
+  end
+
+  # Limit fields returned for company display page. Note the returned objects are simple arrays, not Customer objects, so fields not included here are not visible.
+  def subjobs
+    Customer.select([:id, :parent_id, :full_name, :is_active, :name, :full_name, :sublevel, :job_status]).where(:parent_id => self.id).order(:name)
+  end
+
+  # TODO: maybe move to a helper method?
+  # TODO: consider asking instead, does the customer object have a Thresher Project PKEY?
+  # Returns a boolean value - is the customer instance a project?
+  def client?
+    sublevel.to_i === 0
+  end
+
+  def job?
+    !client? && !project?
+  end
+
+  def project?
+    name.upcase.start_with?('P-')
+  end
 end
 
 # == Schema Information

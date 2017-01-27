@@ -1,0 +1,18 @@
+<div class="row">
+
+<div class="col-xs-24" id="header">
+
+	<h1 class="header"><%=@customer.full_name%></h1>
+
+	<ul>
+		<li class="navHoriz"><%= link_to "Customer Info", customer_path(@customer)%></li>
+		<li class="navHoriz"><%= link_to "Tree", tree_customer_path(@customer)%></li>
+		<li class="navHoriz"><%= link_to "Projects", projects_customer_path(@customer)%></li>
+		<li class="navHoriz"><a href="#">Documents</a></li>
+		<li class="navHoriz"><a href="#">Tickets</a></li>
+		<li class="navHoriz"><a href="#">Schedule</a></li>
+		<li class="navHoriz"><a href="#">RMA</a></li>
+	</ul>
+
+</div>
+</div>

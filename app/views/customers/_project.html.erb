@@ -1,0 +1,13 @@
+<div class="customerRow <%=project.parent_id%> row collapse" style="color:darkblue; border:0;">
+	<div class="col-xs-<%=(5 - project.sublevel.to_i)%> col-xs-offset-<%=(project.sublevel.to_i)%>">
+<%= link_to "#{project.name}", customer_path(project), :target => '_blank', :style => 'color: darkblue; border: 0;' %>
+</div>
+ <div title="Project Date Created" style="color:darkblue; border:0;" class="col-xs-3"><%= project.time_created.to_date %></div>
+ <div title="Project Name" style="color:darkblue; border:0; word-break: break-word;" class="col-xs-4"><%= project.Project_Name %></div>
+	<div class="col-xs-2">&emsp;</div>
+	<div title="Project Percent Complete" style="color:darkblue; border:0;" class="col-xs-2"><%= project.Project_PercentComplete %>%</div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2 ">&emsp;</div>
+</div>

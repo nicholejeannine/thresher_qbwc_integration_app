@@ -1,0 +1,35 @@
+<div class="customerRow row">
+    <div class="col-xs-8">
+    <% unless customer.leaf?  %>
+        <button class="customerJobs btn-link" data-toggle="collapse" data-target=".<%=customer.id%>"><i class="glyphicon glyphicon-menu-left"></i></button>
+     <% end %>
+      <%= link_to "#{customer.name}", customer_path(customer), :target => '_blank', :style => 'color:brown; margin-left: 3px;' %>
+     </div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2">&emsp;</div>
+	<div class="col-xs-2">&emsp;</div>
+<div class="col-xs-2" style="color:green;">
+      <%= number_to_currency(customer.total_balance)%>
+      </div>
+     <div  class="col-xs-2" style="color:grey;">
+      <%= number_to_currency(customer.balance)%>
+     </div>
+     <div class="col-xs-2" style="color:red;">
+      <%= number_to_currency(customer.total_balance - customer.balance)%>
+     </div>
+	<hr/>
+</div>
+<% customer.jobs.order(:name).each do |job|  %>
+  <%= render partial: 'job', locals: {customer: customer, job: job} %>
+    <% job.jobs.order(:name).each do |j2|  %>
+    <%= render partial: 'job', locals: {customer: job, job: j2} %>
+      <% j2.jobs.order(:name).each do |j3|  %>
+      <%= render partial: 'job', locals: {customer: j2, job: j3} %>
+        <% j3.jobs.order(:name).each do |j4|  %>
+        <%= render partial: 'job', locals: {customer: j3, job: j4} %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
