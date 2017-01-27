@@ -1,0 +1,261 @@
+ .wrap {
+  margin: 5px;
+  min-width:450px;
+ }
+ #searchContainer {
+    margin-top: 5px;
+    padding: 5px;
+
+  display:block;
+ }
+ #searchContainer div{
+  display:inline-block;
+  font: 12px/17px Arial;
+  margin-left:3px;
+
+ }
+ .searchFilterInputs {
+  font: 12px/17px Arial;
+  color:#888;
+  width:100px;
+ }
+ #filterContainer {
+  display:block;
+    margin-top: 5px;
+    padding: 5px;
+
+ }
+ #filterContainer div{
+  display:inline-block;
+  font: 12px/17px Arial;
+  text-align:center;
+
+ }
+ button {
+  margin-top: 14px;
+ }
+ ul {
+
+  list-style-type:none;
+  margin-left:5px;
+  padding:0px;
+  list-style-position:outside;
+  position:relative;
+  line-height:1.5em;
+
+ }
+
+ body {
+
+  width:100%;
+
+
+ }
+
+ table tr td {
+  padding: 5px;
+  border: 1px solid #eee;
+  word-wrap: break-word;
+ }
+
+ #companydisplay  {
+ width: 100%;
+  text-align: left;
+  thead, tbody {
+  border: 0;
+  width: 100%;
+ }
+  th {
+    font: bold 12px Verdana;
+    background-color: #005B9A;
+    color: white;
+    border: 0;
+    width: 11%;
+    padding: 1px;
+  }
+  tr td {
+  background: rgba(#eee, .4);
+  border: 0;
+  width: 100%;
+
+ }
+ .inner_table {
+  margin: 0 0 0 0;
+  height: 90%;
+  width:100%;
+  overflow-y:auto;
+
+}
+
+ }
+ .filterLinks {
+  display: inline-block;
+  text-align: center;
+  line-height: 1em;
+ }
+
+ #filterContainer div a {
+  background: none repeat scroll 0 0 #e9e9e9;
+  color: black;
+  padding: 0 1em;
+  text-decoration: none;
+  white-space:nowrap;
+
+ }
+ #filterContainer div a:hover {
+  background: none repeat scroll 0 0 black;
+  color: white;
+  white-space:nowrap;
+
+ }
+
+ #filterContainer .headerSelected a {
+  background: none repeat scroll 0 0 #005b9a;
+  color: white;
+  font-weight: bold;
+  padding-bottom: 2px;
+  white-space:nowrap;
+ }
+
+ body {
+  font: small arial, helvetica, sans-serif;
+}
+
+#header ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#header li {
+  display: inline;
+  margin: 0 2px 0 0;
+}
+
+#header a {
+  padding: 0 1em;
+  text-decoration: none;
+  color: black;
+  background: #E9E9E9;
+}
+
+#header a:hover {
+  background: black;
+  color: white;
+}
+
+#header .selected {
+}
+
+#header .selected a {
+  padding-bottom: 2px;
+  font-weight: bold;
+  color: white;
+  background: #005B9A;
+}
+
+h1.header {
+  font-size: 1.5em;
+  color: #005B9A;
+}
+
+table,th,td {
+  border:0px;
+}
+th {
+  text-align:right;
+}
+textarea {
+  font: 12px/17px Arial;
+}
+
+#newcustomer {
+  border-top: 2px solid white;
+  background: #005B9A;
+  padding: 1em;
+}
+
+#newcustomer p {
+  margin: 0;
+  padding: 1em;
+  background: white;
+}
+
+#info {
+  border-top: 2px solid white;
+  background: #005B9A;
+  padding: 1em;
+}
+
+#info p {
+  margin: 0;
+  padding: 1em;
+  background: white;
+}
+
+#jobs {
+  border-top: 2px solid white;
+  background: #005B9A;
+  padding: 1em;
+}
+
+#jobs p {
+  margin: 0;
+  padding: 1em;
+  background: white;
+}
+
+#estimates {
+  border-top: 2px solid white;
+  background: #005B9A;
+  padding: 1em;
+}
+
+#estimates p {
+  margin: 0;
+  padding: 1em;
+  background: white;
+}
+
+#client {
+  border-top: 2px solid white;
+  background: #005B9A;
+  padding: 1em;
+}
+
+#client p {
+  margin: 0;
+  padding: 1em;
+  background: white;
+}
+
+.customerJobs {
+  color: #005B9A;
+  button: {
+    margin: 0;
+    position: relative;
+    left: -8px;
+  }
+  i {
+  text-decoration: none;
+  font-size: 10px;
+  &:active, &:hover, &:visited, &:focus {
+  text-decoration: none;
+}
+}
+}
+
+.customerRow {
+  margin: 8px 2px 2px -8px;
+  padding: 1px;
+  vertical-align: middle;
+  text-align: left;
+  button {
+    margin: 0;
+    position: relative;
+    left: -8px;
+  }
+  div {
+    margin-top: 14px;
+  }
+}

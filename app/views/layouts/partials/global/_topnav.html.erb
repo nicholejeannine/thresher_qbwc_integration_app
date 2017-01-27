@@ -1,0 +1,94 @@
+<nav id="topnav" class="navbar navbar-inverse" role="navigation">
+ <div class="container-fluid">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+   <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+   </button>
+   <label class="navbar-brand">Thresher Portal</label>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+   <ul class="nav navbar-nav">
+	   <li><%= link_to "#{@current_user.name}'s Start Page", start_page_path%></li>
+	   <li><%= link_to "Crew Schedule", "#"%></li>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">General Info <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "Shark Tube", "https://www.alopias.com/Login/portal/SQL/SharkTube/index.php", target: "_blank" %></li>
+	     <li><%= link_to "Outlook Web App / Email Login", "https://tcp-owa.alopias.com/owa", target: "_blank" %></li>
+
+	     <li><%= link_to "Knowledge Base", "http://wordpress.alopias.com", target: "_blank" %></li>
+	     <li><%= link_to "Knowledge Base IT", "http://wordpressit.alopias.com", target: "_blank" %></li>
+	     <li><%= link_to "Paychex 0400-2084", "https://eservices.paychex.com/secure", target: "_blank" %></li>
+     </ul>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Employee Info <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "Time Card", "#" %></li>
+	     <li><%= link_to "Employee List", employees_path %></li>
+	     <li><%= link_to "CTS Pre-Test", "#" %></li>
+	     <li><%= link_to "Certificate List", "#" %></li>
+	     <li><%= link_to "Expense Report Form", "#" %></li>
+	     <li><%= link_to "Feedback", "#" %></li>
+     </ul>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Company Display <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "Company Display", company_display_path %></li>
+	     <li><%= link_to "Project List", "#" %></li>
+	     <li><%= link_to "Est Status List", "#" %></li>
+	     <li><%= link_to "SO Status List", "#" %></li>
+	     <li><%= link_to "PO Status List", "#" %></li>
+	     <li><%= link_to "Inv Status List", "#" %></li>
+	     <li><%= link_to "Engineering Forecast", "#" %></li>
+	     <li><%= link_to "Company Display Report", "#" %></li>
+	     <li><%= link_to "Invoice and Payments Report", "#" %></li>
+	     <li><%= link_to "Forecasting Tool", "#" %></li>
+	     <li><%= link_to "Ticket List", "#" %></li>
+     </ul>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Maintenance <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "Maintenance - New Ticket", "#" %></li>
+	     <li><%= link_to "Maintenance - List Tickets", "#" %></li>
+	     <li><%= link_to "New RMA", "#" %></li>
+	     <li><%= link_to "RMA List", "#" %></li>
+     </ul>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logistics <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "PO Search", "#" %></li>
+	     <li><%= link_to "Retail Report", "#" %></li>
+     </ul>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administration <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "Inventory", "#" %></li>
+	     <li><%= link_to "User Folder Settings", "#" %></li>
+	     <li><%= link_to "User Menu Settings", "#" %></li>
+	     <li><%= link_to "Access Log", "#" %></li>
+	     <li><%= link_to "Inventory", "#" %></li>
+     </ul>
+    <li class="dropdown">
+     <a href="#" class="dropdown-toggle" data-toggle="dropdown">SQL <b class="caret"></b></a>
+     <ul class="dropdown-menu">
+	     <li><%= link_to "Time Card Admin", "#" %></li>
+	     <li><%= link_to "Time Card Supervisor", "#" %></li>
+	     <li><%= link_to "Holidays Admin", "#" %></li>
+	     <li><%= link_to "Project Phase Report", "#" %></li>
+	     <li><%= link_to "Project Transaction Tracker", "#" %></li>
+	     <li><%= link_to "Function Map", "#" %></li>
+	     <li><%= link_to "Auto Ticket Assignment", "#" %></li>
+	     <li><%= link_to "Time Card Check Locked", "#" %></li>
+     </ul>
+	   <li><%= link_to "Logout", logout_path %></li>
+
+   </ul>
+  </div><!-- /.navbar-collapse -->
+ </div>
+</nav>

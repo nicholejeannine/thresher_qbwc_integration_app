@@ -1,0 +1,19 @@
+@media all and (max-width : 768px) {
+#topnav {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  left: 0;
+  right: 0;
+}
+}
+
+@media all and (min-width : 769px) {
+#topnav {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 170px;
+}
+}

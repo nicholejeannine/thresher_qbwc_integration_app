@@ -1,2 +1,21 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+$(function() {
+
+//     var customerJobs = function(e){
+//            var link = $(this);
+//     var datalink = link.attr('href');
+//     var tableRow = link.closest('tr');
+//     $.ajax({
+//         method: 'GET',
+//         url: datalink,
+//         success: function(response){
+//             tableRow.after(response);
+//         }
+//     })
+
+    });
+
+
+// $("#companydisplay").on('click', '.customerJobs', customerJobs);
+
+// });
+

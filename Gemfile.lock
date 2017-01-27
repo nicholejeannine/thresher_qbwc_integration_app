@@ -52,12 +52,18 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (7.1.4)
+    autoprefixer-rails (6.6.1)
+      execjs
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bootstrap-sass (3.3.7)
+      autoprefixer-rails (>= 5.2.1)
+      sass (>= 3.3.4)
+    bootstrap_form (2.5.3)
     builder (3.2.3)
     byebug (9.0.6)
     coderay (1.1.1)
@@ -201,8 +207,11 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  autoprefixer-rails (~> 6.6, >= 6.6.1)
   better_errors
   binding_of_caller
+  bootstrap-sass (~> 3.3, >= 3.3.7)
+  bootstrap_form (~> 2.5, >= 2.5.3)
   byebug
   fabrication
   faker
@@ -214,7 +223,7 @@ DEPENDENCIES
   qbwc!
   rails
   rspec-rails
-  sass-rails
+  sass-rails (~> 5.0, >= 5.0.6)
   spring
   spring-watcher-listen
   turbolinks

@@ -9,7 +9,7 @@ gem 'mysql2'
 # Use Puma as the app server
 gem 'puma'
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
@@ -29,7 +29,9 @@ gem 'turbolinks'
 # gem 'bcrypt', '~> 3.1.7'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+# for making pretty bootstrap forms
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+gem 'bootstrap_form', '~> 2.5', '>= 2.5.3'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -53,6 +55,8 @@ group :development do
 
   # Add database comments, add model's database schema to model files.
   gem 'annotate'
+  # Add autoprefixer for css cross-browser support
+  gem 'autoprefixer-rails', '~> 6.6', '>= 6.6.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

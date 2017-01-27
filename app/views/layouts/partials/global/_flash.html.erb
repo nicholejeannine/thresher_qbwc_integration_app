@@ -1,0 +1,14 @@
+<div id="alert" class="row">
+			<div class="col-xs-24">
+	<% flash.each do |type, message| %>
+			<div class="alert alert-dismissible <%= bootstrap_class_for(type) %> fade in" role='alert'>
+				<button style="top: -15px;" type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+				<span class="glyphicon <%= bootstrap_glyphs_icon(type)%>" aria-hidden="true"></span>
+				<span class="sr-only"><%= type.capitalize%>:</span>
+				<%= message %>
+			</div>
+	<% end %>
+			</div>
+</div>

@@ -3,7 +3,9 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
-# Add additional assets to the asset load path
+# Add vendor path to find bootstrap-sass assets that we're compiling
+Rails.application.config.assets.paths << 'Vendor'
+
 # Rails.application.config.assets.paths << Emoji.images_path
 
 # Precompile additional assets.

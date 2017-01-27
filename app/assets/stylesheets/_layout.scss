@@ -1,0 +1,364 @@
+body {
+ display:inline-flex;
+ margin: 1px;
+ /* Disabling, not sure what this was for, but it's not cuasing a scroll bar showing up on most pages -- >overflow-y:scroll; */
+}
+
+.wrapper {
+  width: 100%;
+}
+
+.page-wrapper {
+  padding: 0 5px;
+}
+#leftcolumn {
+ display: table-cell;
+ vertical-align:top;
+  -webkit-flex:1 0 auto;
+}
+#leftcolumn ul{
+margin-top:-10px;
+}
+
+@media all and (min-width :1600px) {
+ #leftcolumn {
+  display: table-cell;
+  vertical-align:top;
+  width: 200px;
+  max-width:200px;
+ }
+ #contentarea {
+  overflow-y:hidden;
+
+ }
+ #hierarchy {
+ }
+}
+#contentarea {
+ vertical-align:top;
+}
+/* This applies the dotted outline around a link when it is clicked, used on the ticket list page, firefox or html 5 dedcided to do away with this */
+:link:focus, :visited:focus {
+    outline: 1px dotted 212121;
+}
+
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+.urbangreymenu{
+min-width: 50px;
+max-width: 208px; /*width of menu*/
+}
+
+.urbangreymenu .headerbar{
+font: bold 13px Verdana;
+background: #005B9A;
+color: white;
+margin-bottom: 0; /*bottom spacing between header and rest of content*/
+text-transform: uppercase;
+padding: 2px 0 2px 16px; /*31px is left indentation of header text*/
+}
+
+.urbangreymenu ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 14px; /*bottom spacing between each UL and rest of content*/
+}
+
+.urbangreymenu ul li{
+padding-bottom: 1px; /*bottom spacing between menu items*/
+}
+
+.urbangreymenu ul li a{
+font: normal 12px Arial;
+color: black;
+background: #E9E9E9;
+display: block;
+padding: 1px 0;
+line-height: 17px;
+padding-left: 4px; /*link text is indented 8px*/
+text-decoration: none;
+}
+
+.urbangreymenu ul li a:visited{
+color: black;
+}
+
+.urbangreymenu ul li a:hover{ /*hover state CSS*/
+color: white;
+background: black;
+}
+
+
+ table, td
+{
+  font: 12px/17px Arial;
+  border:1px solid #3F9BCF;
+}
+ th
+{
+  font: bold 13px Verdana;
+  background-color:#005B9A;
+  color:white;
+}
+
+
+ table, td
+{
+ font: 12px/17px Arial;
+ border:1px solid #3F9BCF;
+}
+ th
+{
+ font: bold 13px Verdana;
+ background-color:#005B9A;
+ color:white;
+}
+ #header ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display:flex;
+  max-width:auto;
+
+ }
+
+ #header li {
+  display: inline;
+  margin: 0 2px 0 0;
+    -webkit-flex:1 0 auto;
+
+ }
+
+ #header a {
+  white-space:nowrap;
+  padding: 0 1em;
+  text-decoration: none;
+  color: black;
+  background: #E9E9E9;
+ }
+
+ #header a:hover {
+  background: black;
+  color: white;
+ }
+
+ #header #selected {
+ }
+
+ #header #selected a {
+  padding-bottom: 2px;
+  font-weight: bold;
+  color: white;
+  background: #005B9A;
+ }
+
+
+ nav {
+   margin: 0;
+   padding: 0;
+   padding-right:5px;
+ }
+.menuBars {
+  background-color: white;
+  height: 3px;
+  margin: 6px 0;
+  width: 21px;
+}
+.toggle {
+  background-color: #005b9a;
+  border-radius: 9px;
+  padding: 0 9px;
+}
+[id^=drop]:checked + ul {
+  display: block;
+}
+.toggle:hover {
+  background-color: #000000;
+}
+#logo {
+  display: block;
+  padding: 0 30px;
+  float: left;
+  font-size: 20px;
+  line-height: 60px;
+}
+
+nav:after {
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+nav ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  position: relative;
+}
+
+nav ul li {
+  margin: 0px;
+  display: block;
+}
+
+/*nav a {*/
+/*display: block;*/
+/*padding: 0 20px;*/
+/*color: #FFF;*/
+/*font-size: 20px;*/
+/*line-height: 60px;*/
+/*text-decoration: none;*/
+/*}*/
+
+nav ul li ul li:hover { background: #000000; }
+
+nav a:hover { background-color: #000000; }
+
+nav ul ul {
+  display: none;
+  position: absolute;
+  top: 60px;
+}
+
+nav ul li:hover > ul {
+  display: inherit;
+}
+
+nav ul ul li {
+  width: 170px;
+  float: none;
+  display: list-item;
+  position: relative;
+}
+
+nav ul ul ul li {
+  position: relative;
+  top: -60px;
+  left: 170px;
+}
+
+li > a:after {
+  content: ' +';
+}
+.toggle, [id^=drop] {
+  display: none;
+}
+
+li > a:only-child:after { content: ''; }
+
+@media all and (max-width : 768px) {
+  body {
+    display: flex;
+  }
+  #leftcolumn {
+    color:black;
+    display: table-cell;
+    width: auto;
+  }
+  .toggle + a, .menu {
+    display: none;
+  }
+  .toggle {
+    display: inline-block;
+  }
+  #contentarea {
+    vertical-align: top;
+  }
+  nav {
+    display: inline-block;
+    vertical-align: top;
+  }
+  nav ul {
+    display: flex;
+    width: auto;
+  }
+  nav ul li {
+    width: auto;
+  }
+
+  #alertsAndLogoContainer {
+    -moz-box-orient: horizontal;
+    align-items: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+  #sharkContainer {
+    -moz-box-flex: 1;
+    flex: 1 1 auto;
+    max-width: 600px;
+    min-width: 150px;
+    text-align: left;
+  }
+  #sharkLogo {
+    max-width: 66%;
+  }
+  .urbangreymenu {
+    min-width:0px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+@media all and (max-width: 330px) {
+  body {
+    display: flex;
+  }
+  #leftcolumn {
+    display: table-cell;
+  }
+  .toggle + a, .menu {
+    display: none;
+  }
+  .toggle {
+    display: inline-block;
+  }
+  #contentarea {
+    vertical-align: top;
+  }
+  nav {
+    display: inline-block;
+    vertical-align: top;
+  }
+  nav ul {
+    display: flex;
+    width: auto;
+  }
+  nav ul li {
+    width: auto;
+  }
+
+  #alertsAndLogoContainer {
+    -moz-box-orient: horizontal;
+    align-items: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+  }
+  #sharkContainer {
+    -moz-box-flex: 1;
+    flex: 1 1 auto;
+    max-width: 600px;
+    min-width: 150px;
+    text-align: left;
+  }
+  #sharkLogo {
+    max-width: 33%;
+    min-width:200px;
+  }
+  .urbangreymenu {
+    min-width:0px;
+  }
+
+}
