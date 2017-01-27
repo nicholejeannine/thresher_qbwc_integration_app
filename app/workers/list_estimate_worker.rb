@@ -5,7 +5,7 @@ class ListEstimateWorker < QBWC::Worker
       :estimate_query_rq => {
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
         :max_returned => 100,
-	:include_line_items => false
+	:include_line_items => true
       }
     }
   end
@@ -41,7 +41,7 @@ class ListEstimateWorker < QBWC::Worker
         end # end if statement
       end # end for each |key, value|
       if estimate.save
-        Rails.logger.info("saved a estimate")
+        Rails.logger.info("saved an estimate")
       else
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
