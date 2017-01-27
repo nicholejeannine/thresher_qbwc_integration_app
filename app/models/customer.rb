@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
    has_many :estimates
    has_many :invoices
+   has_many :sales_orders
 end
 
 # == Schema Information
