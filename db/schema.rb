@@ -97,21 +97,6 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.integer  "Customers_PKEY"
   end
 
-  create_table "contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence"
-    t.string   "contact"
-    t.string   "salutation"
-    t.string   "first_name"
-    t.string   "middle_name"
-    t.string   "last_name"
-    t.string   "job_title"
-    t.string   "additional_contact_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
   create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
