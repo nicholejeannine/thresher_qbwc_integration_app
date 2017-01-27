@@ -1,8 +1,8 @@
 class Customer < ApplicationRecord
-   self.primary_key = :id # In case customer model represents a mysql view
-   has_many :estimates
-   has_many :invoices
-   has_many :sales_orders
+  self.primary_key = :id # In case customer model represents a mysql view
+  has_many :estimates
+  has_many :invoices
+  has_many :sales_orders
 
 
   # `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".

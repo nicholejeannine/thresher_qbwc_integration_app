@@ -1,4 +1,5 @@
 class Client < ApplicationRecord
+  self.primary_key = :id # In case customer model represents a mysql view
 end
 
 # == Schema Information
