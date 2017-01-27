@@ -2,8 +2,8 @@ class Project < ApplicationRecord
   self.primary_key = :id # Required for this to work using mysql views
   belongs_to :job, counter_cache: true
   belongs_to :customer
-  scope :active, ->{ where(:is_active => 'true') }
-  scope :inactive, ->{ where(:is_active => 'false') }
+  scope :active, ->{ where(:is_active => true) }
+  scope :inactive, ->{ where(:is_active => false) }
   # Since Project_Status is already an enum, we can avoid having to store it in a table and reference it only in one place for changes (e.g., in the Project model).
   # The line `enum Project_Status` creates a lookup for the column `Project`.`Project_Status`, as defined below. ("Quoting" = 1, "Pending" = 2, etc).
   enum Project_Status: [:Quoting, :Active, :Pending, :WorkComplete, :Invoiced, :Warranty, :Closed]

@@ -7,8 +7,8 @@ class Customer < ApplicationRecord
 
   # `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".
   #  The -> symbol ("lambda") means the whole query is being saved to a variable, so that it can be run when it's actually needed (instead of when the program is started).
-  scope :active, ->{ where(:is_active => 'true') }
-  scope :inactive, ->{ where(:is_active => 'false') }
+  scope :active, ->{ where(:is_active => true) }
+  scope :inactive, ->{ where(:is_active => false) }
   scope :clients, -> { where(:sublevel => 0)}
   scope :jobs, -> {where("`sublevel` > 0 AND `name` NOT LIKE 'P-%'")}
   scope :projects, -> {where("`sublevel` > 0 AND `name` LIKE 'P-%'")}
@@ -33,7 +33,7 @@ class Customer < ApplicationRecord
 
   # Returns a boolean indicating whether the instance is active
   def active?
-    self.is_active == 'true'
+    self.is_active == true
   end
 
   # Included so that the url displays full_name instead of ugly quickbooks id value in url

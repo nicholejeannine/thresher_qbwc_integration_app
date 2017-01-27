@@ -4,8 +4,8 @@ class Job < ApplicationRecord
   belongs_to :parent, :class_name => 'Job', :foreign_key => 'parent_id'
   has_many :jobs, :class_name => 'Job', :foreign_key => 'parent_id'
   has_many :projects, :foreign_key => 'parent_id'
-  scope :active, ->{ where(:is_active => 'true') }
-  scope :inactive, ->{ where(:is_active => 'false') }
+  scope :active, ->{ where(:is_active => true) }
+  scope :inactive, ->{ where(:is_active => false) }
   # Use method borrowed from acts_as_tree gem, but without the gem
   def leaf?
     self.jobs.count == 0 && self.projects.count == 0
