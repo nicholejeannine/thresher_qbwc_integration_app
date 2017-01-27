@@ -1,4 +1,6 @@
 class EstimateLine < ApplicationRecord
+  # set optional to true to prevent the database foreign-key checks on quickbooks-created rows
+ belongs_to :estimate, optional: true
 end
 
 # == Schema Information
