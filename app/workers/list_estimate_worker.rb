@@ -19,13 +19,9 @@ class ListEstimateWorker < QBWC::Worker
       estimate = Estimate.find_or_initialize_by(:id => estimate_id)
       if estimate['estimate_line_ret'].present?
         estimate['estimate_line_ret'].each do |line|
-          estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
-          estimate_line.send("estimate_id=", estimate_id)
-          if estimate_line.save
-            Rails.logger.info("saved an estimate line")
-          else
-            Rails.logger.info("#{EstimateLine.errors}")
-          end # end if estimate_line.save
+          Rails.logger.info("LINE!!!!")
+          Rails.logger.info(line)
+          Rails.logger.info("END LINE!!!!")
       end # end each estimate line
     end # end if estimate['estimate_line_ret'].present?
       qb.to_hash.each do |key, value|
