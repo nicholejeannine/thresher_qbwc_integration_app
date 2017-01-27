@@ -33,3 +33,6 @@
       <% end %>
     <% end %>
   <% end %>
+<% customer.estimates.order(:id).each do |estimate| %>
+      <%= render partial: 'estimate', locals: {estimate: estimate} %>
+<% end %>

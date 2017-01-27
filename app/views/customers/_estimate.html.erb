@@ -1,0 +1,13 @@
+<div class="customerRow <%=estimate.customer_id%> row collapse" style="color:darkblue; border:0;">
+ <div class="col-xs-2 col-xs-offset-3">
+<%= link_to "#{estimate.id}", estimate_path(estimate), :target => '_blank', :style => 'color: darkblue; border: 0;' %>
+</div>
+ <div title="Estimate Date Created" style="color:darkblue; border:0;" class="col-xs-3"><%= estimate.time_created.to_date %></div>
+ <div title="Estimate Name" style="color:darkblue; border:0; word-break: break-word;" class="col-xs-4">Estimate Name</div>
+ <div title="Estimate Status" style="color:darkblue; border:0; word-break: break-word;" class="col-xs-2">Estimate Status</div>
+ <div title="Estimate Percent Complete" style="color:darkblue; border:0;" class="col-xs-2">Estimate %</div>
+ <div class="col-xs-2">&emsp;</div>
+ <div class="col-xs-2">&emsp;</div>
+ <div class="col-xs-2">&emsp;</div>
+ <div class="col-xs-2 ">&emsp;</div>
+</div>
