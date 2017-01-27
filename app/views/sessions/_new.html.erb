@@ -1,0 +1,40 @@
+<div role="main" class="main">
+
+ <section class="page-top">
+  <div class="container">
+
+   <div class="row">
+    <div class="col-sm-12">
+     <h2><font color="000000">Thresher</font> <font color="2493d1">Portal</font></h2>
+    </div>
+   </div>
+  </div>
+ </section>
+
+
+<div class="container">
+
+
+
+ <div class="row">
+
+
+   <div class="col-xs-12 text-center">
+    <img src="images/portal.png"><br><br>Please enter your credentials below.
+    <div class="panel panel-primary">
+     <div class="panel-heading">
+      <h3 class="panel-title text-center"></h3>
+     </div>
+     <div class="panel-body">
+      <%= bootstrap_form_for :user do |f| %>
+        <%= f.text_field :username, label_class: "text-info" %>
+        <%= f.password_field :password, label_class: "text-info" %>
+      <%= f.submit "Log In", class: "btn btn-primary", style: "color: #fff;" %>
+      <% end %>
+    </div>
+   </div>
+  </div>
+ </div>
+ <br>
+</div>
+</div>
