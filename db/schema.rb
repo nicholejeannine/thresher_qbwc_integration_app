@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.string   "edit_sequence",                      limit: 16
     t.string   "name",                               limit: 50
     t.string   "full_name"
-    t.string   "is_active",                          limit: 11
+    t.boolean   "is_active",                         null: false, default: true
     t.string   "parent_id",                          limit: 40
     t.string   "sublevel",                           limit: 40
     t.string   "company_name",                       limit: 40
@@ -103,7 +103,7 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.string   "edit_sequence",                      limit: 16
     t.string   "name",                               limit: 50
     t.string   "full_name"
-    t.string   "is_active",                          limit: 11
+    t.boolean   "is_active",                         null: false, default: true
     t.string   "parent_id",                          limit: 40
     t.string   "sublevel",                           limit: 40
     t.string   "company_name",                       limit: 40
@@ -382,7 +382,7 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.string   "edit_sequence",                      limit: 16
     t.string   "name",                               limit: 50
     t.string   "full_name"
-    t.string   "is_active",                          limit: 11
+    t.boolean   "is_active",                         null: false, default: true
     t.string   "parent_id",                          limit: 40
     t.string   "sublevel",                           limit: 40
     t.string   "company_name",                       limit: 40
@@ -482,7 +482,7 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.string   "edit_sequence",                      limit: 16
     t.string   "name",                               limit: 50
     t.string   "full_name"
-    t.string   "is_active",                          limit: 11
+    t.boolean   "is_active",                         null: false, default: true
     t.string   "parent_id",                          limit: 40
     t.string   "sublevel",                           limit: 40
     t.string   "company_name",                       limit: 40
