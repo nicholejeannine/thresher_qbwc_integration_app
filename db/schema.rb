@@ -181,21 +181,7 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.string   "primary_phone"
   end
 
-  create_table "estimate_line_groups", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "item_group_id"
-    t.string   "desc"
-    t.string   "quantity"
-    t.string   "unit_of_measure"
-    t.string   "override_uom_set_id"
-    t.boolean  "is_print_items_in_group"
-    t.decimal  "total_amount",            precision: 15, scale: 2
-    t.string   "estimate_line_id"
-    t.string   "data_ext_id"
-    t.datetime "created_at",                                       null: false
-    t.datetime "updated_at",                                       null: false
-  end
-
-  create_table "estimate_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "estimate_id"
     t.string  "item_id"
     t.string  "item_full_name"
@@ -286,7 +272,7 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.decimal  "linked_txn_amount",                               precision: 15, scale: 2
   end
 
-  create_table "invoice_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "invoice_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "invoice_id"
     t.string  "item_id"
     t.string  "item_full_name"
@@ -632,7 +618,7 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.integer  "Project_QuotedLgstLabor"
   end
 
-  create_table "purchase_order_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "purchase_order_lines", id: :string,  force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "purchase_order_id"
     t.string  "item_id"
     t.string  "item_full_name"
@@ -750,7 +736,7 @@ ActiveRecord::Schema.define(version: 20161121142805) do
     t.datetime "updated_at",                             null: false
   end
 
-  create_table "sales_order_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sales_order_lines", id: :string,  force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "sales_order_id"
     t.string  "item_id"
     t.string  "item_full_name"
