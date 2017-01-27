@@ -48,6 +48,9 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    annotate (2.6.5)
+      activerecord (>= 2.3.0)
+      rake (>= 0.8.7)
     arel (7.1.4)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -197,6 +200,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   better_errors
   binding_of_caller
   byebug
@@ -222,4 +226,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.7
+   1.14.3
