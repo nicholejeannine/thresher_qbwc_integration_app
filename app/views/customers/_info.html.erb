@@ -23,15 +23,54 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <label class="control-label">Full Name</label>
+                            <label class="control-label">Phone</label>
                         </div>
-                        <div class="col-sm-12"><span>Label</span></div>
+                        <div class="col-sm-12"><span><%= @customer.phone %></span></div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <label class="control-label">Full Name</label>
+                            <label class="control-label">Alternate Phone</label>
                         </div>
-                        <div class="col-sm-12"><span>Label</span></div>
+                        <div class="col-sm-12"><span><%= @customer.alt_phone %></span></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">Email</label>
+                        </div>
+                        <div class="col-sm-12"><span><%= @customer.email %></span></div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">CC</label>
+                        </div>
+                        <div class="col-sm-12"><span><%= @customer.cc %></span></div>
+                    </div>
+                     <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">Fax</label>
+                        </div>
+                        <div class="col-sm-12"><span><%= @customer.fax %></span></div>
+                    </div>
+                     <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">CC</label>
+                        </div>
+                        <div class="col-sm-12"><span><%= @customer.cc %></span></div>
+                    </div>
+                  <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">Other Contact</label>
+                        </div>
+                        <div class="col-sm-12"><span><%= @customer.contact %></span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-24">
+                        <input type="checkbox" readonly="true"  <% unless @customer.is_active == 'true' %>
+   value="true" checked="checked"
+
+   <% end %>   > Customer is inactive
+                        </div>
                     </div>
                 </form>
             </div>
@@ -42,14 +81,26 @@
     <div class="col-xs-24">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h3 class="panel-title">Primary Contact Info</h3></div>
+                <h3 class="panel-title">Site Contact Info</h3></div>
             <div class="panel-body">
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <label class="control-label">Label</label>
+                            <label class="control-label">Site Contact</label>
                         </div>
-                        <div class="col-sm-12"><span>Label</span></div>
+                        <div class="col-sm-16"><span><%= @customer.primary_contact%></span></div>
+                    </div>
+                     <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">Site Email</label>
+                        </div>
+                        <div class="col-sm-16"><span><%= @customer.primary_email %></span></div>
+                    </div>
+                     <div class="form-group">
+                        <div class="col-sm-8">
+                            <label class="control-label">Site Phone</label>
+                        </div>
+                        <div class="col-sm-16"><span><%= @customer.primary_phone %></span></div>
                     </div>
                 </form>
             </div>
@@ -62,12 +113,38 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Billing Address:</h3></div>
             <div class="panel-body">
+                <form class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-8">
                         <label class="control-label">Address 1</label>
                     </div>
-                    <div class="col-sm-12"><span>Label</span></div>
+                    <div class="col-sm-16"><span><%= @customer.bill_address_addr1 %></span></div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 2</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.bill_address_addr2 %></span></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 3</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.bill_address_city %></span></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 4</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.bill_address_state %></span></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 5</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.bill_address_postal_code %></span></div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -76,308 +153,39 @@
             <div class="panel-heading">
                 <h3 class="panel-title">Shipping Address:</h3></div>
             <div class="panel-body">
+              <form class="form-horizontal">
                 <div class="form-group">
                     <div class="col-sm-8">
                         <label class="control-label">Address 1</label>
                     </div>
-                    <div class="col-sm-12"><span>Label</span></div>
+                    <div class="col-sm-16"><span><%= @customer.ship_address_addr1 %></span></div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 2</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.ship_address_addr2 %></span></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 3</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.ship_address_city %></span></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 4</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.ship_address_state %></span></div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-8">
+                        <label class="control-label">Address 5</label>
+                    </div>
+                    <div class="col-sm-16"><span><%= @customer.ship_address_postal_code %></span></div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h3 class="panel-title"><%= @customer.full_name %></h3>
-  </div>
-  <div class="panel-body">
- <table>
- <tbody><tr>
-  <th>
-
-  </th>
-  <td colspan="5">
-
-  </td>
- </tr>
- <tr>
-  <th>
-   Customer Full Company Name
-  </th>
-  <td colspan="5">
-  </td>
- </tr>
- <tr>
-  <th>
-   Full Name
-  </th>
-  <td>
-   <%= @customer.salutation %>
-  </td>
-  <td>
-   <%= @customer.first_name %>
-
-  </td>
-  <td>
-   <%= @customer.middle_name %>
-
-  </td>
-  <td>
-   <%= @customer.last_name %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Main Phone
-  </th>
-  <td>
-   <%= @customer.phone %>
-  </td>
-  <th>
-   Main Email
-  </th>
-  <td colspan="2">
-   <%= @customer.email %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Alternate Phone
-  </th>
-  <td>
-  <%= @customer.alt_phone %>
-    </td>
-  <th>
-   CC Email
-  </th>
-  <td colspan="2">
-   <%= @customer.cc %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Cell Phone
-  </th>
-  <td>
-   What the heck column is this??
-  </td>
-  <th>
-   Fax Phone
-  </th>
-  <td colspan="2">
-   <%= @customer.fax %>
-
-  </td>
- </tr>
- <tr>
-  <td colspan="5">
-  </td>
- </tr>
-</tbody></table>
-<table>
- <tbody><tr>
-  <th width="810" style="text-align: center;">
-   Accounts Payable Details
-  </th>
- </tr>
-
-
- <tr>
-  <td>
-
-    <span class="headingRightAligned">A/P Name</span>
-  <span class="inputTextBoxBillTo"><%= @customer.primary_contact%></span>
-
-  </td>
- </tr>
- <tr>
-  <td>
-
-    <span class="headingRightAligned">A/P Email</span>
-   <span class="inputTextBoxBillTo"><%= @customer.primary_email %></span>
-
-
-  </td>
- </tr>
-
- <tr>
-  <td>
-
-    <span class="headingRightAligned">A/P Phone</span>
-<span class="inputTextBoxBillTo"><%= @customer.primary_phone %></span>
-
-  </td>
-
- </tr>
-
-</tbody></table>
-<table>
-
- <tbody><tr>
-  <th width="810" colspan="5" style="text-align: center;">
-   Address Details
-  </th>
- </tr>
- <tr>
-  <th colspan="2" style="text-align: center;">
-   Invoice/Bill To
-  </th>
-  <td>
-  </td>
-  <th colspan="2" style="text-align: center;">
-   Ship To
-  </th>
- </tr>
- <tr>
-  <th>
-   Company
-  </th>
-  <td>
-   <%= @customer.company_name %>
-  </td>
-  <td>
-  </td>
-  <th>
-   Company
-  </th>
-  <td>
-  <%= @customer.company_name %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Att. Name
-  </th>
-  <td>
-   <%= @customer.primary_contact %>
-  </td>
-  <td>
-  </td>
-  <th>
-   Name
-  </th>
-  <td>
-   <%= @customer.contact %>
-  </td>
- </tr>
- <tr>
-  <th>
-   Address
-  </th>
-  <td>
-      <%= @customer.bill_address_addr1 %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   Address
-  </th>
-  <td>
-         <%= @customer.ship_address_addr1 %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   Address2
-  </th>
-  <td>
-           <%= @customer.bill_address_addr2 %>
-
-  </td>
-  <td style="text-align: center;">
-  </td>
-  <th>
-   Address2
-  </th>
-  <td>
-            <%= @customer.ship_address_addr2 %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   City
-  </th>
-  <td>
-          <%= @customer.bill_address_city %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   City
-  </th>
-  <td>
-           <%= @customer.ship_address_city %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   State
-  </th>
-  <td>
-                 <%= @customer.bill_address_state %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   State
-  </th>
-  <td>
-          <%= @customer.ship_address_state %>
-
-  </td>
- </tr>
- <tr>
-  <th>
-   Zip
-  </th>
-  <td>
-               <%= @customer.bill_address_postal_code %>
-
-  </td>
-  <td>
-  </td>
-  <th>
-   Zip
-  </th>
-  <td>
-            <%= @customer.ship_address_postal_code %>
-
-  </td>
- </tr>
- <tr>
-  <td colspan="2">
-  </td>
- </tr>
- <tr>
-  <td>
-   <input type="checkbox"  <% unless @customer.is_active == 'true' %>
-   value="true" checked="checked"
-
-   <% end %>   > Customer is inactive
-  </td>
- </tr>
- <tr>
-  <td>
-  </td>
- </tr>
-</tbody></table>
-  </div>
-</div>
-
-
