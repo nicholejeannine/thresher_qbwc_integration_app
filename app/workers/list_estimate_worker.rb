@@ -15,7 +15,8 @@ class ListEstimateWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Estimate.column_names
     response['estimate_ret'].each do |qb|
-      estimate = Estimate.find_or_initialize_by(:id => qb['txn_id'])
+      estimate_id = qb['txn_id']
+      estimate = Estimate.find_or_initialize_by(:id => estimate_id)
       qb.to_hash.each do |key, value|
         if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
@@ -38,17 +39,6 @@ class ListEstimateWorker < QBWC::Worker
           name = key.remove(/_ref$/)
           estimate.send("#{name}_id=", value['list_id'])
           estimate.send("#{name}_full_name=", value['full_name'])
-        elsif key.match(/estimate_line_ret/)
-          Rails.logger.info("estimate line ret!")
-          response['estimate_line_ret'].each do |ret|
-            estimate_line = EstimateLine.find_or_initialize_by(:id => value['txn_line_id'])
-              estimate_line.send("#{estimate_id}=", qb['txn_id'])
-              if estimate_line.save
-                Rails.logger.info("saved an estimate line!")
-              else
-                Rails.logger.info("Not saved: #{estimate_line.errors}")
-              end
-          end
         end # end if statement
       end # end for each |key, value|
       if estimate.save
