@@ -18,6 +18,14 @@ class ListEstimateWorker < QBWC::Worker
       estimate_id = qb['txn_id']
       estimate = Estimate.find_or_initialize_by(:id => estimate_id)
       qb.to_hash.each do |key, value|
+        if key.match /estimate_line_ret/
+          EstimateLine.find_or_initialize_by(:id => 'txn_line_id')
+          if EstimateLine.save
+            Rails.logger.info("saved an estimate line")
+          else
+            Rails.logger.info("#{EstimateLine.errors}")
+          end
+        end
         if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
             next
