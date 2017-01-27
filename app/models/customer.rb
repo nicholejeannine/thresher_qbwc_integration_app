@@ -1,6 +1,4 @@
 class Customer < ApplicationRecord
-   self.primary_key = :id # In case customer model represents a mysql view
-   has_many :estimates
    has_many :invoices
    has_many :sales_orders
 

@@ -1,5 +1,4 @@
 class Project < ApplicationRecord
-  self.primary_key = :id # Required for this to work using mysql views
   belongs_to :job, counter_cache: true
   belongs_to :customer
   scope :active, ->{ where(:is_active => true) }

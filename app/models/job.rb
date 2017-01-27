@@ -1,5 +1,4 @@
 class Job < ApplicationRecord
-  self.primary_key = :id # Required for this to work using mysql views
   belongs_to :customer, counter_cache: true
   belongs_to :parent, :class_name => 'Job', :foreign_key => 'parent_id'
   has_many :jobs, :class_name => 'Job', :foreign_key => 'parent_id'
