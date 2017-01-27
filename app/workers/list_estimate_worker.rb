@@ -17,16 +17,16 @@ class ListEstimateWorker < QBWC::Worker
     response['estimate_ret'].each do |qb|
       estimate_id = qb['txn_id']
       estimate = Estimate.find_or_initialize_by(:id => estimate_id)
-      qb.to_hash.each do |key, value|
-        if key.match /estimate_line_ret/
-          estimate_line = EstimateLine.find_or_initialize_by(:id => 'txn_line_id')
+      estimate['estimate_line_ret'].each do |line|
+          estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
           estimate_line.send("estimate_id=", estimate_id)
           if estimate_line.save
             Rails.logger.info("saved an estimate line")
           else
             Rails.logger.info("#{EstimateLine.errors}")
-          end
-        end
+          end # end if estimate_line.save
+      end # end each estimate line
+      qb.to_hash.each do |key, value|
         if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
             next
