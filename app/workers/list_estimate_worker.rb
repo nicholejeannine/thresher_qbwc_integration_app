@@ -5,7 +5,7 @@ class ListEstimateWorker < QBWC::Worker
       :estimate_query_rq => {
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
         :max_returned => 100,
-	      :include_line_items => true
+	      :include_line_items => false
       }
     }
   end
@@ -17,9 +17,9 @@ class ListEstimateWorker < QBWC::Worker
     response['estimate_ret'].each do |qb|
       estimate_id = qb['txn_id']
       estimate = Estimate.find_or_initialize_by(:id => estimate_id)
-      if qb['estimate_line_ret'].present?
+     # if qb['estimate_line_ret'].present?
         # FIXME: will this even work???
-        Rails.logger.info("Class of qb['estimate_line_ret'] is #{qb['estimate_line_ret'].class}")
+       # Rails.logger.info("Class of qb['estimate_line_ret'] is #{qb['estimate_line_ret'].class}")
         ### FIXME:  CHECK RETURN TYPE OF ESTIMATE LINE - IT MAY ACTUALLY BE A REPEATED LIST, NOT AN ARRAY AS WE'D ASSUME .... MAYBE COUNT # OF INSTANCES, OR JUST RETURN THE TYPE?
       #   qb['estimate_line_ret'].each do |line|
       #     estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
@@ -30,7 +30,7 @@ class ListEstimateWorker < QBWC::Worker
       #       Rails.logger.info("#{estimate_line.errors}")
       #     end
       # end # end each estimate line
-    end # end if estimate['estimate_line_ret'].present?
+    #end # end if estimate['estimate_line_ret'].present?
       qb.to_hash.each do |key, value|
         if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
