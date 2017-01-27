@@ -22,6 +22,14 @@ scope module: 'public' do
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
 
+  resources :jobs, :projects, param: :full_name, only: [:index, :show]
 
+  resources :customers, only: [:index, :show], param: :full_name do
+    member do
+      get :tree, to: 'customers#tree'
+      get :projects, to: 'customers#projects'
+      get :test, to: 'customers#test'
+    end
+  end
   root to: 'public#index'
 end
