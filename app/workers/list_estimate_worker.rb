@@ -5,7 +5,7 @@ class ListEstimateWorker < QBWC::Worker
       :estimate_query_rq => {
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
         :max_returned => 100,
-	:include_line_items => true
+	:include_line_items => false
       }
     }
   end
@@ -15,39 +15,36 @@ class ListEstimateWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Estimate.column_names
     response['estimate_ret'].each do |qb|
-      id = qb['list_id'] || qb['txn_id']
-      estimate = Estimate.find_or_initialize_by(:id => id)
+      estimate = Estimate.find_or_initialize_by(:id => qb['txn_id'])
       qb.to_hash.each do |key, value|
-        if key.match /estimate_line|block$|xml_attributes/
+        if columns.include?(key.to_s)
+          estimate.send("#{key}=", value)
             next
-        elsif key.match /ship_address$|bill_address$/
-          estimate.send("#{key}_addr1=", value['addr1'])
-          estimate.send("#{key}_addr2=", value['addr2'])
-          estimate.send("#{key}_addr3=", value['addr3'])
-          estimate.send("#{key}_addr4=", value['addr4'])
-          estimate.send("#{key}_addr5=", value['addr5'])
-          estimate.send("#{key}_city=", value['city'])
-          estimate.send("#{key}_state=", value['state'])
-          estimate.send("#{key}_postal_code=", value['postal_code'])
-          estimate.send("#{key}_note=", value['note'])
-        elsif value.class == Qbxml::Hash
-          value.each  do |k, v|
-            if k == 'list_id' || k == 'txn_id'
-              name = key.sub(/ref$/, "id")
-              name.sub!(/ret$/, "id")
-              estimate.send("#{name}=", v)
-            end  # end if k == 'list_id' || k == 'txn_id'
-          end # end value.each do |k,v|
-        elsif columns.include?(key.to_s)
-            estimate.send("#{key}=", value)
-        end # end if parsing ridiculousness
+        elsif key.match /ship_address$|bill_address$|block$/
+            esimate.send("#{key}_addr1=", value['addr1'])
+            esimate.send("#{key}_addr2=", value['addr2'])
+            esimate.send("#{key}_addr3=", value['addr3'])
+            esimate.send("#{key}_addr4=", value['addr4'])
+            esimate.send("#{key}_addr5=", value['addr5'])
+            # Address blocks don't have city/state/postal)code/country/note
+            if key.match /address$/
+              esimate.send("#{key}_city=", value['city'])
+              esimate.send("#{key}_state=", value['state'])
+              esimate.send("#{key}_postal_code=", value['postal_code'])
+              esimate.send("#{key}_country=", value['country'])
+              esimate.send("#{key}_note=", value['note'])
+            end
+        elsif key.remove(/_ref$/).match /customer$|template$|terms$|sales_rep$|item_sales_tax$|customer_msg$|customer_sales_tax_code$/
+          name = key.remove(/_ref$/)
+          estimate.send("#{name}_id=", value['list_id'])
+          estimate.send("#{name}_full_name=", value['full_name'])
+        end # end if statement
       end # end for each |key, value|
       if estimate.save
-        Rails.logger.info("great success")
+        Rails.logger.info("saved a estimate")
       else
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
     end # end for each estimate
-
   end # end handle response
-end # end worker class
+end # end class
