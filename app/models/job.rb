@@ -12,7 +12,7 @@ class Job < ApplicationRecord
   end
 
   def active?
-    self.is_active == true
+    is_active
   end
 
   def client?

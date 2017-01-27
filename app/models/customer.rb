@@ -33,7 +33,7 @@ class Customer < ApplicationRecord
 
   # Returns a boolean indicating whether the instance is active
   def active?
-    self.is_active == true
+    is_active
   end
 
   # Included so that the url displays full_name instead of ugly quickbooks id value in url

@@ -1,5 +1,9 @@
 class Client < ApplicationRecord
   self.primary_key = :id # In case customer model represents a mysql view
+
+  def active?
+   is_active
+  end
 end
 
 # == Schema Information
