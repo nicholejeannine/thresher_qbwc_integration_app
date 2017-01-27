@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Id:</strong>
+  <%= @estimate.id %>
+</p>
+
+<p>
   <strong>Time created:</strong>
   <%= @estimate.time_created %>
 </p>
@@ -26,13 +31,18 @@
 </p>
 
 <p>
-  <strong>Class:</strong>
-  <%= @estimate.class_id %>
+  <strong>Customer full name:</strong>
+  <%= @estimate.customer_full_name %>
 </p>
 
 <p>
   <strong>Template:</strong>
   <%= @estimate.template_id %>
+</p>
+
+<p>
+  <strong>Template full name:</strong>
+  <%= @estimate.template_full_name %>
 </p>
 
 <p>
@@ -96,6 +106,31 @@
 </p>
 
 <p>
+  <strong>Bill address block addr1:</strong>
+  <%= @estimate.bill_address_block_addr1 %>
+</p>
+
+<p>
+  <strong>Bill address block addr2:</strong>
+  <%= @estimate.bill_address_block_addr2 %>
+</p>
+
+<p>
+  <strong>Bill address block addr3:</strong>
+  <%= @estimate.bill_address_block_addr3 %>
+</p>
+
+<p>
+  <strong>Bill address block addr4:</strong>
+  <%= @estimate.bill_address_block_addr4 %>
+</p>
+
+<p>
+  <strong>Bill address block addr5:</strong>
+  <%= @estimate.bill_address_block_addr5 %>
+</p>
+
+<p>
   <strong>Ship address addr1:</strong>
   <%= @estimate.ship_address_addr1 %>
 </p>
@@ -146,6 +181,31 @@
 </p>
 
 <p>
+  <strong>Ship address block addr1:</strong>
+  <%= @estimate.ship_address_block_addr1 %>
+</p>
+
+<p>
+  <strong>Ship address block addr2:</strong>
+  <%= @estimate.ship_address_block_addr2 %>
+</p>
+
+<p>
+  <strong>Ship address block addr3:</strong>
+  <%= @estimate.ship_address_block_addr3 %>
+</p>
+
+<p>
+  <strong>Ship address block addr4:</strong>
+  <%= @estimate.ship_address_block_addr4 %>
+</p>
+
+<p>
+  <strong>Ship address block addr5:</strong>
+  <%= @estimate.ship_address_block_addr5 %>
+</p>
+
+<p>
   <strong>Is active:</strong>
   <%= @estimate.is_active %>
 </p>
@@ -161,6 +221,11 @@
 </p>
 
 <p>
+  <strong>Terms full name:</strong>
+  <%= @estimate.terms_full_name %>
+</p>
+
+<p>
   <strong>Due date:</strong>
   <%= @estimate.due_date %>
 </p>
@@ -168,6 +233,11 @@
 <p>
   <strong>Sales rep:</strong>
   <%= @estimate.sales_rep_id %>
+</p>
+
+<p>
+  <strong>Sales rep full name:</strong>
+  <%= @estimate.sales_rep_full_name %>
 </p>
 
 <p>
@@ -186,6 +256,11 @@
 </p>
 
 <p>
+  <strong>Item sales tax full name:</strong>
+  <%= @estimate.item_sales_tax_full_name %>
+</p>
+
+<p>
   <strong>Sales tax percentage:</strong>
   <%= @estimate.sales_tax_percentage %>
 </p>
@@ -201,21 +276,6 @@
 </p>
 
 <p>
-  <strong>Currency:</strong>
-  <%= @estimate.currency_id %>
-</p>
-
-<p>
-  <strong>Exchange rate:</strong>
-  <%= @estimate.exchange_rate %>
-</p>
-
-<p>
-  <strong>Total amount in home currency:</strong>
-  <%= @estimate.total_amount_in_home_currency %>
-</p>
-
-<p>
   <strong>Memo:</strong>
   <%= @estimate.memo %>
 </p>
@@ -226,13 +286,13 @@
 </p>
 
 <p>
-  <strong>Is to be emailed:</strong>
-  <%= @estimate.is_to_be_emailed %>
+  <strong>Customer msg full name:</strong>
+  <%= @estimate.customer_msg_full_name %>
 </p>
 
 <p>
-  <strong>Is tax included:</strong>
-  <%= @estimate.is_tax_included %>
+  <strong>Is to be emailed:</strong>
+  <%= @estimate.is_to_be_emailed %>
 </p>
 
 <p>
@@ -241,33 +301,39 @@
 </p>
 
 <p>
-  <strong>Other:</strong>
-  <%= @estimate.other %>
-</p>
-
-<p>
-  <strong>External guid:</strong>
-  <%= @estimate.external_guid %>
+  <strong>Customer sales tax code full name:</strong>
+  <%= @estimate.customer_sales_tax_code_full_name %>
 </p>
 
 <p>
   <strong>Linked txn:</strong>
-  <%= @estimate.linked_txn %>
+  <%= @estimate.linked_txn_id %>
 </p>
 
 <p>
-  <strong>Estimate line:</strong>
-  <%= @estimate.estimate_line_id %>
+  <strong>Linked txn type:</strong>
+  <%= @estimate.linked_txn_type %>
 </p>
 
 <p>
-  <strong>Estimate line group:</strong>
-  <%= @estimate.estimate_line_group_id %>
+  <strong>Linked txn date:</strong>
+  <%= @estimate.linked_txn_date %>
 </p>
 
 <p>
-  <strong>Data ext:</strong>
-  <%= @estimate.data_ext_id %>
+  <strong>Linked txn ref number:</strong>
+  <%= @estimate.linked_txn_ref_number %>
 </p>
 
+<p>
+  <strong>Linked txn link type:</strong>
+  <%= @estimate.linked_txn_link_type %>
+</p>
+
+<p>
+  <strong>Linked txn amount:</strong>
+  <%= @estimate.linked_txn_amount %>
+</p>
+
+<%= link_to 'Edit', edit_estimate_path(@estimate) %> |
 <%= link_to 'Back', estimates_path %>

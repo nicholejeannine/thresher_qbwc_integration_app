@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Estimate Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Estimate</th>
+      <th>Item</th>
+      <th>Item full name</th>
+      <th>Desc</th>
+      <th>Quantity</th>
+      <th>Unit of measure</th>
+      <th>Override uom set</th>
+      <th>Override uom set full name</th>
+      <th>Rate</th>
+      <th>Rate percent</th>
+      <th>Amount</th>
+      <th>Inventory site</th>
+      <th>Inventory site full name</th>
+      <th>Inventory site location</th>
+      <th>Inventory site location full name</th>
+      <th>Sales tax code</th>
+      <th>Sales tax code full name</th>
+      <th>Markup rate</th>
+      <th>Markup rate percent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @estimate_lines.each do |estimate_line| %>
+      <tr>
+        <td><%= estimate_line.estimate_id %></td>
+        <td><%= estimate_line.item_id %></td>
+        <td><%= estimate_line.item_full_name %></td>
+        <td><%= estimate_line.desc %></td>
+        <td><%= estimate_line.quantity %></td>
+        <td><%= estimate_line.unit_of_measure %></td>
+        <td><%= estimate_line.override_uom_set_id %></td>
+        <td><%= estimate_line.override_uom_set_full_name %></td>
+        <td><%= estimate_line.rate %></td>
+        <td><%= estimate_line.rate_percent %></td>
+        <td><%= estimate_line.amount %></td>
+        <td><%= estimate_line.inventory_site_id %></td>
+        <td><%= estimate_line.inventory_site_full_name %></td>
+        <td><%= estimate_line.inventory_site_location_id %></td>
+        <td><%= estimate_line.inventory_site_location_full_name %></td>
+        <td><%= estimate_line.sales_tax_code_id %></td>
+        <td><%= estimate_line.sales_tax_code_full_name %></td>
+        <td><%= estimate_line.markup_rate %></td>
+        <td><%= estimate_line.markup_rate_percent %></td>
+        <td><%= link_to 'Show', estimate_line %></td>
+        <td><%= link_to 'Edit', edit_estimate_line_path(estimate_line) %></td>
+        <td><%= link_to 'Destroy', estimate_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Estimate Line', new_estimate_line_path %>

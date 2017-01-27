@@ -5,13 +5,13 @@
 <table>
   <thead>
     <tr>
+      <th>Id</th>
       <th>Time created</th>
       <th>Time modified</th>
       <th>Edit sequence</th>
       <th>Name</th>
       <th>Full name</th>
       <th>Is active</th>
-      <th>Class</th>
       <th>Parent</th>
       <th>Sublevel</th>
       <th>Company name</th>
@@ -19,7 +19,6 @@
       <th>First name</th>
       <th>Middle name</th>
       <th>Last name</th>
-      <th>Suffix</th>
       <th>Job title</th>
       <th>Bill address addr1</th>
       <th>Bill address addr2</th>
@@ -31,6 +30,11 @@
       <th>Bill address postal code</th>
       <th>Bill address country</th>
       <th>Bill address note</th>
+      <th>Bill address block addr1</th>
+      <th>Bill address block addr2</th>
+      <th>Bill address block addr3</th>
+      <th>Bill address block addr4</th>
+      <th>Bill address block addr5</th>
       <th>Ship address addr1</th>
       <th>Ship address addr2</th>
       <th>Ship address addr3</th>
@@ -41,61 +45,61 @@
       <th>Ship address postal code</th>
       <th>Ship address country</th>
       <th>Ship address note</th>
-      <th>Print as</th>
+      <th>Ship address block addr1</th>
+      <th>Ship address block addr2</th>
+      <th>Ship address block addr3</th>
+      <th>Ship address block addr4</th>
+      <th>Ship address block addr5</th>
       <th>Phone</th>
-      <th>Mobile</th>
-      <th>Pager</th>
       <th>Alt phone</th>
       <th>Fax</th>
       <th>Email</th>
       <th>Cc</th>
       <th>Contact</th>
       <th>Alt contact</th>
-      <th>Additional contact</th>
-      <th>Contacts</th>
       <th>Customer type</th>
+      <th>Customer type full name</th>
       <th>Terms</th>
+      <th>Terms full name</th>
       <th>Sales rep</th>
+      <th>Sales rep full name</th>
       <th>Balance</th>
       <th>Total balance</th>
       <th>Sales tax code</th>
+      <th>Sales tax code full name</th>
       <th>Item sales tax</th>
-      <th>Sales tax country</th>
+      <th>Item sales tax full name</th>
       <th>Resale number</th>
       <th>Account number</th>
-      <th>Credit limit</th>
       <th>Preferred payment method</th>
-      <th>Credit card info</th>
+      <th>Preferred payment method full name</th>
       <th>Job status</th>
       <th>Job start date</th>
       <th>Job projected end date</th>
       <th>Job end date</th>
       <th>Job desc</th>
       <th>Job type</th>
-      <th>Notes</th>
-      <th>Additional notes</th>
-      <th>Is statement with parent</th>
-      <th>Delivery method</th>
+      <th>Job type full name</th>
       <th>Preferred delivery method</th>
       <th>Price level</th>
-      <th>External guid</th>
-      <th>Tax registration number</th>
-      <th>Currency</th>
-      <th>Data ext</th>
-      <th colspan="1"></th>
+      <th>Price level full name</th>
+      <th>Primary contact</th>
+      <th>Primary email</th>
+      <th>Primary phone</th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @customers.each do |customer| %>
       <tr>
+        <td><%= customer.id %></td>
         <td><%= customer.time_created %></td>
         <td><%= customer.time_modified %></td>
         <td><%= customer.edit_sequence %></td>
         <td><%= customer.name %></td>
         <td><%= customer.full_name %></td>
         <td><%= customer.is_active %></td>
-        <td><%= customer.class_id %></td>
         <td><%= customer.parent_id %></td>
         <td><%= customer.sublevel %></td>
         <td><%= customer.company_name %></td>
@@ -103,7 +107,6 @@
         <td><%= customer.first_name %></td>
         <td><%= customer.middle_name %></td>
         <td><%= customer.last_name %></td>
-        <td><%= customer.suffix %></td>
         <td><%= customer.job_title %></td>
         <td><%= customer.bill_address_addr1 %></td>
         <td><%= customer.bill_address_addr2 %></td>
@@ -115,6 +118,11 @@
         <td><%= customer.bill_address_postal_code %></td>
         <td><%= customer.bill_address_country %></td>
         <td><%= customer.bill_address_note %></td>
+        <td><%= customer.bill_address_block_addr1 %></td>
+        <td><%= customer.bill_address_block_addr2 %></td>
+        <td><%= customer.bill_address_block_addr3 %></td>
+        <td><%= customer.bill_address_block_addr4 %></td>
+        <td><%= customer.bill_address_block_addr5 %></td>
         <td><%= customer.ship_address_addr1 %></td>
         <td><%= customer.ship_address_addr2 %></td>
         <td><%= customer.ship_address_addr3 %></td>
@@ -125,48 +133,50 @@
         <td><%= customer.ship_address_postal_code %></td>
         <td><%= customer.ship_address_country %></td>
         <td><%= customer.ship_address_note %></td>
-        <td><%= customer.print_as %></td>
+        <td><%= customer.ship_address_block_addr1 %></td>
+        <td><%= customer.ship_address_block_addr2 %></td>
+        <td><%= customer.ship_address_block_addr3 %></td>
+        <td><%= customer.ship_address_block_addr4 %></td>
+        <td><%= customer.ship_address_block_addr5 %></td>
         <td><%= customer.phone %></td>
-        <td><%= customer.mobile %></td>
-        <td><%= customer.pager %></td>
         <td><%= customer.alt_phone %></td>
         <td><%= customer.fax %></td>
         <td><%= customer.email %></td>
         <td><%= customer.cc %></td>
         <td><%= customer.contact %></td>
         <td><%= customer.alt_contact %></td>
-        <td><%= customer.additional_contact_id %></td>
-        <td><%= customer.contacts_id %></td>
         <td><%= customer.customer_type_id %></td>
+        <td><%= customer.customer_type_full_name %></td>
         <td><%= customer.terms_id %></td>
+        <td><%= customer.terms_full_name %></td>
         <td><%= customer.sales_rep_id %></td>
+        <td><%= customer.sales_rep_full_name %></td>
         <td><%= customer.balance %></td>
         <td><%= customer.total_balance %></td>
         <td><%= customer.sales_tax_code_id %></td>
+        <td><%= customer.sales_tax_code_full_name %></td>
         <td><%= customer.item_sales_tax_id %></td>
-        <td><%= customer.sales_tax_country %></td>
+        <td><%= customer.item_sales_tax_full_name %></td>
         <td><%= customer.resale_number %></td>
         <td><%= customer.account_number %></td>
-        <td><%= customer.credit_limit %></td>
         <td><%= customer.preferred_payment_method_id %></td>
-        <td><%= customer.credit_card_info %></td>
+        <td><%= customer.preferred_payment_method_full_name %></td>
         <td><%= customer.job_status %></td>
         <td><%= customer.job_start_date %></td>
         <td><%= customer.job_projected_end_date %></td>
         <td><%= customer.job_end_date %></td>
         <td><%= customer.job_desc %></td>
         <td><%= customer.job_type_id %></td>
-        <td><%= customer.notes %></td>
-        <td><%= customer.additional_notes_id %></td>
-        <td><%= customer.is_statement_with_parent %></td>
-        <td><%= customer.delivery_method %></td>
+        <td><%= customer.job_type_full_name %></td>
         <td><%= customer.preferred_delivery_method %></td>
         <td><%= customer.price_level_id %></td>
-        <td><%= customer.external_guid %></td>
-        <td><%= customer.tax_registration_number %></td>
-        <td><%= customer.currency_id %></td>
-        <td><%= customer.data_ext_id %></td>
+        <td><%= customer.price_level_full_name %></td>
+        <td><%= customer.primary_contact %></td>
+        <td><%= customer.primary_email %></td>
+        <td><%= customer.primary_phone %></td>
         <td><%= link_to 'Show', customer %></td>
+        <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
+        <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -174,3 +184,4 @@
 
 <br>
 
+<%= link_to 'New Customer', new_customer_path %>

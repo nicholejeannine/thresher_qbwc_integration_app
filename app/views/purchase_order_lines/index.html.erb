@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Purchase Order Lines</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Purchase order</th>
+      <th>Item</th>
+      <th>Item full name</th>
+      <th>Manufacturer part number</th>
+      <th>Desc</th>
+      <th>Quantity</th>
+      <th>Unit of measure</th>
+      <th>Override uom set</th>
+      <th>Override uom set full name</th>
+      <th>Rate</th>
+      <th>Amount</th>
+      <th>Inventory site location</th>
+      <th>Inventory site location full name</th>
+      <th>Customer</th>
+      <th>Customer full name</th>
+      <th>Service date</th>
+      <th>Received quantity</th>
+      <th>Unbilled quantity</th>
+      <th>Is billed</th>
+      <th>Is manually closed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @purchase_order_lines.each do |purchase_order_line| %>
+      <tr>
+        <td><%= purchase_order_line.purchase_order_id %></td>
+        <td><%= purchase_order_line.item_id %></td>
+        <td><%= purchase_order_line.item_full_name %></td>
+        <td><%= purchase_order_line.manufacturer_part_number %></td>
+        <td><%= purchase_order_line.desc %></td>
+        <td><%= purchase_order_line.quantity %></td>
+        <td><%= purchase_order_line.unit_of_measure %></td>
+        <td><%= purchase_order_line.override_uom_set_id %></td>
+        <td><%= purchase_order_line.override_uom_set_full_name %></td>
+        <td><%= purchase_order_line.rate %></td>
+        <td><%= purchase_order_line.amount %></td>
+        <td><%= purchase_order_line.inventory_site_location_id %></td>
+        <td><%= purchase_order_line.inventory_site_location_full_name %></td>
+        <td><%= purchase_order_line.customer_id %></td>
+        <td><%= purchase_order_line.customer_full_name %></td>
+        <td><%= purchase_order_line.service_date %></td>
+        <td><%= purchase_order_line.received_quantity %></td>
+        <td><%= purchase_order_line.unbilled_quantity %></td>
+        <td><%= purchase_order_line.is_billed %></td>
+        <td><%= purchase_order_line.is_manually_closed %></td>
+        <td><%= link_to 'Show', purchase_order_line %></td>
+        <td><%= link_to 'Edit', edit_purchase_order_line_path(purchase_order_line) %></td>
+        <td><%= link_to 'Destroy', purchase_order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Purchase Order Line', new_purchase_order_line_path %>

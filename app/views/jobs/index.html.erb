@@ -1,0 +1,217 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Jobs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Time created</th>
+      <th>Time modified</th>
+      <th>Edit sequence</th>
+      <th>Name</th>
+      <th>Full name</th>
+      <th>Is active</th>
+      <th>Parent</th>
+      <th>Sublevel</th>
+      <th>Company name</th>
+      <th>Salutation</th>
+      <th>First name</th>
+      <th>Middle name</th>
+      <th>Last name</th>
+      <th>Job title</th>
+      <th>Bill address addr1</th>
+      <th>Bill address addr2</th>
+      <th>Bill address addr3</th>
+      <th>Bill address addr4</th>
+      <th>Bill address addr5</th>
+      <th>Bill address city</th>
+      <th>Bill address state</th>
+      <th>Bill address postal code</th>
+      <th>Bill address country</th>
+      <th>Bill address note</th>
+      <th>Bill address block addr1</th>
+      <th>Bill address block addr2</th>
+      <th>Bill address block addr3</th>
+      <th>Bill address block addr4</th>
+      <th>Bill address block addr5</th>
+      <th>Ship address addr1</th>
+      <th>Ship address addr2</th>
+      <th>Ship address addr3</th>
+      <th>Ship address addr4</th>
+      <th>Ship address addr5</th>
+      <th>Ship address city</th>
+      <th>Ship address state</th>
+      <th>Ship address postal code</th>
+      <th>Ship address country</th>
+      <th>Ship address note</th>
+      <th>Ship address block addr1</th>
+      <th>Ship address block addr2</th>
+      <th>Ship address block addr3</th>
+      <th>Ship address block addr4</th>
+      <th>Ship address block addr5</th>
+      <th>Phone</th>
+      <th>Alt phone</th>
+      <th>Fax</th>
+      <th>Email</th>
+      <th>Cc</th>
+      <th>Contact</th>
+      <th>Alt contact</th>
+      <th>Customer type</th>
+      <th>Customer type full name</th>
+      <th>Terms</th>
+      <th>Terms full name</th>
+      <th>Sales rep</th>
+      <th>Sales rep full name</th>
+      <th>Balance</th>
+      <th>Total balance</th>
+      <th>Sales tax code</th>
+      <th>Sales tax code full name</th>
+      <th>Item sales tax</th>
+      <th>Item sales tax full name</th>
+      <th>Resale number</th>
+      <th>Account number</th>
+      <th>Preferred payment method</th>
+      <th>Preferred payment method full name</th>
+      <th>Job status</th>
+      <th>Job start date</th>
+      <th>Job projected end date</th>
+      <th>Job end date</th>
+      <th>Job desc</th>
+      <th>Job type</th>
+      <th>Job type full name</th>
+      <th>Preferred delivery method</th>
+      <th>Price level</th>
+      <th>Price level full name</th>
+      <th>Primary contact</th>
+      <th>Primary email</th>
+      <th>Primary phone</th>
+      <th>Jobs pkey</th>
+      <th>Creationtimestamp</th>
+      <th>Creationuser</th>
+      <th>Lastmodificationtimestamp</th>
+      <th>Lastmodificationuser</th>
+      <th>Fk customers pkey</th>
+      <th>Fk jobid parent</th>
+      <th>Job custclno</th>
+      <th>Job custpono</th>
+      <th>Job dateendactual</th>
+      <th>Job dateendprojected</th>
+      <th>Job datestartactual</th>
+      <th>Job datestartprojected</th>
+      <th>Job description long</th>
+      <th>Job description short</th>
+      <th>Job hourtype</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @jobs.each do |job| %>
+      <tr>
+        <td><%= job.time_created %></td>
+        <td><%= job.time_modified %></td>
+        <td><%= job.edit_sequence %></td>
+        <td><%= job.name %></td>
+        <td><%= job.full_name %></td>
+        <td><%= job.is_active %></td>
+        <td><%= job.parent_id %></td>
+        <td><%= job.sublevel %></td>
+        <td><%= job.company_name %></td>
+        <td><%= job.salutation %></td>
+        <td><%= job.first_name %></td>
+        <td><%= job.middle_name %></td>
+        <td><%= job.last_name %></td>
+        <td><%= job.job_title %></td>
+        <td><%= job.bill_address_addr1 %></td>
+        <td><%= job.bill_address_addr2 %></td>
+        <td><%= job.bill_address_addr3 %></td>
+        <td><%= job.bill_address_addr4 %></td>
+        <td><%= job.bill_address_addr5 %></td>
+        <td><%= job.bill_address_city %></td>
+        <td><%= job.bill_address_state %></td>
+        <td><%= job.bill_address_postal_code %></td>
+        <td><%= job.bill_address_country %></td>
+        <td><%= job.bill_address_note %></td>
+        <td><%= job.bill_address_block_addr1 %></td>
+        <td><%= job.bill_address_block_addr2 %></td>
+        <td><%= job.bill_address_block_addr3 %></td>
+        <td><%= job.bill_address_block_addr4 %></td>
+        <td><%= job.bill_address_block_addr5 %></td>
+        <td><%= job.ship_address_addr1 %></td>
+        <td><%= job.ship_address_addr2 %></td>
+        <td><%= job.ship_address_addr3 %></td>
+        <td><%= job.ship_address_addr4 %></td>
+        <td><%= job.ship_address_addr5 %></td>
+        <td><%= job.ship_address_city %></td>
+        <td><%= job.ship_address_state %></td>
+        <td><%= job.ship_address_postal_code %></td>
+        <td><%= job.ship_address_country %></td>
+        <td><%= job.ship_address_note %></td>
+        <td><%= job.ship_address_block_addr1 %></td>
+        <td><%= job.ship_address_block_addr2 %></td>
+        <td><%= job.ship_address_block_addr3 %></td>
+        <td><%= job.ship_address_block_addr4 %></td>
+        <td><%= job.ship_address_block_addr5 %></td>
+        <td><%= job.phone %></td>
+        <td><%= job.alt_phone %></td>
+        <td><%= job.fax %></td>
+        <td><%= job.email %></td>
+        <td><%= job.cc %></td>
+        <td><%= job.contact %></td>
+        <td><%= job.alt_contact %></td>
+        <td><%= job.customer_type_id %></td>
+        <td><%= job.customer_type_full_name %></td>
+        <td><%= job.terms_id %></td>
+        <td><%= job.terms_full_name %></td>
+        <td><%= job.sales_rep_id %></td>
+        <td><%= job.sales_rep_full_name %></td>
+        <td><%= job.balance %></td>
+        <td><%= job.total_balance %></td>
+        <td><%= job.sales_tax_code_id %></td>
+        <td><%= job.sales_tax_code_full_name %></td>
+        <td><%= job.item_sales_tax_id %></td>
+        <td><%= job.item_sales_tax_full_name %></td>
+        <td><%= job.resale_number %></td>
+        <td><%= job.account_number %></td>
+        <td><%= job.preferred_payment_method_id %></td>
+        <td><%= job.preferred_payment_method_full_name %></td>
+        <td><%= job.job_status %></td>
+        <td><%= job.job_start_date %></td>
+        <td><%= job.job_projected_end_date %></td>
+        <td><%= job.job_end_date %></td>
+        <td><%= job.job_desc %></td>
+        <td><%= job.job_type_id %></td>
+        <td><%= job.job_type_full_name %></td>
+        <td><%= job.preferred_delivery_method %></td>
+        <td><%= job.price_level_id %></td>
+        <td><%= job.price_level_full_name %></td>
+        <td><%= job.primary_contact %></td>
+        <td><%= job.primary_email %></td>
+        <td><%= job.primary_phone %></td>
+        <td><%= job.Jobs_PKEY %></td>
+        <td><%= job.CreationTimeStamp %></td>
+        <td><%= job.CreationUser %></td>
+        <td><%= job.LastModificationTimeStamp %></td>
+        <td><%= job.LastModificationUser %></td>
+        <td><%= job.FK_Customers_PKEY %></td>
+        <td><%= job.FK_JobID_Parent %></td>
+        <td><%= job.Job_CustCLNo %></td>
+        <td><%= job.Job_CustPONo %></td>
+        <td><%= job.Job_DateEndActual %></td>
+        <td><%= job.Job_DateEndProjected %></td>
+        <td><%= job.Job_DateStartActual %></td>
+        <td><%= job.Job_DateStartProjected %></td>
+        <td><%= job.Job_Description_Long %></td>
+        <td><%= job.Job_Description_Short %></td>
+        <td><%= job.Job_HourType %></td>
+        <td><%= link_to 'Show', job %></td>
+        <td><%= link_to 'Edit', edit_job_path(job) %></td>
+        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Job', new_job_path %>

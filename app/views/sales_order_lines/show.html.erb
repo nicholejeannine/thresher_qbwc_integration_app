@@ -1,0 +1,109 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sales order:</strong>
+  <%= @sales_order_line.sales_order_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @sales_order_line.item_id %>
+</p>
+
+<p>
+  <strong>Item full name:</strong>
+  <%= @sales_order_line.item_full_name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @sales_order_line.desc %>
+</p>
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @sales_order_line.quantity %>
+</p>
+
+<p>
+  <strong>Unit of measure:</strong>
+  <%= @sales_order_line.unit_of_measure %>
+</p>
+
+<p>
+  <strong>Override uom set:</strong>
+  <%= @sales_order_line.override_uom_set_id %>
+</p>
+
+<p>
+  <strong>Override uom set full name:</strong>
+  <%= @sales_order_line.override_uom_set_full_name %>
+</p>
+
+<p>
+  <strong>Rate:</strong>
+  <%= @sales_order_line.rate %>
+</p>
+
+<p>
+  <strong>Rate percent:</strong>
+  <%= @sales_order_line.rate_percent %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @sales_order_line.amount %>
+</p>
+
+<p>
+  <strong>Inventory site:</strong>
+  <%= @sales_order_line.inventory_site_id %>
+</p>
+
+<p>
+  <strong>Inventory site full name:</strong>
+  <%= @sales_order_line.inventory_site_full_name %>
+</p>
+
+<p>
+  <strong>Inventory site location:</strong>
+  <%= @sales_order_line.inventory_site_location_id %>
+</p>
+
+<p>
+  <strong>Inventory site location full name:</strong>
+  <%= @sales_order_line.inventory_site_location_full_name %>
+</p>
+
+<p>
+  <strong>Serial number:</strong>
+  <%= @sales_order_line.serial_number %>
+</p>
+
+<p>
+  <strong>Lot number:</strong>
+  <%= @sales_order_line.lot_number %>
+</p>
+
+<p>
+  <strong>Sales tax code:</strong>
+  <%= @sales_order_line.sales_tax_code_id %>
+</p>
+
+<p>
+  <strong>Sales tax code full name:</strong>
+  <%= @sales_order_line.sales_tax_code_full_name %>
+</p>
+
+<p>
+  <strong>Invoiced:</strong>
+  <%= @sales_order_line.invoiced %>
+</p>
+
+<p>
+  <strong>Is manually closed:</strong>
+  <%= @sales_order_line.is_manually_closed %>
+</p>
+
+<%= link_to 'Edit', edit_sales_order_line_path(@sales_order_line) %> |
+<%= link_to 'Back', sales_order_lines_path %>

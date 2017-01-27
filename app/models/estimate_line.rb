@@ -1,0 +1,2 @@
+class EstimateLine < ApplicationRecord
+end

@@ -1,6 +1,17 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
 
+  resources :invoice_lines
+  resources :purchase_order_lines
+  resources :purchase_orders
+  resources :sales_order_lines
+  resources :sales_orders
+  resources :estimate_lines
+  resources :estimates
+  resources :projects
+  resources :jobs
+  resources :customers
+  resources :clients
   resources :invoices
   resources :expense_lines
   resources :customers, only: [:index, :show]

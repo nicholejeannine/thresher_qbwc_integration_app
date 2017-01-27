@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Txn:</strong>
-  <%= @invoice.txn_id %>
+  <strong>Id:</strong>
+  <%= @invoice.id %>
 </p>
 
 <p>
@@ -26,23 +26,33 @@
 </p>
 
 <p>
-  <strong>Customer ref:</strong>
-  <%= @invoice.customer_ref %>
+  <strong>Customer:</strong>
+  <%= @invoice.customer_id %>
 </p>
 
 <p>
-  <strong>Class ref:</strong>
-  <%= @invoice.class_ref %>
+  <strong>Customer full name:</strong>
+  <%= @invoice.customer_full_name %>
 </p>
 
 <p>
-  <strong>Ar account ref:</strong>
-  <%= @invoice.ar_account_ref %>
+  <strong>Ar account:</strong>
+  <%= @invoice.ar_account_id %>
 </p>
 
 <p>
-  <strong>Template ref:</strong>
-  <%= @invoice.template_ref %>
+  <strong>Ar account full name:</strong>
+  <%= @invoice.ar_account_full_name %>
+</p>
+
+<p>
+  <strong>Template:</strong>
+  <%= @invoice.template_id %>
+</p>
+
+<p>
+  <strong>Template full name:</strong>
+  <%= @invoice.template_full_name %>
 </p>
 
 <p>
@@ -56,23 +66,153 @@
 </p>
 
 <p>
-  <strong>Bill address:</strong>
-  <%= @invoice.bill_address %>
+  <strong>Bill address addr1:</strong>
+  <%= @invoice.bill_address_addr1 %>
 </p>
 
 <p>
-  <strong>Bill address block:</strong>
-  <%= @invoice.bill_address_block %>
+  <strong>Bill address addr2:</strong>
+  <%= @invoice.bill_address_addr2 %>
 </p>
 
 <p>
-  <strong>Ship address:</strong>
-  <%= @invoice.ship_address %>
+  <strong>Bill address addr3:</strong>
+  <%= @invoice.bill_address_addr3 %>
 </p>
 
 <p>
-  <strong>Ship address block:</strong>
-  <%= @invoice.ship_address_block %>
+  <strong>Bill address addr4:</strong>
+  <%= @invoice.bill_address_addr4 %>
+</p>
+
+<p>
+  <strong>Bill address addr5:</strong>
+  <%= @invoice.bill_address_addr5 %>
+</p>
+
+<p>
+  <strong>Bill address city:</strong>
+  <%= @invoice.bill_address_city %>
+</p>
+
+<p>
+  <strong>Bill address state:</strong>
+  <%= @invoice.bill_address_state %>
+</p>
+
+<p>
+  <strong>Bill address postal code:</strong>
+  <%= @invoice.bill_address_postal_code %>
+</p>
+
+<p>
+  <strong>Bill address country:</strong>
+  <%= @invoice.bill_address_country %>
+</p>
+
+<p>
+  <strong>Bill address note:</strong>
+  <%= @invoice.bill_address_note %>
+</p>
+
+<p>
+  <strong>Bill address block addr1:</strong>
+  <%= @invoice.bill_address_block_addr1 %>
+</p>
+
+<p>
+  <strong>Bill address block addr2:</strong>
+  <%= @invoice.bill_address_block_addr2 %>
+</p>
+
+<p>
+  <strong>Bill address block addr3:</strong>
+  <%= @invoice.bill_address_block_addr3 %>
+</p>
+
+<p>
+  <strong>Bill address block addr4:</strong>
+  <%= @invoice.bill_address_block_addr4 %>
+</p>
+
+<p>
+  <strong>Bill address block addr5:</strong>
+  <%= @invoice.bill_address_block_addr5 %>
+</p>
+
+<p>
+  <strong>Ship address addr1:</strong>
+  <%= @invoice.ship_address_addr1 %>
+</p>
+
+<p>
+  <strong>Ship address addr2:</strong>
+  <%= @invoice.ship_address_addr2 %>
+</p>
+
+<p>
+  <strong>Ship address addr3:</strong>
+  <%= @invoice.ship_address_addr3 %>
+</p>
+
+<p>
+  <strong>Ship address addr4:</strong>
+  <%= @invoice.ship_address_addr4 %>
+</p>
+
+<p>
+  <strong>Ship address addr5:</strong>
+  <%= @invoice.ship_address_addr5 %>
+</p>
+
+<p>
+  <strong>Ship address city:</strong>
+  <%= @invoice.ship_address_city %>
+</p>
+
+<p>
+  <strong>Ship address state:</strong>
+  <%= @invoice.ship_address_state %>
+</p>
+
+<p>
+  <strong>Ship address postal code:</strong>
+  <%= @invoice.ship_address_postal_code %>
+</p>
+
+<p>
+  <strong>Ship address country:</strong>
+  <%= @invoice.ship_address_country %>
+</p>
+
+<p>
+  <strong>Ship address note:</strong>
+  <%= @invoice.ship_address_note %>
+</p>
+
+<p>
+  <strong>Ship address block addr1:</strong>
+  <%= @invoice.ship_address_block_addr1 %>
+</p>
+
+<p>
+  <strong>Ship address block addr2:</strong>
+  <%= @invoice.ship_address_block_addr2 %>
+</p>
+
+<p>
+  <strong>Ship address block addr3:</strong>
+  <%= @invoice.ship_address_block_addr3 %>
+</p>
+
+<p>
+  <strong>Ship address block addr4:</strong>
+  <%= @invoice.ship_address_block_addr4 %>
+</p>
+
+<p>
+  <strong>Ship address block addr5:</strong>
+  <%= @invoice.ship_address_block_addr5 %>
 </p>
 
 <p>
@@ -91,8 +231,13 @@
 </p>
 
 <p>
-  <strong>Terms ref:</strong>
-  <%= @invoice.terms_ref %>
+  <strong>Terms:</strong>
+  <%= @invoice.terms_id %>
+</p>
+
+<p>
+  <strong>Terms full name:</strong>
+  <%= @invoice.terms_full_name %>
 </p>
 
 <p>
@@ -101,8 +246,13 @@
 </p>
 
 <p>
-  <strong>Sales rep ref:</strong>
-  <%= @invoice.sales_rep_ref %>
+  <strong>Sales rep:</strong>
+  <%= @invoice.sales_rep_id %>
+</p>
+
+<p>
+  <strong>Sales rep full name:</strong>
+  <%= @invoice.sales_rep_full_name %>
 </p>
 
 <p>
@@ -116,8 +266,13 @@
 </p>
 
 <p>
-  <strong>Ship method ref:</strong>
-  <%= @invoice.ship_method_ref %>
+  <strong>Ship method:</strong>
+  <%= @invoice.ship_method_id %>
+</p>
+
+<p>
+  <strong>Ship method full name:</strong>
+  <%= @invoice.ship_method_full_name %>
 </p>
 
 <p>
@@ -126,8 +281,13 @@
 </p>
 
 <p>
-  <strong>Item sales tax ref:</strong>
-  <%= @invoice.item_sales_tax_ref %>
+  <strong>Item sales tax:</strong>
+  <%= @invoice.item_sales_tax_id %>
+</p>
+
+<p>
+  <strong>Item sales tax full name:</strong>
+  <%= @invoice.item_sales_tax_full_name %>
 </p>
 
 <p>
@@ -151,21 +311,6 @@
 </p>
 
 <p>
-  <strong>Currency ref:</strong>
-  <%= @invoice.currency_ref %>
-</p>
-
-<p>
-  <strong>Exchange rate:</strong>
-  <%= @invoice.exchange_rate %>
-</p>
-
-<p>
-  <strong>Balance remaining in home currency:</strong>
-  <%= @invoice.balance_remaining_in_home_currency %>
-</p>
-
-<p>
   <strong>Memo:</strong>
   <%= @invoice.memo %>
 </p>
@@ -176,8 +321,13 @@
 </p>
 
 <p>
-  <strong>Customer msg ref:</strong>
-  <%= @invoice.customer_msg_ref %>
+  <strong>Customer msg:</strong>
+  <%= @invoice.customer_msg_id %>
+</p>
+
+<p>
+  <strong>Customer msg full name:</strong>
+  <%= @invoice.customer_msg_full_name %>
 </p>
 
 <p>
@@ -191,13 +341,13 @@
 </p>
 
 <p>
-  <strong>Is tax included:</strong>
-  <%= @invoice.is_tax_included %>
+  <strong>Customer sales tax code:</strong>
+  <%= @invoice.customer_sales_tax_code_id %>
 </p>
 
 <p>
-  <strong>Customer sales tax code ref:</strong>
-  <%= @invoice.customer_sales_tax_code_ref %>
+  <strong>Customer sales tax code full name:</strong>
+  <%= @invoice.customer_sales_tax_code_full_name %>
 </p>
 
 <p>
@@ -211,48 +361,33 @@
 </p>
 
 <p>
-  <strong>Other:</strong>
-  <%= @invoice.other %>
-</p>
-
-<p>
-  <strong>External guid:</strong>
-  <%= @invoice.external_guid %>
-</p>
-
-<p>
   <strong>Linked txn:</strong>
-  <%= @invoice.linked_txn %>
+  <%= @invoice.linked_txn_id %>
 </p>
 
 <p>
-  <strong>Invoice line ret:</strong>
-  <%= @invoice.invoice_line_ret %>
+  <strong>Linked txn type:</strong>
+  <%= @invoice.linked_txn_type %>
 </p>
 
 <p>
-  <strong>Invoice line group ret:</strong>
-  <%= @invoice.invoice_line_group_ret %>
+  <strong>Linked txn date:</strong>
+  <%= @invoice.linked_txn_date %>
 </p>
 
 <p>
-  <strong>Discount line ret:</strong>
-  <%= @invoice.discount_line_ret %>
+  <strong>Linked txn ref number:</strong>
+  <%= @invoice.linked_txn_ref_number %>
 </p>
 
 <p>
-  <strong>Sales tax line ret:</strong>
-  <%= @invoice.sales_tax_line_ret %>
+  <strong>Linked txn link type:</strong>
+  <%= @invoice.linked_txn_link_type %>
 </p>
 
 <p>
-  <strong>Shipping line ret:</strong>
-  <%= @invoice.shipping_line_ret %>
-</p>
-
-<p>
-  <strong>Data ext ret:</strong>
-  <%= @invoice.data_ext_ret %>
+  <strong>Linked txn amount:</strong>
+  <%= @invoice.linked_txn_amount %>
 </p>
 
 <%= link_to 'Edit', edit_invoice_path(@invoice) %> |

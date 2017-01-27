@@ -5,57 +5,84 @@
 <table>
   <thead>
     <tr>
-      <th>Txn</th>
+      <th>Id</th>
       <th>Time created</th>
       <th>Time modified</th>
       <th>Edit sequence</th>
       <th>Txn number</th>
-      <th>Customer ref</th>
-      <th>Class ref</th>
-      <th>Ar account ref</th>
-      <th>Template ref</th>
+      <th>Customer</th>
+      <th>Customer full name</th>
+      <th>Ar account</th>
+      <th>Ar account full name</th>
+      <th>Template</th>
+      <th>Template full name</th>
       <th>Txn date</th>
       <th>Ref number</th>
-      <th>Bill address</th>
-      <th>Bill address block</th>
-      <th>Ship address</th>
-      <th>Ship address block</th>
+      <th>Bill address addr1</th>
+      <th>Bill address addr2</th>
+      <th>Bill address addr3</th>
+      <th>Bill address addr4</th>
+      <th>Bill address addr5</th>
+      <th>Bill address city</th>
+      <th>Bill address state</th>
+      <th>Bill address postal code</th>
+      <th>Bill address country</th>
+      <th>Bill address note</th>
+      <th>Bill address block addr1</th>
+      <th>Bill address block addr2</th>
+      <th>Bill address block addr3</th>
+      <th>Bill address block addr4</th>
+      <th>Bill address block addr5</th>
+      <th>Ship address addr1</th>
+      <th>Ship address addr2</th>
+      <th>Ship address addr3</th>
+      <th>Ship address addr4</th>
+      <th>Ship address addr5</th>
+      <th>Ship address city</th>
+      <th>Ship address state</th>
+      <th>Ship address postal code</th>
+      <th>Ship address country</th>
+      <th>Ship address note</th>
+      <th>Ship address block addr1</th>
+      <th>Ship address block addr2</th>
+      <th>Ship address block addr3</th>
+      <th>Ship address block addr4</th>
+      <th>Ship address block addr5</th>
       <th>Is pending</th>
       <th>Is finance charge</th>
       <th>Po number</th>
-      <th>Terms ref</th>
+      <th>Terms</th>
+      <th>Terms full name</th>
       <th>Due date</th>
-      <th>Sales rep ref</th>
+      <th>Sales rep</th>
+      <th>Sales rep full name</th>
       <th>Fob</th>
       <th>Ship date</th>
-      <th>Ship method ref</th>
+      <th>Ship method</th>
+      <th>Ship method full name</th>
       <th>Subtotal</th>
-      <th>Item sales tax ref</th>
+      <th>Item sales tax</th>
+      <th>Item sales tax full name</th>
       <th>Sales tax percentage</th>
       <th>Sales tax total</th>
       <th>Applied amount</th>
       <th>Balance remaining</th>
-      <th>Currency ref</th>
-      <th>Exchange rate</th>
-      <th>Balance remaining in home currency</th>
       <th>Memo</th>
       <th>Is paid</th>
-      <th>Customer msg ref</th>
+      <th>Customer msg</th>
+      <th>Customer msg full name</th>
       <th>Is to be printed</th>
       <th>Is to be emailed</th>
-      <th>Is tax included</th>
-      <th>Customer sales tax code ref</th>
+      <th>Customer sales tax code</th>
+      <th>Customer sales tax code full name</th>
       <th>Suggested discount amount</th>
       <th>Suggested discount date</th>
-      <th>Other</th>
-      <th>External guid</th>
       <th>Linked txn</th>
-      <th>Invoice line ret</th>
-      <th>Invoice line group ret</th>
-      <th>Discount line ret</th>
-      <th>Sales tax line ret</th>
-      <th>Shipping line ret</th>
-      <th>Data ext ret</th>
+      <th>Linked txn type</th>
+      <th>Linked txn date</th>
+      <th>Linked txn ref number</th>
+      <th>Linked txn link type</th>
+      <th>Linked txn amount</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -63,57 +90,84 @@
   <tbody>
     <% @invoices.each do |invoice| %>
       <tr>
-        <td><%= invoice.txn_id %></td>
+        <td><%= invoice.id %></td>
         <td><%= invoice.time_created %></td>
         <td><%= invoice.time_modified %></td>
         <td><%= invoice.edit_sequence %></td>
         <td><%= invoice.txn_number %></td>
-        <td><%= invoice.customer_ref %></td>
-        <td><%= invoice.class_ref %></td>
-        <td><%= invoice.ar_account_ref %></td>
-        <td><%= invoice.template_ref %></td>
+        <td><%= invoice.customer_id %></td>
+        <td><%= invoice.customer_full_name %></td>
+        <td><%= invoice.ar_account_id %></td>
+        <td><%= invoice.ar_account_full_name %></td>
+        <td><%= invoice.template_id %></td>
+        <td><%= invoice.template_full_name %></td>
         <td><%= invoice.txn_date %></td>
         <td><%= invoice.ref_number %></td>
-        <td><%= invoice.bill_address %></td>
-        <td><%= invoice.bill_address_block %></td>
-        <td><%= invoice.ship_address %></td>
-        <td><%= invoice.ship_address_block %></td>
+        <td><%= invoice.bill_address_addr1 %></td>
+        <td><%= invoice.bill_address_addr2 %></td>
+        <td><%= invoice.bill_address_addr3 %></td>
+        <td><%= invoice.bill_address_addr4 %></td>
+        <td><%= invoice.bill_address_addr5 %></td>
+        <td><%= invoice.bill_address_city %></td>
+        <td><%= invoice.bill_address_state %></td>
+        <td><%= invoice.bill_address_postal_code %></td>
+        <td><%= invoice.bill_address_country %></td>
+        <td><%= invoice.bill_address_note %></td>
+        <td><%= invoice.bill_address_block_addr1 %></td>
+        <td><%= invoice.bill_address_block_addr2 %></td>
+        <td><%= invoice.bill_address_block_addr3 %></td>
+        <td><%= invoice.bill_address_block_addr4 %></td>
+        <td><%= invoice.bill_address_block_addr5 %></td>
+        <td><%= invoice.ship_address_addr1 %></td>
+        <td><%= invoice.ship_address_addr2 %></td>
+        <td><%= invoice.ship_address_addr3 %></td>
+        <td><%= invoice.ship_address_addr4 %></td>
+        <td><%= invoice.ship_address_addr5 %></td>
+        <td><%= invoice.ship_address_city %></td>
+        <td><%= invoice.ship_address_state %></td>
+        <td><%= invoice.ship_address_postal_code %></td>
+        <td><%= invoice.ship_address_country %></td>
+        <td><%= invoice.ship_address_note %></td>
+        <td><%= invoice.ship_address_block_addr1 %></td>
+        <td><%= invoice.ship_address_block_addr2 %></td>
+        <td><%= invoice.ship_address_block_addr3 %></td>
+        <td><%= invoice.ship_address_block_addr4 %></td>
+        <td><%= invoice.ship_address_block_addr5 %></td>
         <td><%= invoice.is_pending %></td>
         <td><%= invoice.is_finance_charge %></td>
         <td><%= invoice.po_number %></td>
-        <td><%= invoice.terms_ref %></td>
+        <td><%= invoice.terms_id %></td>
+        <td><%= invoice.terms_full_name %></td>
         <td><%= invoice.due_date %></td>
-        <td><%= invoice.sales_rep_ref %></td>
+        <td><%= invoice.sales_rep_id %></td>
+        <td><%= invoice.sales_rep_full_name %></td>
         <td><%= invoice.fob %></td>
         <td><%= invoice.ship_date %></td>
-        <td><%= invoice.ship_method_ref %></td>
+        <td><%= invoice.ship_method_id %></td>
+        <td><%= invoice.ship_method_full_name %></td>
         <td><%= invoice.subtotal %></td>
-        <td><%= invoice.item_sales_tax_ref %></td>
+        <td><%= invoice.item_sales_tax_id %></td>
+        <td><%= invoice.item_sales_tax_full_name %></td>
         <td><%= invoice.sales_tax_percentage %></td>
         <td><%= invoice.sales_tax_total %></td>
         <td><%= invoice.applied_amount %></td>
         <td><%= invoice.balance_remaining %></td>
-        <td><%= invoice.currency_ref %></td>
-        <td><%= invoice.exchange_rate %></td>
-        <td><%= invoice.balance_remaining_in_home_currency %></td>
         <td><%= invoice.memo %></td>
         <td><%= invoice.is_paid %></td>
-        <td><%= invoice.customer_msg_ref %></td>
+        <td><%= invoice.customer_msg_id %></td>
+        <td><%= invoice.customer_msg_full_name %></td>
         <td><%= invoice.is_to_be_printed %></td>
         <td><%= invoice.is_to_be_emailed %></td>
-        <td><%= invoice.is_tax_included %></td>
-        <td><%= invoice.customer_sales_tax_code_ref %></td>
+        <td><%= invoice.customer_sales_tax_code_id %></td>
+        <td><%= invoice.customer_sales_tax_code_full_name %></td>
         <td><%= invoice.suggested_discount_amount %></td>
         <td><%= invoice.suggested_discount_date %></td>
-        <td><%= invoice.other %></td>
-        <td><%= invoice.external_guid %></td>
-        <td><%= invoice.linked_txn %></td>
-        <td><%= invoice.invoice_line_ret %></td>
-        <td><%= invoice.invoice_line_group_ret %></td>
-        <td><%= invoice.discount_line_ret %></td>
-        <td><%= invoice.sales_tax_line_ret %></td>
-        <td><%= invoice.shipping_line_ret %></td>
-        <td><%= invoice.data_ext_ret %></td>
+        <td><%= invoice.linked_txn_id %></td>
+        <td><%= invoice.linked_txn_type %></td>
+        <td><%= invoice.linked_txn_date %></td>
+        <td><%= invoice.linked_txn_ref_number %></td>
+        <td><%= invoice.linked_txn_link_type %></td>
+        <td><%= invoice.linked_txn_amount %></td>
         <td><%= link_to 'Show', invoice %></td>
         <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
         <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>

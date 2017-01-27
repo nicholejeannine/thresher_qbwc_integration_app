@@ -1,0 +1,189 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Clients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Time created</th>
+      <th>Time modified</th>
+      <th>Edit sequence</th>
+      <th>Name</th>
+      <th>Full name</th>
+      <th>Is active</th>
+      <th>Parent</th>
+      <th>Sublevel</th>
+      <th>Company name</th>
+      <th>Salutation</th>
+      <th>First name</th>
+      <th>Middle name</th>
+      <th>Last name</th>
+      <th>Job title</th>
+      <th>Bill address addr1</th>
+      <th>Bill address addr2</th>
+      <th>Bill address addr3</th>
+      <th>Bill address addr4</th>
+      <th>Bill address addr5</th>
+      <th>Bill address city</th>
+      <th>Bill address state</th>
+      <th>Bill address postal code</th>
+      <th>Bill address country</th>
+      <th>Bill address note</th>
+      <th>Bill address block addr1</th>
+      <th>Bill address block addr2</th>
+      <th>Bill address block addr3</th>
+      <th>Bill address block addr4</th>
+      <th>Bill address block addr5</th>
+      <th>Ship address addr1</th>
+      <th>Ship address addr2</th>
+      <th>Ship address addr3</th>
+      <th>Ship address addr4</th>
+      <th>Ship address addr5</th>
+      <th>Ship address city</th>
+      <th>Ship address state</th>
+      <th>Ship address postal code</th>
+      <th>Ship address country</th>
+      <th>Ship address note</th>
+      <th>Ship address block addr1</th>
+      <th>Ship address block addr2</th>
+      <th>Ship address block addr3</th>
+      <th>Ship address block addr4</th>
+      <th>Ship address block addr5</th>
+      <th>Phone</th>
+      <th>Alt phone</th>
+      <th>Fax</th>
+      <th>Email</th>
+      <th>Cc</th>
+      <th>Contact</th>
+      <th>Alt contact</th>
+      <th>Customer type</th>
+      <th>Customer type full name</th>
+      <th>Terms</th>
+      <th>Terms full name</th>
+      <th>Sales rep</th>
+      <th>Sales rep full name</th>
+      <th>Balance</th>
+      <th>Total balance</th>
+      <th>Sales tax code</th>
+      <th>Sales tax code full name</th>
+      <th>Item sales tax</th>
+      <th>Item sales tax full name</th>
+      <th>Resale number</th>
+      <th>Account number</th>
+      <th>Preferred payment method</th>
+      <th>Preferred payment method full name</th>
+      <th>Job status</th>
+      <th>Job start date</th>
+      <th>Job projected end date</th>
+      <th>Job end date</th>
+      <th>Job desc</th>
+      <th>Job type</th>
+      <th>Job type full name</th>
+      <th>Preferred delivery method</th>
+      <th>Price level</th>
+      <th>Price level full name</th>
+      <th>Primary contact</th>
+      <th>Primary email</th>
+      <th>Primary phone</th>
+      <th>Customers pkey</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clients.each do |client| %>
+      <tr>
+        <td><%= client.id %></td>
+        <td><%= client.time_created %></td>
+        <td><%= client.time_modified %></td>
+        <td><%= client.edit_sequence %></td>
+        <td><%= client.name %></td>
+        <td><%= client.full_name %></td>
+        <td><%= client.is_active %></td>
+        <td><%= client.parent_id %></td>
+        <td><%= client.sublevel %></td>
+        <td><%= client.company_name %></td>
+        <td><%= client.salutation %></td>
+        <td><%= client.first_name %></td>
+        <td><%= client.middle_name %></td>
+        <td><%= client.last_name %></td>
+        <td><%= client.job_title %></td>
+        <td><%= client.bill_address_addr1 %></td>
+        <td><%= client.bill_address_addr2 %></td>
+        <td><%= client.bill_address_addr3 %></td>
+        <td><%= client.bill_address_addr4 %></td>
+        <td><%= client.bill_address_addr5 %></td>
+        <td><%= client.bill_address_city %></td>
+        <td><%= client.bill_address_state %></td>
+        <td><%= client.bill_address_postal_code %></td>
+        <td><%= client.bill_address_country %></td>
+        <td><%= client.bill_address_note %></td>
+        <td><%= client.bill_address_block_addr1 %></td>
+        <td><%= client.bill_address_block_addr2 %></td>
+        <td><%= client.bill_address_block_addr3 %></td>
+        <td><%= client.bill_address_block_addr4 %></td>
+        <td><%= client.bill_address_block_addr5 %></td>
+        <td><%= client.ship_address_addr1 %></td>
+        <td><%= client.ship_address_addr2 %></td>
+        <td><%= client.ship_address_addr3 %></td>
+        <td><%= client.ship_address_addr4 %></td>
+        <td><%= client.ship_address_addr5 %></td>
+        <td><%= client.ship_address_city %></td>
+        <td><%= client.ship_address_state %></td>
+        <td><%= client.ship_address_postal_code %></td>
+        <td><%= client.ship_address_country %></td>
+        <td><%= client.ship_address_note %></td>
+        <td><%= client.ship_address_block_addr1 %></td>
+        <td><%= client.ship_address_block_addr2 %></td>
+        <td><%= client.ship_address_block_addr3 %></td>
+        <td><%= client.ship_address_block_addr4 %></td>
+        <td><%= client.ship_address_block_addr5 %></td>
+        <td><%= client.phone %></td>
+        <td><%= client.alt_phone %></td>
+        <td><%= client.fax %></td>
+        <td><%= client.email %></td>
+        <td><%= client.cc %></td>
+        <td><%= client.contact %></td>
+        <td><%= client.alt_contact %></td>
+        <td><%= client.customer_type_id %></td>
+        <td><%= client.customer_type_full_name %></td>
+        <td><%= client.terms_id %></td>
+        <td><%= client.terms_full_name %></td>
+        <td><%= client.sales_rep_id %></td>
+        <td><%= client.sales_rep_full_name %></td>
+        <td><%= client.balance %></td>
+        <td><%= client.total_balance %></td>
+        <td><%= client.sales_tax_code_id %></td>
+        <td><%= client.sales_tax_code_full_name %></td>
+        <td><%= client.item_sales_tax_id %></td>
+        <td><%= client.item_sales_tax_full_name %></td>
+        <td><%= client.resale_number %></td>
+        <td><%= client.account_number %></td>
+        <td><%= client.preferred_payment_method_id %></td>
+        <td><%= client.preferred_payment_method_full_name %></td>
+        <td><%= client.job_status %></td>
+        <td><%= client.job_start_date %></td>
+        <td><%= client.job_projected_end_date %></td>
+        <td><%= client.job_end_date %></td>
+        <td><%= client.job_desc %></td>
+        <td><%= client.job_type_id %></td>
+        <td><%= client.job_type_full_name %></td>
+        <td><%= client.preferred_delivery_method %></td>
+        <td><%= client.price_level_id %></td>
+        <td><%= client.price_level_full_name %></td>
+        <td><%= client.primary_contact %></td>
+        <td><%= client.primary_email %></td>
+        <td><%= client.primary_phone %></td>
+        <td><%= client.Customers_PKEY %></td>
+        <td><%= link_to 'Show', client %></td>
+        <td><%= link_to 'Edit', edit_client_path(client) %></td>
+        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Client', new_client_path %>

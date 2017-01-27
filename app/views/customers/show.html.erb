@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Id:</strong>
+  <%= @customer.id %>
+</p>
+
+<p>
   <strong>Time created:</strong>
   <%= @customer.time_created %>
 </p>
@@ -28,11 +33,6 @@
 <p>
   <strong>Is active:</strong>
   <%= @customer.is_active %>
-</p>
-
-<p>
-  <strong>Class:</strong>
-  <%= @customer.class_id %>
 </p>
 
 <p>
@@ -68,11 +68,6 @@
 <p>
   <strong>Last name:</strong>
   <%= @customer.last_name %>
-</p>
-
-<p>
-  <strong>Suffix:</strong>
-  <%= @customer.suffix %>
 </p>
 
 <p>
@@ -131,6 +126,31 @@
 </p>
 
 <p>
+  <strong>Bill address block addr1:</strong>
+  <%= @customer.bill_address_block_addr1 %>
+</p>
+
+<p>
+  <strong>Bill address block addr2:</strong>
+  <%= @customer.bill_address_block_addr2 %>
+</p>
+
+<p>
+  <strong>Bill address block addr3:</strong>
+  <%= @customer.bill_address_block_addr3 %>
+</p>
+
+<p>
+  <strong>Bill address block addr4:</strong>
+  <%= @customer.bill_address_block_addr4 %>
+</p>
+
+<p>
+  <strong>Bill address block addr5:</strong>
+  <%= @customer.bill_address_block_addr5 %>
+</p>
+
+<p>
   <strong>Ship address addr1:</strong>
   <%= @customer.ship_address_addr1 %>
 </p>
@@ -181,23 +201,33 @@
 </p>
 
 <p>
-  <strong>Print as:</strong>
-  <%= @customer.print_as %>
+  <strong>Ship address block addr1:</strong>
+  <%= @customer.ship_address_block_addr1 %>
+</p>
+
+<p>
+  <strong>Ship address block addr2:</strong>
+  <%= @customer.ship_address_block_addr2 %>
+</p>
+
+<p>
+  <strong>Ship address block addr3:</strong>
+  <%= @customer.ship_address_block_addr3 %>
+</p>
+
+<p>
+  <strong>Ship address block addr4:</strong>
+  <%= @customer.ship_address_block_addr4 %>
+</p>
+
+<p>
+  <strong>Ship address block addr5:</strong>
+  <%= @customer.ship_address_block_addr5 %>
 </p>
 
 <p>
   <strong>Phone:</strong>
   <%= @customer.phone %>
-</p>
-
-<p>
-  <strong>Mobile:</strong>
-  <%= @customer.mobile %>
-</p>
-
-<p>
-  <strong>Pager:</strong>
-  <%= @customer.pager %>
 </p>
 
 <p>
@@ -231,18 +261,13 @@
 </p>
 
 <p>
-  <strong>Additional contact:</strong>
-  <%= @customer.additional_contact_id %>
-</p>
-
-<p>
-  <strong>Contacts:</strong>
-  <%= @customer.contacts_id %>
-</p>
-
-<p>
   <strong>Customer type:</strong>
   <%= @customer.customer_type_id %>
+</p>
+
+<p>
+  <strong>Customer type full name:</strong>
+  <%= @customer.customer_type_full_name %>
 </p>
 
 <p>
@@ -251,8 +276,18 @@
 </p>
 
 <p>
+  <strong>Terms full name:</strong>
+  <%= @customer.terms_full_name %>
+</p>
+
+<p>
   <strong>Sales rep:</strong>
   <%= @customer.sales_rep_id %>
+</p>
+
+<p>
+  <strong>Sales rep full name:</strong>
+  <%= @customer.sales_rep_full_name %>
 </p>
 
 <p>
@@ -271,13 +306,18 @@
 </p>
 
 <p>
+  <strong>Sales tax code full name:</strong>
+  <%= @customer.sales_tax_code_full_name %>
+</p>
+
+<p>
   <strong>Item sales tax:</strong>
   <%= @customer.item_sales_tax_id %>
 </p>
 
 <p>
-  <strong>Sales tax country:</strong>
-  <%= @customer.sales_tax_country %>
+  <strong>Item sales tax full name:</strong>
+  <%= @customer.item_sales_tax_full_name %>
 </p>
 
 <p>
@@ -291,18 +331,13 @@
 </p>
 
 <p>
-  <strong>Credit limit:</strong>
-  <%= @customer.credit_limit %>
-</p>
-
-<p>
   <strong>Preferred payment method:</strong>
   <%= @customer.preferred_payment_method_id %>
 </p>
 
 <p>
-  <strong>Credit card info:</strong>
-  <%= @customer.credit_card_info %>
+  <strong>Preferred payment method full name:</strong>
+  <%= @customer.preferred_payment_method_full_name %>
 </p>
 
 <p>
@@ -336,23 +371,8 @@
 </p>
 
 <p>
-  <strong>Notes:</strong>
-  <%= @customer.notes %>
-</p>
-
-<p>
-  <strong>Additional notes:</strong>
-  <%= @customer.additional_notes_id %>
-</p>
-
-<p>
-  <strong>Is statement with parent:</strong>
-  <%= @customer.is_statement_with_parent %>
-</p>
-
-<p>
-  <strong>Delivery method:</strong>
-  <%= @customer.delivery_method %>
+  <strong>Job type full name:</strong>
+  <%= @customer.job_type_full_name %>
 </p>
 
 <p>
@@ -366,23 +386,24 @@
 </p>
 
 <p>
-  <strong>External guid:</strong>
-  <%= @customer.external_guid %>
+  <strong>Price level full name:</strong>
+  <%= @customer.price_level_full_name %>
 </p>
 
 <p>
-  <strong>Tax registration number:</strong>
-  <%= @customer.tax_registration_number %>
+  <strong>Primary contact:</strong>
+  <%= @customer.primary_contact %>
 </p>
 
 <p>
-  <strong>Currency:</strong>
-  <%= @customer.currency_id %>
+  <strong>Primary email:</strong>
+  <%= @customer.primary_email %>
 </p>
 
 <p>
-  <strong>Data ext:</strong>
-  <%= @customer.data_ext_id %>
+  <strong>Primary phone:</strong>
+  <%= @customer.primary_phone %>
 </p>
 
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
