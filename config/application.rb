@@ -13,11 +13,17 @@ module Railstest
     # -- all .rb files in that directory are automatically loaded.
 
     config.generators do |g|
-      g.helper = false
       g.assets = false
-      g.jbuilder = false
-      g.test_framework :rspec
-
+      g.helper = false
+      g.stylesheets_engine = :scss
+      g.test_framework = :rspec
     end
+
+    config.beginning_of_week = :sunday
+
+    config.autoload_paths += %W(
+    #{config.root}/vendor
+    )
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'lib')
   end
 end
