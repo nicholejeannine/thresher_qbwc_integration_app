@@ -29,7 +29,12 @@ scope module: 'public' do
       get :tree, to: 'customers#tree'
       get :projects, to: 'customers#projects'
       get :test, to: 'customers#test'
+      get :estimates, to: 'customers#estimates'
+      get :invoices, to: 'customers#invoices'
+      get :sales_orders, to: 'customers#sales_orders'
     end
   end
+
+  resources :estimates, :purchase_orders, :invoices, :sales_orders, only: [:index, :show]
   root to: 'public#index'
 end

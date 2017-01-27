@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :tree, :projects]
+  before_action :set_customer, only: [:show, :tree, :projects, :estimates, :invoices, :sales_orders]
 
 # GET /customers
   def index
@@ -29,6 +29,18 @@ class CustomersController < ApplicationController
 
   def projects
     @projects = @customer.all_projects.order(:name)
+  end
+
+  def estimates
+    render json: @customer.estimates
+  end
+
+  def sales_orders
+    render json: @customer.sales_orders
+  end
+
+  def invoices
+    render json: @customer.invoices
   end
 
   def test
