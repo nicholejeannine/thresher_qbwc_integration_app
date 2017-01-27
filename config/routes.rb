@@ -1,5 +1,9 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  # Quickbooks stuff
+  get 'qbwc/action' => 'qbwc#_generate_wsdl'
+  get 'qbwc/qwc' => 'qbwc#qwc'
+  wash_out :qbwc
 scope module: 'public' do
     get :index
     get :home, action: :index
@@ -17,10 +21,6 @@ scope module: 'public' do
   post '/logout' => 'sessions#destroy', as: :logout
   get '/start-page', to: 'users#start_page'
 
-  # Quickbooks stuff
-  get 'qbwc/action' => 'qbwc#_generate_wsdl'
-  get 'qbwc/qwc' => 'qbwc#qwc'
-  wash_out :qbwc
 
   resources :jobs, :projects, param: :full_name, only: [:index, :show]
 
