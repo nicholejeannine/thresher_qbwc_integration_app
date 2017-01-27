@@ -53,18 +53,3 @@ class ListCustomerWorker < QBWC::Worker
     end # end for each customer
   end # end handle response
 end # end class
-    #     if key.match /xml_attributes/
-    #         next
-    #     elsif value.class == Qbxml::Hash
-    #       value.each  do |k, v|
-    #         if k == 'list_id'
-    #           name = key.sub(/ref$/, "id")
-    #           name.sub!(/ret$/, "id")
-    #           customer.send("#{name}=", v)
-    #         end  # end if k == 'list_id'
-    #       end # end value.each do |k,v|
-    #     elsif columns.include?(key.to_s)
-    #         customer.send("#{key}=", value)
-    #       else
-    #         next
-    #     end # end if parsing ridiculousness
