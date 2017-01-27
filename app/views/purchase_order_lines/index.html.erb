@@ -25,7 +25,7 @@
       <th>Unbilled quantity</th>
       <th>Is billed</th>
       <th>Is manually closed</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -53,13 +53,7 @@
         <td><%= purchase_order_line.is_billed %></td>
         <td><%= purchase_order_line.is_manually_closed %></td>
         <td><%= link_to 'Show', purchase_order_line %></td>
-        <td><%= link_to 'Edit', edit_purchase_order_line_path(purchase_order_line) %></td>
-        <td><%= link_to 'Destroy', purchase_order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Purchase Order Line', new_purchase_order_line_path %>

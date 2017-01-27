@@ -101,7 +101,7 @@
       <th>Job description long</th>
       <th>Job description short</th>
       <th>Job hourtype</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -205,13 +205,7 @@
         <td><%= job.Job_Description_Short %></td>
         <td><%= job.Job_HourType %></td>
         <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Job', new_job_path %>

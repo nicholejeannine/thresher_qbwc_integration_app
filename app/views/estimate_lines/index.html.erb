@@ -51,13 +51,9 @@
         <td><%= estimate_line.markup_rate %></td>
         <td><%= estimate_line.markup_rate_percent %></td>
         <td><%= link_to 'Show', estimate_line %></td>
-        <td><%= link_to 'Edit', edit_estimate_line_path(estimate_line) %></td>
-        <td><%= link_to 'Destroy', estimate_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Estimate Line', new_estimate_line_path %>

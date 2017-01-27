@@ -70,7 +70,7 @@
       <th>Linked txn ref number</th>
       <th>Linked txn link type</th>
       <th>Linked txn amount</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -143,13 +143,9 @@
         <td><%= purchase_order.linked_txn_link_type %></td>
         <td><%= purchase_order.linked_txn_amount %></td>
         <td><%= link_to 'Show', purchase_order %></td>
-        <td><%= link_to 'Edit', edit_purchase_order_path(purchase_order) %></td>
-        <td><%= link_to 'Destroy', purchase_order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Purchase Order', new_purchase_order_path %>

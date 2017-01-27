@@ -25,7 +25,7 @@
       <th>Service date</th>
       <th>Sales tax code</th>
       <th>Sales tax code full name</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -53,13 +53,7 @@
         <td><%= invoice_line.sales_tax_code_id %></td>
         <td><%= invoice_line.sales_tax_code_full_name %></td>
         <td><%= link_to 'Show', invoice_line %></td>
-        <td><%= link_to 'Edit', edit_invoice_line_path(invoice_line) %></td>
-        <td><%= link_to 'Destroy', invoice_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Invoice Line', new_invoice_line_path %>

@@ -26,7 +26,7 @@
       <th>Sales tax code full name</th>
       <th>Invoiced</th>
       <th>Is manually closed</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
   </thead>
 
@@ -55,13 +55,7 @@
         <td><%= sales_order_line.invoiced %></td>
         <td><%= sales_order_line.is_manually_closed %></td>
         <td><%= link_to 'Show', sales_order_line %></td>
-        <td><%= link_to 'Edit', edit_sales_order_line_path(sales_order_line) %></td>
-        <td><%= link_to 'Destroy', sales_order_line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Sales Order Line', new_sales_order_line_path %>
