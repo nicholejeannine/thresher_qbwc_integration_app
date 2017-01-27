@@ -17,8 +17,8 @@ class ListEstimateWorker < QBWC::Worker
     response['estimate_ret'].each do |qb|
       estimate_id = qb['txn_id']
       estimate = Estimate.find_or_initialize_by(:id => estimate_id)
-      if estimate['estimate_line_ret'].present?
-        estimate['estimate_line_ret'].each do |line|
+      if qb['estimate_line_ret'].present?
+        qb['estimate_line_ret'].each do |line|
           Rails.logger.info("LINE!!!!")
           Rails.logger.info(line)
           Rails.logger.info("END LINE!!!!")
