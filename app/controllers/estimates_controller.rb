@@ -1,5 +1,5 @@
 class EstimatesController < ApplicationController
-  before_action :set_estimate, only: [:show, :edit, :update, :destroy]
+  before_action :set_estimate, only: [:show]
 
   # GET /estimates
   def index
@@ -8,41 +8,6 @@ class EstimatesController < ApplicationController
 
   # GET /estimates/1
   def show
-  end
-
-  # GET /estimates/new
-  def new
-    @estimate = Estimate.new
-  end
-
-  # GET /estimates/1/edit
-  def edit
-  end
-
-  # POST /estimates
-  def create
-    @estimate = Estimate.new(estimate_params)
-
-    if @estimate.save
-      redirect_to @estimate, notice: 'Estimate was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /estimates/1
-  def update
-    if @estimate.update(estimate_params)
-      redirect_to @estimate, notice: 'Estimate was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /estimates/1
-  def destroy
-    @estimate.destroy
-    redirect_to estimates_url, notice: 'Estimate was successfully destroyed.'
   end
 
   private

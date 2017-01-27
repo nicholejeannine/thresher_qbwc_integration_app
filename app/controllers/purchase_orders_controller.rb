@@ -1,5 +1,5 @@
 class PurchaseOrdersController < ApplicationController
-  before_action :set_purchase_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchase_order, only: [:show]
 
   # GET /purchase_orders
   def index
@@ -8,41 +8,6 @@ class PurchaseOrdersController < ApplicationController
 
   # GET /purchase_orders/1
   def show
-  end
-
-  # GET /purchase_orders/new
-  def new
-    @purchase_order = PurchaseOrder.new
-  end
-
-  # GET /purchase_orders/1/edit
-  def edit
-  end
-
-  # POST /purchase_orders
-  def create
-    @purchase_order = PurchaseOrder.new(purchase_order_params)
-
-    if @purchase_order.save
-      redirect_to @purchase_order, notice: 'Purchase order was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /purchase_orders/1
-  def update
-    if @purchase_order.update(purchase_order_params)
-      redirect_to @purchase_order, notice: 'Purchase order was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /purchase_orders/1
-  def destroy
-    @purchase_order.destroy
-    redirect_to purchase_orders_url, notice: 'Purchase order was successfully destroyed.'
   end
 
   private

@@ -1,5 +1,5 @@
 class InvoiceLinesController < ApplicationController
-  before_action :set_invoice_line, only: [:show, :edit, :update, :destroy]
+  before_action :set_invoice_line, only: [:show]
 
   # GET /invoice_lines
   def index
@@ -8,41 +8,6 @@ class InvoiceLinesController < ApplicationController
 
   # GET /invoice_lines/1
   def show
-  end
-
-  # GET /invoice_lines/new
-  def new
-    @invoice_line = InvoiceLine.new
-  end
-
-  # GET /invoice_lines/1/edit
-  def edit
-  end
-
-  # POST /invoice_lines
-  def create
-    @invoice_line = InvoiceLine.new(invoice_line_params)
-
-    if @invoice_line.save
-      redirect_to @invoice_line, notice: 'Invoice line was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /invoice_lines/1
-  def update
-    if @invoice_line.update(invoice_line_params)
-      redirect_to @invoice_line, notice: 'Invoice line was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /invoice_lines/1
-  def destroy
-    @invoice_line.destroy
-    redirect_to invoice_lines_url, notice: 'Invoice line was successfully destroyed.'
   end
 
   private

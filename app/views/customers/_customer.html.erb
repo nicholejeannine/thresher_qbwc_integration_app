@@ -21,13 +21,13 @@
      </div>
 	<hr/>
 </div>
-<% customer.jobs.order(:name).each do |job|  %>
+<% customer.subjobs.order(:name).each do |job|  %>
   <%= render partial: 'job', locals: {customer: customer, job: job} %>
-    <% job.jobs.order(:name).each do |j2|  %>
+    <% job.subjobs.order(:name).each do |j2|  %>
     <%= render partial: 'job', locals: {customer: job, job: j2} %>
-      <% j2.jobs.order(:name).each do |j3|  %>
+      <% j2.subjobs.order(:name).each do |j3|  %>
       <%= render partial: 'job', locals: {customer: j2, job: j3} %>
-        <% j3.jobs.order(:name).each do |j4|  %>
+        <% j3.subjobs.order(:name).each do |j4|  %>
         <%= render partial: 'job', locals: {customer: j3, job: j4} %>
         <% end %>
       <% end %>

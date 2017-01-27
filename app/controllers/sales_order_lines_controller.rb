@@ -1,5 +1,5 @@
 class SalesOrderLinesController < ApplicationController
-  before_action :set_sales_order_line, only: [:show, :edit, :update, :destroy]
+  before_action :set_sales_order_line, only: [:show]
 
   # GET /sales_order_lines
   def index
@@ -8,41 +8,6 @@ class SalesOrderLinesController < ApplicationController
 
   # GET /sales_order_lines/1
   def show
-  end
-
-  # GET /sales_order_lines/new
-  def new
-    @sales_order_line = SalesOrderLine.new
-  end
-
-  # GET /sales_order_lines/1/edit
-  def edit
-  end
-
-  # POST /sales_order_lines
-  def create
-    @sales_order_line = SalesOrderLine.new(sales_order_line_params)
-
-    if @sales_order_line.save
-      redirect_to @sales_order_line, notice: 'Sales order line was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /sales_order_lines/1
-  def update
-    if @sales_order_line.update(sales_order_line_params)
-      redirect_to @sales_order_line, notice: 'Sales order line was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /sales_order_lines/1
-  def destroy
-    @sales_order_line.destroy
-    redirect_to sales_order_lines_url, notice: 'Sales order line was successfully destroyed.'
   end
 
   private

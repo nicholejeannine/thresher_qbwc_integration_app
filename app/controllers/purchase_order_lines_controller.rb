@@ -1,5 +1,5 @@
 class PurchaseOrderLinesController < ApplicationController
-  before_action :set_purchase_order_line, only: [:show, :edit, :update, :destroy]
+  before_action :set_purchase_order_line, only: [:show]
 
   # GET /purchase_order_lines
   def index
@@ -8,41 +8,6 @@ class PurchaseOrderLinesController < ApplicationController
 
   # GET /purchase_order_lines/1
   def show
-  end
-
-  # GET /purchase_order_lines/new
-  def new
-    @purchase_order_line = PurchaseOrderLine.new
-  end
-
-  # GET /purchase_order_lines/1/edit
-  def edit
-  end
-
-  # POST /purchase_order_lines
-  def create
-    @purchase_order_line = PurchaseOrderLine.new(purchase_order_line_params)
-
-    if @purchase_order_line.save
-      redirect_to @purchase_order_line, notice: 'Purchase order line was successfully created.'
-    else
-      render :new
-    end
-  end
-
-  # PATCH/PUT /purchase_order_lines/1
-  def update
-    if @purchase_order_line.update(purchase_order_line_params)
-      redirect_to @purchase_order_line, notice: 'Purchase order line was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /purchase_order_lines/1
-  def destroy
-    @purchase_order_line.destroy
-    redirect_to purchase_order_lines_url, notice: 'Purchase order line was successfully destroyed.'
   end
 
   private
