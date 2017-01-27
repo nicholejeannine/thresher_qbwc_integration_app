@@ -1,47 +1,27 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
-
-  resources :invoice_lines
-  resources :purchase_order_lines
-  resources :purchase_orders
-  resources :sales_order_lines
-  resources :sales_orders
-  resources :estimate_lines
-  resources :estimates
-  resources :projects
-  resources :jobs
-  resources :customers
-  resources :clients
-  resources :invoices
-  resources :expense_lines
-  resources :customers, only: [:index, :show]
-  resources :estimates, only: [:index, :show]
-  
-
-  controller 'public' do
-        get '/about-us'  => 'public#about'
-        get '/av_design' => 'public#av_design'
-        get '/careers'  => 'public#careers'
-        get '/contact-us'  => 'public#contact'
-        get '/home' => 'public#index'
-        get '/portal'  => 'public#portal', as: :login
-        get '/pressRelease'  => 'public#press'
-        get '/services'  => 'public#services'
-        get '/sitemap'  => 'public#sitemap'
-        get '/meet-the-team'  => 'public#team'
-    end
-
-   # eventually the login page
-  # post '/portal' => 'sessions#create'
-  # get '/logout' => 'sessions#destroy', as: :logout
+scope module: 'public' do
+    get :index
+    get :home, action: :index
+    get :about
+    get :av_design
+    get :careers
+    get :contact
+    get :press
+    get :services
+    get :sitemap
+    get :team
+  end
+  get '/portal'  => 'sessions#new', as: :login
+  post '/portal' => 'sessions#create'
+  post '/logout' => 'sessions#destroy', as: :logout
+  get '/start-page', to: 'users#start_page'
 
   # Quickbooks stuff
   get 'qbwc/action' => 'qbwc#_generate_wsdl'
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
-   # eventually the login page
-  # post '/portal' => 'sessions#create'
+
+
   root to: 'public#index'
-  # get '/logout' => 'sessions#destroy', as: :logout
-  # Only permit index and show routes for customers
 end

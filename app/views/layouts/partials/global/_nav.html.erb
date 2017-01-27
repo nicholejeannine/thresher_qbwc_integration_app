@@ -8,7 +8,7 @@
 
     <li><h3 class="headerbar">Thresher Portal</h3></li>
     <!-- TODO: Fix this so it doesn't break if current user is not an employee! (if we want to have guests log in, etc) -->
-	  <li><%= link_to "#{@current_user.employee.first_name}'s Start Page", start_page_path%></li>
+	  <li><%= link_to "#{@current_user.username}'s Start Page", start_page_path%></li>
 	  <li><%= link_to "Crew Schedule", "#"%></li>
 
     <li><h3 class="headerbar">General Info</h3></li><li>
@@ -22,7 +22,7 @@
 
 	  <li><h3 class="headerbar">Employee Info</h3></li>
 	  <li><%= link_to "Time Card", "#" %></li>
-	  <li><%= link_to "Employee List", employees_path %></li>
+	  <li><%= link_to "Employee List", "#" %></li>
 	  <li><%= link_to "CTS Pre-Test", "#" %></li>
 	  <li><%= link_to "Certificate List", "#" %></li>
 	  <li><%= link_to "Expense Report Form", "#" %></li>
@@ -30,8 +30,8 @@
 
 
 	  <li><h3 class="headerbar">Company Display</h3></li>
-	  <li><%= link_to "Company Display", customers_path %></li>
-	  <li><%= link_to "Project List", projects_path %></li>
+	  <li><%= link_to "Company Display", "#" %></li>
+	  <li><%= link_to "Project List", "#" %></li>
 	  <li><%= link_to "Est Status List", "#" %></li>
 	  <li><%= link_to "SO Status List", "#" %></li>
 	  <li><%= link_to "PO Status List", "#" %></li>
