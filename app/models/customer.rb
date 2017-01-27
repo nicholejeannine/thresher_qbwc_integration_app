@@ -1,5 +1,5 @@
 class Customer < ApplicationRecord
-   # has_many :estimates
+   has_many :estimates
 end
 
 # == Schema Information
