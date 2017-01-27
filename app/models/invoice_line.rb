@@ -1,4 +1,6 @@
 class InvoiceLine < ApplicationRecord
+   # set optional to true to prevent the database foreign-key checks on quickbooks-created rows
+   belongs_to :invoice, optional: true
 end
 
 # == Schema Information
