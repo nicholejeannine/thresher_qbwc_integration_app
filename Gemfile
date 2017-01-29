@@ -2,43 +2,36 @@ source 'https://rubygems.org'
 
 ruby '2.3.1'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '~> 5.0', '>= 5.0.1'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.4.5'
 # Use Puma as the app server
-gem 'puma'
+gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0', '>= 5.0.6'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier'
-# Use CoffeeScript for .coffee assets and views
-# gem 'coffee-rails', '~> 4.2'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
-
+gem 'uglifier', '~> 3.0', '>= 3.0.4'
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-# gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
+gem 'jquery-rails', '~> 4.2', '>= 4.2.2'
+# Use bootstrap-sass for frontend bootstrap support
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+# bootstrap form for simplifying form views
+gem 'bootstrap_form', '~> 2.5', '>= 2.5.3'
+# Turbolinks makes navigating your web application faster.
+gem 'turbolinks', '~> 5.0', '>= 5.0.1'
+# Create JSON structures via a Builder-style DSL
+gem 'jbuilder', '~> 2.6', '>= 2.6.1'
+# Use ActiveModel has_secure_password for password encryption
+gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-# for making pretty bootstrap forms
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-gem 'bootstrap_form', '~> 2.5', '>= 2.5.3'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
-  gem 'better_errors'
-  gem 'binding_of_caller'
-  gem 'pry-rails'
-
+  # Provides a better error page for Rails and other Rack apps. Includes source code inspection, a live REPL and local/instance variable inspection for all stack frames.
+  gem 'better_errors', '~> 2.1', '>= 2.1.1'
+  # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
+  gem 'binding_of_caller', '~> 0.7.2'
   # Testing framework
   gem 'rspec-rails'
   gem 'faker'
@@ -46,17 +39,21 @@ group :development, :test do
 end
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console'
-  gem 'listen'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen'
+  # Access a console on exception pages or by using <%= console %> anywhere in the code.
+  gem 'web-console', '~> 3.4'
+  # Use pry as web console
+  gem 'pry-rails', '~> 0.3.4'
+  # The Listen gem listens to file modifications and notifies you about the changes. Works everywhere!
+  gem 'listen', '~> 3.1', '>= 3.1.5'
+  # Preloads app so things like console, rake and tests run faster
+  gem 'spring', '~> 2.0', '>= 2.0.1'
+  # Makes spring watch files using the listen gem.
+  gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
 
-  # Add database comments, add model's database schema to model files.
-  gem 'annotate'
-  # Add autoprefixer for css cross-browser support
-  gem 'autoprefixer-rails', '~> 6.6', '>= 6.6.1'
+  # Annotates models, tests, and routes based on the database schema.
+  gem 'annotate', '~> 2.7', '>= 2.7.1'
+  # Automatically add up-to-date vendor prefixes to all your css!
+  gem 'autoprefixer-rails', '~> 6.7'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -64,7 +61,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Quickbooks web connector
 gem 'qbwc', github: 'qbwc/qbwc'
-
+gem 'qbxml', github: 'qbwc/qbxml'
 
 # Easily and efficiently make ActiveRecord models support hierarchies https://github.com/mceachen/closure_tree
 #gem 'closure_tree', github: "mceachen/closure_tree"
