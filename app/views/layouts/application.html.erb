@@ -7,7 +7,7 @@
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<!--<link rel="icon" href="../../favicon.ico">-->
+	<link rel="icon" href="/favicon.ico">
 
 	<title>Thresher Portal</title>
 	<!--Latest compiled and minified CSS & JS-->
@@ -16,12 +16,12 @@
 	<%= csrf_meta_tags %>
 </head>
 <body>
-<%= render partial: 'layouts/partials/global/nav' %>
+<%= render partial: 'layouts/partials/nav' %>
 	<div class="container-fluid wrapper">
 		<div class="page-wrapper">
  		<div class="row">
    	<div id="flash" class="col-xs-24">
-					<%= render partial: 'layouts/partials/global/flash' %>
+					<%= render partial: 'layouts/partials/flash' %>
 				</div>
 			</div>
 				<%= yield %>
