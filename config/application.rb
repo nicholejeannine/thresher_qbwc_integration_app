@@ -25,5 +25,7 @@ module Railstest
     #{config.root}/vendor
     )
     config.assets.paths << Rails.root.join('vendor', 'assets', 'lib')
+
+    config.time_zone = 'Pacific Time (US & Canada)'
   end
 end
