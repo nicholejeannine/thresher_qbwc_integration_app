@@ -44,6 +44,12 @@ class ListCustomerWorker < QBWC::Worker
           name = key.remove(/_ref$/)
           customer.send("#{name}_id=", value['list_id'])
           customer.send("#{name}_full_name=", value['full_name'])
+        elsif key.remove(/_ref$/).match /data_ext$/
+          name = key.remove(/_ref$/)
+          variable_name = name['data_ext_name']
+          variable_value = name['data_ext_value']
+          customer.send("#{variable_name}=", variable_name)
+          customer.send("#{variable_value}=", variable_value)
         end # end if statement
       end # end for each |key, value|
       if customer.save
