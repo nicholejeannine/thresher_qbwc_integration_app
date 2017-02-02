@@ -8,7 +8,8 @@ class ListCustomerWorker < QBWC::Worker
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
         :max_returned => 100,
         :active_status => 'All',
- :from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_customers').first.updated_at.localtime.strftime '%FT%R'}"
+# :from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_customers').first.updated_at.localtime.strftime '%FT%R'}",
+        :owner_id => 0
       }
     }
   end
@@ -44,13 +45,14 @@ class ListCustomerWorker < QBWC::Worker
           name = key.remove(/_ref$/)
           customer.send("#{name}_id=", value['list_id'])
           customer.send("#{name}_full_name=", value['full_name'])
-        elsif key.remove(/_ref$/).match /data_ext$/
-          name = key.remove(/_ref$/)
-          variable_name = name['data_ext_name']
-          variable_value = name['data_ext_value']
-          customer.send("#{variable_name}=", variable_name)
-          customer.send("#{variable_value}=", variable_value)
-        end # end if statement
+        elsif key.match(/data_ext_ret/)
+          Rails.logger.info("#{value.class}")
+          Rails.logger.info("#{value.inspect}")
+          plucks = value.pluck([:data_ext_name, :data_ext_value])
+          Rails.logger.info("plucks: #{plucks}")
+          #customer.send("primary_contact=", value['data_ext_value'])
+         # end # end if for data_extensions
+        end # end key matching logic statements
       end # end for each |key, value|
       if customer.save
         Rails.logger.info("saved a customer")
