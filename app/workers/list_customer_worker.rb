@@ -49,6 +49,10 @@ class ListCustomerWorker < QBWC::Worker
           value.to_a.each do |arr|
             if arr['data_ext_name'] == 'Site Contact'
               customer.send("primary_contact=", "#{arr['data_ext_value']}")
+            elsif arr['data_ext_name'] == 'Site Email'
+              customer.send("primary_email=", "#{arr['data_ext_value']}")
+            elsif arr['data_ext_name'] == 'Site Phone'
+              customer.send("primary_phone=", "#{arr['data_ext_value']}")
             end
          end # end value.each for data_extensions
         end # end key matching logic statements
