@@ -24,7 +24,7 @@ class ListEstimateWorker < QBWC::Worker
         qb.to_hash.each do |key, value|
           if columns.include?(key.to_s)
             estimate.send("#{key}=", value)
-              next
+          # save address types
           elsif key.match /ship_address$|bill_address$|block$/
               estimate.send("#{key}_addr1=", value['addr1'])
               estimate.send("#{key}_addr2=", value['addr2'])
@@ -43,11 +43,12 @@ class ListEstimateWorker < QBWC::Worker
             name = key.remove(/_ref$/)
             estimate.send("#{name}_id=", value['list_id'])
             estimate.send("#{name}_full_name=", value['full_name'])
-          elsif value.match(/ret$/)
-            #value.to_a.each do |arr|
-              Rails.logger.info("Estimate line ret: #{value.inspect}")
-            #end # end value.each for estimate lines
-          end # end if statement
+          elsif key.match(/estimate_line_ret/)
+            value.to_a.each do |arr|
+              Rails.logger.info("Estimate line ret: #{arr.class}")
+              Rails.logger.info("Estimate line ret: #{arr}")
+            end # end value.each for estimate_lines
+          end # end key matching logic statements
         end # end for each |key, value|
         if estimate.save
           Rails.logger.info("saved an estimate")
