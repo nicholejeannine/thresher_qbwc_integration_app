@@ -8,7 +8,7 @@ class ListCustomerWorker < QBWC::Worker
         :xml_attributes => { "requestID" =>"1", 'iterator'  => "Start" },
         :max_returned => 100,
         :active_status => 'All',
-# :from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_customers').first.updated_at.localtime.strftime '%FT%R'}",
+:from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_customers').first.updated_at.localtime.strftime '%FT%R'}",
         :owner_id => 0
       }
     }
