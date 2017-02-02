@@ -46,12 +46,11 @@ class ListCustomerWorker < QBWC::Worker
           customer.send("#{name}_id=", value['list_id'])
           customer.send("#{name}_full_name=", value['full_name'])
         elsif key.match(/data_ext_ret/)
-          Rails.logger.info("#{value.class}")
-          Rails.logger.info("#{value.inspect}")
-          plucks = value.pluck([:data_ext_name, :data_ext_value])
-          Rails.logger.info("plucks: #{plucks}")
-          #customer.send("primary_contact=", value['data_ext_value'])
-         # end # end if for data_extensions
+          value.to_a.each do |arr|
+            if arr['data_ext_name'] == 'Site Contact'
+              customer.send("primary_contact=", "#{arr['data_ext_value']}")
+            end
+         end # end value.each for data_extensions
         end # end key matching logic statements
       end # end for each |key, value|
       if customer.save
