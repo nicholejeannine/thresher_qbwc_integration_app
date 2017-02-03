@@ -18,7 +18,7 @@ class ListCustomerWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Customer.column_names
-    response['customer_ret'].each do |qb|
+    response['customer_ret'].to_a.each do |qb|
       customer = Customer.find_or_initialize_by(:id => qb['list_id'])
       qb.to_hash.each do |key, value|
         # send the message to save the values that can be directly translated into key/value pairs
