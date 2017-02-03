@@ -20,7 +20,7 @@ class ListEstimateWorker < QBWC::Worker
     # handle_response will get estimates in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Estimate.column_names
-    response['estimate_ret'].each do |qb|
+    response['estimate_ret'].to_a.each do |qb|
       estimate = Estimate.find_or_initialize_by(:id => qb['txn_id'])
       qb.to_hash.each do |key, value|
         if columns.include?(key.to_s)
