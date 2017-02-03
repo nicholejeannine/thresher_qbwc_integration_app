@@ -47,9 +47,10 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{name}_full_name=", value['full_name'])
         elsif key.match(/estimate_line_ret/)
           value.to_a.each do |line|
+            Rails.logger.info("#{line.inspect} #{line.class}")
            # Really should refactor this into a serializer but just for now let's see if this works ...
-            estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
-            estimate_line.send("estimate_id=", estimate_id)
+            #estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
+            #estimate_line.send("estimate_id=", estimate_id)
             if estimate_line.save
               Rails.logger.info("saved an estimate line")
             else
