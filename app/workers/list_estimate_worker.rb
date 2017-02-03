@@ -51,11 +51,11 @@ class ListEstimateWorker < QBWC::Worker
            # Really should refactor this into a serializer but just for now let's see if this works ...
             #estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
             #estimate_line.send("estimate_id=", estimate_id)
-            if estimate_line.save
-              Rails.logger.info("saved an estimate line")
-            else
-              Rails.logger.info("Not saved: #{estimate_line.errors}")
-            end # end if estimate_line.save
+            #if estimate_line.save
+             # Rails.logger.info("saved an estimate line")
+            #else
+             # Rails.logger.info("Not saved: #{estimate_line.errors}")
+            #end # end if estimate_line.save
           end # end value.each for estimate lines
         end # end key matching logic statements
       end # end for each |key, value|
