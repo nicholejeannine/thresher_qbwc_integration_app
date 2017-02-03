@@ -48,7 +48,9 @@ class ListEstimateWorker < QBWC::Worker
         elsif key.match(/estimate_line_ret/)
           estimate_lines = value.to_a
           estimate_lines.each do |k, v|
-           
+           # Really should refactor this into a serializer but just for now let's see if this works ...
+            estimate_line = EstimateLine.find_or_initialize_by(:id => k['txn_line_id'])
+            estimate_line.save
           end # end value.each for estimate lines
         end # end key matching logic statements
       end # end for each |key, value|
