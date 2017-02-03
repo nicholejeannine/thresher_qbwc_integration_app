@@ -21,7 +21,8 @@ class ListEstimateWorker < QBWC::Worker
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Estimate.column_names
     response['estimate_ret'].to_a.each do |qb|
-      estimate = Estimate.find_or_initialize_by(:id => qb['txn_id'])
+      estimate_id = qb['txn_id']
+      estimate = Estimate.find_or_initialize_by(:id => estimate_id)
       qb.to_hash.each do |key, value|
         if columns.include?(key.to_s)
           estimate.send("#{key}=", value)
@@ -45,9 +46,9 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{name}_id=", value['list_id'])
           estimate.send("#{name}_full_name=", value['full_name'])
         elsif key.match(/estimate_line_ret/)
-          value.to_a.each do |arr|
-            Rails.logger.info("Estimate line ret: #{arr.inspect}")
-          end # end value.each for estimate lines
+          Rails.logger.info("Estimate line value: #{value.inspect}")
+          Rails.logger.info("Estimate line class: #{value.class}")
+         # end # end value.each for estimate lines
         end # end key matching logic statements
       end # end for each |key, value|
       if estimate.save
