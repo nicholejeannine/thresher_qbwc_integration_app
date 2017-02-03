@@ -47,9 +47,10 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{name}_full_name=", value['full_name'])
         elsif key.match(/estimate_line_ret/)
           estimateLines = value.to_a
-          Rails.logger.info("Estimate line to_a value: #{estimateLines.inspect}")
-          Rails.logger.info("Estimate line to_a class: #{estimateLines.class}")
-         # end # end value.each for estimate lines
+          estimateLines.each do |k, v|
+           Rails.logger.info("Estimate line key k: #{k.class} #{k.inspect}")
+           Rails.logger.info("Estimate line value v: #{v.class} #{v.inspect}")
+          end # end value.each for estimate lines
         end # end key matching logic statements
       end # end for each |key, value|
       if estimate.save
