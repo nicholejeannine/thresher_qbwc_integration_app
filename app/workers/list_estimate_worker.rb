@@ -52,8 +52,8 @@ class ListEstimateWorker < QBWC::Worker
       else
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
-      qb['estimate_line_ret'].to_a.each do |qb_line|
-        Rails.logger.info("#{qb_line.inspect}")
+      if qb['estimate_line_ret'].present?
+        Rails.logger.info("#{qb['estimate_line_ret'].inspect}")
       end
     end # end for each estimate
   end # end handle response
