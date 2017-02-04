@@ -1,4 +1,3 @@
-require 'qbwc'
 class ListEstimateWorker < QBWC::Worker
 
   # def should_run?
@@ -46,18 +45,6 @@ class ListEstimateWorker < QBWC::Worker
           name = key.remove(/_ref$/)
           estimate.send("#{name}_id=", value['list_id'])
           estimate.send("#{name}_full_name=", value['full_name'])
-        elsif key.match(/estimate_line_ret/)
-            qbxml  = Qbxml.new(:qb, '13.0').from_qbxml(value) unless value.nil?
-            Rails.logger.info("#{qbxml.inspect} #{qbxml.class}")
-           # Really should refactor this into a serializer but just for now let's see if this works ...
-            #estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
-            #estimate_line.send("estimate_id=", estimate_id)
-            #if estimate_line.save
-             # Rails.logger.info("saved an estimate line")
-            #else
-             # Rails.logger.info("Not saved: #{estimate_line.errors}")
-            #end # end if estimate_line.save
-         # end # end value.each for estimate lines
         end # end key matching logic statements
       end # end for each |key, value|
       if estimate.save
