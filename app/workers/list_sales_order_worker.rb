@@ -10,7 +10,8 @@ class ListSalesOrderWorker < QBWC::Worker
          :modified_date_range_filter => {
          :from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_sales_orders').first.updated_at.localtime.strftime '%FT%R'}"
         },
-        :include_line_items => true
+        :include_line_items => true,
+        :owner_id => 0
       }
     }
   end
