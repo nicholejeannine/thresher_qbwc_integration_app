@@ -19,7 +19,7 @@ class ListInvoiceWorker < QBWC::Worker
     # handle_response will get invoices in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = Invoice.column_names
-    response['invoice_ret'].each do |qb|
+    response['invoice_ret'].to_a.each do |qb|
       invoice_id = qb['txn_id']
       invoice = Invoice.find_or_initialize_by(:id => qb['txn_id'])
       qb.to_hash.each do |key, value|

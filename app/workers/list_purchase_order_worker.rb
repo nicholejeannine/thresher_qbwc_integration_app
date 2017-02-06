@@ -19,7 +19,7 @@ class ListPurchaseOrderWorker < QBWC::Worker
     # handle_response will get purchase_orders in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = PurchaseOrder.column_names
-    response['purchase_order_ret'].each do |qb|
+    response['purchase_order_ret'].to_a.each do |qb|
       purchase_order_id = qb['txn_id']
       purchase_order = PurchaseOrder.find_or_initialize_by(:id => purchase_order_id)
       qb.to_hash.each do |key, value|

@@ -19,7 +19,7 @@ class ListSalesOrderWorker < QBWC::Worker
     # handle_response will get sales_orders in groups of 100. When this is 0, we're done.
     complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     columns = SalesOrder.column_names
-    response['sales_order_ret'].each do |qb|
+    response['sales_order_ret'].to_a.each do |qb|
       sales_order_id = qb['txn_id']
       sales_order = SalesOrder.find_or_initialize_by(:id => sales_order_id)
       qb.to_hash.each do |key, value|
