@@ -46,17 +46,19 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{name}_id=", value['list_id'])
           estimate.send("#{name}_full_name=", value['full_name'])
         end # end key matching logic statements
+        if qb['estimate_line_ret'].present?
+          line = QBWC.parser.to_qbxml(['estimate_line_ret'])
+          # At this point, the returned value is either an array or a hash
+          # if line.class == Array
+          Rails.logger.info("#{line.inspect}")
+        end # end if qb['estimate_line_ret'].present?
       end # end for each |key, value|
       if estimate.save
         Rails.logger.info("saved an estimate")
       else
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
-      if qb['estimate_line_ret'].present?
-        line = QBWC.parser.to_qbxml(['estimate_line_ret'])
-          # At this point, the returned value is either an array or a hash
-          # if line.class == Array
-            Rails.logger.info("#{line.inspect}")
+
               # estimate_line = EstimateLine.find_or_initialize_by(:id => line[1][1])
               # estimate_line.send("estimate_id=", estimate_id)
               # if estimate_line.save
@@ -75,7 +77,6 @@ class ListEstimateWorker < QBWC::Worker
             # Rails.logger.info("line is a not an array, it is #{line.class}: #{line.inspect}")
           # end
         # end # end each line do line
-      end # end if qb['estimate_line_ret'].present?
     end # end for each estimate
   end # end handle response
 end # end class
