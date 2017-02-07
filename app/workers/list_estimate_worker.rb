@@ -53,12 +53,14 @@ class ListEstimateWorker < QBWC::Worker
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
       if qb['estimate_line_ret'].present?
-        qb['estimate_line_ret'].to_a.each do |line|
+        qb['estimate_line_ret'].to_a.each do |arr|
           # At this point, the returned value is either an array or a hash
-          if line.class == Array
-            # if line[0] == 'txn_line_id'
-              estimate_line = EstimateLine.find_or_initialize_by(:id => line[1][1])
+          if arr.class == Array
+            arr.to_a.each do |line|
+            if line[0] == 'txn_line_id'
+              estimate_line = EstimateLine.find_or_initialize_by(:id => line[1])
               estimate_line.send("estimate_id=", estimate_id)
+            end
             # elsif line[0] == 'item_ref'
             #   estimate_line.send("item_id=", "#{line[1]['item_ref_id']}")
             #   estimate_line.send("item_full_name=", "#{line[1]['item_ref_full_name']}")
