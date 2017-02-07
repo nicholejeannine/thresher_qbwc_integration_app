@@ -46,16 +46,13 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{name}_id=", value['list_id'])
           estimate.send("#{name}_full_name=", value['full_name'])
         end # end key matching logic statements
-          Rails.logger.info("#{qb['estimate_line_ret'].class}: #{qb['estimate_line_ret'].inspect}")
-          # At this point, the returned value is either an array or a hash
-          # if line.class == Array
       end # end for each |key, value|
       if estimate.save
         Rails.logger.info("saved an estimate")
       else
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
-
+      Rails.logger.info("#{qb['estimate_line_ret'].class}: #{qb['estimate_line_ret'].inspect}")
               # estimate_line = EstimateLine.find_or_initialize_by(:id => line[1][1])
               # estimate_line.send("estimate_id=", estimate_id)
               # if estimate_line.save
