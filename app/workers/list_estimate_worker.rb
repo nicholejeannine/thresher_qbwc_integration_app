@@ -72,8 +72,9 @@ class ListEstimateWorker < QBWC::Worker
             else
               Rails.logger.info("Not saved:  #{estimate.errors}")
             end
+            end
             # Rails.logger.info("#{array_key}=#{array_value}")
-          else
+          # else
             # Rails.logger.info("line is a not an array, it is #{line.class}: #{line.inspect}")
           end
         end # end each line do line
