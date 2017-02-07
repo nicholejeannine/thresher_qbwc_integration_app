@@ -69,7 +69,7 @@ class ListEstimateWorker < QBWC::Worker
             # elsif line[0] == 'desc'
             #   estimate_line.send("desc=", "#{line[1]['desc']}")
             # end
-            end
+            # end
             # Rails.logger.info("#{array_key}=#{array_value}")
           # else
             # Rails.logger.info("line is a not an array, it is #{line.class}: #{line.inspect}")
