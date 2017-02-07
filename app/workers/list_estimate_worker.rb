@@ -73,6 +73,9 @@ class ListEstimateWorker < QBWC::Worker
           end
         end
       end
+      if qb['estimate_line_ret'].class == Qbxml::Hash
+        Rails.logger.info("Qbxml hash")
+      end
     end # end for each estimate
   end # end handle response
 end # end class
