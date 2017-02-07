@@ -60,10 +60,10 @@ class ListEstimateWorker < QBWC::Worker
           line.to_hash.each do |k, v|
             if line_columns.include?(k.to_s)
               estimate_line.send("#{k}=", v)
-            elsif key.remove(/_ref$/).match /item$|override_uom_set$|inventory_site$|inventory_site_location$|sales_tax_code$/
-              name = key.remove(/_ref$/)
-              estimate.send("#{name}_id=", value['list_id'])
-              estimate.send("#{name}_full_name=", value['full_name'])
+            elsif k.remove(/_ref$/).match /item$|override_uom_set$|inventory_site$|inventory_site_location$|sales_tax_code$/
+              name = k.remove(/_ref$/)
+              estimate.send("#{name}_id=", v['list_id'])
+              estimate.send("#{name}_full_name=", v['full_name'])
             end # end key matching logic statements for estimate_line if Array
           end # end line.to_hash.each do |k,v|
           if estimate_line.save
