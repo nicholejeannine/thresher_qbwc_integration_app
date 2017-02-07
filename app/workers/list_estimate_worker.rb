@@ -53,7 +53,7 @@ class ListEstimateWorker < QBWC::Worker
         Rails.logger.info("Not saved:  #{estimate.errors}")
       end # end if estimate save
       if qb['estimate_line_ret'].present?
-        QBWC.parser.to_qbxml(['estimate_line_ret']).each do |line|
+        line = QBWC.parser.to_qbxml(['estimate_line_ret'])
           # At this point, the returned value is either an array or a hash
           # if line.class == Array
             Rails.logger.info("#{line.inspect}")
@@ -74,7 +74,7 @@ class ListEstimateWorker < QBWC::Worker
           # else
             # Rails.logger.info("line is a not an array, it is #{line.class}: #{line.inspect}")
           # end
-        end # end each line do line
+        # end # end each line do line
       end # end if qb['estimate_line_ret'].present?
     end # end for each estimate
   end # end handle response
