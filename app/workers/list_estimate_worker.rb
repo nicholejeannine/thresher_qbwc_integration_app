@@ -61,27 +61,8 @@ class ListEstimateWorker < QBWC::Worker
           else
             Rails.logger.info("Messed up again")
           end
-
         end
       end
-              # estimate_line = EstimateLine.find_or_initialize_by(:id => line[1][1])
-              # estimate_line.send("estimate_id=", estimate_id)
-              # if estimate_line.save
-              #   Rails.logger.info("saved an estimate line")
-              # else
-              #   Rails.logger.info("Not saved:  #{estimate.errors}")
-            # elsif line[0] == 'item_ref'
-            #   estimate_line.send("item_id=", "#{line[1]['item_ref_id']}")
-            #   estimate_line.send("item_full_name=", "#{line[1]['item_ref_full_name']}")
-            # elsif line[0] == 'desc'
-            #   estimate_line.send("desc=", "#{line[1]['desc']}")
-            # end
-            # end
-            # Rails.logger.info("#{array_key}=#{array_value}")
-          # else
-            # Rails.logger.info("line is a not an array, it is #{line.class}: #{line.inspect}")
-          # end
-        # end # end each line do line
     end # end for each estimate
   end # end handle response
 end # end class
