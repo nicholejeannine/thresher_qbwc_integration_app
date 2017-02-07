@@ -74,7 +74,7 @@ class ListEstimateWorker < QBWC::Worker
         end # end each qb['estimate_line_ret'].each do |line|
       end # end if qb['estimate_line_ret'].class == Array
       if qb['estimate_line_ret'].class == Qbxml::Hash
-        estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
+        estimate_line = EstimateLine.find_or_initialize_by(:id => qb['estimate_line_ret']['txn_line_id'])
         estimate_line.send("estimate_id=", estimate_id)
         if estimate_line.save
           Rails.logger.info("Saved an estimate line that was a hash!!")
