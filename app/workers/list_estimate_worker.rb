@@ -46,9 +46,7 @@ class ListEstimateWorker < QBWC::Worker
           estimate.send("#{name}_id=", value['list_id'])
           estimate.send("#{name}_full_name=", value['full_name'])
         end # end key matching logic statements
-        qb['estimate_line_ret'].to_a.each do |line|
-          Rails.logger.info("#{line.inspect}")
-          end
+          Rails.logger.info("#{qb['estimate_line_ret'].class}: #{qb['estimate_line_ret'].inspect}")
           # At this point, the returned value is either an array or a hash
           # if line.class == Array
       end # end for each |key, value|
