@@ -70,11 +70,17 @@ class ListEstimateWorker < QBWC::Worker
             Rails.logger.info("Saved an estimate line")
           else
             Rails.logger.info("Messed up again")
-          end
-        end
-      end
+          end # end if estimate_line.save
+        end # end each qb['estimate_line_ret'].each do |line|
+      end # end if qb['estimate_line_ret'].class == Array
       if qb['estimate_line_ret'].class == Qbxml::Hash
-        Rails.logger.info("Qbxml hash")
+        estimate_line = EstimateLine.find_or_initialize_by(:id => line['txn_line_id'])
+        estimate_line.send("estimate_id=", estimate_id)
+        if estimate_line.save
+          Rails.logger.info("Saved an estimate line that was a hash!!")
+        else
+          Rails.logger.info("Messed up again.")
+        end # end if estimate_line.save
       end
     end # end for each estimate
   end # end handle response
