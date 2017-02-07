@@ -57,6 +57,7 @@ class ListEstimateWorker < QBWC::Worker
           # At this point, the returned value is either an array or a hash
           if arr.class == Array
             arr.to_a.each do |line|
+              Rails.logger.error("#{line.class}: #{line.inspect}")
             if line[0] == 'txn_line_id'
               estimate_line = EstimateLine.find_or_initialize_by(:id => line[1])
               estimate_line.send("estimate_id=", estimate_id)
