@@ -1,4 +1,5 @@
 class Job < ApplicationRecord
+  include QuickbooksCustomer
   self.primary_key = :id # Required for this to work using mysql views
   belongs_to :customer, counter_cache: true
   belongs_to :parent, :class_name => 'Job', :foreign_key => 'parent_id'
@@ -6,32 +7,7 @@ class Job < ApplicationRecord
   has_many :projects, :foreign_key => 'parent_id'
   scope :active, ->{ where(:is_active => true) }
   scope :inactive, ->{ where(:is_active => false) }
-  # Use method borrowed from acts_as_tree gem, but without the gem
-  def leaf?
-    self.jobs.count == 0 && self.projects.count == 0
-  end
 
-  def active?
-    is_active
-  end
-
-  def client?
-    sublevel.to_i === 0
-  end
-
-  def job?
-    !client? && !project?
-  end
-
-  def project?
-    name.upcase.start_with?('P-')
-  end
-
-  # Included so that the url displays full_name instead of ugly quickbooks id value in url
-  # e.g., `/customers/tcp` instead of `/customers/100273731-866661887 or whatever
-  def to_param
-    full_name
-  end
 end
 
 # == Schema Information

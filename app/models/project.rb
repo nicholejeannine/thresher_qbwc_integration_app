@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  include QuickbooksCustomer
   self.primary_key = :id # Required for this to work using mysql views
   belongs_to :job, counter_cache: true
   belongs_to :customer
@@ -7,33 +8,6 @@ class Project < ApplicationRecord
   # Since Project_Status is already an enum, we can avoid having to store it in a table and reference it only in one place for changes (e.g., in the Project model).
   # The line `enum Project_Status` creates a lookup for the column `Project`.`Project_Status`, as defined below. ("Quoting" = 1, "Pending" = 2, etc).
   enum Project_Status: [:Quoting, :Active, :Pending, :WorkComplete, :Invoiced, :Warranty, :Closed]
-
-  # TODO: update this or replace when projects have estimates! :)
-  def leaf?
-    false
-  end
-
-  def active?
-    is_active
-  end
-
-  # Included so that the url displays full_name instead of ugly quickbooks id value in url
-  # e.g., `/customers/tcp` instead of `/customers/100273731-866661887 or whatever
-  def to_param
-    full_name
-  end
-
-  def client?
-    sublevel.to_i === 0
-  end
-
-  def job?
-    !client? && !project?
-  end
-
-  def project?
-    name.upcase.start_with?('P-')
-  end
 end
 
 # == Schema Information
