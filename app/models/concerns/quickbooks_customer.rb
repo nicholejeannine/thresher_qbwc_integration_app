@@ -1,6 +1,15 @@
 module QuickbooksCustomer
 	extend ActiveSupport::Concern
-
+	included do
+		self.primary_key = :id # In case customer model represents a mysql view
+		# `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".
+		#  The -> symbol ("lambda") means the whole query is being saved to a variable, so that it can  be run when it's actually needed (instead of when the program is started).
+		scope :active, ->{ where(:is_active => true) }
+		scope :inactive, ->{ where(:is_active => false) }
+		has_many :estimates
+		has_many :invoices
+		has_many :sales_orders
+	end
 	# Returns true if this is the final "customer" in the customer/jobs tree, false if there are other jobs underneath it
 	def leaf?
 		self.jobs.count == 0
@@ -28,11 +37,6 @@ module QuickbooksCustomer
 		Customer.where(:parent_id => self.id).order(:name)
 	end
 
-	# Limit fields returned for company display page. Note the returned objects are simple arrays, not Customer objects, so fields not included here are not visible.
-	def subjobs
-		Customer.select([:id, :parent_id, :full_name, :is_active, :name, :full_name, :sublevel, :job_status]).where(:parent_id => self.id).order(:name)
-	end
-
 	def client?
 		sublevel.to_i === 0
 	end
@@ -46,19 +50,4 @@ module QuickbooksCustomer
 	def project?
 		name.upcase.start_with?('P-')
 	end
-
-	### INSTANCE METHODS
-	module ClassMethods
-
-		# For use on company display page - we only need the name, sublevel, balance and total balance fields
-		def companies
-			Customer.select([:id, :parent_id, :name, :sublevel, :full_name, :is_active, :balance, :total_balance]).where(:sublevel => 0)
-		end
-
-	end
-
-
-
-
-
 end

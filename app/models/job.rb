@@ -1,13 +1,9 @@
 class Job < ApplicationRecord
   include QuickbooksCustomer
-  self.primary_key = :id # Required for this to work using mysql views
-  belongs_to :customer, counter_cache: true
+  belongs_to :client, counter_cache: true
   belongs_to :parent, :class_name => 'Job', :foreign_key => 'parent_id'
   has_many :jobs, :class_name => 'Job', :foreign_key => 'parent_id'
   has_many :projects, :foreign_key => 'parent_id'
-  scope :active, ->{ where(:is_active => true) }
-  scope :inactive, ->{ where(:is_active => false) }
-
 end
 
 # == Schema Information

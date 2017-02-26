@@ -1,8 +1,15 @@
 class Client < ApplicationRecord
-  self.primary_key = :id # In case customer model represents a mysql view
+  include QuickbooksCustomer
+  has_many :subjobs, :class_name => 'Job', :foreign_key => 'parent_id'
 
-  def active?
-   is_active
+  def self.companies
+    Customer.select([:id, :parent_id, :name, :sublevel, :full_name, :is_active, :balance, :total_balance]).where(:sublevel => 0)
+  end
+  def jobs
+    Job.where("`full_name` LIKE '#{self.full_name}:%'").order(:full_name)
+  end
+  def projects
+    Project.where("`full_name` LIKE '#{self.full_name}:%'").order(:full_name)
   end
 end
 

@@ -1,18 +1,11 @@
 class Customer < ApplicationRecord
   include QuickbooksCustomer
-  self.primary_key = :id # In case customer model represents a mysql view
-  # `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".
-  #  The -> symbol ("lambda") means the whole query is being saved to a variable, so that it can be run when it's actually needed (instead of when the program is started).
-  scope :active, ->{ where(:is_active => true) }
-  scope :inactive, ->{ where(:is_active => false) }
-  scope :clients, -> { where(:sublevel => 0)}
-  scope :jobs, -> {where("`sublevel` > 0 AND `name` NOT LIKE 'P-%'")}
-  scope :projects, -> {where("`sublevel` > 0 AND `name` LIKE 'P-%'")}
-  has_many :jobs, :class_name => 'Job', :foreign_key => 'parent_id'
-  has_many :projects, :class_name => 'Project', :foreign_key => 'parent_id', through: :jobs
-  has_many :estimates
-  has_many :invoices
-  has_many :sales_orders
+
+
+  # Limit fields returned for company display page. Note the returned objects are simple arrays, not Customer objects, so fields not included here are not visible.
+  def subjobs
+    Customer.select([:id, :parent_id, :full_name, :is_active, :name, :full_name, :sublevel, :job_status]).where(:parent_id => self.id).order(:name)
+  end
 end
 
 # == Schema Information
