@@ -3,6 +3,7 @@ class ListCustomerWorker < QBWC::Worker
   include QbListTypeWorker
 
   # def should_run?
+  include QuickbooksUtils
 
   def requests(job, session, data)
     {
@@ -17,4 +18,5 @@ class ListCustomerWorker < QBWC::Worker
   end
 
   # handle response method is part of QbListTypeWorker concern
+
 end # end class
