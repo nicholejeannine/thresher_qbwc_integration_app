@@ -11,7 +11,7 @@ module QbUtils
 		end
 
         def columns
-		    self.klass.class.column_names
+		    self.class.klass.column_names
         end
 
         def address?(key)
