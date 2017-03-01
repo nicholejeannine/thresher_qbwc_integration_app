@@ -1,19 +1,8 @@
 module QbListTypeWorker
 	extend ActiveSupport::Concern
+	include QbUtils
 
 	included do
-		def self.klass
-		   self.name.remove(/^List/).remove(/Worker$/).constantize
-		end
-
-		def self.response_name
-		    klass.to_s.underscore << '_ret'
-		end
-
-        def self.column_names
-		    klass.column_names
-        end
-
 	 	def handle_response(response, session, job, request, data)
 			complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
 			columns = self.class.column_names
