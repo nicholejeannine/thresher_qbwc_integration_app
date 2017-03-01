@@ -10,11 +10,13 @@ module QbListTypeWorker
 		    klass.to_s.underscore << '_ref'
 		end
 
-                def self.column_names
+        def self.column_names
 		    klass.column_names
-                end
+        end
+     end
 
-		def handle_response(response, session, job, request, data)
+     module ClassMethods
+	 	def handle_response(response, session, job, request, data)
 			complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
 			columns = self.column_names
     		response[self.response_name].to_a.each do |qb|
@@ -30,7 +32,6 @@ module QbListTypeWorker
         			Rails.logger.info("Not saved")
       			end # end if customer save
          	end # end each response
-		end
+         end
 	end	
-	
 end
