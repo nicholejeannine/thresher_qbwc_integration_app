@@ -21,6 +21,14 @@ module QbUtils
         def extended_address?(key)
         	key.match /address$/
         end
+
+        def handle_address(instance, key, value)
+        	instance.send("#{key}_addr1=", value['addr1'])
+			instance.send("#{key}_addr2=", value['addr2'])
+			instance.send("#{key}_addr3=", value['addr3'])
+			instance.send("#{key}_addr4=", value['addr4'])
+			instance.send("#{key}_addr5=", value['addr5'])
+        end
 	end
 
 

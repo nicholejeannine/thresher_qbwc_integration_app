@@ -11,11 +11,7 @@ module QbListTypeWorker
     			if columns.include?(key.to_s)
           			instance.send("#{key}=", value)
           		elsif address?(key)
-			        instance.send("#{key}_addr1=", value['addr1'])
-			        instance.send("#{key}_addr2=", value['addr2'])
-			        instance.send("#{key}_addr3=", value['addr3'])
-			        instance.send("#{key}_addr4=", value['addr4'])
-			        instance.send("#{key}_addr5=", value['addr5'])
+			        handle_address(instance, key, value)
 			        # Address blocks don't have city/state/postal)code/country/note
 		        	if extended_address?(key)
 		          		instance.send("#{key}_city=", value['city'])
