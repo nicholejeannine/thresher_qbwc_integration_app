@@ -1,14 +1,13 @@
 module QbListTypeWorker
 	extend ActiveSupport::Concern
 
-	module ClassMethods
-
+	included do
 		def klass
 			self.name.remove(/^List/).remove(/Worker$/).constantize
 		end
 
 		def response_name
-			self.klass.name.underscore << '_ref'
+			klass.name.underscore << '_ref'
 		end
 
 		def handle_response(response, session, job, request, data)
@@ -29,4 +28,5 @@ module QbListTypeWorker
          	end # end each response
 		end
 	end	
+	
 end
