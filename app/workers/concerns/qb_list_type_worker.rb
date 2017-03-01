@@ -55,7 +55,7 @@ module QbListTypeWorker
           		end
           		end # end qb.to_hash.each do |key, value|
           		if instance.save
-        			Rails.logger.info("#{self.class.name} saved")
+        			Rails.logger.info("#{self.class.name} completed without errors")
       			else
         			Rails.logger.info("#{instance.errors}")
       			end # end if customer save
