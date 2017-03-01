@@ -1,4 +1,6 @@
-class ListCustomerWorker < QBListTypeWorker
+class ListCustomerWorker < QBWC::Worker
+
+  include QbListTypeWorker
 
   # def should_run?
 
