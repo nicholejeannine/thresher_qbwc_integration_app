@@ -28,8 +28,14 @@ module QbUtils
 			instance.send("#{key}_addr3=", value['addr3'])
 			instance.send("#{key}_addr4=", value['addr4'])
 			instance.send("#{key}_addr5=", value['addr5'])
+			 # Address blocks don't have city/state/postal)code/country/note
+		    if extended_address?(key)
+		       instance.send("#{key}_city=", value['city'])
+		       instance.send("#{key}_state=", value['state'])
+		       instance.send("#{key}_postal_code=", value['postal_code'])
+		       instance.send("#{key}_country=", value['country'])
+		       instance.send("#{key}_note=", value['note'])
+		    end
         end
 	end
-
-
 end

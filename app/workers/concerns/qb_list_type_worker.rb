@@ -12,14 +12,6 @@ module QbListTypeWorker
           			instance.send("#{key}=", value)
           		elsif address?(key)
 			        handle_address(instance, key, value)
-			        # Address blocks don't have city/state/postal)code/country/note
-		        	if extended_address?(key)
-		          		instance.send("#{key}_city=", value['city'])
-		          		instance.send("#{key}_state=", value['state'])
-		          		instance.send("#{key}_postal_code=", value['postal_code'])
-		          		instance.send("#{key}_country=", value['country'])
-		          		instance.send("#{key}_note=", value['note'])
-		        	end
 		        elsif key.match(/parent_ref/)
           			instance.send("parent_id=", value['list_id'])
         		elsif key.remove(/_ref$/).match /customer_type$|terms$|sales_rep|sales_tax_code|item_sales_tax$|preferred_payment_method$|job_type$|price_level$/
