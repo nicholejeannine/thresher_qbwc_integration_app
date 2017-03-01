@@ -10,8 +10,8 @@ module QbUtils
 		    klass.to_s.underscore << '_ret'
 		end
 
-        def self.column_names
-		    klass.column_names
+        def columns
+		    self.klass.class.column_names
         end
 
         def address?(key)

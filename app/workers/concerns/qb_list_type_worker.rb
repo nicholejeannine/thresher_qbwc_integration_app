@@ -5,7 +5,6 @@ module QbListTypeWorker
 	included do
 	 	def handle_response(response, session, job, request, data)
 			complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
-			columns = self.class.column_names
     		response["#{self.class.response_name}"].to_a.each do |qb|
     			instance = self.class.klass.find_or_initialize_by(:id => qb['list_id'])
     			qb.to_hash.each do |key, value|
