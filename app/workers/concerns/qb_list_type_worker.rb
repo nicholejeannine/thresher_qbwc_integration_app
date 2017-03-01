@@ -36,12 +36,28 @@ module QbListTypeWorker
 		          		instance.send("#{key}_country=", value['country'])
 		          		instance.send("#{key}_note=", value['note'])
 		        	end
+		        elsif key.match(/parent_ref/)
+          			instance.send("parent_id=", value['list_id'])
+        		elsif key.remove(/_ref$/).match /customer_type$|terms$|sales_rep|sales_tax_code|item_sales_tax$|preferred_payment_method$|job_type$|price_level$/
+          			name = key.remove(/_ref$/)
+          			instance.send("#{name}_id=", value['list_id'])
+          			instance.send("#{name}_full_name=", value['full_name'])
+          		elsif key.match(/data_ext_ret/)
+				    value.to_a.each do |arr|
+				        if arr['data_ext_name'] == 'Site Contact'
+				          instance.send("primary_contact=", "#{arr['data_ext_value']}")
+				        elsif arr['data_ext_name'] == 'Site Email'
+				          instance.send("primary_email=", "#{arr['data_ext_value']}")
+				        elsif arr['data_ext_name'] == 'Site Phone'
+				          instance.send("primary_phone=", "#{arr['data_ext_value']}")
+				        end
+				  	end # end value.each for data_extensions
           		end
           		end # end qb.to_hash.each do |key, value|
           		if instance.save
-        			Rails.logger.info("saved it")
+        			Rails.logger.info("#{self.class.name} saved")
       			else
-        			Rails.logger.info("Not saved")
+        			Rails.logger.info("#{instance.errors}")
       			end # end if customer save
          	end # end each response
              end	
