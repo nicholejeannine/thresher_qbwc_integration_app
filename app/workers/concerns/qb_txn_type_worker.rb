@@ -44,7 +44,7 @@ module QbTxnTypeWorker
       end # end if qb['instance_line_ret'].class == Array
       if qb["#{self.class.line_item_response_name}"].class == Qbxml::Hash
         instance_line = self.class.line_klass.find_or_initialize_by(:id => qb["#{self.class.line_item_response_name}"]['txn_line_id'])
-        estimate_line.send("estimate_id=", estimate_id)
+        instance_line.send("#{self.class.klass.to_s.underscore}_id=", instance_id)
         qb["#{self.class.line_item_response_name}"].to_hash.each do |k, v|
           if line_columns.include?(k.to_s)
             instance_line.send("#{k}=", v)
