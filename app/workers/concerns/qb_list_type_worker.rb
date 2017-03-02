@@ -16,11 +16,11 @@ module QbListTypeWorker
               handle_ref_type(instance, key, value)
           	elsif custom_type?(key)
               # only handle custom types for customers
-				      handle_custom_type(instance, key, value) if self.class.klass.name == 'Customer'
+				      handle_custom_type(instance, key, value) if "#{self.class.klass}" == 'Customer'
           	end
           end # end qb.to_hash.each do |key, value|
           if instance.save
-        	  Rails.logger.info("#{self.klass.name} saved without errors")
+        	  Rails.logger.info("#{self.class.klass} saved without errors")
       		else
         		Rails.logger.info("#{instance.errors}")
       		end # end if customer save
