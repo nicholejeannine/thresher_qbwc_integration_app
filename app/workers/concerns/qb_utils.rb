@@ -22,6 +22,10 @@ module QbUtils
 		    self.class.klass.column_names
         end
 
+        def line_columns
+        	self.line_class.columns_names
+        end
+
         def address?(key)
         	key.match /ship_address$|vendor_address$|bill_address$|block$/
         end
