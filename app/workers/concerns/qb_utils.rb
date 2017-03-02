@@ -49,5 +49,16 @@ module QbUtils
           	instance.send("#{name}_full_name=", value['full_name']) if columns.include?("#{name}_full_name")
         end
 
+        def custom_type?(key)
+        	key.match(/data_ext_ret/)
+        end
+
+        def handle_custom_type(instance, key, value)
+          value.to_a.each do |arr|
+		    instance.send("primary_contact=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Contact'
+		    instance.send("primary_email=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Email'
+		    instance.send("primary_phone=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Phone'
+		  end
+		end 
 	end
 end
