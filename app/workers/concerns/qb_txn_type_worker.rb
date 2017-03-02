@@ -61,8 +61,6 @@ module QbTxnTypeWorker
         end # end if estimate_line.save
       end # end if qb['estimate_line_ret'].class == Qbxml::Hash
     end # end each response
-
-
       end # end handle_response
     end # end included block
 end
