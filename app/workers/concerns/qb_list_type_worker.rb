@@ -22,7 +22,7 @@ module QbListTypeWorker
         	  Rails.logger.info("Complete")
       		else
         		Rails.logger.info("#{instance.errors}")
-      		end # end if customer save
+      		end # end if instance save
          end # end each response
       end	 # end handle response
   end # end included block
