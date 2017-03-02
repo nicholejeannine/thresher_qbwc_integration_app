@@ -23,7 +23,7 @@ module QbUtils
         end
 
         def line_columns
-        	self.class.line_class.columns_names
+        	self.class.line_klass.columns_names
         end
 
         def address?(key)
