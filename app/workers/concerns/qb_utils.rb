@@ -54,12 +54,12 @@ module QbUtils
         end
 
         def handle_custom_type(instance, key, value)
-        	return unless klass.to_s == 'Customer'
           value.to_a.each do |arr|
-		    instance.send("primary_contact=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Contact'
-		    instance.send("primary_email=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Email'
-		    instance.send("primary_phone=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Phone'
+		    instance.send("primary_contact=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Contact' && columns.include?("primary_contact")
+		    instance.send("primary_email=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Email' && columns.include?("primary_email")
+		    instance.send("primary_phone=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Phone' && columns.include?("primary_phone")
 		  end
 		end 
+		
 	end
 end
