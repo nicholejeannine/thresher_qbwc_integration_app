@@ -54,12 +54,12 @@ module QbTxnTypeWorker
       #       estimate_line.send("#{name}_full_name=", v['full_name'])
       #     end # end key matching logic statements for estimate_line if Qbxml::Hash
       #  end # end qb['estimate_line_ret'].to_hash.each do |k,v|
-        if instance_line.save
-          Rails.logger.info("Saved an estimate line that was a hash!!")
-        else
-          Rails.logger.info("Messed up again.")
-        end # end if estimate_line.save
-      end # end if qb['estimate_line_ret'].class == Qbxml::Hash
+        # if instance_line.save
+        #   Rails.logger.info("Saved an estimate line that was a hash!!")
+        # else
+        #   Rails.logger.info("Messed up again.")
+        # end # end if estimate_line.save
+      # end # end if qb['estimate_line_ret'].class == Qbxml::Hash
        end # end each response
 
 
