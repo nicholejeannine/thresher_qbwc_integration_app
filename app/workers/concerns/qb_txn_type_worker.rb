@@ -25,7 +25,7 @@ module QbTxnTypeWorker
         if qb["#{self.class.line_item_response_name}"].class == Array
         qb["#{self.class.line_item_response_name}"].each do |line|
           instance_line = self.class.line_klass.find_or_initialize_by(:id => line['txn_line_id'])
-          instance_line.send("#{self.class.klass}_id=", instance_id)
+          instance_line.send("#{self.class.klass.to_s.underscore}_id=", instance_id)
           line.to_hash.each do |k, v|
             if line_columns.include?(k.to_s)
               instance_line.send("#{k}=", v)
