@@ -37,5 +37,17 @@ module QbUtils
 		       instance.send("#{key}_note=", value['note'])
 		    end
         end
+
+        def ref_type?(key)
+        	key.match(/_ref$/)
+        end
+
+        def handle_ref_type(instance, key, value)
+        	name = key.remove(/_ref$/)
+        	# Check if the ref type is one of the values we want to save
+        	instance.send("#{name}_id=", value['list_id']) if columns.include?("#{name}_id")
+          	instance.send("#{name}_full_name=", value['full_name']) if columns.include?("#{name}_full_name")
+        end
+
 	end
 end

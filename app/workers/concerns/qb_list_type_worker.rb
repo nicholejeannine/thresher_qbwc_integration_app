@@ -12,12 +12,14 @@ module QbListTypeWorker
           			instance.send("#{key}=", value)
           		elsif address?(key)
 			        handle_address(instance, key, value)
-		        elsif key.match(/parent_ref/)
-          			instance.send("parent_id=", value['list_id'])
-        		elsif key.remove(/_ref$/).match /customer_type$|terms$|sales_rep|sales_tax_code|item_sales_tax$|preferred_payment_method$|job_type$|price_level$/
-          			name = key.remove(/_ref$/)
-          			instance.send("#{name}_id=", value['list_id'])
-          			instance.send("#{name}_full_name=", value['full_name'])
+            elsif ref_type?(key)
+              handle_ref_type(instance, key, value)
+		        # elsif key.match(/parent_ref/)
+          # 			instance.send("parent_id=", value['list_id'])
+        		# elsif key.remove(/_ref$/).match /customer_type$|terms$|sales_rep|sales_tax_code|item_sales_tax$|preferred_payment_method$|job_type$|price_level$/
+          # 			name = key.remove(/_ref$/)
+          # 			instance.send("#{name}_id=", value['list_id'])
+          # 			instance.send("#{name}_full_name=", value['full_name'])
           		elsif key.match(/data_ext_ret/)
 				    value.to_a.each do |arr|
 				        if arr['data_ext_name'] == 'Site Contact'
