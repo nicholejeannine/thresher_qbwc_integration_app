@@ -42,25 +42,25 @@ module QbTxnTypeWorker
           end # end if instance_line.save
         end # end each qb['instance_line_ret'].each do |line|
       end # end if qb['instance_line_ret'].class == Array
-      # if qb['estimate_line_ret'].class == Qbxml::Hash
-      #   estimate_line = EstimateLine.find_or_initialize_by(:id => qb['estimate_line_ret']['txn_line_id'])
-      #   estimate_line.send("estimate_id=", estimate_id)
-      #   qb['estimate_line_ret'].to_hash.each do |k, v|
-      #     if line_columns.include?(k.to_s)
-      #       estimate_line.send("#{k}=", v)
-      #     elsif k.remove(/_ref$/).match /item$|override_uom_set$|inventory_site$|inventory_site_location$|sales_tax_code$/
-      #       name = k.remove(/_ref$/)
-      #       estimate_line.send("#{name}_id=", v['list_id'])
-      #       estimate_line.send("#{name}_full_name=", v['full_name'])
-      #     end # end key matching logic statements for estimate_line if Qbxml::Hash
-      #  end # end qb['estimate_line_ret'].to_hash.each do |k,v|
-        # if instance_line.save
-        #   Rails.logger.info("Saved an estimate line that was a hash!!")
-        # else
-        #   Rails.logger.info("Messed up again.")
-        # end # end if estimate_line.save
-      # end # end if qb['estimate_line_ret'].class == Qbxml::Hash
-       end # end each response
+      if qb["#{self.class.line_item_response_name}"].class == Qbxml::Hash
+        instance_line = self.class.line_klass.find_or_initialize_by(:id => qb["#{self.class.line_item_response_name}"]['txn_line_id'])
+        estimate_line.send("estimate_id=", estimate_id)
+        qb["#{self.class.line_item_response_name}"].to_hash.each do |k, v|
+          if line_columns.include?(k.to_s)
+            instance_line.send("#{k}=", v)
+          elsif k.remove(/_ref$/).match /item$|override_uom_set$|inventory_site$|inventory_site_location$|sales_tax_code$/
+            name = k.remove(/_ref$/)
+            instance_line.send("#{name}_id=", v['list_id'])
+            instance_line.send("#{name}_full_name=", v['full_name'])
+          end # end key matching logic statements for estimate_line if Qbxml::Hash
+       end # end qb['estimate_line_ret'].to_hash.each do |k,v|
+        if instance_line.save
+          Rails.logger.info("Saved a thing that was a hash!!")
+        else
+          Rails.logger.info("Messed up again.")
+        end # end if estimate_line.save
+      end # end if qb['estimate_line_ret'].class == Qbxml::Hash
+    end # end each response
 
 
       end # end handle_response
