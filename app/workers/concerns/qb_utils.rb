@@ -6,8 +6,16 @@ module QbUtils
 		   self.name.remove(/^List/).remove(/Worker$/).constantize
 		end
 
+		def self.line_klass
+			(klass.to_s << "Line").constantize
+		end
+
 		def self.response_name
 		    klass.to_s.underscore << '_ret'
+		end
+
+		def self.line_item_response_name
+			klass.to_s.underscore << '_line_ret'
 		end
 
         def columns
@@ -60,6 +68,6 @@ module QbUtils
 		    instance.send("primary_phone=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Phone' && columns.include?("primary_phone")
 		  end
 		end 
-		
+
 	end
 end
