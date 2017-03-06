@@ -1,6 +1,6 @@
 module QbUtils
 	extend ActiveSupport::Concern
-
+	include QbLineItemUtils
 	included do
 		def self.klass
 		   self.name.remove(/^List/).remove(/Worker$/).constantize

@@ -1,7 +1,7 @@
 module QbTxnTypeWorker
   extend ActiveSupport::Concern
   include QbUtils # defines the database table, columns, address types, reference types, return types
-  include QbLineItemUtils
+
 
   included do
     def handle_response(response, session, job, request, data)
