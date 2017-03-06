@@ -1,5 +1,6 @@
-module QbUtils
+module QbLineItemUtils
 	extend ActiveSupport::Concern
+	include QbUtils
 	included do
 
 		def self.line_klass
