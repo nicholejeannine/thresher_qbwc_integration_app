@@ -45,8 +45,8 @@ module QbUtils
 	    end
 		end
 
-    def handle_ref_type(instance, key, value, lines = false)
-			db_columns = (lines? ? line_columns : columns)
+    def handle_ref_type(instance, key, value, lines = nil)
+			db_columns = (lines.present? ? line_columns : columns)
       name = key.remove(/_ref$/)
       # Check if the ref type is one of the values we want to save
       instance.send("#{name}_id=", value['list_id']) if db_columns.include?("#{name}_id")
