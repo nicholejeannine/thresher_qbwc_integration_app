@@ -2,9 +2,6 @@ class ListCustomerWorker < QBWC::Worker
 
   include QbListTypeWorker
 
-  # def should_run?
-  include QuickbooksUtils
-
   def requests(job, session, data)
     {
       :customer_query_rq => {
