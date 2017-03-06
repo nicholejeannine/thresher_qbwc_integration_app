@@ -10,13 +10,7 @@ module QbTxnTypeWorker
       instance_id = qb['txn_id']
 	    instance = self.class.klass.find_or_initialize_by(:id => instance_id)
 	    qb.to_hash.each do |key, value|
-          if columns.include?(key.to_s)
-            instance.send("#{key}=", value)
-          elsif address?(key)
-		    handle_address(instance, key, value)
-          elsif ref_type?(key)
-            handle_ref_type(instance, key, value)
-          end
+          handle_hash(instance, key, value)
         end # end qb.to_hash.each do |key, value|
         if instance.save
           Rails.logger.info("Complete")
@@ -28,11 +22,7 @@ module QbTxnTypeWorker
           instance_line = self.class.line_klass.find_or_initialize_by(:id => line['txn_line_id'])
           instance_line.send("#{self.class.klass.to_s.underscore}_id=", instance_id)
           line.to_hash.each do |k, v|
-            if line_columns.include?(k.to_s)
-              instance_line.send("#{k}=", v)
-            elsif ref_type?(k)
-              handle_ref_type(instance_line, k, v, true)
-            end # end key matching logic statements for instance_line if Array
+            handle_hash(instance_line, k, v, true)
           end # end line.to_hash.each do |k,v|
           if instance_line.save
             Rails.logger.info("Saved ...")
@@ -45,11 +35,7 @@ module QbTxnTypeWorker
         instance_line = self.class.line_klass.find_or_initialize_by(:id => qb["#{self.class.line_item_response_name}"]['txn_line_id'])
         instance_line.send("#{self.class.klass.to_s.underscore}_id=", instance_id)
         qb["#{self.class.line_item_response_name}"].to_hash.each do |k, v|
-          if line_columns.include?(k.to_s)
-            instance_line.send("#{k}=", v)
-          elsif ref_type?(k)
-           handle_ref_type(instance_line, k, v, true)
-          end # end key matching logic statements for estimate_line if Qbxml::Hash
+          handle_hash(instance_line, k, v, true)
        end # end qb['estimate_line_ret'].to_hash.each do |k,v|
         if instance_line.save
           Rails.logger.info("Saved a thing that was a hash!!")
