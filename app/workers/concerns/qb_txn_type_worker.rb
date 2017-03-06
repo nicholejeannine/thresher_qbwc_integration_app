@@ -22,7 +22,11 @@ module QbTxnTypeWorker
           instance_line = self.class.line_klass.find_or_initialize_by(:id => line['txn_line_id'])
           instance_line.send("#{self.class.klass.to_s.underscore}_id=", instance_id)
           line.to_hash.each do |k, v|
-            handle_hash(instance_line, k, v, true)
+            if line_columns.include?(k.to_s)
+              instance_line.send("#{k}=", v)
+            elsif ref_type?(k)
+              handle_ref_type(instance_line, k, v, true)
+            end # end key matching logic statements for instance_line if Array
           end # end line.to_hash.each do |k,v|
           if instance_line.save
             Rails.logger.info("Saved ...")
@@ -35,7 +39,11 @@ module QbTxnTypeWorker
         instance_line = self.class.line_klass.find_or_initialize_by(:id => qb["#{self.class.line_item_response_name}"]['txn_line_id'])
         instance_line.send("#{self.class.klass.to_s.underscore}_id=", instance_id)
         qb["#{self.class.line_item_response_name}"].to_hash.each do |k, v|
-          handle_hash(instance_line, k, v, true)
+          if line_columns.include?(k.to_s)
+            instance_line.send("#{k}=", v)
+          elsif ref_type?(k)
+           handle_ref_type(instance_line, k, v, true)
+          end # end key matching logic statements for estimate_line if Qbxml::Hash
        end # end qb['estimate_line_ret'].to_hash.each do |k,v|
         if instance_line.save
           Rails.logger.info("Saved a thing that was a hash!!")
