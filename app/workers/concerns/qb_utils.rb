@@ -29,6 +29,10 @@ module QbUtils
 			key.match(/data_ext_ret/)
 		end
 
+		def skip_type?(key)
+                        key.match(/email$|balance$|^cc$|job_title|ship_address$|ship_address_block$|job_desc$/)
+                end
+
 		def handle_address(instance, key, value)
 			instance.send("#{key}_addr1=", value['addr1'])
 			instance.send("#{key}_addr2=", value['addr2'])
