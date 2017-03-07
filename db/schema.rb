@@ -155,8 +155,8 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.string   "terms_full_name",                    limit: 31
     t.string   "sales_rep_id",                       limit: 41
     t.string   "sales_rep_full_name",                limit: 5
-    t.decimal  "balance",                                       precision: 20, scale: 5
-    t.decimal  "total_balance",                                 precision: 20, scale: 5
+    t.decimal  "balance",                                       precision: 10, scale: 5
+    t.decimal  "total_balance",                                 precision: 10, scale: 5
     t.string   "sales_tax_code_id",                  limit: 41
     t.string   "sales_tax_code_full_name",           limit: 3
     t.string   "item_sales_tax_id",                  limit: 41
