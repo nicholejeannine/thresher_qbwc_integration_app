@@ -12,13 +12,13 @@ unless Rails.env.production?
       end
     end
   end
-  User.create([{id: 1, email: 'nklerk@alopias.com', username: 'nklerk', password: 'password'}])
+ # User.create([{id: 1, email: 'nklerk@alopias.com', username: 'nklerk', password: 'password'}])
 
  # clear quickbooks jobs
   QBWC.clear_jobs
   QBWC.add_job(:list_customers, true, '', ListCustomerWorker)
-  QBWC.add_job(:list_estimates, true, '', ListEstimateWorker)
-  QBWC.add_job(:list_sales_orders, true, '', ListSalesOrderWorker)
-  QBWC.add_job(:list_purchase_orders, true, '', ListPurchaseOrderWorker)
-  QBWC.add_job(:list_invoices, true, '', ListInvoiceWorker)
+ # QBWC.add_job(:list_estimates, true, '', ListEstimateWorker)
+ # QBWC.add_job(:list_sales_orders, true, '', ListSalesOrderWorker)
+ # QBWC.add_job(:list_purchase_orders, true, '', ListPurchaseOrderWorker)
+ # QBWC.add_job(:list_invoices, true, '', ListInvoiceWorker)
 end
