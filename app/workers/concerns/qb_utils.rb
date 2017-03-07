@@ -30,7 +30,7 @@ module QbUtils
 		end
 
 		def skip_type?(key)
-                        key.match(/email$|balance$|^cc$|job_title|ship_address$|ship_address_block$|job_desc$/)
+                        key.match(/balance$/)
                 end
 
 		def handle_address(instance, key, value)
