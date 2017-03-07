@@ -1,16 +1,16 @@
 module QbUtils
 	extend ActiveSupport::Concern
 	included do
-		def self.klass
-		   self.name.remove(/^List/).remove(/Worker$/).constantize
+		def klass
+		   self.class.name.remove(/^List/).remove(/Worker$/).constantize
 		end
 
-		def self.response_name
+		def response_name
 		    klass.to_s.underscore << '_ret'
 		end
 
 		def columns
-			self.class.klass.column_names
+			klass.column_names
 		end
 
 	  def address?(key)
