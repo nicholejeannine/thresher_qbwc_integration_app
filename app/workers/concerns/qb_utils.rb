@@ -29,9 +29,9 @@ module QbUtils
 			key.match(/data_ext_ret/)
 		end
 
-		def skip_type?(key)
-                        key.match(/balance$/)
-                end
+		# def skip_type?(key)
+  #                       key.match(/balance$/)
+  #       end
 
 		def handle_address(instance, key, value)
 			instance.send("#{key}_addr1=", value['addr1'])

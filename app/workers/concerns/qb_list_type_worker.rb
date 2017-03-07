@@ -8,10 +8,8 @@ module QbListTypeWorker
     		response["#{self.class.response_name}"].to_a.each do |qb|
     			instance = self.class.klass.find_or_initialize_by(:id => qb['list_id'])
     			qb.to_hash.each do |key, value|
-                         if skip_type?(key)
-                              next
-    			  elsif columns.include?(key.to_s)
-          		       instance.send("#{key}=", "#{value}")
+    			  if columns.include?(key.to_s)
+          		instance.send("#{key}=", "#{value}")
           	elsif address?(key)
 			        handle_address(instance, key, value)
             elsif ref_type?(key)
