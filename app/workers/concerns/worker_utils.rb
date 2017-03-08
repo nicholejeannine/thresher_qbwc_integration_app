@@ -1,4 +1,4 @@
-module QbUtils
+module WorkerUtils
 	extend ActiveSupport::Concern
 
 		# Retrieve the name of the class we're interested in saving to the database from a QueryWorker instance (e.g., "CustomerQueryWorker.new.klass returns the Customer class)

@@ -1,4 +1,4 @@
-module QbModelUtils
+module QuickbooksModel
 	extend ActiveSupport::Concern
 	included do
 		# Since the id column is the qb-generated string, make sure it's still treated as a primary key in the DB.
@@ -47,5 +47,18 @@ module QbModelUtils
 		name = key.remove(/_ref$/)
 		self.send("#{name}_id=", value['list_id']) if self.respond_to?("#{name}_id=")
 		self.send("#{name}_full_name=", value['full_name']) if self.respond_to?("#{name}_full_name=")
+	end
+
+	# Customer objects have custom fields - this method parses the value returned for this part of a qb hash
+	def handle_custom_type(value)
+		value.to_a.each do |arr|
+			if self.respond_to?("primary_contact=") && arr['data_ext_name'] == 'Site Contact'
+				self.send("primary_contact=", "#{arr['data_ext_value']}")
+			elsif self.respond_to?("primary_email=") && arr['data_ext_name'] == 'Site Email'
+				self.send("primary_email=", "#{arr['data_ext_value']}")
+			elsif self.respond_to?("primary_phone=") && arr['data_ext_name'] == 'Site Phone'
+				self.send("primary_phone=", "#{arr['data_ext_value']}")
+			end
+		end
 	end
 end
