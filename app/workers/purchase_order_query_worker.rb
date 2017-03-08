@@ -1,6 +1,6 @@
 class PurchaseOrderQueryWorker < QBWC::Worker
 
-  include QueryTxnTypeHandler
+  include QueryResponseHandler
 
   # def should_run?
 

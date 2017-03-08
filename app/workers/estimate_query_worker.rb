@@ -1,6 +1,6 @@
 class EstimateQueryWorker < QBWC::Worker
 
-  include QueryTxnTypeHandler
+  include QueryResponseHandler
 
 
   # def should_run?
@@ -19,5 +19,5 @@ class EstimateQueryWorker < QBWC::Worker
     }
   end
 
-    # handle response method is part of QueryTxnTypeHandler concern
+    # handle response method is part of QueryResponseHandler concern
 end # end class
