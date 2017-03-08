@@ -17,8 +17,8 @@ unless Rails.env.production?
  # clear quickbooks jobs
   QBWC.clear_jobs
   QBWC.add_job(:list_customers, true, '', CustomerQueryWorker)
- # QBWC.add_job(:list_estimates, true, '', ListEstimateWorker)
- # QBWC.add_job(:list_sales_orders, true, '', ListSalesOrderWorker)
- # QBWC.add_job(:list_purchase_orders, true, '', ListPurchaseOrderWorker)
- # QBWC.add_job(:list_invoices, true, '', ListInvoiceWorker)
+ # QBWC.add_job(:list_estimates, true, '', EstimateQueryWorker)
+ # QBWC.add_job(:list_sales_orders, true, '', SalesOrderQueryWorker)
+ # QBWC.add_job(:list_purchase_orders, true, '', PurchaseOrderQueryWorker)
+ # QBWC.add_job(:list_invoices, true, '', InvoiceQueryWorker)
 end

@@ -1,4 +1,4 @@
-class ListSalesOrderWorker < QBWC::Worker
+class SalesOrderQueryWorker < QBWC::Worker
 
   include QbTxnTypeWorker
 

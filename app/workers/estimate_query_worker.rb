@@ -1,4 +1,4 @@
-class ListEstimateWorker < QBWC::Worker
+class EstimateQueryWorker < QBWC::Worker
 
   include QbTxnTypeWorker
 
