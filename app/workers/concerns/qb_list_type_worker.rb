@@ -6,6 +6,7 @@ module QbListTypeWorker
 	 	def handle_response(response, session, job, request, data)
 			complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     		response["#{response_name}"].to_a.each do |qb|
+                begin
     			instance = klass.find_or_initialize_by(:id => qb['list_id'])
     			qb.to_hash.each do |key, value|
     			  if columns.include?(key.to_s)
@@ -18,10 +19,9 @@ module QbListTypeWorker
 				      handle_custom_type(instance, key, value)
           	end
           end # end qb.to_hash.each do |key, value|
-         if instance.save
-           Rails.logger.info("Complete")
-         else
-           Rails.logger.info("#{instance.errors}")
+          instance.save
+   	  rescue Exception => e
+           Rails.logger.info("#{e}")
       	  end # end if instance save
          end # end each response
       end	 # end handle response
