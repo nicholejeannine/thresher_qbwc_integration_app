@@ -1,6 +1,6 @@
 class InvoiceQueryWorker < QBWC::Worker
 
-  include QueryResponseHandler
+  include QueryTxnTypeHandler
 
 
   # def should_run?

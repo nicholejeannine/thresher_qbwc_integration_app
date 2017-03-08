@@ -1,4 +1,4 @@
-module QueryResponseHandler
+module QueryListTypeHandler
 	extend ActiveSupport::Concern
 	include WorkerUtils
 
@@ -9,16 +9,14 @@ module QueryResponseHandler
 		# Make sure the response is an array
 		response["#{response_name}"].to_a.each do |qb|
 			begin
-				# The id column is named "list id" for list types, "txn id" for transaction types. Save it to a variable.
-				instance_id = qb['list_id'] || qb['txn_id']
 				# Search the DB for the id. Retrieve the object to update it, or create a new row.
-				instance = klass.find_or_initialize_by(:id => instance_id)
+				instance = klass.find_or_initialize_by(:id => qb['list_id'])
 				# Send the hash to the object for processing.
 				instance.parse_qb_hash(qb)
 				instance.save
 				# Catch any errors and save them to the qbwc_errors table
 			rescue Exception => e
-				QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{instance_id}", :error_message => "#{e}")
+				QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{qb['list_id']}", :error_message => "#{e}")
 			end
 		end
 	end
