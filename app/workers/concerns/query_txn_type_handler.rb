@@ -13,14 +13,14 @@ module QueryTxnTypeHandler
       if qb["#{line_item_response_name}"].class == Array
         qb["#{line_item_response_name}"].each do |line|
           instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
-          instance_line.send("#{klass}_id=", instance_line)
+          instance_line.send("#{klass.name.underscore}_id=", instance_line)
           instance_line.parse_qb_hash(line)
           instance_line.save
         end
       end
       if qb["#{line_item_response_name}"].class == Qbxml::Hash
         instance_line = line_klass.find_or_initialize_by(:id => qb["#{line_item_response_name}"]['txn_line_id'])
-        instance_line.send("#{klass}_id=", instance_line)
+        instance_line.send("#{klass.name.underscore}_id=", instance_line)
         instance_line.parse_qb_hash(line)
         instance_line.save
       end
