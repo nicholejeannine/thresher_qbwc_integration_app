@@ -730,7 +730,7 @@ ActiveRecord::Schema.define(version: 20170127084237) do
     t.integer  "progress",                   default: 0, null: false
     t.string   "current_job"
     t.string   "iterator_id"
-    t.string   "error",        limit: 1000
+    t.text     "error"
     t.text     "pending_jobs", limit: 65535,             null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
