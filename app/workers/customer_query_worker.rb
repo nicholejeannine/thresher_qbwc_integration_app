@@ -1,4 +1,4 @@
-class ListCustomerWorker < QBWC::Worker
+class CustomerQueryWorker < QBWC::Worker
 
   include QbListTypeWorker
 

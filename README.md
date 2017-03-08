@@ -96,9 +96,3 @@ QuickBooks stores addresses as a single string. It does not store address detail
 
 The ship_to_address field will return an array of shipping addresses that have been previously used for that customer (or job, etc).  Whichever shipping address has been declared the "default" (in the Quickbooks GUI) will be returned as the `ship_address` value.
 
-## Models
-
-1. Client (quickbooks customers where "sublevel = 0")
-2. Job (quickbooks customers where sublevel != 0 AND name NOT LIKE 'P-%') ... LEFT JOIN `ThresherSB`.`Jobs` on((`ThresherSB`.`Jobs`.`Job_QB_JobName_Hierarc.calc` = `dont_delete_me_jobs`.`full_name`))
-3. Project (quickbooks customers where sublevel != 0 AND name LIKE 'P-%') ... Left JOIN `ThresherSB`.`Project` on((`ThresherSB`.`Project`.`Project_PKEY` = (select trim(leading 'P-' from `dont_delete_me_projects`.`name`))))
-4. Customer encompasses everything, currently.
