@@ -21,7 +21,7 @@ module QbListTypeWorker
           end # end qb.to_hash.each do |key, value|
           instance.save
    	  rescue Exception => e
-           Rails.logger.info("#{e}")
+           QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{qb['list_id']}", :error_message => "#{e}")
       	  end # end if instance save
          end # end each response
       end	 # end handle response
