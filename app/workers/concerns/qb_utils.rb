@@ -1,9 +1,12 @@
 module QbUtils
 	extend ActiveSupport::Concern
+
+		# Retrieve the name of the class we're interested in saving to the database from a ListWorker instance (e.g., "ListCustomerWorker.new.klass returns the Customer class)
 		def klass
-		   self.class.name.remove(/^List/).remove(/Worker$/).constantize
+			self.class.name.remove(/^List/).remove(/Worker$/).constantize
 		end
 
+		# Retrieve the quickbooks xml response name from the worker class instance (e.g., "ListCustomerWorker.new.klass returns 'customer_ret')
 		def response_name
 			klass.to_s.underscore << '_ret'
 		end

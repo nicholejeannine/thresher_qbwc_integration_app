@@ -2,8 +2,7 @@ module QbListType
 	extend ActiveSupport::Concern
 	include QbModelUtils
 
-
-
+	# Customer objects have custom fields - this method parses the value returned for this part of a qb hash
 	def handle_custom_type(value)
 		value.to_a.each do |arr|
 			if self.respond_to?("primary_contact=") && arr['data_ext_name'] == 'Site Contact'
@@ -16,6 +15,7 @@ module QbListType
 		end
 	end
 
+	# Takes a qb hash and deals with each key/value pair according to its contents.
 	def parse_qb_hash(qb)
 		qb.to_hash.each do |key, value|
 			if self.respond_to?("#{key}=")
@@ -27,6 +27,6 @@ module QbListType
 			elsif custom_type?(key)
 				handle_custom_type(value)
 			end
-		end # end qb.to_hash.each do |key, value|
+		end
 	end
 end
