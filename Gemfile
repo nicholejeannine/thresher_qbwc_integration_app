@@ -7,22 +7,6 @@ gem 'rails', '~> 5.0', '>= 5.0.1'
 gem 'mysql2', '~> 0.4.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0', '>= 5.0.6'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '~> 3.0', '>= 3.0.4'
-# Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.2', '>= 4.2.2'
-# Use bootstrap-sass for frontend bootstrap support
-gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
-# bootstrap form for simplifying form views
-gem 'bootstrap_form', '~> 2.5', '>= 2.5.3'
-# Turbolinks makes navigating your web application faster.
-gem 'turbolinks', '~> 5.0', '>= 5.0.1'
-# Create JSON structures via a Builder-style DSL
-gem 'jbuilder', '~> 2.6', '>= 2.6.1'
-# Use ActiveModel has_secure_password for password encryption
-gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development, :test do
@@ -33,9 +17,6 @@ group :development, :test do
   # Retrieve the binding of a method's caller. Can also retrieve bindings even further up the stack.
   gem 'binding_of_caller', '~> 0.7.2'
   # Testing framework
-  gem 'rspec-rails'
-  gem 'faker'
-  gem 'fabrication'
 end
 
 group :development do
@@ -50,10 +31,7 @@ group :development do
   # Makes spring watch files using the listen gem.
   gem 'spring-watcher-listen', '~> 2.0', '>= 2.0.1'
 
-  # Annotates models, tests, and routes based on the database schema.
-  gem 'annotate', '~> 2.7', '>= 2.7.1'
-  # Automatically add up-to-date vendor prefixes to all your css!
-  gem 'autoprefixer-rails', '~> 6.7'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

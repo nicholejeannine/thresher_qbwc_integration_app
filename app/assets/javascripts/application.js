@@ -9,13 +9,3 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
-//
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
-//= require bootstrap
-//= require_tree .
-$(document).on("click",  ".navHoriz", function() {
-	$(".selected").removeClass('selected');
-	$(this).addClass('selected');
-});

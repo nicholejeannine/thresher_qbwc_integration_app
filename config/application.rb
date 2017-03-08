@@ -21,10 +21,6 @@ module Railstest
 
     config.beginning_of_week = :sunday
 
-    config.autoload_paths += %W(
-    #{config.root}/vendor
-    )
-    config.assets.paths << Rails.root.join('vendor', 'assets', 'lib')
 
     config.time_zone = 'Pacific Time (US & Canada)'
   end

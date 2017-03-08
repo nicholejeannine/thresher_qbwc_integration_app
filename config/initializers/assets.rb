@@ -4,7 +4,7 @@
 Rails.application.config.assets.version = '1.0'
 
 # Add vendor path to find bootstrap-sass assets that we're compiling
-Rails.application.config.assets.paths << 'Vendor'
+# Rails.application.config.assets.paths << 'Vendor'
 
 # Rails.application.config.assets.paths << Emoji.images_path
 
