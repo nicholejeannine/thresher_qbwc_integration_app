@@ -1,4 +1,4 @@
-module QuickbooksListType
+module QuickbooksQueryable
 	extend ActiveSupport::Concern
 	include QuickbooksModel
 
