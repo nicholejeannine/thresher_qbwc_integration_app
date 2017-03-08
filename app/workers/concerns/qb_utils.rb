@@ -1,6 +1,5 @@
 module QbUtils
 	extend ActiveSupport::Concern
-	included do
 		def klass
 		   self.class.name.remove(/^List/).remove(/Worker$/).constantize
 		end
@@ -34,7 +33,7 @@ module QbUtils
 			 # Address blocks don't have city/state/postal)code/country/note
 	    if extended_address?(key)
 	       instance.send("#{key}_city=", value['city']) if instance.respond_to?("#{key}_city=")
-	       instance.send("#{key}_state=", value['state'])if instance.respond_to?("#{key}_state=")
+	       instance.send("#{key}_state=", value['state']) if instance.respond_to?("#{key}_state=")
 	       instance.send("#{key}_postal_code=", value['postal_code']) if instance.respond_to?("#{key}_postal_code=")
 	       instance.send("#{key}_country=", value['country'])if instance.respond_to?("#{key}_country=")
 	       instance.send("#{key}_note=", value['note']) if instance.respond_to?("#{key}_note=")
@@ -50,10 +49,13 @@ module QbUtils
 
     def handle_custom_type(instance, key, value)
 	    value.to_a.each do |arr|
-        instance.send("primary_contact=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Contact' && instance.respond_to?("primary_contact=")
-        instance.send("primary_email=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Email' && instance.respond_to?("primary_email=")
-        instance.send("primary_phone=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Phone' && instance.respond_to?("primary_phone=")
+		   if instance.respond_to?("primary_contact=") && arr['data_ext_name'] == 'Site Contact'
+			   instance.send("primary_contact=", "#{arr['data_ext_value']}")
+		   elsif instance.respond_to?("primary_email=") && arr['data_ext_name'] == 'Site Email'
+			   instance.send("primary_email=", "#{arr['data_ext_value']}")
+		   elsif instance.respond_to?("primary_phone=") && arr['data_ext_name'] == 'Site Phone'
+			   instance.send("primary_phone=", "#{arr['data_ext_value']}")
+		   end
       end
     end
-	end
 end
