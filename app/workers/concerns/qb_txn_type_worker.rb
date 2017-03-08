@@ -10,7 +10,7 @@ module QbTxnTypeWorker
       instance_id = qb['txn_id']
 	    instance = klass.find_or_initialize_by(:id => instance_id)
 	    qb.to_hash.each do |key, value|
-        if instance.respond_to("#{key}=")
+        if instance.respond_to?("#{key}=")
           instance.send("#{key}=", "#{value}")
         elsif address?(key)
           handle_address(instance, key, value)
