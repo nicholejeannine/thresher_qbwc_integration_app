@@ -6,11 +6,11 @@ module QbTxnTypeWorker
   included do
     def handle_response(response, session, job, request, data)
 	  complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
-	  response["#{self.class.response_name}"].to_a.each do |qb|
+	  response["#{response_name}"].to_a.each do |qb|
       instance_id = qb['txn_id']
 	    instance = klass.find_or_initialize_by(:id => instance_id)
 	    qb.to_hash.each do |key, value|
-        if klass.column_names.include?(key.to_s)
+        if instance.respond_to("#{key}=")
           instance.send("#{key}=", "#{value}")
         elsif address?(key)
           handle_address(instance, key, value)
@@ -56,7 +56,8 @@ module QbTxnTypeWorker
           Rails.logger.info("Messed up again.")
         end # end if estimate_line.save
       end # end if qb['estimate_line_ret'].class == Qbxml::Hash
-    end # end each response
+      end # end each response
+      end
       end # end handle_response
     end # end included block
 end
