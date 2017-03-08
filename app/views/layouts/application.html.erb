@@ -9,23 +9,20 @@
 	<meta name="author" content="">
 	<link rel="icon" href="/favicon.ico">
 
-	<title>Thresher Portal</title>
-	<!--Latest compiled and minified CSS & JS-->
-	<%= stylesheet_link_tag 'application', 'data-turbolinks-track' => true %>
-	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-	<%= csrf_meta_tags %>
-</head>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="/favicon.ico">
+
+	</head>
 <body>
-<%= render partial: 'layouts/partials/nav' %>
-	<div class="container-fluid wrapper">
-		<div class="page-wrapper">
- 		<div class="row">
-   	<div id="flash" class="col-xs-24">
-					<%= render partial: 'layouts/partials/flash' %>
-				</div>
-			</div>
-				<%= yield %>
-		</div> <!-- end page wrapper -->
-	</div> <!-- end container-fluid -->
+<%= yield %>
 </body>
+</html>
 </html>
