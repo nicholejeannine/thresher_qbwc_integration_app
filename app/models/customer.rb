@@ -1,3 +1,3 @@
 class Customer < ApplicationRecord
-  include QuickbooksListType
+  include QuickbooksQueryable
 end

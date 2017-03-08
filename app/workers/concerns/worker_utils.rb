@@ -10,4 +10,12 @@ module WorkerUtils
 		def response_name
 			klass.to_s.underscore << '_ret'
 		end
+
+		def line_klass
+			self.class.name.remove(/QueryWorker/).concat('Line').constantize
+		end
+
+		def line_item_response_name
+			line_klass.to_s.underscore << '_ret'
+		end
 end

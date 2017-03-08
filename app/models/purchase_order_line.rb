@@ -1,5 +1,4 @@
 class PurchaseOrderLine < ApplicationRecord
-   self.primary_key = :id # In case customer model represents a mysql view
-   # set optional to true to prevent database foreign-key checks on quickbooks-created rows
+   include QuickbooksQueryable
    belongs_to :purchase_order, optional: true
 end
