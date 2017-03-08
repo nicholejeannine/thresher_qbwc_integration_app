@@ -1,5 +1,6 @@
 module QuickbooksCustomer
 	extend ActiveSupport::Concern
+	include QbListType
 	included do
 		self.primary_key = :id # In case customer model represents a mysql view
 		# `Customer.active` will query all active customers, `Customer.inactive` will query all inactive customers.  `Customer.where("full_name LIKE 'MommyCo%'").active` will query all of the active customers where full_name begins with "MommyCo".
