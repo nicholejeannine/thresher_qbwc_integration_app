@@ -1,6 +1,6 @@
-module QbListTypeWorker
+module QueryListTypeHandler
 	extend ActiveSupport::Concern
-	include QbUtils
+	include WorkerUtils
 
 	# Handle the incoming xml response
 	def handle_response(response, session, job, request, data)
