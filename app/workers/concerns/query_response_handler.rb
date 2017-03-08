@@ -1,4 +1,4 @@
-module QueryListTypeHandler
+module QueryResponseHandler
 	extend ActiveSupport::Concern
 	include WorkerUtils
 
