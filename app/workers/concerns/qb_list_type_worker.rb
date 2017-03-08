@@ -1,15 +1,14 @@
 module QbListTypeWorker
 	extend ActiveSupport::Concern
-	include QbUtils # defines the database table, columns, address types, reference types, return types
+	include QbUtils
 
-	included do
 	 	def handle_response(response, session, job, request, data)
 			complete = response['xml_attributes']['iteratorRemainingCount'] == '0'
     		response["#{response_name}"].to_a.each do |qb|
-                begin
+			    begin
     			instance = klass.find_or_initialize_by(:id => qb['list_id'])
     			qb.to_hash.each do |key, value|
-    			  if columns.include?(key.to_s)
+    			  if instance.respond_to?("#{key}=")
           		instance.send("#{key}=", "#{value}")
           	elsif address?(key)
 			        handle_address(instance, key, value)
@@ -20,10 +19,9 @@ module QbListTypeWorker
           	end
           end # end qb.to_hash.each do |key, value|
           instance.save
-   	  rescue Exception => e
+   	      rescue Exception => e
            QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{qb['list_id']}", :error_message => "#{e}")
       	  end # end if instance save
          end # end each response
       end	 # end handle response
-  end # end included block
 end
