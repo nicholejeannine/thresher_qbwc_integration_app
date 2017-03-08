@@ -64,16 +64,5 @@ module QbUtils
         instance.send("primary_phone=", "#{arr['data_ext_value']}") if arr['data_ext_name'] == 'Site Phone' && columns.include?("primary_phone")
       end
     end
-
-		def handle_hash(instance, key, value, lines = nil)
-			db_columns = (lines.present? ? line_columns : columns)
-			if db_columns.include?(key.to_s)
-				instance.send("#{key}=", value)
-			elsif address?(key)
-				handle_address(instance, key, value)
-			elsif ref_type?(key)
-				handle_ref_type(instance, key, value)
-			end
-		end
 	end
 end
