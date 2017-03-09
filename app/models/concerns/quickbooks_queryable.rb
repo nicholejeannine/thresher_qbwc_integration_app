@@ -6,6 +6,9 @@ module QuickbooksQueryable
 	# This is the method called by CustomerQueryWorker (and other list-type list workers)
 	def parse_qb_hash(qb)
 		qb.to_hash.each do |key, value|
+			if line_item_type?(key)
+				next unless self.class.name.match(/Line/)
+			end
 			if self.respond_to?("#{key}=")
 				self.send("#{key}=", "#{value}")
 			elsif address?(key)
@@ -17,5 +20,4 @@ module QuickbooksQueryable
 			end
 		end
 	end
-
 end

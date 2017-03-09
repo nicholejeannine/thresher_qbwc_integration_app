@@ -25,6 +25,11 @@ module QuickbooksModel
 		key.match(/data_ext_ret/)
 	end
 
+	# Is the xml fragment part of a "line item?"
+	def line_item_type?(key)
+		key.match(/_line_ret/)
+	end
+
 	# Handle each piece of an address
 	def handle_address(key, value)
 		self.send("#{key}_addr1=", value['addr1']) if self.respond_to?("#{key}_addr1=")
