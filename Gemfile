@@ -7,6 +7,7 @@ gem 'rails', '~> 5.0', '>= 5.0.1'
 gem 'mysql2', '~> 0.4.5'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+gem 'rack-cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development, :test do
