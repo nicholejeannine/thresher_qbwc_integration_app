@@ -11,7 +11,7 @@ module QuickbooksQueryable
 				next unless self.class.name.match(/Line/)
 			end
 			if self.respond_to?("#{key}=")
-				self.send("#{key}=", "#{value}")
+				self.send("#{key}=", value)
 			elsif address?(key)
 				handle_address(key, value)
 			elsif ref_type?(key)
