@@ -21,7 +21,7 @@ module QueryTxnTypeHandler
       if qb["#{line_item_response_name}"].class == Qbxml::Hash
         instance_line = line_klass.find_or_initialize_by(:id => qb["#{line_item_response_name}"]['txn_line_id'])
         instance_line.send("#{klass.name.underscore}_id=", instance_id)
-        instance_line.parse_qb_hash(qb["#{line_item_response_name}")
+        instance_line.parse_qb_hash(qb["#{line_item_response_name}"])
         instance_line.save
       end
       # Catch any errors and save them to the qbwc_errors table
