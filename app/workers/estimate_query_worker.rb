@@ -15,6 +15,7 @@ class EstimateQueryWorker < QBWC::Worker
          :from_modified_date => "2017-02-28T08:14",
           },
 	      :include_line_items => true,
+        :include_linked_txns => true,
         :owner_id => 0
       }
     }
