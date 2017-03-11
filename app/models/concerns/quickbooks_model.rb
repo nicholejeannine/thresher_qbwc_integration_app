@@ -57,13 +57,17 @@ module QuickbooksModel
 	# Customer objects have custom fields - this method parses the value returned for this part of a qb hash
 	def handle_custom_type(value)
 		value.to_a.each do |arr|
-			if self.respond_to?("primary_contact=") && arr['data_ext_name'] == 'Site Contact'
-				self.send("primary_contact=", "#{arr['data_ext_value']}")
-			elsif self.respond_to?("primary_email=") && arr['data_ext_name'] == 'Site Email'
-				self.send("primary_email=", "#{arr['data_ext_value']}")
-			elsif self.respond_to?("primary_phone=") && arr['data_ext_name'] == 'Site Phone'
-				self.send("primary_phone=", "#{arr['data_ext_value']}")
+			if arr['data_ext_name'] == 'Site Contact'
+				update_attribute("primary_contact", "#{arr['data_ext_value']}")
+			elsif arr['data_ext_name'] == 'Site Email'
+				update_attribute("primary_email", "#{arr['data_ext_value']}")
+			elsif arr['data_ext_name'] == 'Site Phone'
+				update_attribute("primary_phone", "#{arr['data_ext_value']}")
 			end
 		end
+	end
+
+	def update_attribute(column_name, new_value)
+		self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
 	end
 end
