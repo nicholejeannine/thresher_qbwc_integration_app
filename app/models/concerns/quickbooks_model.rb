@@ -37,20 +37,24 @@ module QuickbooksModel
 
 	# Handle each piece of an address
 	def handle_address(key, value)
-          QbwcError.create(:worker_class => 'Address', :model_id => "#{key}", :error_message => "Value #{value} of type #{value.class} from #{key} of #{key.class}")
-		update_attribute("#{key}_addr1", value['addr1'])
-		update_attribute("#{key}_addr2", value['addr2'])
-		update_attribute("#{key}_addr3", value['addr3'])
-		update_attribute("#{key}_addr4", value['addr4'])
-		update_attribute("#{key}_addr5", value['addr5'])
-		# If this is an extended address we need to also save city, state, etc
-		if extended_address?(key)
-			update_attribute("#{key}_city", value['city'])
-			update_attribute("#{key}_state", value['state'])
-			update_attribute("#{key}_postal_code", value['postal_code'])
-			update_attribute("#{key}_country", value['country'])
-			update_attribute("#{key}_note", value['note'])
+		if value && value.is_a?(Qbxml::Hash)
+			value.each do |k, v|
+				update_attribute("#{key}_#{k}", v)
+			end
 		end
+		# update_attribute("#{key}_addr1", value['addr1'])
+		# update_attribute("#{key}_addr2", value['addr2'])
+		# update_attribute("#{key}_addr3", value['addr3'])
+		# update_attribute("#{key}_addr4", value['addr4'])
+		# update_attribute("#{key}_addr5", value['addr5'])
+		# If this is an extended address we need to also save city, state, etc
+		# if extended_address?(key)
+		# 	update_attribute("#{key}_city", value['city'])
+		# 	update_attribute("#{key}_state", value['state'])
+		# 	update_attribute("#{key}_postal_code", value['postal_code'])
+		# 	update_attribute("#{key}_country", value['country'])
+		# 	update_attribute("#{key}_note", value['note'])
+		# end
 	end
 
 	# Handle reference types - save the "list_id" and "full_name" values, only if those fields are in the DB
