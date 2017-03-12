@@ -21,18 +21,18 @@ module WorkerUtils
 
 		def process_line_items(ret = nil)
 		  return if ret.nil?
-	    if qb["#{line_item_response_name}"].is_a?(Array)
-		    qb["#{line_item_response_name}"].each do |line|
+	    if ret.is_a?(Array)
+		    ret.each do |line|
 				  instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
 				  instance_line.send("#{klass.name.underscore}_id=", instance_id)
 				  instance_line.parse_qb_hash(line)
 				  instance_line.save
 		    end
 	    end
-		  if qb["#{line_item_response_name}"].is_a?(Qbxml::Hash)
-			  instance_line = line_klass.find_or_initialize_by(:id => qb["#{line_item_response_name}"]['txn_line_id'])
+		  if ret.is_a?(Qbxml::Hash)
+			  instance_line = line_klass.find_or_initialize_by(:id => ret['txn_line_id'])
 			  instance_line.send("#{klass.name.underscore}_id=", instance_id)
-			  instance_line.parse_qb_hash(qb["#{line_item_response_name}"])
+			  instance_line.parse_qb_hash(ret)
 			  instance_line.save
 		  end
 		end
