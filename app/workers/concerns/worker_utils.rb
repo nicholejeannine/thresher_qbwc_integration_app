@@ -20,7 +20,7 @@ module WorkerUtils
 		end
 
 		def process_line_items(instance_id = nil, ret = nil)
-		  return if instance_id.nil? && ret.nil?
+		  return if instance_id.nil? || ret.nil?
 	    if ret.is_a?(Array)
 		    ret.each do |line|
 			    handle_line(instance_id, line)

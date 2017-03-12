@@ -10,11 +10,6 @@ module QuickbooksModel
 		key.match /ship_address$|vendor_address$|bill_address$|block$/
 	end
 
-	# Is the xml fragment an "extended address" (with city, state, postal code, etc? Address "blocks" are not extended addresses - they have just "addr1" through "addr5")
-	def extended_address?(key)
-		key.match /address$/
-	end
-
 	# Is the xml fragment a "reference type"? (A reference type has additional key/value pairs that need to be processed separately)
 	def ref_type?(key)
 	  key.match(/_ref$/)
@@ -42,19 +37,6 @@ module QuickbooksModel
 				update_attribute("#{key}_#{k}", v)
 			end
 		end
-		# update_attribute("#{key}_addr1", value['addr1'])
-		# update_attribute("#{key}_addr2", value['addr2'])
-		# update_attribute("#{key}_addr3", value['addr3'])
-		# update_attribute("#{key}_addr4", value['addr4'])
-		# update_attribute("#{key}_addr5", value['addr5'])
-		# If this is an extended address we need to also save city, state, etc
-		# if extended_address?(key)
-		# 	update_attribute("#{key}_city", value['city'])
-		# 	update_attribute("#{key}_state", value['state'])
-		# 	update_attribute("#{key}_postal_code", value['postal_code'])
-		# 	update_attribute("#{key}_country", value['country'])
-		# 	update_attribute("#{key}_note", value['note'])
-		# end
 	end
 
 	# Handle reference types - save the "list_id" and "full_name" values, only if those fields are in the DB

@@ -8,7 +8,7 @@ module QuickbooksQueryable
 		qb.to_hash.each do |key, value|
 			# skip processing line items unless we're inside the line item class (e.g., Estimate objects shouldn't try to save EstimateLine attributes)
 			next if ignored_type?(key)
-                        if line_item_type?(key)
+			if line_item_type?(key)
 				next unless self.class.name.match(/Line/)
 			end
 			if self.respond_to?("#{key}=")
