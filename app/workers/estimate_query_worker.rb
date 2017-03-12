@@ -2,9 +2,6 @@ class EstimateQueryWorker < QBWC::Worker
 
   include QueryTxnTypeHandler
 
-
-  # def should_run?
-
   def requests(job, session, data)
     {
       :estimate_query_rq => {
@@ -14,11 +11,8 @@ class EstimateQueryWorker < QBWC::Worker
        #  :from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_estimates').first.updated_at.localtime.strftime '%FT%R'}"
          :from_modified_date => "2017-02-28T08:14",
           },
-	      :include_line_items => true,
-        :owner_id => 0
+	 :include_line_items => true
       }
     }
   end
-
-    # handle response method is part of QueryTxnTypeHandler concern
 end # end class

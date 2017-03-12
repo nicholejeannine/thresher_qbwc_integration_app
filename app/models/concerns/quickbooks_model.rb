@@ -17,13 +17,23 @@ module QuickbooksModel
 
 	# Is the xml fragment a "reference type"? (A reference type has additional key/value pairs that need to be processed separately)
 	def ref_type?(key)
-		key.match(/_ref$/)
+	  key.match(/_ref$/)
 	end
 
 	# Is the xml fragment a "custom type"? (In Quickbooks a custom type has the key "data_ext_ret")
 	def custom_type?(key)
-		key.match(/data_ext_ret/)
+	  key.match(/data_ext_ret/)
 	end
+
+	# Is the xml fragment part of a "line item?"
+	def line_item_type?(key)
+	  key.match(/_line_ret/)
+	end
+
+        # Keys we never care about handling
+        def ignored_type?(key)
+	   key.match(/class_ref|contact_ref|contacts_ret|card_info|currency_ref|ship_to_address/)
+        end
 
 	# Handle each piece of an address
 	def handle_address(key, value)
@@ -44,21 +54,29 @@ module QuickbooksModel
 
 	# Handle reference types - save the "list_id" and "full_name" values, only if those fields are in the DB
 	def handle_ref_type(key, value)
+                begin
 		name = key.remove(/_ref$/)
-		self.send("#{name}_id=", value['list_id']) if self.respond_to?("#{name}_id=")
-		self.send("#{name}_full_name=", value['full_name']) if self.respond_to?("#{name}_full_name=")
+		update_attribute("#{name}_id", value['list_id'])
+		update_attribute("#{name}_full_name", value['full_name'])
+               rescue Exception => e
+                QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{self.id}", :error_message => "#{e} in persisting #{key}")
+               end
 	end
 
 	# Customer objects have custom fields - this method parses the value returned for this part of a qb hash
 	def handle_custom_type(value)
 		value.to_a.each do |arr|
-			if self.respond_to?("primary_contact=") && arr['data_ext_name'] == 'Site Contact'
-				self.send("primary_contact=", "#{arr['data_ext_value']}")
-			elsif self.respond_to?("primary_email=") && arr['data_ext_name'] == 'Site Email'
-				self.send("primary_email=", "#{arr['data_ext_value']}")
-			elsif self.respond_to?("primary_phone=") && arr['data_ext_name'] == 'Site Phone'
-				self.send("primary_phone=", "#{arr['data_ext_value']}")
+			if arr['data_ext_name'] == 'Site Contact'
+				update_attribute("primary_contact", "#{arr['data_ext_value']}")
+			elsif arr['data_ext_name'] == 'Site Email'
+				update_attribute("primary_email", "#{arr['data_ext_value']}")
+			elsif arr['data_ext_name'] == 'Site Phone'
+				update_attribute("primary_phone", "#{arr['data_ext_value']}")
 			end
 		end
+	end
+
+	def update_attribute(column_name, new_value)
+		self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
 	end
 end
