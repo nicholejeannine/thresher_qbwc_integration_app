@@ -23,17 +23,18 @@ module WorkerUtils
 		  return if instance_id.nil? && ret.nil?
 	    if ret.is_a?(Array)
 		    ret.each do |line|
-				  instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
-				  instance_line.send("#{klass.name.underscore}_id=", instance_id)
-				  instance_line.parse_qb_hash(line)
-				  instance_line.save
+			    handle_line(instance_id, line)
 		    end
 	    end
 		  if ret.is_a?(Qbxml::Hash)
-			  instance_line = line_klass.find_or_initialize_by(:id => ret['txn_line_id'])
-			  instance_line.send("#{klass.name.underscore}_id=", instance_id)
-			  instance_line.parse_qb_hash(ret)
-			  instance_line.save
+			  handle_line(instance_id, ret)
 		  end
+		end
+
+		def handle_line(instance_id, line)
+			instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
+			instance_line.send("#{klass.name.underscore}_id=", instance_id)
+			instance_line.parse_qb_hash(line)
+			instance_line.save
 		end
 end
