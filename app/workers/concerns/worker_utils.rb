@@ -19,8 +19,8 @@ module WorkerUtils
 			line_klass.to_s.underscore << '_ret'
 		end
 
-		def process_line_items(ret = nil)
-		  return if ret.nil?
+		def process_line_items(instance_id = nil, ret = nil)
+		  return if instance_id.nil? && ret.nil?
 	    if ret.is_a?(Array)
 		    ret.each do |line|
 				  instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
