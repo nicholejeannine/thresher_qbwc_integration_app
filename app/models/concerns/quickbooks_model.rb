@@ -37,6 +37,7 @@ module QuickbooksModel
 
 	# Handle each piece of an address
 	def handle_address(key, value)
+          QbwcError.create(:worker_class => 'Address', :model_id => "#{key}", :error_message => "Value #{value} of type #{value.class} from #{key} of #{key.class}")
 		update_attribute("#{key}_addr1", value['addr1'])
 		update_attribute("#{key}_addr2", value['addr2'])
 		update_attribute("#{key}_addr3", value['addr3'])
