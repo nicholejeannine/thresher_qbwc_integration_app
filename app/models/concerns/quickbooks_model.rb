@@ -31,36 +31,36 @@ module QuickbooksModel
 	end
 
         # Keys we never care about handling
-        def ignored_type?(key)
-	   key.match(/class_ref|contact_ref|contacts_ret|card_info|currency_ref|ship_to_address/)
-        end
+	def ignored_type?(key)
+	   key.match(/class_ref|contact_ref|contacts_ret|card_info|currency_ref|ship_to_address|total_balance/)
+	end
 
 	# Handle each piece of an address
 	def handle_address(key, value)
-		self.send("#{key}_addr1=", value['addr1']) if self.respond_to?("#{key}_addr1=")
-		self.send("#{key}_addr2=", value['addr2']) if self.respond_to?("#{key}_addr2=")
-		self.send("#{key}_addr3=", value['addr3']) if self.respond_to?("#{key}_addr3=")
-		self.send("#{key}_addr4=", value['addr4']) if self.respond_to?("#{key}_addr4=")
-		self.send("#{key}_addr5=", value['addr5']) if self.respond_to?("#{key}_addr5=")
+		update_attribute("#{key}_addr1", value['addr1'])
+		update_attribute("#{key}_addr2", value['addr2'])
+		update_attribute("#{key}_addr3", value['addr3'])
+		update_attribute("#{key}_addr4", value['addr4'])
+		update_attribute("#{key}_addr5", value['addr5'])
 		# If this is an extended address we need to also save city, state, etc
 		if extended_address?(key)
-			self.send("#{key}_city=", value['city']) if self.respond_to?("#{key}_city=")
-			self.send("#{key}_state=", value['state']) if self.respond_to?("#{key}_state=")
-			self.send("#{key}_postal_code=", value['postal_code']) if self.respond_to?("#{key}_postal_code=")
-			self.send("#{key}_country=", value['country'])if self.respond_to?("#{key}_country=")
-			self.send("#{key}_note=", value['note']) if self.respond_to?("#{key}_note=")
+			update_attribute("#{key}_city", value['city'])
+			update_attribute("#{key}_state", value['state'])
+			update_attribute("#{key}_postal_code", value['postal_code'])
+			update_attribute("#{key}_country", value['country'])
+			update_attribute("#{key}_note", value['note'])
 		end
 	end
 
 	# Handle reference types - save the "list_id" and "full_name" values, only if those fields are in the DB
 	def handle_ref_type(key, value)
-                begin
-		name = key.remove(/_ref$/)
-		update_attribute("#{name}_id", value['list_id'])
-		update_attribute("#{name}_full_name", value['full_name'])
-               rescue Exception => e
-                QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{self.id}", :error_message => "#{e} in persisting #{key}")
-               end
+		begin
+		  name = key.remove(/_ref$/)
+		  update_attribute("#{name}_id", value['list_id'])
+		  update_attribute("#{name}_full_name", value['full_name'])
+		  rescue Exception => e
+			  QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{self.id}", :error_message => "#{e} in persisting #{key}")
+		  end
 	end
 
 	# Customer objects have custom fields - this method parses the value returned for this part of a qb hash
