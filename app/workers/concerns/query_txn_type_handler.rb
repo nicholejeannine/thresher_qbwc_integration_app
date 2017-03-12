@@ -10,20 +10,7 @@ module QueryTxnTypeHandler
       instance = klass.find_or_initialize_by(:id => instance_id)
       instance.parse_qb_hash(qb)
       instance.save
-      if qb["#{line_item_response_name}"].class == Array
-        qb["#{line_item_response_name}"].each do |line|
-          instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
-          instance_line.send("#{klass.name.underscore}_id=", instance_id)
-          instance_line.parse_qb_hash(line)
-          instance_line.save
-        end
-      end
-      if qb["#{line_item_response_name}"].class == Qbxml::Hash
-        instance_line = line_klass.find_or_initialize_by(:id => qb["#{line_item_response_name}"]['txn_line_id'])
-        instance_line.send("#{klass.name.underscore}_id=", instance_id)
-        instance_line.parse_qb_hash(qb["#{line_item_response_name}"])
-        instance_line.save
-      end
+      process_line_items(qb["#{line_item_response_name}"])
       # Catch any errors and save them to the qbwc_errors table
       rescue Exception => e
       QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{instance_id}", :error_message => "#{e}")
