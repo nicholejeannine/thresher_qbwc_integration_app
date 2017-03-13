@@ -16,7 +16,7 @@ module WorkerUtils
 		end
 
 		def line_item_response_name
-			line_klass.to_s.underscore << '_ret'
+			klass.to_s.underscore.concat('_line_ret')
 		end
 
 		def process_line_items(instance_id = nil, ret = nil)
