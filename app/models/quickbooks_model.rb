@@ -1,6 +1,6 @@
 class QuickbooksModel < ActiveRecord::Base
   include QuickbooksQueryable
-
+  self.abstract_class = true
   # Handle each piece of an address
   def handle_address(key, value)
     if value && value.is_a?(Qbxml::Hash)
