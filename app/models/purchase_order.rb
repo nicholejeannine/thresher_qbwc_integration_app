@@ -1,4 +1,3 @@
-class PurchaseOrder < ApplicationRecord
-  include QuickbooksQueryable
+class PurchaseOrder < QuickbooksModel
   has_many :purchase_order_lines
 end

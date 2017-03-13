@@ -1,4 +1,3 @@
-class InvoiceLine < ApplicationRecord
-  include QuickbooksQueryable
+class InvoiceLine < QuickbooksModel
   belongs_to :invoice, optional: true
 end
