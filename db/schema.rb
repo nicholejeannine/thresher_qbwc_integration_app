@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308003749) do
+ActiveRecord::Schema.define(version: 20170312201948) do
 
   create_table "clients", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "id"
@@ -156,7 +156,6 @@ ActiveRecord::Schema.define(version: 20170308003749) do
     t.string   "sales_rep_id",                       limit: 41
     t.string   "sales_rep_full_name",                limit: 5
     t.decimal  "balance",                                         precision: 20, scale: 5
-    t.decimal  "total_balance",                                   precision: 20, scale: 5
     t.string   "sales_tax_code_id",                  limit: 41
     t.string   "sales_tax_code_full_name",           limit: 3
     t.string   "item_sales_tax_id",                  limit: 41
@@ -708,7 +707,7 @@ ActiveRecord::Schema.define(version: 20170308003749) do
   end
 
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "worker_class",                  null: false
+    t.string   "worker_class",                null: false
     t.string   "model_id"
     t.text     "error_message", limit: 65535
     t.datetime "created_at",                  null: false
