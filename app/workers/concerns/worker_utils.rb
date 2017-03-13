@@ -22,13 +22,11 @@ module WorkerUtils
 		def process_line_items(instance_id = nil, ret = nil)
 		  return if instance_id.nil? || ret.nil?
 		  begin
+			  handle_line(instance_id, ret) if ret.is_a?(Qbxml::Hash)
 			  if ret.is_a?(Array)
 				  ret.each do |line|
 					  handle_line(instance_id, line)
 				  end
-			  end
-			  if ret.is_a?(Qbxml::Hash)
-				   handle_line(instance_id, ret)
 			  end
 		  rescue Exception => e
 			  QbwcError.create(:worker_class => "line item", :model_id => "#{instance_id}", :error_message => "#{line}")
