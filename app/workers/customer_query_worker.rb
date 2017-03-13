@@ -5,7 +5,7 @@ class CustomerQueryWorker < QBWC::Worker
   def requests(job, session, data)
     {
       :customer_query_rq => {
-          :xml_attributes => { "requestID" =>"1", "iterator"  => "Start" },
+        :xml_attributes => { "requestID" =>"1", "iterator"  => "Start" },
         :max_returned => 100,
         :active_status => "All",
         :from_modified_date => "2017-02-28T08:14",
@@ -15,7 +15,6 @@ class CustomerQueryWorker < QBWC::Worker
     }
   end
 
-	# see QueryResponseHandler for handle_response method
+  # see QueryResponseHandler for handle_response method
 
 end # end class
-
