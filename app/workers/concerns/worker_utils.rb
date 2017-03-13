@@ -23,9 +23,7 @@ module WorkerUtils
 		  return if instance_id.nil? || ret.nil?
 		  begin
 			  handle_line(instance_id, ret) if ret.is_a?(Qbxml::Hash)
-			  if ret.is_a?(Array)
-                  ret.each{|line|handle_line(instance_id, line)} 
-		          end
+			  ret.each{|line|handle_line(instance_id, line)} if ret.is_a?(Array)		          
 		  rescue Exception => e
 			  QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{instance_id}", :error_message => "line item processing failed due to error: #{e}")
 		     end
