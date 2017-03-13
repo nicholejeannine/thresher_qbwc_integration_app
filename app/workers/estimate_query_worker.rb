@@ -1,6 +1,6 @@
 class EstimateQueryWorker < QBWC::Worker
 
-  include QueryTxnTypeHandler
+  include QueryResponseHandler
 
   def requests(job, session, data)
     {

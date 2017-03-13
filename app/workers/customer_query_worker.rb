@@ -1,6 +1,6 @@
 class CustomerQueryWorker < QBWC::Worker
 
-  include QueryListTypeHandler
+  include QueryResponseHandler
 
   def requests(job, session, data)
     {
@@ -15,7 +15,7 @@ class CustomerQueryWorker < QBWC::Worker
     }
   end
 
-	# see QueryListTypeHandler for handle_response method
+	# see QueryResponseHandler for handle_response method
 
 end # end class
 
