@@ -1,4 +1,3 @@
-class PurchaseOrderLine < ApplicationRecord
-  include QuickbooksQueryable
+class PurchaseOrderLine < QuickbooksModel
   belongs_to :purchase_order, optional: true
 end
