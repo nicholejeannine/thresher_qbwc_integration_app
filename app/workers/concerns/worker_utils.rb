@@ -29,9 +29,9 @@ module WorkerUtils
 				  end
 			  end
 		  rescue Exception => e
-			  QbwcError.create(:worker_class => "line item", :model_id => "#{instance_id}", :error_message => "#{line}")
+			  QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{instance_id}", :error_message => "line item processing failed due to error: #{e}")
 		     end
-		   end
+		end
 
 		def handle_line(instance_id, line)
 			instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
