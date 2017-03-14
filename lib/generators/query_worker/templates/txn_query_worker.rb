@@ -7,7 +7,6 @@ include QueryResponseHandler
       :<%=name.underscore%>_query_rq => {
     :xml_attributes => { "requestID" =>"1", "iterator"  => "Start" },
     :max_returned => 100,
-    :active_status => "All",
     :modified_date_range_filter => {
         #:from_modified_date => "#{QBWC::ActiveRecord::Job::QbwcJob.where(:name => '<%=name.underscore%>_query').first.updated_at.localtime.strftime '%FT%R'}"
     },
