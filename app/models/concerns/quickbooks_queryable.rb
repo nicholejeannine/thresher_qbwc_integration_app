@@ -1,15 +1,15 @@
 module QuickbooksQueryable
   extend ActiveSupport::Concern
-  include QuickbooksReturnTypes
+  include QuickbooksObjects
   # Takes a qb hash and deals with each key/value pair according to its contents.
-  # This is the method called by CustomerQueryWorker (and other list-type list workers)
   def parse_qb_hash(qb)
     qb.to_hash.each do |key, value|
-      # skip ignored items. Skip line items unless we're in a line item.
+      # Ignore the ignored types
+      next if QuickbooksReturnTypes::IGNORED_TYPES.include?(key)
       if line_item_type?(key)
-        next unless self.class.name.match(/Line/)
+        # Only let line item classes parse line items
+        next unless self.line_item?
       end
-      next if ignored_type?(key)
       if address?(key)
         handle_address(key, value)
       elsif ref_type?(key)
@@ -20,7 +20,7 @@ module QuickbooksQueryable
       end
     end
   end
-
+  
   def handle_address(key, value)
     if value && value.is_a?(Qbxml::Hash)
       value.each do |k, v|
@@ -52,8 +52,10 @@ module QuickbooksQueryable
       end
     end
   end
-
+  
+  # Try to update the attribute if it's not a special type
   def update_attribute(column_name, new_value)
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
   end
+  
 end

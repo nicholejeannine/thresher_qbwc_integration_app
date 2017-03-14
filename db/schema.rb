@@ -97,6 +97,14 @@ ActiveRecord::Schema.define(version: 20170314065014) do
     t.integer  "Customers_PKEY"
   end
 
+  create_table "customer_hierarchies", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "ancestor_id",   null: false
+    t.string  "descendant_id", null: false
+    t.integer "generations",   null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "customer_anc_desc_idx", unique: true, using: :btree
+    t.index ["descendant_id"], name: "customer_desc_idx", using: :btree
+  end
+
   create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"

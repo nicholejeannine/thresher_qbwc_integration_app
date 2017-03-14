@@ -1,2 +1,0 @@
-class ReceivePayment < QuickbooksModel
-end
