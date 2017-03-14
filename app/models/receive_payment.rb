@@ -1,0 +1,2 @@
+class ReceivePayment < ApplicationRecord
+end
