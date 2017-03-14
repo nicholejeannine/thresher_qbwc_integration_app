@@ -21,7 +21,8 @@ module QuickbooksReturnTypes
 	end
 
 # Keys we never care about handling
-	def ignored_type?(key)
-		key.match(/class_ref|contact_ref|contacts_ret|card_info|currency_ref|ship_to_address|total_balance/)
+	def ignored_types
+		['class_ref', 'ship_to_address', 'print_as', 'pager', 'additional_contact_ref', 'contacts_ret' 'credit_limit', 'credit_card_info', 'additional_notes_ret', 'is_statement_with_parent', 'external_guid','tax_registration_number', 'currency_ref']
 	end
+	
 end
