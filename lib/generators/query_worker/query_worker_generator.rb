@@ -12,7 +12,7 @@ class QueryWorkerGenerator < Rails::Generators::NamedBase
   end
   
   def elements
-    QBWC.parser.describe('ReceivePaymentRet').elements.map{|e|e.name.underscore}
+    QBWC.parser.describe("#{name}Ret").elements.map{|e|e.name.underscore.match(/_ref$/).nil? ? e.name.underscore : [e.name.underscore.remove(/_ref$/).concat('_id'), e.name.underscore.remove(/_ref$/).concat('_full_name')]}.flatten
   end
   
 end

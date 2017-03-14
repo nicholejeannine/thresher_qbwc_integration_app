@@ -1,2 +1,3 @@
-class Customer < QuickbooksModel
+class Customer < ApplicationRecord
+	include QuickbooksQueryable
 end
