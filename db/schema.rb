@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312201948) do
+ActiveRecord::Schema.define(version: 20170314065014) do
 
   create_table "clients", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "id"
@@ -740,6 +740,26 @@ ActiveRecord::Schema.define(version: 20170312201948) do
     t.text     "pending_jobs", limit: 65535,             null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "receive_payments", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence"
+    t.integer  "txn_number"
+    t.string   "customer_id"
+    t.string   "customer_full_name"
+    t.string   "ar_account_id"
+    t.string   "ar_account_full_name"
+    t.date     "txn_date"
+    t.string   "ref_number"
+    t.decimal  "total_amount",                           precision: 10
+    t.string   "payment_method_id"
+    t.string   "payment_method_full_name"
+    t.text     "memo",                     limit: 65535
+    t.decimal  "unused_payment",                         precision: 10
+    t.decimal  "unused_credits",                         precision: 10
+    t.string   "applied_to_txn_ret"
   end
 
   create_table "sales_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,3 +1,2 @@
-class ReceivePayment < ApplicationRecord
-  include QuickbooksQueryable
+class ReceivePayment < QuickbooksModel
 end
