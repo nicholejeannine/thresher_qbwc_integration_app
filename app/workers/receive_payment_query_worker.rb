@@ -15,4 +15,8 @@ include QueryResponseHandler
     }
     }
   end
+
+	def handle_response(response)
+    Rails.logger.warn("#{response}")
+  end
 end
