@@ -1,26 +1,8 @@
 module QuickbooksQueryable
   extend ActiveSupport::Concern
-  include QuickbooksObjects
-  # Takes a qb hash and deals with each key/value pair according to its contents.
-  def parse_qb_hash(qb)
-    qb.to_hash.each do |key, value|
-      # Ignore the ignored types
-      next if QuickbooksReturnTypes::IGNORED_TYPES.include?(key)
-      if line_item_type?(key)
-        # Only let line item classes parse line items
-        next unless self.class.line_item?
-      end
-      if address?(key)
-        handle_address(key, value)
-      elsif ref_type?(key)
-        handle_ref_type(key, value)
-      elsif custom_type?(key)
-        handle_custom_type(value)
-      else update_attribute(key, value)
-      end
-    end
-  end
-  
+  include QuickbooksTypeable
+
+  # Handle address types
   def handle_address(key, value)
     if value && value.is_a?(Qbxml::Hash)
       value.each do |k, v|
@@ -52,10 +34,28 @@ module QuickbooksQueryable
       end
     end
   end
-  
-  # Try to update the attribute if it's not a special type
+
+  # Try to update the attribute, only if the column named exists in the database table.
   def update_attribute(column_name, new_value)
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
   end
-  
+
+  # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
+  def parse_qb_hash(qb)
+    qb.to_hash.each do |key, value|
+      next if ignored_type?(key) # skip ignored items.
+      if line_item_type?(key)
+        next unless self.class.name.match(/Line/) # Only line item models should handle the line items.
+      end
+      if address?(key)
+        handle_address(key, value) # deal with address blocks
+      elsif ref_type?(key)
+        handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
+      elsif custom_type?(key)
+        handle_custom_type(value)
+      else update_attribute(key, value) # handle custom data types we have added to quickbooks
+      end
+    end
+  end
+
 end

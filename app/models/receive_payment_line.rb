@@ -1,2 +1,0 @@
-class ReceivePaymentLine < ApplicationRecord
-end
