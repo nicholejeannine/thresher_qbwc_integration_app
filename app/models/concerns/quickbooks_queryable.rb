@@ -6,15 +6,15 @@ module QuickbooksQueryable
   def parse_qb_hash(qb)
     qb.to_hash.each do |key, value|
       # skip ignored items. Skip line items unless we're in a line item.
-      if k.line_item_type?
+      if line_item_type?(key)
         next unless self.class.name.match(/Line/)
       end
-      next if k.ignored_type?
-      if k.address?
+      next if ignored_type?(key)
+      if address?(key)
         handle_address(key, value)
-      elsif k.ref_type?
+      elsif ref_type?(key)
         handle_ref_type(key, value)
-      elsif k.custom_type?
+      elsif custom_type?(key)
         handle_custom_type(value)
       else update_attribute(key, value)
       end

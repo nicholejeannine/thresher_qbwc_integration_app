@@ -1,5 +1,5 @@
 module QuickbooksReturnTypes
-	extend ActiveSupport::Concnern
+	extend ActiveSupport::Concern
 	# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
 	def address?(key)
 		key.match(/ship_address$|vendor_address$|bill_address$|block$/)
