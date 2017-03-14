@@ -8,7 +8,7 @@ module QuickbooksQueryable
       next if QuickbooksReturnTypes::IGNORED_TYPES.include?(key)
       if line_item_type?(key)
         # Only let line item classes parse line items
-        next unless self.line_item?
+        next unless self.class.line_item?
       end
       if address?(key)
         handle_address(key, value)
