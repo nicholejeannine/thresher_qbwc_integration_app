@@ -1,5 +1,9 @@
 module QuickbooksReturnTypes
 	extend ActiveSupport::Concern
+	# Keys we never care about handling
+	IGNORED_TYPES = [
+				'class_ref', 'ship_to_address', 'print_as', 'pager', 'additional_contact_ref', 'contacts_ret' 'credit_limit', 'credit_card_info', 'additional_notes_ret', 'is_statement_with_parent', 'external_guid','tax_registration_number', 'currency_ref'
+	]
 	# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
 	def address?(key)
 		key.match(/ship_address$|vendor_address$|bill_address$|block$/)
@@ -20,9 +24,4 @@ module QuickbooksReturnTypes
 		key.match(/_line_ret/)
 	end
 
-# Keys we never care about handling
-	def ignored_types
-		['class_ref', 'ship_to_address', 'print_as', 'pager', 'additional_contact_ref', 'contacts_ret' 'credit_limit', 'credit_card_info', 'additional_notes_ret', 'is_statement_with_parent', 'external_guid','tax_registration_number', 'currency_ref']
-	end
-	
 end
