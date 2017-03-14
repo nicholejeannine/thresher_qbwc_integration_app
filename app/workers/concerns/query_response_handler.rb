@@ -18,7 +18,8 @@ module QueryResponseHandler
         instance.save
         # Process any line items, if they are present
         # TODO - FIND out what happens when qb line item response is empty - does it try to run the method with a null value, does it throw an error, does this return false and exit?
-        process_line_items(instance_id, qb["#{line_item_response_name}"])
+        line_items = qb["#{line_item_response_name}"] || ''
+        process_line_items(instance_id, line_items) unless line_items.empty?
         # Catch any errors and save them to the qbwc_errors table
       rescue Exception => e
         QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{instance_id}", :error_message => "#{e}")

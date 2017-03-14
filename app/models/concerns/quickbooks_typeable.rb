@@ -22,7 +22,7 @@ module QuickbooksTypeable
 
 	# Keys we never care about handling
 	def ignored_type?(key)
-		key.match(/class_ref|contact_ref|contacts_ret|card_info|currency_ref|ship_to_address|total_balance/)
+		key.match(/class_ref$|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$/)
 	end
 
 end
