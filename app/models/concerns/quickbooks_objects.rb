@@ -19,7 +19,7 @@ module QuickbooksObjects
   
   # Determine if the current model represents a line item type
   def line_item?
-    self.name.match('Line$')
+    self.name.match(/Line$/)
   end
   end
 end
