@@ -3,7 +3,7 @@
   requests = {
    :data_event_subscription_query_rq => {
      :xml_attributes => {"requestID" => '9'},
-     :subscriber_id =>  '{57F3B9B1-86F1-4fcc-B1EE-566DE1813D20}'
+     :subscriber_id => 0 
      }
    }
 #  QBWC.add_job(:customer_query, true, '', CustomerQueryWorker)
