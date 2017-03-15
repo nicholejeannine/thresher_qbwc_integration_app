@@ -25,7 +25,7 @@ module WorkerUtils
     QBWC.parser.describe("#{klass}Ref")&.elements&.first&.name == 'TxnID'
   end
 
-  # The the line item class (returned as a Class object, so line_klass.new will create a new object)
+  # The line item class (returned as a Class object, so line_klass.new will create a new object)
   def line_klass
     self.class.name.remove(/QueryWorker/).concat('Line').constantize
   end
