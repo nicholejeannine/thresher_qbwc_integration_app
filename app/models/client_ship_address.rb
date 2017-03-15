@@ -1,0 +1,2 @@
+class ClientShipAddress < ApplicationRecord
+end

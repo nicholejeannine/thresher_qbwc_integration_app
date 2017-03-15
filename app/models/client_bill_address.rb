@@ -1,0 +1,2 @@
+class ClientBillAddress < ApplicationRecord
+end

@@ -10,172 +10,152 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20170315231156) do
 
-  create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "client_bill_addresses", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "addr1",       limit: 41
+    t.string "addr2",       limit: 41
+    t.string "addr3",       limit: 41
+    t.string "addr4",       limit: 41
+    t.string "addr5",       limit: 41
+    t.string "city",        limit: 31
+    t.string "state",       limit: 21
+    t.string "postal_code", limit: 13
+    t.string "country",     limit: 31
+    t.string "note",        limit: 41
+  end
+
+  create_table "client_contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "salutation",      limit: 15
+    t.string "first_name",      limit: 25
+    t.string "middle_name",     limit: 25
+    t.string "last_name",       limit: 25
+    t.string "job_title",       limit: 41
+    t.string "phone",           limit: 21
+    t.string "alt_phone",       limit: 21
+    t.string "fax",             limit: 21
+    t.string "email",           limit: 1023
+    t.string "cc",              limit: 1023
+    t.string "contact",         limit: 41
+    t.string "alt_contact",     limit: 41
+    t.string "primary_contact"
+    t.string "primary_email"
+    t.string "primary_phone"
+  end
+
+  create_table "client_ship_addresses", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "addr1",       limit: 41
+    t.string "addr2",       limit: 41
+    t.string "addr3",       limit: 41
+    t.string "addr4",       limit: 41
+    t.string "addr5",       limit: 41
+    t.string "city",        limit: 31
+    t.string "state",       limit: 21
+    t.string "postal_code", limit: 13
+    t.string "country",     limit: 31
+    t.string "note",        limit: 41
+  end
+
+  create_table "clients", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
-    t.string   "edit_sequence",                      limit: 16
-    t.string   "name",                               limit: 41
-    t.string   "full_name",                          limit: 209
-    t.boolean  "is_active",                          default: true, null: false
-    t.string   "parent_id",                          limit: 41
-    t.integer  "sublevel",                           default: 0,    null: false
-    t.string   "company_name",                       limit: 41
-    t.string   "salutation",                         limit: 15
-    t.string   "first_name",                         limit: 25
-    t.string   "middle_name",                        limit: 5
-    t.string   "last_name",                          limit: 25
-    t.string   "job_title",                          limit: 41
-    t.string   "bill_address_addr1",                 limit: 41
-    t.string   "bill_address_addr2",                 limit: 41
-    t.string   "bill_address_addr3",                 limit: 41
-    t.string   "bill_address_addr4",                 limit: 41
-    t.string   "bill_address_addr5",                 limit: 41
-    t.string   "bill_address_city",                  limit: 31
-    t.string   "bill_address_state",                 limit: 21
-    t.string   "bill_address_postal_code",           limit: 13
-    t.string   "bill_address_country",               limit: 31
-    t.string   "bill_address_note",                  limit: 41
-    t.string   "bill_address_block_addr1",           limit: 41
-    t.string   "bill_address_block_addr2",           limit: 41
-    t.string   "bill_address_block_addr3",           limit: 41
-    t.string   "bill_address_block_addr4",           limit: 41
-    t.string   "bill_address_block_addr5",           limit: 41
-    t.string   "ship_address_addr1",                 limit: 41
-    t.string   "ship_address_addr2",                 limit: 41
-    t.string   "ship_address_addr3",                 limit: 41
-    t.string   "ship_address_addr4",                 limit: 41
-    t.string   "ship_address_addr5",                 limit: 41
-    t.string   "ship_address_city",                  limit: 31
-    t.string   "ship_address_state",                 limit: 21
-    t.string   "ship_address_postal_code",           limit: 13
-    t.string   "ship_address_country",               limit: 31
-    t.string   "ship_address_note",                  limit: 41
-    t.string   "ship_address_block_addr1",           limit: 41
-    t.string   "ship_address_block_addr2",           limit: 41
-    t.string   "ship_address_block_addr3",           limit: 41
-    t.string   "ship_address_block_addr4",           limit: 41
-    t.string   "ship_address_block_addr5",           limit: 41
-    t.string   "phone",                              limit: 21
-    t.string   "alt_phone",                          limit: 21
-    t.string   "fax",                                limit: 21
-    t.string   "email",                              limit: 1023
-    t.string   "cc",                                 limit: 1023
-    t.string   "contact",                            limit: 41
-    t.string   "alt_contact",                        limit: 41
-    t.string   "customer_type_id",                   limit: 41
-    t.string   "customer_type_full_name",            limit: 159
-    t.string   "terms_id",                           limit: 41
-    t.string   "terms_full_name",                    limit: 31
-    t.string   "sales_rep_id",                       limit: 41
-    t.string   "sales_rep_full_name",                limit: 5
-    t.decimal  "balance",      precision: 20, scale: 5
-    t.decimal "total_balance", precision: 20, scale: 5
-    t.string   "sales_tax_code_id",                  limit: 41
-    t.string   "sales_tax_code_full_name",           limit: 3
-    t.string   "item_sales_tax_id",                  limit: 41
-    t.string   "item_sales_tax_full_name",           limit: 31
-    t.string   "resale_number",                      limit: 15
-    t.string   "account_number",                     limit: 99
-    t.string   "preferred_payment_method_id",        limit: 41
-    t.string   "preferred_payment_method_full_name", limit: 31
-    t.string   "job_status",                         limit: 41
-    t.date     "job_start_date"
-    t.date     "job_projected_end_date"
-    t.date     "job_end_date"
-    t.string   "job_desc",                           limit: 99
-    t.string   "job_type_id",                        limit: 41
-    t.string   "job_type_full_name",                 limit: 159
-    t.string   "preferred_delivery_method",          limit: 41
-    t.string   "price_level_id",                     limit: 41
-    t.string   "price_level_full_name",              limit: 31
-    t.string   "primary_contact"
-    t.string   "primary_email"
-    t.string   "primary_phone"
+    t.string   "edit_sequence",             limit: 16
+    t.string   "full_name",                 limit: 209
+    t.boolean  "is_active",                                                      default: true, null: false
+    t.string   "company_name",              limit: 41
+    t.string   "customer_type",             limit: 159
+    t.string   "terms",                     limit: 31
+    t.string   "sales_rep",                 limit: 5
+    t.decimal  "total_balance",                         precision: 20, scale: 5
+    t.string   "sales_tax_code",            limit: 3
+    t.string   "item_sales_tax",            limit: 31
+    t.string   "account_number",            limit: 99
+    t.string   "preferred_delivery_method", limit: 41
+    t.index ["full_name"], name: "index_clients_on_full_name", unique: true, using: :btree
+    t.index ["is_active"], name: "index_clients_on_is_active", using: :btree
   end
 
   create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "estimate_id"
     t.string  "item_id"
     t.string  "item_full_name"
-    t.string    "desc",             limit: 4095
-    t.decimal "quantity",           precision: 20, scale: 5
-    t.string  "unit_of_measure", limit: 31
+    t.string  "desc",                              limit: 4095
+    t.decimal "quantity",                                       precision: 20, scale: 5
+    t.string  "unit_of_measure",                   limit: 31
     t.string  "override_uom_set_id"
-    t.string  "override_uom_set_full_name", limit: 31
-    t.decimal "rate",         precision: 20, scale: 5
-    t.float   "rate_percent", limit: 24
-    t.decimal "amount",       precision: 20, scale: 5
+    t.string  "override_uom_set_full_name",        limit: 31
+    t.decimal "rate",                                           precision: 20, scale: 5
+    t.float   "rate_percent",                      limit: 24
+    t.decimal "amount",                                         precision: 20, scale: 5
     t.string  "inventory_site_id"
-    t.string  "inventory_site_full_name", limit: 31
+    t.string  "inventory_site_full_name",          limit: 31
     t.string  "inventory_site_location_id"
     t.string  "inventory_site_location_full_name", limit: 31
     t.string  "sales_tax_code_id"
-    t.string  "sales_tax_code_full_name", limit: 3
-    t.decimal "markup_rate",               precision: 20, scale: 5
-    t.float   "markup_rate_percent",       limit: 24
+    t.string  "sales_tax_code_full_name",          limit: 3
+    t.decimal "markup_rate",                                    precision: 20, scale: 5
+    t.float   "markup_rate_percent",               limit: 24
   end
 
   create_table "estimates", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
-    t.string   "edit_sequence", limit: 16
+    t.string   "edit_sequence",                     limit: 16
     t.integer  "txn_number"
     t.string   "customer_id"
-    t.string   "customer_full_name", limit: 209
+    t.string   "customer_full_name",                limit: 209
     t.string   "template_id"
-    t.string   "template_full_name", limit: 159
+    t.string   "template_full_name",                limit: 159
     t.date     "txn_date"
-    t.string   "ref_number", limit: 11
-    t.string   "bill_address_addr1", limit: 41
-    t.string   "bill_address_addr2", limit: 41
-    t.string   "bill_address_addr3", limit: 41
-    t.string   "bill_address_addr4", limit: 41
-    t.string   "bill_address_addr5", limit: 41
-    t.string   "bill_address_city", limit: 31
-    t.string   "bill_address_state", limit: 21
-    t.string   "bill_address_postal_code", limit: 13
-    t.string   "bill_address_country", limit: 31
-    t.string   "bill_address_note", limit: 41
-    t.string   "bill_address_block_addr1", limit: 41
-    t.string   "bill_address_block_addr2", limit: 41
-    t.string   "bill_address_block_addr3", limit: 41
-    t.string   "bill_address_block_addr4", limit: 41
-    t.string   "bill_address_block_addr5", limit: 41
-    t.string   "ship_address_addr1", limit: 41
-    t.string   "ship_address_addr2", limit: 41
-    t.string   "ship_address_addr3", limit: 41
-    t.string   "ship_address_addr4", limit: 41
-    t.string   "ship_address_addr5", limit: 41
-    t.string   "ship_address_city", limit: 31
-    t.string   "ship_address_state", limit: 21
-    t.string   "ship_address_postal_code", limit: 13
-    t.string   "ship_address_country", limit: 31
-    t.string   "ship_address_note", limit: 41
-    t.string   "ship_address_block_addr1", limit: 41
-    t.string   "ship_address_block_addr2", limit: 41
-    t.string   "ship_address_block_addr3", limit: 41
-    t.string   "ship_address_block_addr4", limit: 41
-    t.string   "ship_address_block_addr5", limit: 41
-    t.boolean   "is_active", default: true, null: false
-    t.string   "po_number", limit: 25
+    t.string   "ref_number",                        limit: 11
+    t.string   "bill_address_addr1",                limit: 41
+    t.string   "bill_address_addr2",                limit: 41
+    t.string   "bill_address_addr3",                limit: 41
+    t.string   "bill_address_addr4",                limit: 41
+    t.string   "bill_address_addr5",                limit: 41
+    t.string   "bill_address_city",                 limit: 31
+    t.string   "bill_address_state",                limit: 21
+    t.string   "bill_address_postal_code",          limit: 13
+    t.string   "bill_address_country",              limit: 31
+    t.string   "bill_address_note",                 limit: 41
+    t.string   "bill_address_block_addr1",          limit: 41
+    t.string   "bill_address_block_addr2",          limit: 41
+    t.string   "bill_address_block_addr3",          limit: 41
+    t.string   "bill_address_block_addr4",          limit: 41
+    t.string   "bill_address_block_addr5",          limit: 41
+    t.string   "ship_address_addr1",                limit: 41
+    t.string   "ship_address_addr2",                limit: 41
+    t.string   "ship_address_addr3",                limit: 41
+    t.string   "ship_address_addr4",                limit: 41
+    t.string   "ship_address_addr5",                limit: 41
+    t.string   "ship_address_city",                 limit: 31
+    t.string   "ship_address_state",                limit: 21
+    t.string   "ship_address_postal_code",          limit: 13
+    t.string   "ship_address_country",              limit: 31
+    t.string   "ship_address_note",                 limit: 41
+    t.string   "ship_address_block_addr1",          limit: 41
+    t.string   "ship_address_block_addr2",          limit: 41
+    t.string   "ship_address_block_addr3",          limit: 41
+    t.string   "ship_address_block_addr4",          limit: 41
+    t.string   "ship_address_block_addr5",          limit: 41
+    t.boolean  "is_active",                                                               default: true, null: false
+    t.string   "po_number",                         limit: 25
     t.string   "terms_id"
-    t.string   "terms_full_name", limit: 31
+    t.string   "terms_full_name",                   limit: 31
     t.date     "due_date"
     t.string   "sales_rep_id"
-    t.string   "sales_rep_full_name", limit: 5
-    t.string   "fob", limit: 13
-    t.decimal  "subtotal",  precision: 20, scale: 5
+    t.string   "sales_rep_full_name",               limit: 5
+    t.string   "fob",                               limit: 13
+    t.decimal  "subtotal",                                       precision: 20, scale: 5
     t.string   "item_sales_tax_id"
-    t.string   "item_sales_tax_full_name", limit: 31
-    t.float    "sales_tax_percentage",  limit: 24
-    t.decimal  "sales_tax_total",   precision: 20, scale: 5
-    t.decimal  "total_amount",      precision: 20, scale: 5
-    t.string     "memo",              limit: 4095
+    t.string   "item_sales_tax_full_name",          limit: 31
+    t.float    "sales_tax_percentage",              limit: 24
+    t.decimal  "sales_tax_total",                                precision: 20, scale: 5
+    t.decimal  "total_amount",                                   precision: 20, scale: 5
+    t.string   "memo",                              limit: 4095
     t.string   "customer_msg_id"
-    t.string   "customer_msg_full_name", limit: 101
-    t.boolean   "is_to_be_emailed"
+    t.string   "customer_msg_full_name",            limit: 101
+    t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code_id"
     t.string   "customer_sales_tax_code_full_name", limit: 3
   end
@@ -206,81 +186,81 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "invoices", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
-    t.string   "edit_sequence", limit: 16
+    t.string   "edit_sequence",                     limit: 16
     t.integer  "txn_number"
     t.string   "customer_id"
-    t.string   "customer_full_name", limit: 209
+    t.string   "customer_full_name",                limit: 209
     t.string   "ar_account_id"
-    t.string   "ar_account_full_name", limit: 159
+    t.string   "ar_account_full_name",              limit: 159
     t.string   "template_id"
-    t.string   "template_full_name", limit: 31
+    t.string   "template_full_name",                limit: 31
     t.date     "txn_date"
-    t.string   "ref_number", limit: 11
-    t.string   "bill_address_addr1", limit: 41
-    t.string   "bill_address_addr2", limit: 41
-    t.string   "bill_address_addr3", limit: 41
-    t.string   "bill_address_addr4", limit: 41
-    t.string   "bill_address_addr5", limit: 41
-    t.string   "bill_address_city", limit: 31
-    t.string   "bill_address_state", limit: 21
-    t.string   "bill_address_postal_code", limit: 13
-    t.string   "bill_address_country", limit: 31
-    t.string   "bill_address_note", limit: 41
-    t.string   "bill_address_block_addr1", limit: 41
-    t.string   "bill_address_block_addr2", limit: 41
-    t.string   "bill_address_block_addr3", limit: 41
-    t.string   "bill_address_block_addr4", limit: 41
-    t.string   "bill_address_block_addr5", limit: 41
-    t.string   "ship_address_addr1", limit: 41
-    t.string   "ship_address_addr2", limit: 41
-    t.string   "ship_address_addr3", limit: 41
-    t.string   "ship_address_addr4", limit: 41
-    t.string   "ship_address_addr5", limit: 41
-    t.string   "ship_address_city", limit: 31
-    t.string   "ship_address_state", limit: 21
-    t.string   "ship_address_postal_code", limit: 13
-    t.string   "ship_address_country", limit: 31
-    t.string   "ship_address_note", limit: 41
-    t.string   "ship_address_block_addr1", limit: 41
-    t.string   "ship_address_block_addr2", limit: 41
-    t.string   "ship_address_block_addr3", limit: 41
-    t.string   "ship_address_block_addr4", limit: 41
-    t.string   "ship_address_block_addr5", limit: 41
-    t.boolean   "is_pending"
-    t.boolean   "is_finance_charge"
-    t.string   "po_number", limit: 25
+    t.string   "ref_number",                        limit: 11
+    t.string   "bill_address_addr1",                limit: 41
+    t.string   "bill_address_addr2",                limit: 41
+    t.string   "bill_address_addr3",                limit: 41
+    t.string   "bill_address_addr4",                limit: 41
+    t.string   "bill_address_addr5",                limit: 41
+    t.string   "bill_address_city",                 limit: 31
+    t.string   "bill_address_state",                limit: 21
+    t.string   "bill_address_postal_code",          limit: 13
+    t.string   "bill_address_country",              limit: 31
+    t.string   "bill_address_note",                 limit: 41
+    t.string   "bill_address_block_addr1",          limit: 41
+    t.string   "bill_address_block_addr2",          limit: 41
+    t.string   "bill_address_block_addr3",          limit: 41
+    t.string   "bill_address_block_addr4",          limit: 41
+    t.string   "bill_address_block_addr5",          limit: 41
+    t.string   "ship_address_addr1",                limit: 41
+    t.string   "ship_address_addr2",                limit: 41
+    t.string   "ship_address_addr3",                limit: 41
+    t.string   "ship_address_addr4",                limit: 41
+    t.string   "ship_address_addr5",                limit: 41
+    t.string   "ship_address_city",                 limit: 31
+    t.string   "ship_address_state",                limit: 21
+    t.string   "ship_address_postal_code",          limit: 13
+    t.string   "ship_address_country",              limit: 31
+    t.string   "ship_address_note",                 limit: 41
+    t.string   "ship_address_block_addr1",          limit: 41
+    t.string   "ship_address_block_addr2",          limit: 41
+    t.string   "ship_address_block_addr3",          limit: 41
+    t.string   "ship_address_block_addr4",          limit: 41
+    t.string   "ship_address_block_addr5",          limit: 41
+    t.boolean  "is_pending"
+    t.boolean  "is_finance_charge"
+    t.string   "po_number",                         limit: 25
     t.string   "terms_id"
-    t.string   "terms_full_name", limit: 31
+    t.string   "terms_full_name",                   limit: 31
     t.date     "due_date"
     t.string   "sales_rep_id"
-    t.string   "sales_rep_full_name", limit: 5
-    t.string   "fob", limit: 13
+    t.string   "sales_rep_full_name",               limit: 5
+    t.string   "fob",                               limit: 13
     t.date     "ship_date"
     t.string   "ship_method_id"
-    t.string   "ship_method_full_name"
-    t.decimal  "subtotal", precision: 20, scale: 5
+    t.string   "ship_method_full_name",             limit: 15
+    t.decimal  "subtotal",                                       precision: 20, scale: 5
     t.string   "item_sales_tax_id"
-    t.string   "item_sales_tax_full_name"
+    t.string   "item_sales_tax_full_name",          limit: 31
     t.float    "sales_tax_percentage",              limit: 24
-    t.decimal  "sales_tax_total",  precision: 20, scale: 5
-    t.decimal  "applied_amount",   precision: 20, scale: 5
-    t.decimal  "balance_remaining", precision: 20, scale: 5
-    t.text     "memo",                              limit: 65535
-    t.string   "is_paid"
+    t.decimal  "sales_tax_total",                                precision: 20, scale: 5
+    t.decimal  "applied_amount",                                 precision: 20, scale: 5
+    t.decimal  "balance_remaining",                              precision: 20, scale: 5
+    t.string   "memo",                              limit: 4095
+    t.boolean  "is_paid"
     t.string   "customer_msg_id"
-    t.string   "customer_msg_full_name"
-    t.string   "is_to_be_printed"
-    t.string   "is_to_be_emailed"
+    t.string   "customer_msg_full_name",            limit: 101
+    t.boolean  "is_to_be_printed"
+    t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code_id"
-    t.string   "customer_sales_tax_code_full_name"
-    t.decimal  "suggested_discount_amount",                       precision: 15, scale: 2
+    t.string   "customer_sales_tax_code_full_name", limit: 3
+    t.decimal  "suggested_discount_amount",                      precision: 15, scale: 2
     t.date     "suggested_discount_date"
     t.string   "linked_txn_id"
     t.string   "linked_txn_type"
     t.date     "linked_txn_date"
     t.string   "linked_txn_ref_number"
     t.string   "linked_txn_link_type"
-    t.decimal  "linked_txn_amount",                               precision: 15, scale: 2
+    t.decimal  "linked_txn_amount",                              precision: 15, scale: 2
   end
 
   create_table "purchase_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -371,6 +351,14 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "linked_txn_ref_number"
     t.string   "linked_txn_link_type"
     t.decimal  "linked_txn_amount",                        precision: 15, scale: 2
+  end
+
+  create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "model_name",                  null: false
+    t.string   "model_id"
+    t.text     "error_message", limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "qbwc_jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
