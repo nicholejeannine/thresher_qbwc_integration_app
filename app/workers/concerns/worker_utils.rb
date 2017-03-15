@@ -8,7 +8,11 @@ module WorkerUtils
 
   # Retrieve the quickbooks xml response name from the worker class instance (e.g., "CustomerQueryWorker.new.klass returns 'customer_ret')
   def response_name
-    klass.to_s.underscore << '_ret'
+    if klass == 'Client'
+      'customer_ret'
+    else
+      klass.to_s.underscore << '_ret'
+    end
   end
 
   # If this is a quickbooks list type, the id value will be 'list id'

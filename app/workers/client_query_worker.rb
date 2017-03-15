@@ -1,4 +1,4 @@
-class CustomerQueryWorker < QBWC::Worker
+class ClientQueryWorker < QBWC::Worker
 
   include QueryResponseHandler
 
