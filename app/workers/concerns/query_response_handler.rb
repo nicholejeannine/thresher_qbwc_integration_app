@@ -10,6 +10,7 @@ module QueryResponseHandler
     response["#{response_name}"].to_a.each do |qb|
       begin
         # Find the quickbooks ID (list_id or txn_id for transactions)
+        QbwcError.create(:worker_class => 'ClientWorker', :model_id => qb['list_id']), :error_message => "#{qb}")
         instance_id = qb['list_id'] || qb['txn_id']
         # Search the DB for the id. Retrieve the row if it exists, else create a new row.
         instance = klass.find_or_initialize_by(:id => instance_id)
