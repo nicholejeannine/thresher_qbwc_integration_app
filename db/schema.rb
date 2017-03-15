@@ -354,7 +354,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
   end
 
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "model_name",                  null: false
+    t.string   "worker_class",                  null: false
     t.string   "model_id"
     t.text     "error_message", limit: 65535
     t.datetime "created_at",                  null: false
