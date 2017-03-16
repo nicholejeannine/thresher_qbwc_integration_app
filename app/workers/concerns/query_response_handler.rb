@@ -10,7 +10,7 @@ module QueryResponseHandler
     response["#{response_name}"].to_a.each do |qb|
       begin
         # Find the quickbooks ID (list_id or txn_id for transactions)
-        next if should_skip? # make sure customer requests are handled by client/job/project classes
+        next if should_skip?(qb) # make sure customer requests are handled by client/job/project classes
         instance_id = qb['list_id'] || qb['txn_id']
         # Search the DB for the id. Retrieve the row if it exists, else create a new row.
         instance = klass.find_or_initialize_by(:id => instance_id)

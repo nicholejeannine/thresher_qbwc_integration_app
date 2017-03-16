@@ -11,7 +11,7 @@ module WorkerUtils
      customer_request? ? 'customer_ret' : (klass.to_s.underscore << '_ret')
   end
 
-  def should_skip?
+  def should_skip?(qb)
     # If this is a client worker, skip anything with sublevel > 0
     if klass.to_s.match(/Client/)
       qb['sublevel'] > 0
