@@ -8,11 +8,22 @@ module WorkerUtils
 
   # Retrieve the quickbooks xml response name from the worker class instance (e.g., "CustomerQueryWorker.new.klass returns 'customer_ret')
   def response_name
-    if klass == Client
-      return 'customer_ret'
-    else
-      return klass.to_s.underscore << '_ret'
+     customer_request? ? 'customer_ret' : (klass.to_s.underscore << '_ret')
+  end
+
+  def should_skip?
+    # If this is a client worker, skip anything with sublevel > 0
+    if klass.to_s.match(/Client/)
+      qb['sublevel'] > 0
+    elsif klass.to_s.match(/Job/)
+      qb['sublevel'] == 0 || qb['name'].match(/^P-/)
+    elsif klass.to_s.match(/Project/)
+      qb['name'].match(/^P-/).nil?
     end
+  end
+
+  def customer_request?
+    klass.to_s.match(/Client|Job|Project/)
   end
 
   # If this is a quickbooks list type, the id value will be 'list id'
