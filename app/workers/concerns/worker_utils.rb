@@ -13,6 +13,7 @@ module WorkerUtils
 
   def should_skip?(qb)
     # If this is a client worker, skip anything with sublevel > 0
+    false unless customer_request?
     if klass.to_s.match(/Client/)
       qb['sublevel'] > 0
     elsif klass.to_s.match(/Job/)
