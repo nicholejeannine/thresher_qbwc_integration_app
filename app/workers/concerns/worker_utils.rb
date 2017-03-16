@@ -16,9 +16,9 @@ module WorkerUtils
     if klass.to_s.match(/Client/)
       qb['sublevel'] > 0
     elsif klass.to_s.match(/Job/)
-      qb['sublevel'] == 0 || qb['name'].match(/^P-/)
+      qb['sublevel'] == 0 || qb['name']&.match(/^P-/)
     elsif klass.to_s.match(/Project/)
-      qb['name'].match(/^P-/).nil?
+      qb['name']&.match(/^P-/).nil?
     end
   end
 
