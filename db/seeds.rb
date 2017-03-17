@@ -2,9 +2,8 @@
   QBWC.clear_jobs
 
   def last_ran
-    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'all_queries').first&.updated_at&.localtime&.strftime '%FT%R' || "2017-02-28T08:14"
+    "2017-03-08T08:14"
   end
-
 
   client_request = {:customer_query_rq => {
           :xml_attributes => { :requestID =>1, :iterator  => "Start" },
