@@ -82,6 +82,6 @@ class QueryWorker < QBWC::Worker
 
 
 	def handle_response(r, session, job, request, data)
-		QbwcError.create(:worker_class => self.class.name, :error_message => data)
+		QbwcError.create(:worker_class => self.class.name, :error_message => r)
 	end
 end
