@@ -4,7 +4,7 @@ class QueryWorker < QBWC::Worker
 			(QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at || Time.now)&.localtime&.strftime '%FT%R'
 		end
 
-
+		def self.queries
 		client_request = {:customer_query_rq => {
 				:xml_attributes => { :requestID =>1, :iterator  => "Start" },
 				:max_returned => 100,
@@ -82,8 +82,11 @@ class QueryWorker < QBWC::Worker
 						:include_line_items => true
 				}
 		}
+		 [client_request, job_request, project_request, estimate_request, sales_order_request, purchase_order_request, invoice_request]
+		end
+
 		def requests
-			[client_request, job_request, project_request, estimate_request, sales_order_request, purchase_order_request, invoice_request]
+			queries
 		end
 
 
