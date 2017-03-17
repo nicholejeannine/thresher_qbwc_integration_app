@@ -2,23 +2,15 @@ module WorkerUtils
   extend ActiveSupport::Concern
 
   # Retrieve the name of the class we're interested in saving to the database from a QueryWorker instance (e.g., "CustomerQueryWorker.new.klass returns the Customer class)
-  def klass
-    self.class.name.remove(/QueryWorker/).constantize
-  end
-
-  # Retrieve the quickbooks xml response name from the worker class instance (e.g., "CustomerQueryWorker.new.klass returns 'customer_ret')
-  def response_name
-
-  end
 
   # The line item class (returned as a Class object, so line_klass.new will create a new object)
   def line_klass
-    self.class.name.remove(/QueryWorker/).concat('Line').constantize
+    self.class.name.concat('Line').constantize
   end
 
   # The name of the line item class, if present (returned as a string object, not a class object)
   def line_item_response_name
-    klass.to_s.underscore.concat('_line_ret')
+    line_klass.to_s.underscore.concat('_line_ret')
   end
 
   # Parse the line item returned block - send the key/value pairs for parsing one at a time
