@@ -83,7 +83,8 @@
       }
   }
 
-  QBWC.add_job(:all_queries, true, '', QBWC::Worker, [client_request, job_request, project_request, estimate_request, sales_order_request, purchase_order_request, invoice_request])
+  QBWC.add_job(:initialize, true, '', QueryWorker,[client_request, job_request, project_request, estimate_request, sales_order_request, purchase_order_request, invoice_request], last_ran )
+
   # QBWC.add_job(:estimate_query, true, '', EstimateQueryWorker)
  # QBWC.add_job(:list_sales_orders, true, '', SalesOrderQueryWorker)
  # QBWC.add_job(:list_purchase_orders, true, '', PurchaseOrderQueryWorker)
