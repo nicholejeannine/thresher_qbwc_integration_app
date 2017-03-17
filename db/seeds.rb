@@ -14,6 +14,10 @@
       :max_returned => 100,
       :active_status => "All",
       :from_modified_date => "2017-02-28T08:14",
+      :name_filter => {
+          :match_criterion => 'Contains',
+          :name => ':'
+      },
       :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'JobStatus', 'JobStartDate', 'JobEndDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef']
   }
   }
