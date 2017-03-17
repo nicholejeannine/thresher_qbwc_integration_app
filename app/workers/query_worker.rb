@@ -3,7 +3,7 @@ class QueryWorker < QBWC::Worker
 		def last_ran
 			(QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at || Time.now)&.localtime&.strftime '%FT%R'
 		end
-		def requests
+	def	requests(job, session, data)
 			[{:customer_query_rq => {
 					:xml_attributes => { :requestID =>1, :iterator  => "Start" },
 					:max_returned => 100,
