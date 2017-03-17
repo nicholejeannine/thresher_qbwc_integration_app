@@ -3,15 +3,10 @@
 
 ## TODO:
 
-____ CODING TASKS _____
-
-1. Correct all of the database column types.
-2. Document the shit out of this. 
-____ DESIGN TASKS (for everyone) ____
-
-1. Decide how to handle customers/jobs/projects. It's OUR web connnector, so we can totally have the script save to different tables (clients, jobs, projects) depending on the data - we don't have to write it all to a single table (pros and cons each way).
-
-
+1. Correct QbwcError model column names
+2. Figure out the whole customer special rules thing.
+3. Get rid of the dupes in the customer request since the Customer model will just cheerfully smoke up anything a customer_ret passes it ... super useful ...
+4. Decide where line items handling should go (in the "parent model", or in itself)
 
 
 
