@@ -87,7 +87,10 @@ class QueryWorker < QBWC::Worker
              # handle_response will get customers in groups of 100. When this is 0, we're done.
         return if  r['xml_attributes']['iteratorRemainingCount'] == '0'
         r['customer_ret'].each{|qb|Customer.parse_qb_response(qb)}     
-             
+        r['estimate_ret'].each{|qb|Estimate.parse_qb_response(qb)}
+        r['sales_order_ret'].each{|qb|SalesOrder.parse_qb_response(qb)}
+       r['purchase_order_ret'].each{|qb|PurchaseOrder.parse_qb_response(qb)}
+      r['invoice_ret'].each{|qb|Invoice.parse_qb_response(qb)}       
 		QbwcError.create(:worker_class => self.class.name, :error_message => r['customer_ret']&.first)
 	end
 end

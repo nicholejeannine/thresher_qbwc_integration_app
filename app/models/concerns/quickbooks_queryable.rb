@@ -37,7 +37,8 @@ module QuickbooksQueryable
   def update_attribute(column_name, new_value)
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
   end
-
+  
+  
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   def parse_qb_hash(qb)
     qb.to_hash.each do |key, value|
@@ -54,6 +55,15 @@ module QuickbooksQueryable
       else update_attribute(key, value) # handle custom data types we have added to quickbooks
       end
     end
+  end
+
+  module ClassMethods
+     
+   def parse_qb_response(qb)
+     instance_id = qb['list_id'] || qb['txn_id']
+     i = self.find_or_initialize_by(:id => instance_id)
+     i.save
+   end
   end
 
 end
