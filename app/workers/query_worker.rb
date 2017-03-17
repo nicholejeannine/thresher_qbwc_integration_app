@@ -1,7 +1,7 @@
 class QueryWorker < QBWC::Worker
 
 		def last_ran
-			'2017-03-14T01:30'
+			'2017-01-14T01:30'
 			# QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at&.localtime&.strftime '%FT%R'
 		end
 
@@ -84,6 +84,10 @@ class QueryWorker < QBWC::Worker
 
 
 	def handle_response(r, session, job, request, data)
-		QbwcError.create(:worker_class => self.class.name, :error_message => r.class)
+             # handle_response will get customers in groups of 100. When this is 0, we're done.
+        return if  r['xml_attributes']['iteratorRemainingCount'] == '0'
+        r['customer_ret'].each{|qb|Customer.parse_qb_response(qb)}     
+             
+		QbwcError.create(:worker_class => self.class.name, :error_message => r['customer_ret']&.first)
 	end
 end

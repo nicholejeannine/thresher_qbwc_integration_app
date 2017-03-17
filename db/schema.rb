@@ -74,6 +74,11 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.index ["full_name"], name: "index_clients_on_full_name", unique: true, using: :btree
     t.index ["is_active"], name: "index_clients_on_is_active", using: :btree
   end
+  
+  create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+   t.string "customer_type"  
+
+  end
 
   create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "estimate_id"
