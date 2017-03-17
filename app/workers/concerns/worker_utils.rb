@@ -8,33 +8,7 @@ module WorkerUtils
 
   # Retrieve the quickbooks xml response name from the worker class instance (e.g., "CustomerQueryWorker.new.klass returns 'customer_ret')
   def response_name
-     customer_request? ? 'customer_ret' : (klass.to_s.underscore << '_ret')
-  end
 
-  def should_skip?(qb)
-    # If this is a client worker, skip anything with sublevel > 0
-    false unless customer_request?
-    if klass.to_s.match(/Client/)
-      qb['sublevel'] > 0
-    elsif klass.to_s.match(/Job/)
-      qb['sublevel'] == 0 || qb['name']&.match(/^P-/)
-    elsif klass.to_s.match(/Project/)
-      qb['name']&.match(/^P-/).nil?
-    end
-  end
-
-  def customer_request?
-    klass.to_s.match(/Client|Job|Project/)
-  end
-
-  # If this is a quickbooks list type, the id value will be 'list id'
-  def list_type?
-    QBWC.parser.describe("#{klass}Ref")&.elements&.first&.name == 'ListID'
-  end
-
-  # If this is a quickbooks transaction type, the id value will be 'txn id'
-  def txn_type?
-    QBWC.parser.describe("#{klass}Ref")&.elements&.first&.name == 'TxnID'
   end
 
   # The line item class (returned as a Class object, so line_klass.new will create a new object)
