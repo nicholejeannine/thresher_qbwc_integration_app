@@ -60,8 +60,7 @@ module QuickbooksQueryable
   module ClassMethods
      
    def parse_qb_response(qb)
-     instance_id = qb['list_id'] || qb['txn_id']
-     i = self.find_or_initialize_by(:id => instance_id)
+     i = self.find_or_initialize_by(:id => qb['list_id'] || qb['txn_id'])
      i.save
    end
   end
