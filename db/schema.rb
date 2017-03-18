@@ -26,6 +26,26 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string "note",        limit: 41
   end
 
+  create_table "clients", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",             limit: 16
+    t.string   "full_name",                 limit: 209
+    t.boolean  "is_active", default: true, null: false
+    t.string   "company_name",              limit: 41
+    t.string   "customer_type",             limit: 159
+    t.string   "terms",                     limit: 31
+    t.string   "sales_rep",                 limit: 5
+    t.decimal  "total_balance",                         precision: 20, scale: 5
+    t.string   "sales_tax_code",            limit: 3
+    t.string   "item_sales_tax",            limit: 31
+    t.string   "account_number",            limit: 99
+    t.string   "preferred_delivery_method", limit: 41
+    t.index ["full_name"], name: "index_clients_on_full_name", unique: true, using: :btree
+    t.index ["is_active"], name: "index_clients_on_is_active", using: :btree
+  end
+
+
   create_table "contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "contact_type"
     t.string "salutation",      limit: 15
@@ -43,44 +63,6 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string "primary_contact"
     t.string "primary_email"
     t.string "primary_phone"
-  end
-
-  create_table "ship_addresses", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "addressable_type"
-    t.string "addr1",       limit: 41
-    t.string "addr2",       limit: 41
-    t.string "addr3",       limit: 41
-    t.string "addr4",       limit: 41
-    t.string "addr5",       limit: 41
-    t.string "city",        limit: 31
-    t.string "state",       limit: 21
-    t.string "postal_code", limit: 13
-    t.string "country",     limit: 31
-    t.string "note",        limit: 41
-  end
-
-  create_table "clients", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "full_name",                 limit: 209
-    t.boolean  "is_active", default: true, null: false
-    t.string   "company_name",              limit: 41
-    t.string   "customer_type",             limit: 159
-    t.string   "terms",                     limit: 31
-    t.string   "sales_rep",                 limit: 5
-    t.decimal  "total_balance",                         precision: 20, scale: 5
-    t.string   "sales_tax_code",            limit: 3
-    t.string   "item_sales_tax",            limit: 31
-    t.string   "account_number",            limit: 99
-    t.string   "preferred_delivery_method", limit: 41
-    t.index ["full_name"], name: "index_clients_on_full_name", unique: true, using: :btree
-    t.index ["is_active"], name: "index_clients_on_is_active", using: :btree
-  end
-
-  create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence",             limit: 16
-   t.string "customer_type"
-
   end
 
   create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -322,4 +304,18 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string   "customer_sales_tax_code"
   end
 
+
+  create_table "ship_addresses", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "addressable_type"
+    t.string "addr1",       limit: 41
+    t.string "addr2",       limit: 41
+    t.string "addr3",       limit: 41
+    t.string "addr4",       limit: 41
+    t.string "addr5",       limit: 41
+    t.string "city",        limit: 31
+    t.string "state",       limit: 21
+    t.string "postal_code", limit: 13
+    t.string "country",     limit: 31
+    t.string "note",        limit: 41
+  end
 end
