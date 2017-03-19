@@ -1,2 +1,2 @@
-class Job < ApplicationRecord
+class Job < Customer
 end
