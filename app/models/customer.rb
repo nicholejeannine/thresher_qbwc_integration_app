@@ -1,5 +1,4 @@
 class Customer < ApplicationRecord
-	class Customer < ApplicationRecord
 
 		self.abstract_class = true
 		def self.parse_qb_response(qb)
@@ -8,6 +7,4 @@ class Customer < ApplicationRecord
 			c.save
 
 		end
-	end
-
 end
