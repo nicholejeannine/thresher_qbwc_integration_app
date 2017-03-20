@@ -1,14 +1,14 @@
 class Customer < ApplicationRecord
-	include QuickbooksQueryable
 		self.abstract_class = true
 		def self.parse_qb_response(qb)
-			klass = table_name(qb['name'], qb['sublevel'])
-			c = klass.find_or_initialize_by(:id => qb['list_id'])
-			c.parse_qb_hash(qb)
+			klass = qb_customer_type(qb['name'], qb['sublevel'])
+			id = qb['list_id']
+			c = klass.find_or_initialize_by(:id => id)
+			c.parse_hash(qb, id)
 			c.save
 		end
 		
-		def self.table_name(name, sublevel)
+		def self.qb_customer_type(name, sublevel)
 			sublevel == 0 ? Client : Job
 		end
 end
