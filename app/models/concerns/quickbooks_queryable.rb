@@ -71,7 +71,7 @@ module QuickbooksQueryable
     qb.to_hash.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
-        process_line_items(self.class.name, self.id, value) if self.class.match(/Line/)
+        process_line_items(self.class.name, self.id, value) if self.class.name.match(/Line/)
       elsif address?(key)
         handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
