@@ -2,7 +2,7 @@ module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypeable
   
-  def handle_address(key, klass, id)
+  def handle_address(key, value, klass, id)
     begin
     address_instance = key.classify.constantize.find_or_initialize_by(:id => id)
     address_instance.send("addressable_type=", klass)
@@ -53,7 +53,7 @@ module QuickbooksQueryable
       if line_item_type?(key)
         next unless self.class.name.match(/Line/) # Only line item models should handle the line items.
       elsif address?(key)
-        handle_address(key, self.class.name, self.id)
+        handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
         handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
       elsif custom_type?(key)
