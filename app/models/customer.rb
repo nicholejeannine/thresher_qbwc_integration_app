@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
 		self.abstract_class = true
-		def self.parse_qb_response(qb)
+		def self.parse_customer(qb)
 			klass = qb_customer_type(qb['name'], qb['sublevel'])
 			id = qb['list_id']
 			c = klass.find_or_initialize_by(:id => id)

@@ -57,7 +57,6 @@ module QuickbooksQueryable
     end
   end
   
-  
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
 
   def parse_hash(qb)
@@ -78,4 +77,14 @@ module QuickbooksQueryable
       end
     end
   end
+
+included do
+  def self.parse_qb_response(qb)
+    klass = self.class.name
+    id = (qb['list_id'] || qb['txn_id'])
+    c = klass.find_or_initialize_by(:id => id)
+    c.parse_hash(qb)
+    c.save
+  end
+end
 end
