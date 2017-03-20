@@ -12,33 +12,34 @@ class QueryWorker < QBWC::Worker
 	    :from_modified_date =>last_ran,
 	    # :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'FullName', 'IsActive', 'CompanyName', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'TotalBalance', 'SalesTaxCodeRep', 'ItemSalesTaxRef', 'AccountNumber', 'PreferredDeliveryMethod'],
 	    :owner_id => 0
+		}
 	  },
-	 {
-	   :estimate_query_rq => {
+	 {:estimate_query_rq => {
 	 	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	 	  :max_returned => 100,
 	 	  :modified_date_range_filter => {
 	 	    :from_modified_date => last_ran
 	 	  },
 	 	  :include_line_items => true,
+	 	}
 		},
-		{
-		:sales_order_query_rq => {
+		{:sales_order_query_rq => {
 		  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		  :max_returned => 100,
 		  :modified_date_range_filter => {
 		    :from_modified_date => last_ran
 		  },
 		  :include_line_items => true
+		}
 		},
-		{
-		:purchase_order_query_rq => {
+		{:purchase_order_query_rq => {
 		  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		  :max_returned => 100,
 		  :modified_date_range_filter => {
 			:from_modified_date => last_ran
 		  },
 		  :include_line_items => true
+		}
 		},
 		{:invoice_query_rq => {
 		  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
