@@ -22,7 +22,7 @@ module QuickbooksQueryable
   def handle_ref_type(key, value)
     begin
       if key.match(/customer/)
-        update_attribute("#{key.remove(/_ref$/)}_id", value['id'])
+        update_attribute("#{key.remove(/_ref$/)}_id", value['line_id'])
         update_attribute("#{key.remove(/_ref$/)}_full_name", value['full_name'])
       else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])    end
