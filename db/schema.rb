@@ -214,16 +214,6 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string   "template"
     t.date     "txn_date"
     t.string   "ref_number"
-    t.string   "vendor_address_addr1"
-    t.string   "vendor_address_addr2"
-    t.string   "vendor_address_addr3"
-    t.string   "vendor_address_addr4"
-    t.string   "vendor_address_addr5"
-    t.string   "vendor_address_city"
-    t.string   "vendor_address_state"
-    t.string   "vendor_address_postal_code"
-    t.string   "vendor_address_country"
-    t.string   "vendor_address_note"
     t.string   "terms"
     t.date     "due_date"
     t.date     "expected_date"
@@ -326,6 +316,20 @@ ActiveRecord::Schema.define(version: 20170315231156) do
 
 
   create_table "ship_addresses", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "addressable_type"
+    t.string "addr1",       limit: 41
+    t.string "addr2",       limit: 41
+    t.string "addr3",       limit: 41
+    t.string "addr4",       limit: 41
+    t.string "addr5",       limit: 41
+    t.string "city",        limit: 31
+    t.string "state",       limit: 21
+    t.string "postal_code", limit: 13
+    t.string "country",     limit: 31
+    t.string "note",        limit: 41
+  end
+
+  create_table "vendor_addresses", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "addressable_type"
     t.string "addr1",       limit: 41
     t.string "addr2",       limit: 41

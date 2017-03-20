@@ -1,0 +1,2 @@
+class VendorAddress < ApplicationRecord
+end
