@@ -67,6 +67,7 @@ module QuickbooksQueryable
     # Extract the address for parsing
     contact_keys = [:salutation, :first_name, :middle_name, :last_name, :job_title, :phone, :alt_phone, :fax, :email, :cc, :contact, :alt_contact, :data_ext_ret]
     contact_hash = qb.extract!(*contact_keys)
+    Qbwc.Error.create(:worker_class => "Contact", :model_id => self.id, :error_message => "#{contact_hash.class}: #{contact_hash}")
     handle_contact(contact_hash, self.class.name ,self.id) unless contact_hash.empty?
     qb.to_hash.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
