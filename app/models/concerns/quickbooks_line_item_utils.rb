@@ -16,7 +16,7 @@ module QuickbooksLineItemUtils
   def handle_line(klass_name, instance_id, line)
     begin
       # Send the foreign key and value to link the line item to its parent (estimate, invoice, etc)
-      instance_line = line_klass.find_or_initialize_by(:id => line['txn_id'])
+      instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
       QbwcError.create(:worker_class => 'Line', :error_message => line)
       instance_line.send("#{klass_name.underscore}_id=", instance_id)
       # Send the hash off for processing. Save it to the database, and catch any errors that occur.
