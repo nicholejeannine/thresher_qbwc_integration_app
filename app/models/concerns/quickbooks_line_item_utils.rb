@@ -1,6 +1,5 @@
 module QuickbooksLineItemUtils
   extend ActiveSupport::Concern
-  include QuickbooksLineItemUtils
   # Retrieve the name of the class we're interested in saving to the database from a QueryWorker instance (e.g., "CustomerQueryWorker.new.klass returns the Customer class)
   
   # The line item class (returned as a Class object, so line_klass.new will create a new object)
