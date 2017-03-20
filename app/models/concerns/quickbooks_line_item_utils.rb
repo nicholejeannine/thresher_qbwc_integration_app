@@ -26,4 +26,10 @@ module QuickbooksLineItemUtils
       QbwcError.create(:worker_class => "#{klass_name}Line", :model_id => "#{instance_id}", :error_message => "Line item #{line['txn_line_id']} failed due to #{e}")
     end
   end
+
+  def process_line_items(klass_name, instance_id = nil, ret = nil)
+    return if instance_id.nil? || ret.empty?
+    handle_line(klass_name, instance_id, ret) if ret.is_a?(Qbxml::Hash)
+    ret.each{|line|handle_line(klass_name, instance_id, line)} if ret.is_a?(Array)
+  end
 end
