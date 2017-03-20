@@ -36,21 +36,23 @@ module QuickbooksQueryable
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
   end
   
-  def handle_contact_type(key, value, klass, id)
+  def handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
-      if custom_type?(key)
-        value.to_a.each do |arr|
+      hash.each do |k, v|
+      if v.is_a?(Array)
+        hash.each do |arr|
           if arr['data_ext_name'] == 'Site Contact'
-            update_attribute("primary_contact", arr['data_ext_value'])
+            contact_instance.update_attribute("primary_contact", arr['data_ext_value'])
           elsif arr['data_ext_name'] == 'Site Email'
-            update_attribute("primary_email", arr['data_ext_value'])
+            contact_instance.update_attribute("primary_email", arr['data_ext_value'])
           elsif arr['data_ext_name'] == 'Site Phone'
-            update_attribute("primary_phone", arr['data_ext_value'])
+            contact_instance.update_attribute("primary_phone", arr['data_ext_value'])
           end
         end
       else
-        contact_instance.update_attribute(key, value)
+        contact_instance.update_attribute(k, v)
+      end
       end
         contact_instance.save
     rescue Exception => e
@@ -62,12 +64,14 @@ module QuickbooksQueryable
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
 
   def parse_hash(qb)
+    # Extract the address for parsing
+    contact_keys = [:salutation, :first_name, :middle_name, :last_name, :job_title, :phone, :alt_phone, :fax, :email, :cc, :contact, :alt_contact, :data_ext_ret]
+    contact_hash = qb.extract!(*contact_keys)
+    handle_contact(contact_hash, self.class.name ,self.id) unless contact_hash.empty?
     qb.to_hash.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
         next unless self.class.name.match(/Line/) # Only line item models should handle the line items.
-      elsif contact_type?(key)
-        handle_contact_type(key, value,self.class.name, self.id)
       elsif address?(key)
         handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
