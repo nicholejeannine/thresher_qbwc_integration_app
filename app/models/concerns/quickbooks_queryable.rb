@@ -5,8 +5,7 @@ module QuickbooksQueryable
   # Handle address types by creating or updating an instance in the appropriate table (BillAddress, ShipAddress, VendorAddress)
   def handle_address(key, value, klass, id)
     begin
-    address_instance = key.classify.constantize.find_or_initialize_by(:id => id)
-    address_instance.send("addressable_type=", klass)
+    address_instance = key.classify.constantize.find_or_initialize_by(:id => id, :addressable_type => klass)
     if value && value.is_a?(Qbxml::Hash)
       value.each do |k, v|
         address_instance.send("#{k}=", v) unless ignored_type?(k)
@@ -22,8 +21,8 @@ module QuickbooksQueryable
   def handle_ref_type(key, value)
     begin
       if key.match(/customer/)
-        update_attribute("#{key.remove(/_ref$/)}_id", value['line_id'])
-        update_attribute("#{key.remove(/_ref$/)}_full_name", value['full_name'])
+        update_attribute("customer_id", value['list_id'])
+        update_attribute("customer_full_name", value['full_name'])
       else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])    end
     rescue Exception => e
@@ -72,7 +71,7 @@ module QuickbooksQueryable
     qb.to_hash.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
-        process_line_items(self.class.name, self.id, value)
+        process_line_items(self.class.name, self.id, value) if self.class.match(/Line/)
       elsif address?(key)
         handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
