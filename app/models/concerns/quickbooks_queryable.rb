@@ -40,7 +40,7 @@ module QuickbooksQueryable
          end
          if address?(key)
            address_instance = key.classify.constantize.find_or_initialize_by(:id => self.id)
-           address_instance.send("addressable_type=", self.class.classify)
+           address_instance.send("addressable_type=", self.class.name)
            if value && value.is_a?(Qbxml::Hash)
              value.each do |k, v|
                address_instance.update_attribute("#{key}_#{k}", v)
