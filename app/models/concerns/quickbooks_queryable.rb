@@ -66,11 +66,13 @@ module QuickbooksQueryable
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
         next unless self.class.name.match(/Line/) # Only line item models should handle the line items.
+      elsif contact_type?(key)
+        handle_contact_type(key, value,self.class.name, self.id)
       elsif address?(key)
         handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
         handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
-      else update_attribute(key, value) # handle custom data types we have added to quickbooks
+      else update_attribute(key, value)
       end
     end
   end
