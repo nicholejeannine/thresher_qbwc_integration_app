@@ -1,4 +1,4 @@
-module QuickbooksTypeable
+module QuickbooksTypes
 	extend ActiveSupport::Concern
 	# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
 	def address?(key)
@@ -23,6 +23,10 @@ module QuickbooksTypeable
 	# Keys we never care about handling
 	def ignored_type?(key)
 		key.match(/class_ref$|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes/)
+	end
+	
+	def contact_type?(key)
+		key.match(/salutation$|first_name$|middle_name$|last_name$|job_title$|phone$|alt_phone$|fax$|email$|cc$|contact$|alt_contact$|data_ext_ret$/)
 	end
 
 end

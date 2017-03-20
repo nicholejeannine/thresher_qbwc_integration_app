@@ -1,6 +1,6 @@
 module QuickbooksQueryable
   extend ActiveSupport::Concern
-  include QuickbooksTypeable
+  include QuickbooksTypes
   
   def handle_address(key, value, klass, id)
     begin
@@ -28,20 +28,35 @@ module QuickbooksQueryable
 
   # Customer objects have custom fields - this method parses the value returned for this part of a qb hash
   def handle_custom_type(value)
-    value.to_a.each do |arr|
-      if arr['data_ext_name'] == 'Site Contact'
-        update_attribute("primary_contact", arr['data_ext_value'])
-      elsif arr['data_ext_name'] == 'Site Email'
-        update_attribute("primary_email", arr['data_ext_value'])
-      elsif arr['data_ext_name'] == 'Site Phone'
-        update_attribute("primary_phone", arr['data_ext_value'])
-      end
-    end
+    
   end
 
   # Try to update the attribute, only if the column named exists in the database table.
   def update_attribute(column_name, new_value)
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
+  end
+  
+  def handle_contact_type(key, value, klass, id)
+    begin
+      contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass.name)
+      if custom_type?(key)
+        value.to_a.each do |arr|
+          if arr['data_ext_name'] == 'Site Contact'
+            update_attribute("primary_contact", arr['data_ext_value'])
+          elsif arr['data_ext_name'] == 'Site Email'
+            update_attribute("primary_email", arr['data_ext_value'])
+          elsif arr['data_ext_name'] == 'Site Phone'
+            update_attribute("primary_phone", arr['data_ext_value'])
+          end
+        end
+      else
+        custom_instance.update_attribute(key, value)
+        custom_instance.save
+      end
+      address_instance.save
+    rescue Exception => e
+      QbwcError.create(:worker_class => "#{Contact}: klass}", :model_id => "#{id}", :error_message => "#{e}")
+    end
   end
   
   
@@ -56,8 +71,6 @@ module QuickbooksQueryable
         handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
         handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
-      elsif custom_type?(key)
-        handle_custom_type(value)
       else update_attribute(key, value) # handle custom data types we have added to quickbooks
       end
     end
