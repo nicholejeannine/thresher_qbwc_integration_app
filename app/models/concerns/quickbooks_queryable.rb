@@ -80,9 +80,8 @@ module QuickbooksQueryable
 
 included do
   def self.parse_qb_response(qb)
-    klass = self.name.constanize
     id = (qb['list_id'] || qb['txn_id'])
-    c = klass.find_or_initialize_by(:id => id)
+    c = self.find_or_initialize_by(:id => id)
     c.parse_hash(qb)
     c.save
   end
