@@ -19,7 +19,7 @@ module QuickbooksLineItemUtils
       instance_line = line_klass.find_or_initialize_by(:id => line['txn_id'])
       instance_line.send("#{klass_name.underscore}_id=", instance_id)
       # Send the hash off for processing. Save it to the database, and catch any errors that occur.
-      instance_line.parse_qb_hash(line)
+      instance_line.parse_hash(line)
       instance_line.save
     rescue Exception => e
       QbwcError.create(:worker_class => "#{klass_name}Line", :model_id => "#{instance_id}", :error_message => "Line item #{line['txn_line_id']} failed due to #{e}")
