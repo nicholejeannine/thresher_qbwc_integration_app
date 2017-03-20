@@ -14,23 +14,22 @@ module QuickbooksLineItemUtils
   end
   
   # Parse the line item returned block - send the key/value pairs for parsing one at a time
-  def process_line_items(instance_id = nil, ret = nil)
+  def process_line_items(klass_name, instance_id = nil, ret = nil)
     return if instance_id.nil? || ret.empty?
-    handle_line(instance_id, ret) if ret.is_a?(Qbxml::Hash)
-    ret.each{|line|handle_line(instance_id, line)} if ret.is_a?(Array)
+    handle_line(klass_name, instance_id, ret) if ret.is_a?(Qbxml::Hash)
+    ret.each{|line|handle_line(klass_name, instance_id, line)} if ret.is_a?(Array)
   end
   
   # Handle each line item instance. Find an existing row by id for updating, or create a new row.
-  def handle_line(instance_id, line)
+  def handle_line(klass_name, instance_id, line)
     begin
-      instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
       # Send the foreign key and value to link the line item to its parent (estimate, invoice, etc)
-      instance_line.send("#{klass.name.underscore}_id=", instance_id)
+      instance_line.send("#{klass_name.underscore}_id=", instance_id)
       # Send the hash off for processing. Save it to the database, and catch any errors that occur.
       instance_line.parse_qb_hash(line)
       instance_line.save
     rescue Exception => e
-      QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{instance_id}", :error_message => "Line item #{line['txn_line_id']} failed due to #{e}")
+      QbwcError.create(:worker_class => "#{klass_name}Line", :model_id => "#{instance_id}", :error_message => "Line item #{line['txn_line_id']} failed due to #{e}")
     end
   end
 end
