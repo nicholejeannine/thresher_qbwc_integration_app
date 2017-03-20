@@ -13,13 +13,6 @@ module QuickbooksLineItemUtils
     line_klass.to_s.underscore.concat('_line_ret')
   end
   
-  # Parse the line item returned block - send the key/value pairs for parsing one at a time
-  def process_line_items(klass_name, instance_id = nil, ret = nil)
-    return if instance_id.nil? || ret.empty?
-    handle_line(klass_name, instance_id, ret) if ret.is_a?(Qbxml::Hash)
-    ret.each{|line|handle_line(klass_name, instance_id, line)} if ret.is_a?(Array)
-  end
-  
   # Handle each line item instance. Find an existing row by id for updating, or create a new row.
   def handle_line(klass_name, instance_id, line)
     begin
