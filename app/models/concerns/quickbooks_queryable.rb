@@ -50,10 +50,9 @@ module QuickbooksQueryable
           end
         end
       else
-        custom_instance.update_attribute(key, value)
-        custom_instance.save
+        contact_instance.update_attribute(key, value)
       end
-      address_instance.save
+        contact_instance.save
     rescue Exception => e
       QbwcError.create(:worker_class => "#{Contact}: klass}", :model_id => "#{id}", :error_message => "#{e}")
     end
