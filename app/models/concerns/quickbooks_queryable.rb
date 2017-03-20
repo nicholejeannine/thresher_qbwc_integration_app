@@ -54,7 +54,7 @@ module QuickbooksQueryable
       end
         contact_instance.save
     rescue Exception => e
-      QbwcError.create(:worker_class => "#{Contact}: klass}", :model_id => "#{id}", :error_message => "#{e}")
+      QbwcError.create(:worker_class => "Contact: #{klass}", :model_id => "#{id}", :error_message => "#{e}")
     end
   end
   
