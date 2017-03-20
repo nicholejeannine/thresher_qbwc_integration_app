@@ -23,6 +23,8 @@ module QuickbooksQueryable
       if key.match(/customer_ref/)
         update_attribute("customer_id", value['list_id'])
         update_attribute("customer_full_name", value['full_name'])
+      elsif key.match(/parent_ref/)
+        update_attribute("parent_id", value['list_id'])
       else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])    end
     rescue Exception => e
