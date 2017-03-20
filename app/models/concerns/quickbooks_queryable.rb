@@ -3,12 +3,17 @@ module QuickbooksQueryable
   include QuickbooksTypeable
   
   def handle_address(key, klass, id)
+    begin
     address_instance = key.classify.constantize.find_or_initialize_by(:id => id)
     address_instance.send("addressable_type=", klass)
     if value && value.is_a?(Qbxml::Hash)
       value.each do |k, v|
         address_instance.send("#{k}=", v) unless ignored_type?(k)
       end
+    end
+    address_instance.save
+    rescue Exception => e
+      QbwcError.create(:worker_class => "#{address_instance.class.name}: klass}", :model_id => "#{id}", :error_message => "#{e}")
     end
   end
   
