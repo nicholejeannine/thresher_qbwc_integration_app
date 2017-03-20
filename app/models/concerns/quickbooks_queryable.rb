@@ -2,6 +2,16 @@ module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypeable
   
+  def handle_address(key, klass, id)
+    address_instance = key.classify.constantize.find_or_initialize_by(:id => id)
+    address_instance.send("addressable_type=", klass)
+    if value && value.is_a?(Qbxml::Hash)
+      value.each do |k, v|
+        address_instance.send("#{k}=", v) unless ignored_type?(k)
+      end
+    end
+  end
+  
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
     begin
@@ -34,24 +44,17 @@ module QuickbooksQueryable
 
   def parse_hash(qb)
     qb.to_hash.each do |key, value|
-         next if ignored_type?(key) # skip ignored items.
-         if line_item_type?(key)
-           next unless self.class.name.match(/Line/) # Only line item models should handle the line items.
-         end
-         if address?(key)
-           address_instance = key.classify.constantize.find_or_initialize_by(:id => self.id)
-           address_instance.send("addressable_type=", self.class.name)
-           if value && value.is_a?(Qbxml::Hash)
-             value.each do |k, v|
-               address_instance.send("#{k}=", v) unless ignored_type?(k)
-             end
-           end
-         elsif ref_type?(key)
-           handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
-         elsif custom_type?(key)
-           handle_custom_type(value)
-         else update_attribute(key, value) # handle custom data types we have added to quickbooks
-         end
+      next if ignored_type?(key) # skip ignored items.
+      if line_item_type?(key)
+        next unless self.class.name.match(/Line/) # Only line item models should handle the line items.
+      elsif address?(key)
+        handle_address(key, self.class.name, self.id)
+      elsif ref_type?(key)
+        handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
+      elsif custom_type?(key)
+        handle_custom_type(value)
+      else update_attribute(key, value) # handle custom data types we have added to quickbooks
+      end
     end
-    end
+  end
 end
