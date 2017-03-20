@@ -65,7 +65,7 @@ module QuickbooksQueryable
 
   def parse_hash(qb)
     # Extract the address for parsing
-    contact_keys = [:salutation, :first_name, :middle_name, :last_name, :job_title, :phone, :alt_phone, :fax, :email, :cc, :contact, :alt_contact, :data_ext_ret]
+    contact_keys = ['salutation', 'first_name', 'middle_name', 'last_name', 'job_title', 'phone', 'alt_phone', 'fax', 'email', 'cc', 'contact', 'alt_contact', 'data_ext_ret']
     contact_hash = qb.extract!(*contact_keys)
     QbwcError.create(:worker_class => "Contact", :model_id => self.id, :error_message => "#{contact_hash}")
     handle_contact(contact_hash, self.class.name ,self.id) unless contact_hash.empty?
