@@ -43,7 +43,7 @@ module QuickbooksQueryable
            address_instance.send("addressable_type=", self.class.name)
            if value && value.is_a?(Qbxml::Hash)
              value.each do |k, v|
-               address_instance.update_attribute("#{key}_#{k}", v)
+               address_instance.send("#{k}=", v) unless ignored_type?(k)
              end
            end
          elsif ref_type?(key)
