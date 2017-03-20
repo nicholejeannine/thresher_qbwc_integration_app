@@ -38,7 +38,7 @@ module QuickbooksQueryable
   
   def handle_contact_type(key, value, klass, id)
     begin
-      contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass.name)
+      contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
       if custom_type?(key)
         value.to_a.each do |arr|
           if arr['data_ext_name'] == 'Site Contact'
