@@ -194,6 +194,31 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.index ["parent_id"], name: "parent_id", using: :btree
   end
 
+  create_table "projects", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.integer "FK_Project_PKEY"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",          limit: 16
+    t.string   "name",                   limit: 41
+    t.string   "full_name",              limit: 209
+    t.boolean  "is_active",                                                   default: true, null: false
+    t.string   "parent_id",              limit: 41
+    t.integer  "sublevel",                                                    default: 0,    null: false
+    t.decimal  "balance",                            precision: 20, scale: 5
+    t.decimal  "total_balance",                      precision: 20, scale: 5
+    t.string   "account_number",         limit: 99
+    t.string   "job_status",             limit: 41
+    t.date     "job_start_date"
+    t.date     "job_projected_end_date"
+    t.date     "job_end_date"
+    t.string   "job_desc",               limit: 99
+    t.string   "job_type",               limit: 159
+    t.index ["full_name"], name: "full_name", unique: true, using: :btree
+    t.index ["is_active"], name: "is_active", using: :btree
+    t.index ["parent_id"], name: "parent_id", using: :btree
+    t.index ["FK_Project_PKEY"], name: "FK_Project_PKEY", using: :btree
+  end
+
   create_table "purchase_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "purchase_order_id"
     t.string  "item"
