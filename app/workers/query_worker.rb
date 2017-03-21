@@ -1,6 +1,6 @@
 class QueryWorker < QBWC::Worker
   def last_ran
-    '2016-11-14T01:30'
+    '2017-03-19T01:30'
 	# QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at&.localtime&.strftime '%FT%R'
   end
 
@@ -14,42 +14,42 @@ class QueryWorker < QBWC::Worker
 	     :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
 	    :owner_id => 0
 	    }
-	  # },
-	 #  {:estimate_query_rq => {
-	 #  	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-	 # 	  :max_returned => 100,
-	 #  	  :modified_date_range_filter => {
-	 #  	    :from_modified_date => last_ran
-	 #  	  },
-	 #  	  :include_line_items => true,
-	 #  	}
-		# },
-		# {:sales_order_query_rq => {
-		#   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-		#   :max_returned => 100,
-		#   :modified_date_range_filter => {
-		#     :from_modified_date => last_ran
-		#   },
-		#   :include_line_items => true
-		# }
-		# },
-		# {:purchase_order_query_rq => {
-		#   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-		#   :max_returned => 100,
-		#   :modified_date_range_filter => {
-		# 	:from_modified_date => last_ran
-		#   },
-		#   :include_line_items => true
-		# }
-		# },
-		# {:invoice_query_rq => {
-		#   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-		#   :max_returned => 100,
-		#   :modified_date_range_filter => {
-		#     :from_modified_date => last_ran
-		#   },
-		#   :include_line_items => true
-		# }
+	   },
+	   {:estimate_query_rq => {
+	   	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+	  	  :max_returned => 100,
+	   	  :modified_date_range_filter => {
+	   	    :from_modified_date => last_ran
+	   	  },
+	   	  :include_line_items => true,
+	   	}
+		 },
+		 {:sales_order_query_rq => {
+		   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+		   :max_returned => 100,
+		   :modified_date_range_filter => {
+		     :from_modified_date => last_ran
+		   },
+		   :include_line_items => true
+		 }
+		 },
+		 {:purchase_order_query_rq => {
+		   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+		   :max_returned => 100,
+		   :modified_date_range_filter => {
+		 	:from_modified_date => last_ran
+		   },
+		   :include_line_items => true
+		 }
+		 },
+		 {:invoice_query_rq => {
+		   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+		   :max_returned => 100,
+		   :modified_date_range_filter => {
+		     :from_modified_date => last_ran
+		   },
+		   :include_line_items => true
+		 }
 		}]
 	end
 
