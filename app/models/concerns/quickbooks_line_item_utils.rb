@@ -6,12 +6,7 @@ module QuickbooksLineItemUtils
   def line_klass
     self.class.name.concat('Line').constantize
   end
-  
-  # The name of the line item class, if present (returned as a string object, not a class object)
-  def line_item_response_name
-    line_klass.to_s.underscore.concat('_line_ret')
-  end
-  
+
   # Handle each line item instance. Find an existing row by id for updating, or create a new row.
   def handle_line(klass_name, instance_id, line)
     begin

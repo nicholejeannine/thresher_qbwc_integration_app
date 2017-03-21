@@ -1,7 +1,7 @@
 module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypes
-  
+
   # Handle address types by creating or updating an instance in the appropriate table (BillAddress, ShipAddress, VendorAddress)
   def handle_address(key, value, klass, id)
     begin
@@ -16,7 +16,7 @@ module QuickbooksQueryable
       QbwcError.create(:worker_class => "#{address_instance.class.name}: klass}", :model_id => "#{id}", :error_message => "#{e}")
     end
   end
-  
+
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
     begin
@@ -36,7 +36,7 @@ module QuickbooksQueryable
   def update_attribute(column_name, new_value)
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
   end
-  
+
   def handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
@@ -61,7 +61,7 @@ module QuickbooksQueryable
       QbwcError.create(:worker_class => "Contact: #{klass}", :model_id => "#{id}", :error_message => "#{e}")
     end
   end
-  
+
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
 
   def parse_hash(qb)
