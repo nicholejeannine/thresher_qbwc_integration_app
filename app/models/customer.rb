@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
 			id = qb['list_id']
 			c = klass.find_or_initialize_by(:id => id)
 			if (klass == Project)
-				c.send("FK_Project_PKEY=", c.name.from(2))
+		          c.send("FK_Project_PKEY=", qb['name'].from(2))
 			end
 			c.parse_hash(qb)
 			c.save
