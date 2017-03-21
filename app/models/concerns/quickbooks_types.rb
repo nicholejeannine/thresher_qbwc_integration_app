@@ -1,8 +1,9 @@
-module QuickbooksTypeable
+module QuickbooksTypes
 	extend ActiveSupport::Concern
+	include QuickbooksLineItemUtils
 	# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
 	def address?(key)
-		key.match(/ship_address$|vendor_address$|bill_address$|block$/)
+		key.match(/ship_address$|vendor_address$|bill_address$/)
 	end
 
 # Is the xml fragment a "reference type"? (A reference type has additional key/value pairs that need to be processed separately)
@@ -22,7 +23,7 @@ module QuickbooksTypeable
 
 	# Keys we never care about handling
 	def ignored_type?(key)
-		key.match(/class_ref$|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$/)
+		key.match(/class_ref$|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes/)
 	end
 
 end

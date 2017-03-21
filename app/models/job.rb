@@ -1,3 +1,3 @@
-class Job < ApplicationRecord
-  self.primary_key = :id
+class Job < Customer
+  include QuickbooksQueryable
 end

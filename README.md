@@ -3,31 +3,10 @@
 
 ## TODO:
 
-____ CODING TASKS _____
-
-1. Correct all of the database column types.
-2. Document the shit out of this. 
-3. Finish slimming down all the stuffs we don't need (assets folder, helpers folder, jobs folder, probably the views folder, mailers unless we're going to use them, etc).
-4. Provide some kind of generator or very good instructions for how to create a new request type.
-5. Maybe refactor the utils and model stuffs, if time. (it's fairly good enough as is)
-
-____ DESIGN TASKS (for everyone) ____
-
-1. Decide how to handle customers/jobs/projects. It's OUR web connnector, so we can totally have the script save to different tables (clients, jobs, projects) depending on the data - we don't have to write it all to a single table (pros and cons each way).
-2. Figure out how we're going to handle the "magical script that will compare all the data on the qb side and the portal side" ... for each damn column? .... hmmm.
-3. Shred some of these database columns (price_level_ref is never used, for instance).
-4. Do we want to include linked_txns? (rarely used, but maybe we should check?)
-
-
-
-
-
-
-
-
-
-
-
+1. Correct QbwcError model column names
+2. Figure out the whole customer special rules thing.
+3. Get rid of the dupes in the customer request since the Customer model will just cheerfully smoke up anything a customer_ret passes it ... super useful ...
+4. Decide where line items handling should go (in the "parent model", or in itself)
 
 
 
