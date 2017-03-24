@@ -27,25 +27,6 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.index ["id", "addressable_type"], name: "id", unique: true, using: :btree
   end
 
-  create_table "clients", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence",             limit: 16
-    t.string   "full_name",                 limit: 209
-    t.boolean  "is_active",                                                      default: true, null: false
-    t.string   "company_name",              limit: 41
-    t.string   "customer_type",             limit: 159
-    t.string   "terms",                     limit: 31
-    t.string   "sales_rep",                 limit: 5
-    t.decimal  "total_balance",                         precision: 20, scale: 5
-    t.string   "sales_tax_code",            limit: 3
-    t.string   "item_sales_tax",            limit: 31
-    t.string   "account_number",            limit: 99
-    t.string   "preferred_delivery_method", limit: 41
-    t.index ["full_name"], name: "index_clients_on_full_name", unique: true, using: :btree
-    t.index ["is_active"], name: "index_clients_on_is_active", using: :btree
-  end
-
   create_table "contacts", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "contact_type"
     t.string "salutation",      limit: 15
@@ -64,6 +45,37 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string "primary_email"
     t.string "primary_phone"
     t.index ["id", "contact_type"], name: "id", unique: true, using: :btree
+  end
+
+  create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",             limit: 16
+    t.string   "name",                   limit: 41
+    t.string   "full_name",              limit: 209
+    t.boolean  "is_active",                                                   default: true, null: false
+    t.string   "parent_id",              limit: 41
+    t.integer  "sublevel",                                                    default: 0,    null: false
+    t.string   "company_name",              limit: 41
+    t.string   "customer_type",             limit: 159
+    t.string   "terms",                     limit: 31
+    t.string   "sales_rep",                 limit: 5
+    t.decimal  "balance",                         precision: 20, scale: 5
+    t.decimal  "total_balance",                         precision: 20, scale: 5
+    t.string   "sales_tax_code",            limit: 3
+    t.string   "item_sales_tax",            limit: 31
+    t.string   "account_number",            limit: 99
+    t.string   "job_status",                         limit: 41
+    t.date     "job_start_date"
+    t.date     "job_projected_end_date"
+    t.date     "job_end_date"
+    t.string   "job_desc",                           limit: 99
+    t.string   "job_type",                        limit: 159
+    t.string   "preferred_delivery_method", limit: 41
+    t.index ["full_name"], name: "index_customers_on_full_name", unique: true, using: :btree
+    t.index ["is_active"], name: "index_customers_on_is_active", using: :btree
+    t.index ["parent_id"], name: "parent_id", using: :btree
+    t.index ["sublevel"], name: "sublevel", using: :btree
   end
 
   create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -169,54 +181,6 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.date     "suggested_discount_date"
     t.index ["customer_full_name"], name: "customer_full_name", using: :btree
     t.index ["customer_id"], name: "customer_id", using: :btree
-  end
-
-  create_table "jobs", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence",          limit: 16
-    t.string   "name",                   limit: 41
-    t.string   "full_name",              limit: 209
-    t.boolean  "is_active",                                                   default: true, null: false
-    t.string   "parent_id",              limit: 41
-    t.integer  "sublevel",                                                    default: 0,    null: false
-    t.decimal  "balance",                            precision: 20, scale: 5
-    t.decimal  "total_balance",                      precision: 20, scale: 5
-    t.string   "account_number",         limit: 99
-    t.string   "job_status",             limit: 41
-    t.date     "job_start_date"
-    t.date     "job_projected_end_date"
-    t.date     "job_end_date"
-    t.string   "job_desc",               limit: 99
-    t.string   "job_type",               limit: 159
-    t.index ["full_name"], name: "full_name", unique: true, using: :btree
-    t.index ["is_active"], name: "is_active", using: :btree
-    t.index ["parent_id"], name: "parent_id", using: :btree
-  end
-
-  create_table "projects", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.datetime "time_created"
-    t.integer "FK_Project_PKEY"
-    t.datetime "time_modified"
-    t.string   "edit_sequence",          limit: 16
-    t.string   "name",                   limit: 41
-    t.string   "full_name",              limit: 209
-    t.boolean  "is_active",                                                   default: true, null: false
-    t.string   "parent_id",              limit: 41
-    t.integer  "sublevel",                                                    default: 0,    null: false
-    t.decimal  "balance",                            precision: 20, scale: 5
-    t.decimal  "total_balance",                      precision: 20, scale: 5
-    t.string   "account_number",         limit: 99
-    t.string   "job_status",             limit: 41
-    t.date     "job_start_date"
-    t.date     "job_projected_end_date"
-    t.date     "job_end_date"
-    t.string   "job_desc",               limit: 99
-    t.string   "job_type",               limit: 159
-    t.index ["full_name"], name: "full_name", unique: true, using: :btree
-    t.index ["is_active"], name: "is_active", using: :btree
-    t.index ["parent_id"], name: "parent_id", using: :btree
-    t.index ["FK_Project_PKEY"], name: "FK_Project_PKEY", using: :btree
   end
 
   create_table "purchase_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
