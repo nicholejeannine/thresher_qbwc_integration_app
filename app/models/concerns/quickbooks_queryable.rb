@@ -62,7 +62,7 @@ module QuickbooksQueryable
       end
         contact_instance.save
       if contact_instance.persisted?
-        QbwcError.create(:worker_class => "Success persisting #{c.class.name}", :model_id => c.id, :error_message => "#{c.inspect}")
+        QbwcError.create(:worker_class => "Success persisting #{contact_instance.class.name}", :model_id => id, :error_message => "#{contact_instance.inspect}")
       end
     rescue Exception => e
       QbwcError.create(:worker_class => "Contact: #{klass}", :model_id => "#{id}", :error_message => "#{e}")
