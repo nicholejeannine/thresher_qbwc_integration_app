@@ -2,20 +2,6 @@ module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypes
 
-  # Handle address types by creating or updating an instance in the appropriate table (BillAddress, ShipAddress, VendorAddress)
-  def handle_address(key, value, klass, id)
-    begin
-    address_instance = key.classify.constantize.find_or_initialize_by(:id => id, :addressable_type => klass)
-    if value && value.is_a?(Qbxml::Hash)
-      value.each do |k, v|
-        address_instance.send("#{k}=", v) unless ignored_type?(k)
-      end
-    end
-    address_instance.save
-    rescue Exception => e
-      QbwcError.create(:worker_class => "#{address_instance.class.name}: klass}", :model_id => "#{id}", :error_message => "Address parsing error: #{e}")
-    end
-  end
 
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
@@ -26,7 +12,8 @@ module QuickbooksQueryable
       elsif key.match(/parent_ref/)
         update_attribute("parent_id", value['list_id'])
       else
-      update_attribute("#{key.remove(/_ref$/)}", value['full_name'])    end
+      update_attribute("#{key.remove(/_ref$/)}", value['full_name'])
+      end
     rescue Exception => e
       QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{self.id}", :error_message => "#{e} in persisting #{key}")
     end
@@ -40,7 +27,7 @@ module QuickbooksQueryable
       QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "Update attribute method failed: #{e}")
     end
   end
-
+  
   def handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)

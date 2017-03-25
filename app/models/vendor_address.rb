@@ -1,2 +1,2 @@
-class VendorAddress < ApplicationRecord
+class VendorAddress < Address
 end

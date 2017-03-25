@@ -1,2 +1,2 @@
-class ShipAddress < ApplicationRecord
+class ShipAddress < Address
 end
