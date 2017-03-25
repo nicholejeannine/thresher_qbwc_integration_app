@@ -68,18 +68,14 @@ module QuickbooksQueryable
     begin
     contact_keys = ['salutation', 'first_name', 'middle_name', 'last_name', 'job_title', 'phone', 'alt_phone', 'fax', 'email', 'cc', 'contact', 'alt_contact', 'data_ext_ret']
     contact_hash = qb.extract!(*contact_keys)
-    billing = qb.extract!('bill_address')
-    shipping = qb.extract!('ship_address')
-    vendor = qb.extract!('vendor_address')
     handle_contact(contact_hash, self.class.name ,self.id) unless contact_hash.empty?
-    handle_address('bill_address', billing, self.class.name, self.id) unless billing.empty?
-    handle_address('ship_address', shipping, self.class.name, self.id) unless shipping.empty?
-    handle_address('vendor_address', vendor, self.class.name, self.id) unless vendor.empty?
     # Parse the rest of the hash in key/value pairs
     qb.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
+      elsif address?(key)
+        handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
         handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
       else update_attribute(key, value)
