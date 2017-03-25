@@ -52,7 +52,7 @@ module QuickbooksQueryable
       hash.each do |k, v|
       if custom_type?(k)
         # Customer objects have custom fields
-        k.each{|i| contact_instance.update_attribute("#{i['data_ext_name'].sub('Site ', 'primary').underscore}", "#{i['data_ext_value']}")}
+        v.each{|i| contact_instance.update_attribute("#{i['data_ext_name'].sub('Site ', 'primary').underscore}", "#{i['data_ext_value']}")}
       else
         contact_instance.update_attribute(k, v)
       end
