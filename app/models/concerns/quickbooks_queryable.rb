@@ -3,6 +3,7 @@ module QuickbooksQueryable
   include QuickbooksTypes
 
 
+  # TODO: Fix so that we only save customer_id and parent_id, the rest get the full name values
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
     begin
@@ -20,6 +21,7 @@ module QuickbooksQueryable
   end
 
   # Try to update the attribute, only if the column named exists in the database table.
+  # TODO: Throw an error when this is called and returns false due to self.respond_to? == false
   def update_attribute(column_name, new_value)
     begin
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
@@ -28,6 +30,7 @@ module QuickbooksQueryable
     end
   end
   
+  # TODO: Pull this into the Contact class. Just like with the addresses.
   def handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
@@ -49,7 +52,7 @@ module QuickbooksQueryable
   end
 
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
-
+  # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
   def parse_hash(qb)
     # Extract the contact information part of the hash
     begin
