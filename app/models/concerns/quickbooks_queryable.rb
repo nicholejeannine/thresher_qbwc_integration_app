@@ -44,11 +44,9 @@ module QuickbooksQueryable
   def handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
-      unless hash.include?('data_ext_ret')
-           contact_instance.update_attribute('primary_contact', nil)
-           contact_instance.update_attribute('primary_email', nil)
-           contact_instance.update_attribute('primary_phone', nil)
-      end
+      contact_instance.update_attribute('primary_contact', nil)
+      contact_instance.update_attribute('primary_email', nil)
+      contact_instance.update_attribute('primary_phone', nil)
       hash.each do |k, v|
       if custom_type?(k)
         # Customer objects have custom fields
