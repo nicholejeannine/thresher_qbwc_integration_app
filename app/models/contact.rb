@@ -1,5 +1,5 @@
 class Contact < ApplicationRecord
-  incldue QuickbooksQueryable
+  include QuickbooksQueryable
   def self.handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
