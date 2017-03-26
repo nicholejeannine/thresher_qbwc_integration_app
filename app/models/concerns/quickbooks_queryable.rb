@@ -25,7 +25,7 @@ module QuickbooksQueryable
     begin
     contact_keys = ['salutation', 'first_name', 'middle_name', 'last_name', 'job_title', 'phone', 'alt_phone', 'fax', 'email', 'cc', 'contact', 'alt_contact', 'data_ext_ret']
     contact_hash = qb.extract!(*contact_keys)
-    handle_contact(contact_hash, self.class.name ,self.id) unless contact_hash.empty?
+    Contact.handle_contact(contact_hash, self.class.name ,self.id) unless contact_hash.empty?
     # Parse the rest of the hash in key/value pairs
     qb.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
