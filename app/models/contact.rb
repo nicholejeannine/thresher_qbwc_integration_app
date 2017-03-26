@@ -1,4 +1,5 @@
 class Contact < ApplicationRecord
+  extend QuickbooksTypes
   include QuickbooksQueryable
   def self.handle_contact(hash, klass, id)
     begin
