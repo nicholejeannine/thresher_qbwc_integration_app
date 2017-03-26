@@ -32,7 +32,7 @@ module QuickbooksQueryable
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif address?(key)
-        handle_address(key, value, self.class.name, self.id)
+        Address.handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
         handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
       else update_attribute(key, value)
