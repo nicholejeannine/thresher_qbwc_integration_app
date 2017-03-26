@@ -3,54 +3,21 @@ module QuickbooksQueryable
   include QuickbooksTypes
 
 
-  # TODO: Fix so that we only save customer_id and parent_id, the rest get the full name values
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
-    begin
-      if key.match(/customer_ref/)
-        update_attribute("customer_id", value['list_id'])
-        update_attribute("customer_full_name", value['full_name'])
-      elsif key.match(/parent_ref/)
-        update_attribute("parent_id", value['list_id'])
+      if key.match(/customer_ref|parent_ref/)
+        update_attribute("#{key}", value['list_id'])
       else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])
       end
-    rescue Exception => e
-      QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{self.id}", :error_message => "#{e} in persisting #{key}")
-    end
   end
 
   # Try to update the attribute, only if the column named exists in the database table.
   # TODO: Throw an error when this is called and returns false due to self.respond_to? == false
   def update_attribute(column_name, new_value)
-    begin
     self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
-    rescue Exception => e
-      QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "Update attribute method failed: #{e}")
-    end
   end
   
-  # TODO: Pull this into the Contact class. Just like with the addresses.
-  def handle_contact(hash, klass, id)
-    begin
-      contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
-      contact_instance.update_attribute('primary_contact', nil)
-      contact_instance.update_attribute('primary_email', nil)
-      contact_instance.update_attribute('primary_phone', nil)
-      hash.each do |k, v|
-      if custom_type?(k)
-        # Customer objects have custom fields
-        v.each{|i| contact_instance.update_attribute("#{i['data_ext_name'].sub('Site ', 'primary').underscore}", "#{i['data_ext_value']}")}
-      else
-        contact_instance.update_attribute(k, v)
-      end
-      end
-        contact_instance.save
-    rescue Exception => e
-      QbwcError.create(:worker_class => "Contact: #{klass}", :model_id => "#{id}", :error_message => "#{e}")
-    end
-  end
-
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
   def parse_hash(qb)
@@ -83,6 +50,9 @@ included do
     c = self.find_or_initialize_by(:id => id)
     c.parse_hash(qb.to_hash)
     c.save
+      unless c.persisted?
+        QbwcError.create(:worker_class => 'not persisted', :error_message => "#{c}")
+      end
     rescue Exception => e
       QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{id}", :error_message => "Error parsing response: #{e}")
     end
