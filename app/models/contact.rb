@@ -1,4 +1,5 @@
 class Contact < ApplicationRecord
+  extend QuickbooksTypes
   def self.handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
