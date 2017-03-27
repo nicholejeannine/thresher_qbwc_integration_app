@@ -1,5 +1,4 @@
 class Contact < ApplicationRecord
-  extend QuickbooksTypes
   include QuickbooksQueryable
   def self.handle_contact(hash, klass, id)
     begin
@@ -8,9 +7,17 @@ class Contact < ApplicationRecord
       contact_instance.update_attribute('primary_email', nil)
       contact_instance.update_attribute('primary_phone', nil)
       hash.each do |k, v|
-        if custom_type?(k)
+        if k.match(/data_ext_ret/)
           # Customer objects have custom fields
-          v.each{|i| contact_instance.send("#{i['data_ext_name'].sub('Site ', 'primary').underscore}=", "#{i['data_ext_value']}")}
+          v.each do |arr|
+            if arr['data_ext_name'] == 'Site Contact'
+              contact_instance.update_attribute("primary_contact", arr['data_ext_value'])
+            elsif arr['data_ext_name'] == 'Site Email'
+              contact_instance.update_attribute("primary_email", arr['data_ext_value'])
+            elsif arr['data_ext_name'] == 'Site Phone'
+              contact_instance.update_attribute("primary_phone", arr['data_ext_value'])
+            end
+          end
         else
           contact_instance.update_attribute(k, v)
         end

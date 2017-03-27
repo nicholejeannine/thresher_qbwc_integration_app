@@ -11,11 +11,6 @@ module QuickbooksTypes
 		key.match(/_ref$/)
 	end
 
-# Is the xml fragment a "custom type"? (In Quickbooks a custom type has the key "data_ext_ret")
-	def custom_type?(key)
-		key.match(/data_ext_ret/)
-	end
-
 # Is the xml fragment part of a "line item?"
 	def line_item_type?(key)
 		key.match(/_line_ret/)

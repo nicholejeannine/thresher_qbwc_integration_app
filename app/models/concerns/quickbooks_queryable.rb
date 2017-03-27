@@ -1,8 +1,7 @@
 module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypes
-
-
+  
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
       if key.match(/customer_ref|parent_ref/)
