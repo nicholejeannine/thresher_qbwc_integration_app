@@ -80,13 +80,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string   "account_number",                     limit: 99
     # t.string   "preferred_payment_method_id",        limit: 41
     # t.string   "preferred_payment_method_full_name", limit: 31
-    # t.string   "job_status",                         limit: 41
-    # t.date     "job_start_date"
-    # t.date     "job_projected_end_date"
-    # t.date     "job_end_date"
-    # t.string   "job_desc",                           limit: 99
-    # t.string   "job_type_id",                        limit: 41
-    # t.string   "job_type_full_name",                 limit: 159
+    
     t.string   "preferred_delivery_method",          limit: 41
     # t.string   "price_level_id",                     limit: 41
     # t.string   "price_level_full_name",              limit: 31

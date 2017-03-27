@@ -1,2 +1,2 @@
-class BillAddress < ApplicationRecord
+class BillAddress < Address
 end
