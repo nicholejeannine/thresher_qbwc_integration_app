@@ -14,7 +14,11 @@ module QuickbooksQueryable
   # Try to update the attribute, only if the column named exists in the database table.
   # TODO: Throw an error when this is called and returns false due to self.respond_to? == false
   def update_attribute(column_name, new_value)
-    self.send("#{column_name}=", new_value) if self.respond_to?("#{column_name}=")
+    if self.respond_to?("#{column_name}=")
+      self.send("#{column_name}=", new_value)
+    else
+       QbwcError.create(:worker_class => "#{self.class}", :error_message => "update attribute failed for #{column_name}= #{new_value}")
+     end
   end
   
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
