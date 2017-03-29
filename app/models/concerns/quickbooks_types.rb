@@ -19,7 +19,7 @@ module QuickbooksTypes
 	# Keys we never care about handling
 	# TODO: add class_ref, price stuff, etc
 	def ignored_type?(key)
-		key.match(/class_ref$|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes/)
+		key.match(/class_ref$|line_id$|txn_line_id$|txn_id$|other$|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes/)
 	end
 
 end
