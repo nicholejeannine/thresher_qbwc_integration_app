@@ -17,7 +17,7 @@ module QuickbooksQueryable
     if self.respond_to?("#{column_name}=")
       self.send("#{column_name}=", new_value)
     else
-       QbwcError.create(:worker_class => "#{self.class}", :error_message => "update attribute failed for #{column_name}= #{new_value}")
+       QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{column_name}", :error_message => "update attribute failed for #{column_name}= #{new_value}")
      end
   end
   
