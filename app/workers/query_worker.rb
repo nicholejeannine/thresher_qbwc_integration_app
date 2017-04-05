@@ -1,8 +1,4 @@
 class QueryWorker < QBWC::Worker
-  def last_ran
-   # '2017-03-18T01:30'
-    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at&.localtime&.strftime '%FT%R'
-  end
 
   def requests(job, session, data)
 	[
@@ -10,7 +6,7 @@ class QueryWorker < QBWC::Worker
 	    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	    :max_returned => 100,
 	    :active_status => "All",
-	    :from_modified_date =>last_ran,
+	    :from_modified_date => Customer.maximum('time_modified')&.strftime '%FT%R'
 	     :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
 	    :owner_id => 0
 	    }
@@ -19,7 +15,7 @@ class QueryWorker < QBWC::Worker
 	    	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	   	  :max_returned => 100,
 	   	  :modified_date_range_filter => {
-	    	    :from_modified_date => last_ran
+	    	    :from_modified_date => Estimate.maximum('time_modified')&.strftime '%FT%R'
 	    	  },
 	   	  :include_line_items => true,
 	    	}
@@ -28,7 +24,7 @@ class QueryWorker < QBWC::Worker
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
 		    :modified_date_range_filter => {
-		      :from_modified_date => last_ran
+		      :from_modified_date => SalesOrder.maximum('time_modified')&.strftime '%FT%R'
 		    },
 		    :include_line_items => true
 		  }
@@ -36,7 +32,7 @@ class QueryWorker < QBWC::Worker
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
 		    :modified_date_range_filter => {
-		  	:from_modified_date => last_ran
+		  	:from_modified_date => PurchaseOrder.maximum('time_modified')&.strftime '%FT%R'
 		    },
 		    :include_line_items => true
 		  }
@@ -45,7 +41,7 @@ class QueryWorker < QBWC::Worker
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
 		    :modified_date_range_filter => {
-		      :from_modified_date => last_ran
+		      :from_modified_date => Invoice.maximum('time_modified')&.strftime '%FT%R'
 		    },
 		    :include_line_items => true
 		  }
@@ -66,5 +62,9 @@ class QueryWorker < QBWC::Worker
 		  QbwcError.create(:worker_class => self.class.name, :error_message => e)
 		end
 
+          QBWC.session_complete_success = lambda do |session|
+            total_time = Time.now - session.began_at
+            Rails.logger.log("Query worker completed in #{total_time} seconds")
+          end
 	end
 end

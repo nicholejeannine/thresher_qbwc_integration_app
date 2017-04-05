@@ -48,10 +48,6 @@ class InitialWorker < QBWC::Worker
 		rescue Exception => e
 		  QbwcError.create(:worker_class => self.class.name, :error_message => e)
 		end
-		QBWC.session_complete_success = lambda do |session|
-			QBWC.clear_jobs
-			QBWC.add_job(:query, true, '', QueryWorker)
-		end
 
 	end
 end
