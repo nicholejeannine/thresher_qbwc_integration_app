@@ -60,8 +60,8 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string   "customer_type",             limit: 159
     t.string   "terms",                     limit: 31
     t.string   "sales_rep",                 limit: 5
-    t.decimal  "balance",                         precision: 20, scale: 5
-    t.decimal  "total_balance",                         precision: 20, scale: 5
+    t.decimal  "balance",                         precision: 20, scale: 5, null: false, default: 0
+    t.decimal  "total_balance",                         precision: 20, scale: 5, null: false, default: 0
     t.string   "sales_tax_code",            limit: 3
     t.string   "item_sales_tax",            limit: 31
     t.string   "account_number",            limit: 99
@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string  "override_uom_set",        limit: 31
     t.decimal "rate",                                 precision: 20, scale: 5
     t.float   "rate_percent",            limit: 24
-    t.decimal "amount",                               precision: 20, scale: 5
+    t.decimal "amount",                               precision: 20, scale: 5, null: false, default: 0
     t.string  "inventory_site",          limit: 31
     t.string  "inventory_site_location", limit: 31
     t.string  "sales_tax_code",          limit: 3
@@ -111,11 +111,11 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.date     "due_date"
     t.string   "sales_rep",               limit: 5
     t.string   "fob",                     limit: 13
-    t.decimal  "subtotal",                             precision: 20, scale: 5
+    t.decimal  "subtotal",                             precision: 20, scale: 5, null: false, default: 0
     t.string   "item_sales_tax",          limit: 31
     t.float    "sales_tax_percentage",    limit: 24
-    t.decimal  "sales_tax_total",                      precision: 20, scale: 5
-    t.decimal  "total_amount",                         precision: 20, scale: 5
+    t.decimal  "sales_tax_total",                      precision: 20, scale: 5, null: false, default: 0
+    t.decimal  "total_amount",                         precision: 20, scale: 5, null: false, default: 0
     t.string   "memo",                    limit: 4095
     t.string   "customer_msg",            limit: 101
     t.boolean  "is_to_be_emailed"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string  "override_uom_set"
     t.decimal "rate",                                  precision: 20, scale: 5
     t.float   "rate_percent",            limit: 24
-    t.decimal "amount",                                precision: 20, scale: 5
+    t.decimal "amount",                                precision: 20, scale: 5, null: false, default: 0
     t.string  "inventory_site"
     t.string  "inventory_site_location"
     t.string  "serial_number"
@@ -162,12 +162,12 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string   "fob",                       limit: 13
     t.date     "ship_date"
     t.string   "ship_method",               limit: 15
-    t.decimal  "subtotal",                               precision: 20, scale: 5
+    t.decimal  "subtotal",                               precision: 20, scale: 5, null: false, default: 0
     t.string   "item_sales_tax",            limit: 31
     t.float    "sales_tax_percentage",      limit: 24
-    t.decimal  "sales_tax_total",                        precision: 20, scale: 5
-    t.decimal  "applied_amount",                         precision: 20, scale: 5
-    t.decimal  "balance_remaining",                      precision: 20, scale: 5
+    t.decimal  "sales_tax_total",                        precision: 20, scale: 5, null: false, default: 0
+    t.decimal  "applied_amount",                         precision: 20, scale: 5, null: false, default: 0
+    t.decimal  "balance_remaining",                      precision: 20, scale: 5, null: false, default: 0
     t.string   "memo",                      limit: 4095
     t.boolean  "is_paid"
     t.string   "customer_msg",              limit: 101
@@ -188,7 +188,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string  "unit_of_measure"
     t.string  "override_uom_set"
     t.decimal "rate",                                   precision: 20, scale: 5
-    t.decimal "amount",                                 precision: 20, scale: 5
+    t.decimal "amount",                                 precision: 20, scale: 5, null: false, default: 0
     t.string  "inventory_site_location"
     t.string  "customer_id"
     t.date    "service_date"
@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.date     "expected_date"
     t.string   "ship_method"
     t.string   "fob"
-    t.decimal  "total_amount",                     precision: 20, scale: 5
+    t.decimal  "total_amount",                     precision: 20, scale: 5, null: false, default: 0
     t.boolean  "is_manually_closed"
     t.boolean  "is_fully_received"
     t.text     "memo",               limit: 65535
