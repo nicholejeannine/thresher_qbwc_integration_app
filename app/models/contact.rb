@@ -3,19 +3,19 @@ class Contact < ApplicationRecord
   def self.handle_contact(hash, klass, id)
     begin
       contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
-      contact_instance.update_attribute('primary_contact', nil)
-      contact_instance.update_attribute('primary_email', nil)
-      contact_instance.update_attribute('primary_phone', nil)
+      contact_instance.update_attribute('site_contact', nil)
+      contact_instance.update_attribute('site_email', nil)
+      contact_instance.update_attribute('site_phone', nil)
       hash.each do |k, v|
         if k.match(/data_ext_ret/)
           # Customer objects have custom fields
           v.each do |arr|
             if arr['data_ext_name'] == 'Site Contact'
-              contact_instance.update_attribute("primary_contact", arr['data_ext_value'])
+              contact_instance.update_attribute("site_contact", arr['data_ext_value'])
             elsif arr['data_ext_name'] == 'Site Email'
-              contact_instance.update_attribute("primary_email", arr['data_ext_value'])
+              contact_instance.update_attribute("site_email", arr['data_ext_value'])
             elsif arr['data_ext_name'] == 'Site Phone'
-              contact_instance.update_attribute("primary_phone", arr['data_ext_value'])
+              contact_instance.update_attribute("site_phone", arr['data_ext_value'])
             end
           end
         else
