@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string "cc",              limit: 1023
     t.string "contact",         limit: 41
     t.string "alt_contact",     limit: 41
-    t.string "primary_contact"
-    t.string "primary_email"
-    t.string "primary_phone"
+    t.string "site_contact"
+    t.string "site_email"
+    t.string "site_phone"
     t.index ["id", "contact_type"], name: "id", unique: true, using: :btree
   end
 
