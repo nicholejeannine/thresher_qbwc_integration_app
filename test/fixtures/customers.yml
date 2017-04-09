@@ -1,0 +1,116 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+# This model initially had no columns defined. If you add columns to the
+# model remove the '{}' from the fixture names and add the columns immediately
+# below each fixture, per the syntax in the comments below
+#
+one:
+  id: '3233003-9035782541'
+  time_created: '2003-06-10 23:02:26'
+  time_modified: '2017-02-09 22:27:42'
+  edit_sequence: '1486679262'
+  name: 'BloobleYank'
+  full_name: 'BloobleYank'
+  is_active: 1
+  parent_id: nil
+  sublevel: 0
+  company_name: 'BloobleYank Corp'
+  customer_type: 'Corporate'
+  terms: 'Net 30'
+  sales_rep: 'PBJ'
+  balance: 372.02
+  total_balance: 128210.072222
+  sales_tax_code: 'Tax'
+  item_sales_tax: 'SC/CA'
+  account_number: '7818'
+  job_status: 'None'
+  job_start_date: nil
+  job_projected_end_date: nil
+  job_end_date: nil
+  job_desc: nil
+  job_type: nil
+  preferred_delivery_method: 'None'
+
+# column: value
+#
+two:
+  id: '3239001-907B906641'
+  time_created: '2005-12-07 22:14:15'
+  time_modified: '2017-03-15 03:23:07'
+  edit_sequence: '1482346566'
+  name: 'Construction'
+  full_name: 'BloobleYank:Construction'
+  is_active: 1
+  parent_id: '3233003-9035782541'
+  sublevel: 1
+  company_name: 'BloobleYank Corp'
+  customer_type: 'Corporate'
+  terms: 'Net 45'
+  sales_rep: 'ABC'
+  balance: 0
+  total_balance: 330391.33843
+  sales_tax_code: 'Tax'
+  item_sales_tax: 'SC/CA'
+  account_number: '7818'
+  job_status: 'InProgress'
+  job_start_date: 2002-10-01 00:00:00
+  job_projected_end_date: nil
+  job_end_date: nil
+  job_desc: 'Conference room installation and cabling'
+  job_type: 'Cabling'
+  preferred_delivery_method: 'None'
+
+
+three:
+  id: '8643085-B072123456'
+  time_created: '2005-12-07 22:14:15'
+  time_modified: '2017-03-15 03:23:07'
+  edit_sequence: '1482346566'
+  name: 'US-KIR-D1'
+  full_name: 'BloobleYank:Construction:US-KIR-D1'
+  is_active: 1
+  parent_id: '3239001-907B906641'
+  sublevel: 2
+  company_name: 'BloobleYank Corp'
+  customer_type: 'Corporate'
+  terms: 'Net 45'
+  sales_rep: 'ABC'
+  balance: 0
+  total_balance: 0
+  sales_tax_code: 'Tax'
+  item_sales_tax: 'SC/CA'
+  account_number: '7818'
+  job_status: 'InProgress'
+  job_start_date: 2002-10-01 00:00:00
+  job_projected_end_date: nil
+  job_end_date: nil
+  job_desc: 'Conference room installation and cabling'
+  job_type: 'Cabling'
+  preferred_delivery_method: 'None'
+
+four:
+  id: '1234567-B072123456'
+  time_created: '2005-12-07 22:14:15'
+  time_modified: '2017-03-15 03:23:07'
+  edit_sequence: '1482346566'
+  name: 'P-2808'
+  full_name: 'BloobleYank:Construction:US-KIR-D1:P-2808'
+  is_active: 1
+  parent_id: '8643085-B072123456'
+  sublevel: 3
+  company_name: 'BloobleYank Corp'
+  customer_type: 'Corporate'
+  terms: 'Net 45'
+  sales_rep: 'ABC'
+  balance: 0
+  total_balance: 0
+  sales_tax_code: 'Tax'
+  item_sales_tax: 'SC/CA'
+  account_number: '7818'
+  job_status: 'InProgress'
+  job_start_date: 2002-10-01 00:00:00
+  job_projected_end_date: nil
+  job_end_date: nil
+  job_desc: 'Conference room installation and cabling'
+  job_type: 'Cabling'
+  preferred_delivery_method: 'None'
