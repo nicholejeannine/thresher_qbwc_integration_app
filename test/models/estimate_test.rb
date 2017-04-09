@@ -9,10 +9,22 @@ class EstimateTest < ActiveSupport::TestCase
   
   # TODO
   test "saves customer id" do
-    skip
+    e = prep({"txn_id" => '222',
+              "customer_ref" => {
+                  "list_id" => "1111",
+                  "full_name" => "Test:Testing:P-2"
+              }
+             })
+    assert_equal("1111", e.customer_id, "Estimate should parse customer_ref['list_id'] as customer_id")
   end
   test "saves a bill address with estimate id" do
-    skip
+    BillAddress.destroy_all
+    e = prep({"txn_id" => '333',
+              "bill_address" => {
+                  "xml_attributes" => "some crap",
+                  "addr1" => "333 Street"
+              }})
+    assert_equal("333", BillAddress.first.id, "Bill Address id should match id of estimate hash")
   end
   test "saves a ship address with estimate id" do
     skip
