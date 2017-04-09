@@ -27,11 +27,19 @@ class EstimateTest < ActiveSupport::TestCase
     assert_equal("333", BillAddress.first.id, "Bill Address id should match id of estimate hash")
   end
   test "saves a ship address with estimate id" do
+    ShipAddress.destroy_all
+    e = prep({"txn_id" => '333',
+              "ship_address" => {
+                  "xml_attributes" => "some crap",
+                  "addr1" => "333 Street"
+              }})
+    assert_equal("333", ShipAddress.first.id, "Ship Address id should match id of estimate hash")
+  end
+  
+  test "saves an estimate line that is passed in as a Qbxml Hash" do
     skip
   end
-  test "saves an estimate line that is passed in as a Qbsml Hash" do
-    skip
-  end
+  
   test "saves all estimate lines passed in as an array" do
     skip
   end
