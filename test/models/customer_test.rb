@@ -16,6 +16,7 @@ class CustomerTest < ActiveSupport::TestCase
   end
   
   test "can save billing address" do
+    BillAddress.destroy_all
     c = prep({"list_id" => '333',
             "bill_address" => {
                 "xml_attributes" => "some crap",
@@ -25,6 +26,7 @@ class CustomerTest < ActiveSupport::TestCase
   end
 
   test "can save ship address" do
+    ShipAddress.destroy_all
     c = prep({"list_id" => '444',
             "ship_address" => {
                 "xml_attributes" => "some crap",
@@ -35,6 +37,7 @@ class CustomerTest < ActiveSupport::TestCase
   end
   
   test "can save contact info" do
+    Contact.destroy_all
     c = prep({"list_id" => '555',
            "salutation" => "Joe"})
     assert_equal("555", Contact.first.id, "Contact id should match id of customer hash")
