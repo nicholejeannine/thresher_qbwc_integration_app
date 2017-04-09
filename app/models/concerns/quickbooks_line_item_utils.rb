@@ -3,7 +3,6 @@ module QuickbooksLineItemUtils
   # Retrieve the name of the class we're interested in saving to the database from a QueryWorker instance (e.g., "CustomerQueryWorker.new.klass returns the Customer class)
   
   # The line item class (returned as a Class object, so line_klass.new will create a new object)
-  # TODO: search files for use of line_klass definition - I think it's not being used, or it could be refactored. Goal is for this whole file to go away.
   def line_klass
     self.class.name.concat('Line').constantize
   end
