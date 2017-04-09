@@ -41,8 +41,20 @@ class CustomerTest < ActiveSupport::TestCase
     assert_equal("Joe", Contact.first.salutation, "Contact salutation should match salutation value of customer hash")
   end
   
-  # test "can parse data extensions"
-  
+  # TODO
+  test "can parse data extensions" do
+    skip
+    # this will be stored in contact table
+  end
+  test "skips skipped types on associated models" do
+    skip
+  end
+  test "handles ref types" do
+    skip
+  end
+  test "handles associated customer/parent object" do
+    skip
+  end
   
   def prep(hash)
     Customer.destroy_all
