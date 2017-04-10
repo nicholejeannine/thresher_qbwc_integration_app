@@ -46,9 +46,27 @@ class CustomerTest < ActiveSupport::TestCase
   
   # TODO
   test "can parse data extensions" do
-    skip
-    # this will be stored in contact table
+    c = prep({"list_id" => '33331',
+    "data_ext_ret"=> [
+      {'data_ext_name' => 'Site Contact',
+   'data_ext_value' => 'Frankie Jones'
+    },{'data_ext_name' => 'Site Phone',
+     'data_ext_value' => '555=555=5555'
+    }, {'data_ext_name' => 'Site Email',
+    'data_ext_value' => 'email.com'
+    }]})
+    assert_equal("555=555=5555", Contact.first.site_phone, "Contact phone should be parsed via data extension")
   end
+
+  test "nullifies data extension values when not explicitly defined" do
+    Contact.destroy_all
+    c = Customer.new(:id => '3331hnjd')
+    Contact.create!(:id => '3331hnjd', 'site_contact' => 'not null', 'site_phone' => '33')
+    c.parse_hash(:name => 'no data extensions')
+    c.save
+    assert_nil(Contact.first.site_phone, "Should nullify custom data types that aren't declared")
+  end
+  
   test "skips skipped types on associated models" do
     skip
   end
@@ -61,6 +79,9 @@ class CustomerTest < ActiveSupport::TestCase
   
   def prep(hash)
     Customer.destroy_all
+    Contact.destroy_all
+    BillAddress.destroy_all
+    ShipAddress.destroy_all
     id = hash["list_id"]
     c = Customer.new(:id => id)
     c.parse_hash(hash)
@@ -70,11 +91,3 @@ class CustomerTest < ActiveSupport::TestCase
 end
 
 
-# "data_ext_ret"=> [
-# {'data_ext_name' => 'Site Contact',
-#  'data_ext_value' => 'Frankie Jones'
-# },{'data_ext_name' => 'Site Phone',
-#    'data_ext_value' => '555=555=5555'
-# }, {'data_ext_name' => 'Site Email',
-#     'data_ext_value' => 'email.com'
-# }]})
