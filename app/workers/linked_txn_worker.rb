@@ -36,5 +36,17 @@ class LinkedTxnWorker < QBWC::Worker
   def handle_response(r, session, job, request, data)
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
+    qb['estimate_ret']&.each do |qb|
+      Rails.logger.info("Estimate #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+    end
+    qb['sales_order_ret']&.each do |qb|
+      Rails.logger.info("SalesOrder #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+    end
+    qb['purchase_order_ret']&.each do |qb|
+      Rails.logger.info("PurchaseOrder #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+    end
+    qb['invoice_ret']&.each do |qb|
+      Rails.logger.info("Invoice #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+    end
   end
 end
