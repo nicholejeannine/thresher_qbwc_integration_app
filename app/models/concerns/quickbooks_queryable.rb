@@ -25,11 +25,6 @@ module QuickbooksQueryable
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
   def parse_hash(qb)
     begin
-    if self.class.name == 'Customer'
-      if qb['sublevel'] > 0 || qb['name'].start_with?('P-')
-        next
-      end
-    end
     # Extract the contact information part of the hash
     contact_keys = ['salutation', 'first_name', 'middle_name', 'last_name', 'job_title', 'phone', 'alt_phone', 'fax', 'email', 'cc', 'contact', 'alt_contact', 'data_ext_ret']
     contact_hash = qb.extract!(*contact_keys)
