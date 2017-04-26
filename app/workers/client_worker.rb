@@ -1,4 +1,4 @@
-class QueryWorker < QBWC::Worker
+class ClientWorker < QBWC::Worker
   def last_ran
     QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at&.localtime&.strftime '%FT%R'
   end
