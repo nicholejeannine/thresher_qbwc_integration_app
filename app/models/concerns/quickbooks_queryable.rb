@@ -24,18 +24,24 @@ module QuickbooksQueryable
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
   def parse_hash(qb)
-    # Extract the contact information part of the hash
     begin
+    if self.class.name == 'Customer'
+      if qb['sublevel'] > 0 || qb['name'].start_with?('P-')
+        next
+      end
+    end
+    # Extract the contact information part of the hash
     contact_keys = ['salutation', 'first_name', 'middle_name', 'last_name', 'job_title', 'phone', 'alt_phone', 'fax', 'email', 'cc', 'contact', 'alt_contact', 'data_ext_ret']
     contact_hash = qb.extract!(*contact_keys)
-    Contact.handle_contact(self.id, contact_hash)
+    #Contact.handle_contact(self.id, contact_hash)
     # Parse the rest of the hash in key/value pairs
     qb.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif address?(key)
-        Address.handle_address(key, value, self.class.name, self.id)
+        next
+        #Address.handle_address(key, value, self.class.name, self.id)
       elsif ref_type?(key)
         handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
       else update_attribute(key, value)
