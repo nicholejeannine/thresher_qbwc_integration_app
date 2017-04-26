@@ -1,12 +1,13 @@
 class Contact < ApplicationRecord
   include QuickbooksQueryable
-  def self.handle_contact(hash, klass, id)
+  def self.handle_contact(id, hash = nil)
     begin
-      contact_instance = Contact.find_or_initialize_by(:id => id, :contact_type => klass)
-      contact_instance.update_attribute('site_contact', nil)
-      contact_instance.update_attribute('site_email', nil)
-      contact_instance.update_attribute('site_phone', nil)
-      hash.each do |k, v|
+      contact_instance = Contact.find_or_initialize_by(:id => id)
+      contact_instance.send('site_contact=', nil)
+      contact_instance.send('site_email=', nil)
+      contact_instance.send('site_phone=', nil)
+      contact_instance.save
+      hash&.each do |k, v|
         if k.match(/data_ext_ret/)
           # Customer objects have custom fields
           v.each do |arr|
