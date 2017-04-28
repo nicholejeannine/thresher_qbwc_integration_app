@@ -20,7 +20,7 @@ class ClientWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     begin
-      r['customer_ret']&.each do
+      r['customer_ret']&.each do |qb|
         if qb['sublevel'] == 0 && !qb['name'].upcase.start_with?('P-')
           Customer.parse_qb_response(qb)
         end
