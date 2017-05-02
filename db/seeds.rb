@@ -1,6 +1,7 @@
 # clear quickbooks jobs
   QBWC.clear_jobs
   # QBWC.add_job(:client, true, '', ClientWorker)
+  QBWC.add_job(:initial, true, '', InitialWorker)
 
   # QBWC.add_job(:query, true, '', QueryWorker)
   # QBWC.add_job(:estimate_query, true, '', EstimateQueryWorker)
