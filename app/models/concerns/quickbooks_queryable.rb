@@ -22,6 +22,23 @@ module QuickbooksQueryable
      end
   end
   
+  def handle_custom_type(value)
+    self.send('site_contact=', nil)
+    self.send('site_email=', nil)
+    self.send('site_phone=', nil)
+    value&.each do |k, v|
+        v.each do |arr|
+          if arr['data_ext_name'] == 'Site Contact'
+            update_attribute("site_contact", arr['data_ext_value'])
+          elsif arr['data_ext_name'] == 'Site Email'
+            update_attribute("site_email", arr['data_ext_value'])
+          elsif arr['data_ext_name'] == 'Site Phone'
+            update_attribute("site_phone", arr['data_ext_value'])
+          end
+        end
+    end
+  end
+  
   def handle_address(key, value)
     prefix = key.remove(/address/)
     value&.each do |k, v|
@@ -44,8 +61,7 @@ module QuickbooksQueryable
       elsif ref_type?(key)
         handle_ref_type(key, value)
       elsif custom_type?(key)
-        next # FIXME: FIND OUT IF WE CAN GET RID OF THIS SHEE-IT!
-        # handle_custom_type(value) # FIXME:  DEFINE IF WE NEED IT!
+        handle_custom_type(value) # FIXME:  DEFINE IF WE NEED IT!
       else update_attribute(key, value)
       end
     end
