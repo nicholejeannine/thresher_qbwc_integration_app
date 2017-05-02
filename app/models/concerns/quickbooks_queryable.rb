@@ -25,7 +25,9 @@ module QuickbooksQueryable
   def handle_address(key, value)
     prefix = key.remove(/address/)
     value&.each do |k, v|
-      update_attribute("#{prefix}#{k}", v)
+      unless ignored_type?(k)
+        update_attribute("#{prefix}#{k}", v)
+      end
     end
   end
   
