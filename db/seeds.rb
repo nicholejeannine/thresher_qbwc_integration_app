@@ -1,7 +1,8 @@
 # clear quickbooks jobs
   QBWC.clear_jobs
+  QBWC.add_job(:client, true, '', ClientWorker)
 
-  QBWC.add_job(:query, true, '', QueryWorker)
+  # QBWC.add_job(:query, true, '', QueryWorker)
   # QBWC.add_job(:estimate_query, true, '', EstimateQueryWorker)
  # QBWC.add_job(:list_sales_orders, true, '', SalesOrderQueryWorker)
  # QBWC.add_job(:list_purchase_orders, true, '', PurchaseOrderQueryWorker)

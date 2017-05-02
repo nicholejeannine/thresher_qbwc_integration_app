@@ -5,6 +5,10 @@ module QuickbooksTypes
 	def address?(key)
 		key.match(/ship_address$|vendor_address$|bill_address$/)
 	end
+	
+	def custom_type?(key)
+		key.match(/data_ext_ret/)
+	end
 
 # Is the xml fragment a "reference type"? (A reference type has additional key/value pairs that need to be processed separately)
 	def ref_type?(key)

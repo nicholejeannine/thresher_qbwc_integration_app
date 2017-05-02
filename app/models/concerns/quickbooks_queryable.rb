@@ -6,6 +6,7 @@ module QuickbooksQueryable
   def handle_ref_type(key, value)
       if key.match(/customer_ref|parent_ref/)
         update_attribute("#{key.remove(/ref$/).concat('id')}", value['list_id'])
+        update_attribute("#{key.remove(/ref$/).concat('full_name')}", value['full_name']) if key == 'customer_ref'
       else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])
       end
@@ -21,24 +22,28 @@ module QuickbooksQueryable
      end
   end
   
+  def handle_address(key, value)
+    prefix = key.remove(/address/)
+    value&.each do |k, v|
+      update_attribute("#{prefix}#{k}", v)
+    end
+  end
+  
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
   def parse_hash(qb)
     begin
-    # Extract the contact information part of the hash
-    contact_keys = ['salutation', 'first_name', 'middle_name', 'last_name', 'job_title', 'phone', 'alt_phone', 'fax', 'email', 'cc', 'contact', 'alt_contact', 'data_ext_ret']
-    contact_hash = qb.extract!(*contact_keys)
-    #Contact.handle_contact(self.id, contact_hash)
-    # Parse the rest of the hash in key/value pairs
-    qb.each do |key, value|
+    qb&.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif address?(key)
-        next
-        #Address.handle_address(key, value, self.class.name, self.id)
+        handle_address(key, value)
       elsif ref_type?(key)
-        handle_ref_type(key, value) # deal with "ref types" (foreign keys to lookup tables)
+        handle_ref_type(key, value)
+      elsif custom_type?(key)
+        next # FIXME: FIND OUT IF WE CAN GET RID OF THIS SHEE-IT!
+        # handle_custom_type(value) # FIXME:  DEFINE IF WE NEED IT!
       else update_attribute(key, value)
       end
     end
