@@ -1,6 +1,6 @@
 class Customer < ApplicationRecord
 	self.abstract_class = true
-	def parse_customer_response(qb)
+	def self.parse_customer_response(qb)
 		if qb['sublevel'] == 0 && !qb['name'].upcase.start_with?('P-')
 			Client.parse_customer_response(qb)
 		elsif qb['sublevel'] > 0 && !qb['name'].upcase.start_with?('P-')
