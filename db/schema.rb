@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170315231156) do
 
-  create_table "customers", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "clients", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"
     t.string   "edit_sequence",             limit: 16
