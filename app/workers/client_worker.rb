@@ -1,6 +1,6 @@
 class ClientWorker < QBWC::Worker
   def last_ran
-    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'query').first&.updated_at&.localtime&.strftime '%FT%R'
+    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'client').first&.updated_at&.localtime&.strftime '%FT%R'
   end
   def requests(job, session, data)
     [
