@@ -1,2 +1,0 @@
-class VendorAddress < Address
-end
