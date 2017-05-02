@@ -26,16 +26,14 @@ module QuickbooksQueryable
     self.send('site_contact=', nil)
     self.send('site_email=', nil)
     self.send('site_phone=', nil)
-    value&.each do |k, v|
-        v&.each do |arr|
-          if arr['data_ext_name'] == 'Site Contact'
-            update_attribute("site_contact", arr['data_ext_value'])
-          elsif arr['data_ext_name'] == 'Site Email'
-            update_attribute("site_email", arr['data_ext_value'])
-          elsif arr['data_ext_name'] == 'Site Phone'
-            update_attribute("site_phone", arr['data_ext_value'])
-          end
-        end
+    value&.each do |arr|
+      if arr['data_ext_name'] == 'Site Contact'
+        update_attribute("site_contact", arr['data_ext_value'])
+      elsif arr['data_ext_name'] == 'Site Email'
+        update_attribute("site_email", arr['data_ext_value'])
+      elsif arr['data_ext_name'] == 'Site Phone'
+        update_attribute("site_phone", arr['data_ext_value'])
+      end
     end
   end
   
