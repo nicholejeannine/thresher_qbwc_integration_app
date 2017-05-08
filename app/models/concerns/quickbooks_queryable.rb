@@ -17,9 +17,7 @@ module QuickbooksQueryable
   def update_attribute(column_name, new_value)
     if self.respond_to?("#{column_name}=")
       self.send("#{column_name}=", new_value)
-    else
-       QbwcError.create(:worker_class => "#{self.class}", :model_id => "#{column_name}", :error_message => "update attribute failed for #{column_name}= #{new_value}")
-     end
+    end
   end
   
   def handle_custom_type(value)
