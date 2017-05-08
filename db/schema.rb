@@ -360,7 +360,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.decimal "unbilled_quantity",                      precision: 20, scale: 5
     t.boolean "is_billed"
     t.boolean "is_manually_closed"
-    t.index ["purchase_order_id"], name: "customer_id", using: :btree
+    t.index ["purchase_order_id"], name: "purchase_order_id", using: :btree
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
   end
 
