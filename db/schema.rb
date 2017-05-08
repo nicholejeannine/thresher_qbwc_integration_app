@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20170315231156) do
     t.string   "sales_tax_code",            limit: 3
     t.string   "item_sales_tax",            limit: 31
     t.string   "account_number",            limit: 99
+    t.string   "job_type",                        limit: 159
     t.string   "preferred_delivery_method", limit: 41
     t.string "site_contact"
     t.string "site_email"
