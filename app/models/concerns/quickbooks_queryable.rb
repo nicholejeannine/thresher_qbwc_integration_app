@@ -4,12 +4,12 @@ module QuickbooksQueryable
   
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
-      if key.match(/customer_ref|parent_ref/)
-        update_attribute("#{key.remove(/ref$/).concat('id')}", value['list_id'])
-        update_attribute("#{key.remove(/ref$/).concat('full_name')}", value['full_name']) if key == 'customer_ref'
-      else
+    if key.match(/customer_ref|parent_ref/)
+      update_attribute("#{key.remove(/ref$/).concat('id')}", value['list_id'])
+      update_attribute("#{key.remove(/ref$/).concat('type')}", name_type(value['full_name'])) if key == 'customer_ref'
+    else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])
-      end
+    end
   end
 
   # Try to update the attribute, only if the column named exists in the database table.

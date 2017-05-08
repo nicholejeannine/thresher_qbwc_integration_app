@@ -6,6 +6,15 @@ module QuickbooksTypes
 		key.match(/ship_address$|vendor_address$|bill_address$/)
 	end
 	
+	def name_type(key)
+		if key.match(/P-\d+$/)
+			"Project"
+		elsif key.match(/:/)
+			"Job"
+		else "Client"
+		end
+	end
+	
 	def custom_type?(key)
 		key.match(/data_ext_ret/)
 	end

@@ -79,9 +79,6 @@ class CustomerTest < ActiveSupport::TestCase
   
   def prep(hash)
     Customer.destroy_all
-    Contact.destroy_all
-    BillAddress.destroy_all
-    ShipAddress.destroy_all
     id = hash["list_id"]
     c = Customer.new(:id => id)
     c.parse_hash(hash)
