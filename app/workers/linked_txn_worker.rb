@@ -37,16 +37,20 @@ class LinkedTxnWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     r['estimate_ret']&.each do |qb|
-      Rails.logger.info("Estimate #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      QbwcError.create(:worker_class => 'Estimate', :model_id => "#{qb['txn_id']}", :error_message => "#{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      #Rails.logger.info("Estimate #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
     end
     r['sales_order_ret']&.each do |qb|
-      Rails.logger.info("SalesOrder #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      QbwcError.create(:worker_class => 'SalesOrder', :model_id => "#{qb['txn_id']}", :error_message => "#{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      #Rails.logger.info("SalesOrder #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
     end
     r['purchase_order_ret']&.each do |qb|
-      Rails.logger.info("PurchaseOrder #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      QbwcError.create(:worker_class => 'PurchaseOrder', :model_id => "#{qb['txn_id']}", :error_message => "#{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      #Rails.logger.info("PurchaseOrder #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
     end
     r['invoice_ret']&.each do |qb|
-      Rails.logger.info("Invoice #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      QbwcError.create(:worker_class => 'Invoice', :model_id => "#{qb['txn_id']}", :error_message => "#{qb['linked_txn']}") if qb.has_key?('linked_txn')
+      # Rails.logger.info("Invoice #{qb['txn_id']}: #{qb['linked_txn']}") if qb.has_key?('linked_txn')
     end
   end
 end
