@@ -15,8 +15,12 @@ module QuickbooksQueryable
   # Try to update the attribute, only if the column named exists in the database table.
   # TODO: Throw an error when this is called and returns false due to self.respond_to? == false
   def update_attribute(column_name, new_value)
+    begin
     if self.respond_to?("#{column_name}=")
       self.send("#{column_name}=", new_value)
+    end
+    rescue Exception => e
+      QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "Error when attempting operation #{column_name}=#{new_value}: #{e}")
     end
   end
   
