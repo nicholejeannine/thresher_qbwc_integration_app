@@ -7,10 +7,9 @@ class PurchaseOrder < ApplicationRecord
   def parse_memo
     begin
       # TODO: put the various common incorrect spellings here to catch most of them
-      if self.sales_order_id.nil? && memo.downcase.match(/salesorder|sales_order/)
-        # TODO: LOGIC HERE
-        # ref = memo.try(:split)[1].remove(":")
-        self.sales_order_id = SalesOrder.where(:ref_number => ref).first&.id
+      if self.sales_order_id.nil? memo.downcase.match(/sales order/)
+          ref = memo.try(:split)[2].remove(":")
+          self.sales_order_id = SalesOrder.where(:ref_number => ref).first&.id
       end
     rescue Exception => e
       QbwcError.create(:worker_class => self.class.name, :model_id => self.id, :error_message => "Error parsing Purchase Order memo to assign estimate_id: #{e}")
