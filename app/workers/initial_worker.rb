@@ -2,39 +2,39 @@ class InitialWorker < QBWC::Worker
 
 	def requests(job, session, data)
 	[
-	# {:customer_query_rq => {
-	#     :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-	#     :max_returned => 100,
-	#     :active_status => "All",
-	#      :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
-	#     :owner_id => 0
-	#     }
-	#    },
+	{:customer_query_rq => {
+	    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+	    :max_returned => 100,
+	    :active_status => "All",
+	     :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
+	    :owner_id => 0
+	    }
+	   },
 	    {:estimate_query_rq => {
 	    	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	   	  :max_returned => 100,
-	   	  :include_line_items => false,
+	   	  :include_line_items => true,
 	   	  :include_linked_txns => false
 	    	}
 		  },
 		  {:sales_order_query_rq => {
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
-		    :include_line_items => false,
+		    :include_line_items => true,
 		    :include_linked_txns => false
 		  }
 		  },
-		  # {:purchase_order_query_rq => {
-		  #   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-		  #   :max_returned => 100,
-		  #   :include_line_items => false,
-		  #   :include_linked_txns => false
-		  # }
-		  # },
+		  {:purchase_order_query_rq => {
+		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+		    :max_returned => 100,
+		    :include_line_items => true,
+		    :include_linked_txns => false
+		  }
+		  },
 		  {:invoice_query_rq => {
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
-		    :include_line_items => false,
+		    :include_line_items => true,
 		    :include_linked_txns => true
 		  }
 		  },
@@ -63,7 +63,7 @@ class InitialWorker < QBWC::Worker
 
 		 QBWC.session_complete_success = lambda do |session|
      total_time = Time.now - session.began_at
-     QbwcError.create(:worker_class => 'none', :error_message => "Total run time of initial workers was #{total_time}s")
+     QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of initial worker was #{total_time} seconds")
    end
   end
 end
