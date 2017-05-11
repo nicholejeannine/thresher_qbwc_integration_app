@@ -4,7 +4,7 @@ module QuickbooksQueryable
   
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
-    if key.match(/customer_ref|parent_ref/)
+    if key.match(/customer_ref|vendor_ref|parent_ref/)
       update_attribute("#{key.remove(/ref$/).concat('id')}", value['list_id'])
       update_attribute("#{key.remove(/ref$/).concat('type')}", name_type(value['full_name'])) if key == 'customer_ref'
     else
