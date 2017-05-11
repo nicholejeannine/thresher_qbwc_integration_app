@@ -372,6 +372,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "edit_sequence"
     t.integer  "txn_number"
     t.string   "vendor_id"
+    t.string   "sales_order_id"
     t.string   "inventory_site"
     t.string   "ship_to_entity"
     t.string   "template"
@@ -410,6 +411,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.boolean  "is_to_be_printed"
     t.boolean  "is_to_be_emailed"
     t.index ["vendor_id"], name: "vendor_id", using: :btree
+    t.index ["sales_order_id"], name: "sales_order_id", using: :btree
   end
 
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
