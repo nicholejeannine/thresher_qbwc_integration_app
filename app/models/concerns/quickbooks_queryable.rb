@@ -71,7 +71,7 @@ module QuickbooksQueryable
       elsif custom_type?(key)
         handle_custom_type(value) # FIXME:  DEFINE IF WE NEED IT!
       elsif link_type?(key)
-        key.each{|hash|parse_linked_txn(hash)} if self.respond_to?("parse_inked_txn")
+        value.each{|hash|parse_linked_txn(hash)}
        # handle_link_type(self.class.name, self.id, value)
       else update_attribute(key, value)
       end
