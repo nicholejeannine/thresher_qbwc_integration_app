@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "company_name",              limit: 41
     t.string   "salutation",                limit: 15
     t.string   "first_name",                limit: 25
-    t.string   "middle_name",               limit: 25
+    t.string   "middle_name",               limit: 5
     t.string   "last_name",                 limit: 25
     t.string   "job_title",                 limit: 41
     t.string   "bill_addr1",                limit: 41
@@ -223,7 +223,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "company_name",              limit: 41
     t.string   "salutation",                limit: 15
     t.string   "first_name",                limit: 25
-    t.string   "middle_name",               limit: 25
+    t.string   "middle_name",               limit: 5
     t.string   "last_name",                 limit: 25
     t.string   "job_title",                 limit: 41
     t.string   "bill_addr1",                limit: 41
@@ -289,7 +289,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "company_name",              limit: 41
     t.string   "salutation",                limit: 15
     t.string   "first_name",                limit: 25
-    t.string   "middle_name",               limit: 25
+    t.string   "middle_name",               limit: 5
     t.string   "last_name",                 limit: 25
     t.string   "job_title",                 limit: 41
     t.string   "bill_addr1",                limit: 41
@@ -529,4 +529,55 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.decimal "amount",      precision: 20, scale: 5
   end
 
+  create_table "vendors", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",             limit: 16
+    t.string   "name",                 limit: 41
+    t.boolean  "is_active",                                                       default: true,  null: false
+    t.string   "company_name",              limit: 41
+    t.string   "salutation",                limit: 15
+    t.string   "first_name",                limit: 25
+    t.string   "middle_name",               limit:  5
+    t.string   "last_name",                 limit: 25
+    t.string   "job_title",                 limit: 41
+    t.string   "vendor_addr1",       limit: 41
+    t.string   "vendor_addr2",       limit: 41
+    t.string   "vendor_addr3",       limit: 41
+    t.string   "vendor_addr4",       limit: 41
+    t.string   "vendor_addr5",       limit: 41
+    t.string   "vendor_city",        limit: 31
+    t.string   "vendor_state",       limit: 21
+    t.string   "vendor_postal_code", limit: 13
+    t.string   "vendor_country",     limit: 31
+    t.string   "vendor_note",        limit: 41
+    t.string   "ship_addr1",         limit: 41
+    t.string   "ship_addr2",         limit: 41
+    t.string   "ship_addr3",         limit: 41
+    t.string   "ship_addr4",         limit: 41
+    t.string   "ship_addr5",         limit: 41
+    t.string   "ship_city",          limit: 31
+    t.string   "ship_state",         limit: 21
+    t.string   "ship_postal_code",   limit: 13
+    t.string   "ship_country",       limit: 31
+    t.string   "ship_note",          limit: 41
+    t.string   "phone",                     limit: 21
+    t.string   "alt_phone",                 limit: 21
+    t.string   "fax",                       limit: 21
+    t.string   "email",                     limit: 1023
+    t.string   "cc",                        limit: 1023
+    t.string   "contact",                   limit: 41
+    t.string   "alt_contact",               limit: 41
+    t.string "name_on_check",               limit: 41
+    t.string "account_number",              limit: 99
+    t.string "notes",                       limit: 4095
+    t.string "vendor_type",                 limit: 159
+    t.string "terms",                       limit: 31
+    t.decimal "credit_limit",               precision: 20, scale: 5
+    t.string "vendor_tax_ident",            limit: 15
+    t.boolean "is_vendor_eligible_for1099"
+    t.decimal "balance",                     precision: 20, scale: 5, default: "0.0", null: false
+    t.string "billing_rate",                 limit: 31
+    t.string "prefill_account",              limit: 159
+  end
 end
