@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.integer  "txn_number"
     t.string   "customer_id"
     t.string   "customer_type",             limit: 209
+    t.string  "sales_order_id"
     t.string   "ar_account",                limit: 159
     t.string   "template",                  limit: 31
     t.date     "txn_date"
@@ -210,6 +211,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.decimal  "suggested_discount_amount",              precision: 20, scale: 5
     t.date     "suggested_discount_date"
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
+    t.index ["sales_order_id"], name: "sales_order_id", using: :btree
   end
 
   create_table "jobs", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
