@@ -4,11 +4,15 @@ module QuickbooksQueryable
   
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
+    begin
     if key.match(/customer_ref|vendor_ref|parent_ref/)
       update_attribute("#{key.remove(/ref$/).concat('id')}", value['list_id'])
       update_attribute("#{key.remove(/ref$/).concat('type')}", name_type(value['full_name'])) if key == 'customer_ref'
     else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])
+    end
+    rescue Exception => e
+      QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "Error when attempting operation #{key}=#{value}: #{e}")
     end
   end
 
