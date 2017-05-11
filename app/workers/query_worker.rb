@@ -21,6 +21,7 @@ class QueryWorker < QBWC::Worker
            :from_modified_date => last_ran
            },
         :include_line_items => true,
+        :include_linked_txns => true
        }
      },
      {:sales_order_query_rq => {
@@ -29,7 +30,8 @@ class QueryWorker < QBWC::Worker
        :modified_date_range_filter => {
          :from_modified_date => last_ran
          },
-       :include_line_items => true
+       :include_line_items => true,
+       :include_linked_txns => true
        }
      },
      {:purchase_order_query_rq => {
@@ -38,7 +40,8 @@ class QueryWorker < QBWC::Worker
        :modified_date_range_filter => {
          :from_modified_date => last_ran
          },
-       :include_line_items => true
+       :include_line_items => true,
+       :include_linked_txns => true
      }
      },
      {:invoice_query_rq => {
@@ -47,7 +50,9 @@ class QueryWorker < QBWC::Worker
        :modified_date_range_filter => {
          :from_modified_date => last_ran
          },
-       :include_line_items => true
+       :include_line_items => true,
+       :include_linked_txns => true
+
       }
      },
      {:vendor_query_rq => {

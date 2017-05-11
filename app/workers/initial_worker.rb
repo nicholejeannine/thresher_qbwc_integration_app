@@ -14,31 +14,35 @@ class InitialWorker < QBWC::Worker
 	    	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	   	  :max_returned => 100,
 	   	  :include_line_items => true,
+	   	  :include_linked_txns => true
 	    	}
 		  },
 		  {:sales_order_query_rq => {
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
-		    :include_line_items => true
+		    :include_line_items => true,
+		    :include_linked_txns => true
 		  }
-		  },		  {:purchase_order_query_rq => {
+		  },
+		  {:purchase_order_query_rq => {
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
-		    :include_line_items => true
+		    :include_line_items => true,
+		    :include_linked_txns => true
 		  }
 		  },
 		  {:invoice_query_rq => {
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 100,
-		    :include_line_items => true
+		    :include_line_items => true,
+		    :include_linked_txns => true
 		  }
 		  },
 		   {:vendor_query_rq => {
        :xml_attributes => { :requestID =>1, :iterator  => "Start" },
        :max_returned => 100,
-       :active_status => "All",
-       :from_modified_date => last_ran
-        }
+       :active_status => "All"
+      }
 				}]
 	end
 
