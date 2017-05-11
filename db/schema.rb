@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "customer_sales_tax_code", limit: 3
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
+    t.index ["ref_number"], name: "ref_number", using: :btree
   end
 
   create_table "invoice_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -474,6 +475,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.integer  "txn_number"
     t.string   "customer_id"
     t.string   "customer_type",           limit: 209
+    t.string   "estimate_id"
     t.string   "template"
     t.date     "txn_date"
     t.string   "ref_number"
@@ -517,6 +519,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code"
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
+    t.index ["estimate_id"], name: "estimate_id", using: :btree
   end
 
   create_table "txn_links", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
