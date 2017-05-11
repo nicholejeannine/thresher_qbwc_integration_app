@@ -576,7 +576,6 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "alt_contact",               limit: 41
     t.string "name_on_check",               limit: 41
     t.string "account_number",              limit: 99
-    t.string "notes",                       limit: 4095
     t.string "vendor_type",                 limit: 159
     t.string "terms",                       limit: 31
     t.decimal "credit_limit",               precision: 20, scale: 5
@@ -584,6 +583,5 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.boolean "is_vendor_eligible_for1099"
     t.decimal "balance",                     precision: 20, scale: 5, default: "0.0", null: false
     t.string "billing_rate",                 limit: 31
-    t.string "prefill_account",              limit: 159
   end
 end
