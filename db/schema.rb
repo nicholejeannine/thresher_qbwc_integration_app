@@ -452,6 +452,27 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.datetime "updated_at",                             null: false
   end
 
+  create_table "receive_payments", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",             limit: 16
+    t.integer  "txn_number"
+    t.string   "customer_id"
+    t.string   "customer_type",             limit: 209
+    t.string  "invoice_id"
+    t.string   "ar_account",                limit: 159
+    t.date     "txn_date"
+    t.string   "ref_number",                limit: 20
+    t.decimal  "total_amount",                               precision: 20, scale: 5, default: "0.0", null: false
+    t.string   "payment_method",               limit: 31
+    t.string   "memo",                      limit: 4095
+    t.string   "deposit_to_account",                 limit: 159
+    t.decimal  "unused_payment",                        precision: 20, scale: 5, default: "0.0", null: false
+    t.decimal  "unused_credits",                         precision: 20, scale: 5, default: "0.0", null: false
+    t.index ["customer_id", "customer_type"], name: "customer", using: :btree
+    t.index ["invoice_id"], name: "invoice_id", using: :btree
+  end
+
   create_table "sales_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "sales_order_id"
     t.string  "item"

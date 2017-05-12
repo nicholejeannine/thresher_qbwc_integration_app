@@ -61,7 +61,11 @@ class QueryWorker < QBWC::Worker
        :active_status => "All",
        :from_modified_date => last_ran
         }
-      }
+      },
+      {:receive_payment_query_rq => {
+      				    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+      				    :max_returned => 100
+
      ]
   end
 
@@ -75,8 +79,14 @@ class QueryWorker < QBWC::Worker
       r['purchase_order_ret']&.each{|qb|PurchaseOrder.parse_qb_response(qb)}
       r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
       r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
+      r['receive_payment_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
     rescue Exception => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
+
+    QBWC.session_complete_success = lambda do |session|
+         total_time = Time.now - session.began_at
+         QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of query worker was #{total_time} seconds")
+     end
   end
 end
