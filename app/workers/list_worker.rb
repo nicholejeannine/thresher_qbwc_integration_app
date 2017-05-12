@@ -1,6 +1,6 @@
-class ClientWorker < QBWC::Worker
+class ListWorker < QBWC::Worker
   def last_ran
-    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'client').first&.updated_at&.localtime&.strftime '%FT%R'
+    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list').first&.updated_at&.localtime&.strftime '%FT%R'
   end
   def requests(job, session, data)
     [
@@ -12,6 +12,12 @@ class ClientWorker < QBWC::Worker
             :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
             :owner_id => 0
         }
+        },
+         {:vendor_query_rq => {
+             :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+             :max_returned => 100,
+             :active_status => "All"
+         }
         }]
   end
   
@@ -21,6 +27,7 @@ class ClientWorker < QBWC::Worker
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     begin
       r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
+      r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
     rescue Exception => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end

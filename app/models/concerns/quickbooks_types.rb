@@ -15,6 +15,10 @@ module QuickbooksTypes
 		end
 	end
 	
+	def link_type?(key)
+		key.match(/linked_txn|applied_to_txn_ret/)
+	end
+	
 	def custom_type?(key)
 		key.match(/data_ext_ret/)
 	end
@@ -32,7 +36,7 @@ module QuickbooksTypes
 	# Keys we never care about handling
 	# TODO: add class_ref, price stuff, etc
 	def ignored_type?(key)
-		key.match(/group_ret$|class_ref$|list_id$|txn_line_id$|txn_id$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes/)
+		key.match(/card_txn_info|prefill_account_ref|external_guid|group_ret$|class_ref$|list_id$|txn_line_id$|txn_id$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate/)
 	end
 
 end

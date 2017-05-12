@@ -4,19 +4,27 @@ module QuickbooksQueryable
   
   # Handle reference types - save only the value labeled "full name"
   def handle_ref_type(key, value)
-    if key.match(/customer_ref|parent_ref/)
+    begin
+    if key.match(/customer_ref|vendor_ref|parent_ref/)
       update_attribute("#{key.remove(/ref$/).concat('id')}", value['list_id'])
       update_attribute("#{key.remove(/ref$/).concat('type')}", name_type(value['full_name'])) if key == 'customer_ref'
     else
       update_attribute("#{key.remove(/_ref$/)}", value['full_name'])
+    end
+    rescue Exception => e
+      QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "Error when attempting operation #{key}=#{value}: #{e}")
     end
   end
 
   # Try to update the attribute, only if the column named exists in the database table.
   # TODO: Throw an error when this is called and returns false due to self.respond_to? == false
   def update_attribute(column_name, new_value)
+    begin
     if self.respond_to?("#{column_name}=")
       self.send("#{column_name}=", new_value)
+    end
+    rescue Exception => e
+      QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "Error when attempting operation #{column_name}=#{new_value}: #{e}")
     end
   end
   
@@ -43,6 +51,10 @@ module QuickbooksQueryable
       end
     end
   end
+
+  # def handle_link_type(klass, id, value)
+  #     value.each{|h|TxnLink.create(h.except("xml_attributes").merge("parent_id" => id, "parent_type" => klass))}
+  # end
   
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
@@ -58,6 +70,9 @@ module QuickbooksQueryable
         handle_ref_type(key, value)
       elsif custom_type?(key)
         handle_custom_type(value) # FIXME:  DEFINE IF WE NEED IT!
+      elsif link_type?(key)
+        value.each{|hash|parse_linked_txn(hash)}
+       # handle_link_type(self.class.name, self.id, value)
       else update_attribute(key, value)
       end
     end
@@ -82,5 +97,4 @@ included do
   end
 end
 
-  # Parse the line item returned block - send the key/value pairs for parsing one at a time
 end
