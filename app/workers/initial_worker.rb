@@ -69,9 +69,6 @@ class InitialWorker < QBWC::Worker
 		 end
 
 		 QBWC.session_complete_success = lambda do |session|
-			 # The job can disable itself after it's done and add the regular repeating job.
-			 QBWC.get_job(:inital).enabled=false
-			 QBWC.add_job(:query, true, false, '', QueryWorker)
 			 total_time = Time.now - session.began_at
        QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of initial worker was #{total_time} seconds")
 		 end
