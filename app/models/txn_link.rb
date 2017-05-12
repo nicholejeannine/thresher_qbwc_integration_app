@@ -1,2 +1,0 @@
-class TxnLink < ApplicationRecord
-end
