@@ -66,7 +66,7 @@ class QueryWorker < QBWC::Worker
          :xml_attributes => { :requestID =>1, :iterator  => "Start" },
          :max_returned => 100,
           :modified_date_range_filter => {
-         # :from_modified_date => last_ran
+         :from_modified_date => last_ran
           },
            :include_line_items => true
         }
