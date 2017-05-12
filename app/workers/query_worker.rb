@@ -65,8 +65,8 @@ class QueryWorker < QBWC::Worker
       {:receive_payment_query_rq => {
       				    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
       				    :max_returned => 100
-
-     ]
+        }
+        }]
   end
 
   def handle_response(r, session, job, request, data)
