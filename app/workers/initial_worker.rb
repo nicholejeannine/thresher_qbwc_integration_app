@@ -62,7 +62,7 @@ class InitialWorker < QBWC::Worker
 			 r['purchase_order_ret']&.each{|qb|PurchaseOrder.parse_qb_response(qb)}
 			 r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
 			 r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
-		   r['receive_payment_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
+		   r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
 		 rescue Exception => e
 		   QbwcError.create(:worker_class => self.class.name, :error_message => e)
 		 end
