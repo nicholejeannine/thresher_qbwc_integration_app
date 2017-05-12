@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.date     "suggested_discount_date"
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
+    t.index ["ref_number"], name: "ref_number", using: :btree
   end
 
   create_table "jobs", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -414,6 +415,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.boolean  "is_to_be_emailed"
     t.index ["vendor_id"], name: "vendor_id", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
+    t.index ["ref_number"], name: "ref_number", using: :btree
   end
 
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -545,6 +547,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "customer_sales_tax_code"
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
     t.index ["estimate_id"], name: "estimate_id", using: :btree
+    t.index ["ref_number"], name: "ref_number", using: :btree
   end
 
   create_table "txn_links", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
