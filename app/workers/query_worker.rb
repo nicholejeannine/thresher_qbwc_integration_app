@@ -68,7 +68,7 @@ class QueryWorker < QBWC::Worker
           :modified_date_range_filter => {
          # :from_modified_date => last_ran
           },
-           :include_linked_txns => true
+           :include_line_items => true
         }
         }]
   end

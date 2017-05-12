@@ -47,7 +47,7 @@ class InitialWorker < QBWC::Worker
 		    {:receive_payment_query_rq => {
 				    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 				    :max_returned => 100,
-				    :include_linked_txns => true
+				    :include_line_items => true
 		    }
 		    }]
 	end
