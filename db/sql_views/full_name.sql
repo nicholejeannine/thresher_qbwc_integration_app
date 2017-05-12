@@ -9,10 +9,10 @@ CREATE OR REPLACE
  ALGORITHM = UNDEFINED
  SQL SECURITY DEFINER
  VIEW `FullName`
- AS select `FullNameFields`.`Jobs_PKEY` AS `Jobs_PKEY`,concat(`FullNameFields`.`cust`,(case when (`FullNameFields`.`jp3` is not null) then concat(':',`FullNameFields`.`jp3`,':',`FullNameFields`.`jp2`,':',`FullNameFields`.`jp1`) when (`FullNameFields`.`jp2` is not null) then concat(':',`FullNameFields`.`jp2`,':',`FullNameFields`.`jp1`) when (`FullNameFields`.`jp1` is not null) then concat(':',`FullNameFields`.`jp1`) else '' end),':',`FullNameFields`.`pj`) AS `FullName` from `Thresher`.`FullNameFields`;
+ AS select `FullNameFields`.`Jobs_PKEY` AS `Jobs_PKEY`,concat(`FullNameFields`.`cust`,(case when (`FullNameFields`.`jp3` is not null) then concat(':',`FullNameFields`.`jp3`,':',`FullNameFields`.`jp2`,':',`FullNameFields`.`jp1`) when (`FullNameFields`.`jp2` is not null) then concat(':',`FullNameFields`.`jp2`,':',`FullNameFields`.`jp1`) when (`FullNameFields`.`jp1` is not null) then concat(':',`FullNameFields`.`jp1`) else '' end),':',`FullNameFields`.`pj`) AS `FullName` from `railstest_development`.`FullNameFields`;
 
 CREATE OR REPLACE
  ALGORITHM = UNDEFINED
  SQL SECURITY DEFINER
- VIEW `ProjectFulllName` AS
- select `p`.`Project_PKEY` AS `Project_PKEY`,concat(`f`.`FullName`,':P-',`p`.`Project_PKEY`) AS `project_full_name` from (`Thresher`.`Project` `p` join `Thresher`.`FullName` `f` on((`f`.`Jobs_PKEY` = `p`.`FK_Jobs_PKEY`)));
+ VIEW `ProjectFullName` AS
+ select `p`.`Project_PKEY` AS `Project_PKEY`,concat(`f`.`FullName`,':P-',`p`.`Project_PKEY`) AS `project_full_name` from (`Thresher`.`Project` `p` join `railstest_development`.`FullName` `f` on((`f`.`Jobs_PKEY` = `p`.`FK_Jobs_PKEY`)));
