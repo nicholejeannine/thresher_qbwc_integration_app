@@ -21,7 +21,7 @@ class QueryWorker < QBWC::Worker
            :from_modified_date => last_ran
            },
         :include_line_items => true,
-        :include_linked_txns => true
+        :include_linked_txns => false
        }
      },
      {:sales_order_query_rq => {
@@ -31,7 +31,7 @@ class QueryWorker < QBWC::Worker
          :from_modified_date => last_ran
          },
        :include_line_items => true,
-       :include_linked_txns => true
+       :include_linked_txns => false
        }
      },
      {:purchase_order_query_rq => {
@@ -41,7 +41,7 @@ class QueryWorker < QBWC::Worker
          :from_modified_date => last_ran
          },
        :include_line_items => true,
-       :include_linked_txns => true
+       :include_linked_txns => false
      }
      },
      {:invoice_query_rq => {
@@ -63,8 +63,11 @@ class QueryWorker < QBWC::Worker
         }
       },
       {:receive_payment_query_rq => {
-      				    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-      				    :max_returned => 100
+         :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+         :max_returned => 100,
+          :modified_date_range_filter => {
+          :from_modified_date => last_ran
+          },
         }
         }]
   end
