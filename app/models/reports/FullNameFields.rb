@@ -1,3 +1,3 @@
-class Report::FullNameFields < ActiveRecord::Base
+class FullNameFields < ActiveRecord::Base
   self.table_name = 'FullNameFields'
 end

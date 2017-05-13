@@ -1,3 +1,3 @@
-class Report::InvoiceCombos < ActiveRecord::Base
+class InvoiceCombos < ActiveRecord::Base
   self.table_name = 'invoice_combos'
 end

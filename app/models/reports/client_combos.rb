@@ -1,3 +1,3 @@
-class Report::ClientCombos < ActiveRecord::Base
+class ClientCombos < ActiveRecord::Base
   self.table_name = 'client_combos'
 end
