@@ -17,10 +17,12 @@ class ClientTest < ActiveSupport::TestCase
     assert_equal("444 Street", Client.first.ship_addr1, "Bill Address row value should match that of client hash")
   end
   
+  # Test to make sure custom fields are properly parsed and stored.
   test "can parse data extensions" do
     assert_equal("555-555-5555", Client.first.site_phone, "Site phone should be parsed via data extension")
   end
 
+  # When a user changes a custom field to a blank value, Quickbooks doesn't send the field to the Web Connector at all (it doesn't even show up as null, it's just not there). Our code should therefore treat NO value as a null value, and update the record in the database.
   test "nullifies data extension values when not explicitly defined" do
     Customer.parse_customer_response({'list_id' => '111-111', 'sublevel' => 0, 'name' => 'Frankie', 'full_name' => 'Frankie'})
     assert_nil(Client.first.site_phone, "Should nullify custom data types that aren't declared")
@@ -36,8 +38,13 @@ class ClientTest < ActiveSupport::TestCase
     assert_equal(2, Client.count)
   end
   
+  # Make sure "reference types" are handled appropriately
   test "handles ref types" do
-    skip
+    assert_equal("Corporate", Client.first.customer_type)
+    assert_equal("Net 30", Client.first.terms)
+    assert_equal("NJK", Client.first.sales_rep)
+    assert_equal("Tax", Client.first.sales_tax_code)
+    assert_equal("SC/CA", Client.first.item_sales_tax)
   end
 
   private
@@ -59,6 +66,26 @@ class ClientTest < ActiveSupport::TestCase
             "ship_address" => {
                 "xml_attributes" => "some crap",
                 "addr1" => "444 Street"
+            },
+            "customer_type_ref" => {
+                "list_id" => 'xxx-33333',
+                "full_name" => "Corporate"
+            },
+            "terms_ref" => {
+                "list_id" => "897219-87981",
+                "full_name" => "Net 30"
+            },
+            "sales_rep_ref" => {
+                "list_id" => "yyyy-yyyy",
+                "full_name" => "NJK"
+            },
+            "sales_tax_code_ref" => {
+                 "list_id" => "ihkjkj",
+                 "full_name" => "Tax"
+            },
+            "item_sales_tax_ref" => {
+                 "list_id" => "87879-3882",
+                 "full_name" => "SC/CA"
             },
             "data_ext_ret"=> [
                 {'data_ext_name' => 'Site Contact',
