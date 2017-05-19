@@ -6,7 +6,6 @@ class PurchaseOrder < ApplicationRecord
 
   def parse_memo
     begin
-      # TODO: put the various common incorrect spellings here to catch most of them
       if self.sales_order_id.nil? && memo&.downcase&.include?("sales order")
           ref = memo.try(:split)[2].remove(":")
           self.sales_order_id = SalesOrder.where(:ref_number => ref).first&.id
