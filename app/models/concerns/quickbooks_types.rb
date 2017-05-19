@@ -15,10 +15,6 @@ module QuickbooksTypes
 		end
 	end
 	
-	def link_type?(key)
-		key.match(/linked_txn|applied_to_txn_ret/)
-	end
-	
 	def custom_type?(key)
 		key.match(/data_ext_ret/)
 	end

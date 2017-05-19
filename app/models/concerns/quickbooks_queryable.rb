@@ -51,10 +51,6 @@ module QuickbooksQueryable
       end
     end
   end
-
-  # def handle_link_type(klass, id, value)
-  #     value.each{|h|TxnLink.create(h.except("xml_attributes").merge("parent_id" => id, "parent_type" => klass))}
-  # end
   
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
@@ -69,10 +65,7 @@ module QuickbooksQueryable
       elsif ref_type?(key)
         handle_ref_type(key, value)
       elsif custom_type?(key)
-        handle_custom_type(value) # FIXME:  DEFINE IF WE NEED IT!
-      elsif link_type?(key)
-        value.each{|hash|parse_linked_txn(hash)}
-       # handle_link_type(self.class.name, self.id, value)
+        handle_custom_type(value)
       else update_attribute(key, value)
       end
     end
