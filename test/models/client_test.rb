@@ -22,8 +22,18 @@ class ClientTest < ActiveSupport::TestCase
   end
 
   test "nullifies data extension values when not explicitly defined" do
-    Customer.parse_customer_response({'list_id' => '222', 'is_active' => 0, 'sublevel' => 0, 'name' => 'Frankie', 'full_name' => 'Frankie'})
+    Customer.parse_customer_response({'list_id' => '111-111', 'sublevel' => 0, 'name' => 'Frankie', 'full_name' => 'Frankie'})
     assert_nil(Client.first.site_phone, "Should nullify custom data types that aren't declared")
+  end
+  
+  test "updates a model when the id already exists in the database" do
+    Customer.parse_customer_response({'list_id' => '111-111', 'is_active' => 0, 'sublevel' => 0, 'name' => 'FrankieDude', 'full_name' => 'FrankieDude'})
+    assert_equal("FrankieDude", Client.first.full_name)
+  end
+  
+  test "inserts a new record when the id is not found" do
+    Customer.parse_customer_response({'list_id' => '222-222', 'sublevel' => 0, 'name' => 'another', 'full_name' => 'another'})
+    assert_equal(2, Client.count)
   end
   
   test "handles ref types" do
@@ -35,7 +45,7 @@ class ClientTest < ActiveSupport::TestCase
   setup do
     Client.destroy_all
     qb_customer_hash = {
-            "list_id" => '222',
+            "list_id" => '111-111',
             "is_active" => 1,
             "sublevel" => 0,
             "parent_id" => nil,
