@@ -14,7 +14,7 @@ class ClientTest < ActiveSupport::TestCase
   end
 
   test "can save ship address" do
-    assert_equal("444 Street", Client.first.ship_addr1, "Bill Address row value should match that of client hash")
+    assert_equal("444 Street", Client.first.ship_addr1, "Ship Address row value should match that of client hash")
   end
   
   # Test to make sure custom fields are properly parsed and stored.
