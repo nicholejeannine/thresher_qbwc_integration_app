@@ -1,7 +1,7 @@
 require 'test_helper'
 class ClientTest < ActiveSupport::TestCase
   
-  test "customer responds to parse customer response" do
+  test "client responds to parse customer response" do
     assert_respond_to Customer, :parse_customer_response
   end
   
@@ -55,7 +55,6 @@ class ClientTest < ActiveSupport::TestCase
             "list_id" => '111-111',
             "is_active" => 1,
             "sublevel" => 0,
-            "parent_id" => nil,
             "name" => "Frankie",
             "full_name" => "Frankie",
             "salutation" => "Joe",
