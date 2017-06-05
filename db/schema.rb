@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.integer  "txn_number"
     t.string   "customer_id"
     t.string   "customer_type",             limit: 209
+    t.string  "estimate_id"
     t.string  "sales_order_id"
     t.string   "ar_account",                limit: 159
     t.string   "template",                  limit: 31
