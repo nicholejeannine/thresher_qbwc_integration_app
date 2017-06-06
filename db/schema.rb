@@ -212,6 +212,7 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.decimal  "suggested_discount_amount",              precision: 20, scale: 5
     t.date     "suggested_discount_date"
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
+    t.index ["estimate_id"], name: "estimate_id", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
   end
