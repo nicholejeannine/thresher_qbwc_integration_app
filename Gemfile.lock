@@ -8,15 +8,6 @@ GIT
       qbxml (>= 0.3.0)
       wash_out (= 0.10.0)
 
-GIT
-  remote: git://github.com/qbwc/qbxml.git
-  revision: c1a947fd2049c1acc52773c4c969e5b4fff3dd5e
-  specs:
-    qbxml (0.3.0)
-      activesupport (>= 4.1.0)
-      builder (~> 3.0)
-      nokogiri (~> 1.5)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -100,6 +91,10 @@ GEM
     pry-rails (0.3.5)
       pry (>= 0.9.10)
     puma (3.7.1)
+    qbxml (0.4.0)
+      activesupport (>= 4.1.0)
+      builder (~> 3.0)
+      nokogiri (~> 1.5)
     rack (2.0.1)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -171,7 +166,7 @@ DEPENDENCIES
   pry-rails (~> 0.3.4)
   puma (~> 3.7)
   qbwc!
-  qbxml!
+  qbxml (~> 0.4.0)
   rails (~> 5.0, >= 5.0.1)
   spring (~> 2.0, >= 2.0.1)
   spring-watcher-listen (~> 2.0, >= 2.0.1)
@@ -182,4 +177,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.5
+   1.14.6
