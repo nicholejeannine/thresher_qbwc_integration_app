@@ -40,7 +40,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Quickbooks web connector
 gem 'qbwc', github: 'qbwc/qbwc'
-gem 'qbxml', github: 'qbwc/qbxml'
+gem 'qbxml', '~> 0.4.0'
 
 # Easily and efficiently make ActiveRecord models support hierarchies https://github.com/mceachen/closure_tree
 #gem 'closure_tree', github: "mceachen/closure_tree"
