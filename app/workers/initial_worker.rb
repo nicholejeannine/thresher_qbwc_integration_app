@@ -2,28 +2,28 @@ class InitialWorker < QBWC::Worker
 
 	def requests(job, session, data)
 	[
-	# {:customer_query_rq => {
-	#     :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-	#     :max_returned => 100,
-	#     :active_status => "All",
-	#      :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
-	#     :owner_id => 0
-	#     }
-	#    },
-	#     {:estimate_query_rq => {
-	#     	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-	#    	  :max_returned => 100,
-	#    	  :include_line_items => true,
-	#    	  :include_linked_txns => false
-	#     	}
-	# 	  },
-	# 	  {:sales_order_query_rq => {
-	# 	    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-	# 	    :max_returned => 100,
-	# 	    :include_line_items => true,
-	# 	    :include_linked_txns => false
-	# 	  }
-	# 	  },
+	 {:customer_query_rq => {
+	     :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+	     :max_returned => 100,
+	     :active_status => "All",
+	      :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
+	     :owner_id => 0
+	     }
+	    },
+	     {:estimate_query_rq => {
+	     	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+	    	  :max_returned => 100,
+	    	  :include_line_items => true,
+	    	  :include_linked_txns => false
+	     	}
+	 	  },
+	 	  {:sales_order_query_rq => {
+	 	    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+	 	    :max_returned => 100,
+	 	    :include_line_items => true,
+	 	    :include_linked_txns => false
+	 	  }
+	 	  },
 		  {:purchase_order_query_rq => {
 		    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 		    :max_returned => 50,
