@@ -2,24 +2,24 @@ class TxnDeletedQueryWorker < QBWC::Worker
   def requests(job, session, data)
     [{:txn_deleted_query_rq =>
          {:xml_attributes=> {"requestID"=>"1"},
-          :list_del_type=>'Estimate'}
+          :txn_del_type=>'Estimate'}
     },
      {:txn_deleted_query_rq =>
           {:xml_attributes=> {"requestID"=>"1"},
-           :list_del_type=>'SalesOrder'}
+           :txn_del_type=>'SalesOrder'}
      },
      {:txn_deleted_query_rq =>
           {:xml_attributes=> {"requestID"=>"1"},
-           :list_del_type=>'PurchaseOrder'}
+           :txn_del_type=>'PurchaseOrder'}
      },
      {:txn_deleted_query_rq =>
           {:xml_attributes=> {"requestID"=>"1"},
-           :list_del_type=>'Invoice'}
+           :txn_del_type=>'Invoice'}
   
      },
      {:txn_deleted_query_rq =>
           {:xml_attributes=> {"requestID"=>"1"},
-           :list_del_type=>'ReceivePayment'}
+           :txn_del_type=>'ReceivePayment'}
      }]
   end
   
