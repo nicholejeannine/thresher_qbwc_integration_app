@@ -456,6 +456,17 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.datetime "updated_at",                             null: false
   end
 
+  create_table "qbwc_history", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.datetime   "began_at"
+    t.string   "ticket"
+    t.string   "run_time"
+    t.text     "error",        limit: 65535
+    t.string     "status_code"
+    t.string     "status_severity"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
   create_table "receive_payments", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "time_created"
     t.datetime "time_modified"

@@ -26,11 +26,11 @@ module Railstest
     config.api_only = :true
 
     config.beginning_of_week = :sunday
+    config.time_zone = 'Pacific Time (US & Canada)'
 
     QBWC.session_complete_success = lambda do |session|
       total_time = Time.now - session.began_at
-      QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of worker was #{total_time} seconds")
+      QbwcHistory.create(:began_at => session.began_at, :ticket => session.ticket, :run_time => total_time, :status_code => session.status_code, :status_severity => session.status_severity)
     end
-    config.time_zone = 'Pacific Time (US & Canada)'
   end
 end
