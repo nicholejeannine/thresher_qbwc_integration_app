@@ -7,7 +7,7 @@ class TxnDeletedQueryWorker < QBWC::Worker
   end
   
   def handle_response(r, session, job, request, data)
-    # TODO
+    Rails.logger.warn(r)
   end
   
   def should_run?(job, session, data)
