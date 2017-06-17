@@ -27,7 +27,10 @@ module Railstest
 
     config.beginning_of_week = :sunday
 
-
+    QBWC.session_complete_success = lambda do |session|
+      total_time = Time.now - session.began_at
+      QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of worker was #{total_time} seconds")
+    end
     config.time_zone = 'Pacific Time (US & Canada)'
   end
 end

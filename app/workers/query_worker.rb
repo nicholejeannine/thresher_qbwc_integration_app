@@ -87,10 +87,5 @@ class QueryWorker < QBWC::Worker
     rescue Exception => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
-
-    QBWC.session_complete_success = lambda do |session|
-         total_time = Time.now - session.began_at
-         QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of query worker was #{total_time} seconds")
-     end
   end
 end

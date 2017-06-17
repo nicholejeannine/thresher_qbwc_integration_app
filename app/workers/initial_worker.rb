@@ -68,9 +68,5 @@ class InitialWorker < QBWC::Worker
 		   QbwcError.create(:worker_class => self.class.name, :error_message => e)
 		 end
 
-		 QBWC.session_complete_success = lambda do |session|
-			 total_time = Time.now - session.began_at
-       QbwcError.create(:worker_class => 'Success', :error_message => "Total run time of initial worker was #{total_time} seconds")
-		 end
   end
 end
