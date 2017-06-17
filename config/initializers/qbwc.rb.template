@@ -33,5 +33,9 @@ QBWC.configure do |c|
 
   # Some log lines contain sensitive information
   # (default false on production, true otherwise)
-  # c.log_requests_and_responses = false
+  c.log_requests_and_responses = false
+  QBWC.session_complete_success = lambda do |session|
+    total_time = Time.now - session.began_at
+    QbwcHistory.create(:began_at => session.began_at, :ticket => session.ticket, :run_time => total_time, :status_code => session.status_code, :status_severity => session.status_severity)
+  end
 end
