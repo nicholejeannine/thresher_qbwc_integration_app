@@ -2,7 +2,7 @@ class ListDeletedQueryWorker < QBWC::Worker
   def requests(job, session, data)
     {:list_deleted_query_rq =>
          {:xml_attributes=> {"requestID"=>"1"},
-          :list_del_type=>["Customer", "Vendor"]}
+          :list_del_type=>['Customer', 'Vendor']}
     }
   end
 
