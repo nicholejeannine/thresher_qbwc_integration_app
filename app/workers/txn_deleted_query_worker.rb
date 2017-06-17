@@ -11,6 +11,6 @@ class TxnDeletedQueryWorker < QBWC::Worker
   end
   
   def should_run?(job, session, data)
-    # TODO
+    true
   end
 end
