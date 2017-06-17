@@ -28,9 +28,5 @@ module Railstest
     config.beginning_of_week = :sunday
     config.time_zone = 'Pacific Time (US & Canada)'
 
-    QBWC.session_complete_success = lambda do |session|
-      total_time = Time.now - session.began_at
-      QbwcHistory.create(:began_at => session.began_at, :ticket => session.ticket, :run_time => total_time, :status_code => session.status_code, :status_severity => session.status_severity)
-    end
   end
 end
