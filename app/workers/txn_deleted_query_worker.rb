@@ -1,11 +1,11 @@
-class ListDeletedQueryWorker < QBWC::Worker
+class TxnDeletedQueryWorker < QBWC::Worker
   def requests(job, session, data)
-    {:list_deleted_query_rq =>
+    {:txn_deleted_query_rq =>
          {:xml_attributes=> {"requestID"=>"1"},
-          :list_del_type=>["Customer", "Vendor"]}
+          :list_del_type=>["Estimate", "SalesOrder", "PurchaseOrder", "Invoice", "ReceivePayment"]}
     }
   end
-
+  
   def handle_response(r, session, job, request, data)
     # TODO
   end
