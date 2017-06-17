@@ -461,10 +461,16 @@ ActiveRecord::Schema.define(version: 20170510010405) do
     t.string   "ticket"
     t.string   "run_time"
     t.text     "error",        limit: 65535
-    t.string     "status_code"
-    t.string     "status_severity"
+    t.string     "status_code_id", limit: 255
+    t.string     "status_code_severity"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+    t.index ["status_code_id"], name: "status_code_id", using: :btree
+  end
+
+  create_table "qbwc_status_codes", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "message"
+    t.text   "description"
   end
 
   create_table "receive_payments", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
