@@ -52,14 +52,6 @@ module QuickbooksQueryable
     end
   end
 
-  def process_linked_txn(ret = nil)
-    QbwcError.create(:worker_class => "#{self.class.name} Link", :error_message => "#{ret}")
-    # return unless self.respond_to?(:parse_link))
-    parse_link(ret) if ret.is_a?(Qbxml::Hash)
-    ret.each{|link|parse_link(link) if ret.is_a?(Array)}
-  end
-  
-  
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
   def parse_hash(qb)
@@ -69,7 +61,8 @@ module QuickbooksQueryable
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif linked_txn?(key)
-        process_linked_txn(value)
+        QbwcError.create(:worker_class => "#{self.class.name}Link", :model_id => "#{value.class}", :error_message => "#{value}")
+        value.each{|hash|parse_linked_txn(hash)}
       elsif address?(key)
         handle_address(key, value)
       elsif ref_type?(key)

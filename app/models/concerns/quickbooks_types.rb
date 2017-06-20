@@ -36,8 +36,7 @@ module QuickbooksTypes
 	end
 	
 	def linked_txn?(key)
-		Rails.logger.warn("linked transaction found: #{key}")
-		key.match('linked_txn')
+		key.match('linked_txn' || 'applied_to_txn_ret')
 	end
 
 end

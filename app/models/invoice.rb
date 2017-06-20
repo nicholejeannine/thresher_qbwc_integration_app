@@ -6,8 +6,7 @@ class Invoice < ApplicationRecord
   before_save :parse_memo
 
 
-  def parse_link(hash)
-    QbwcError.create(:worker_class => "InvoiceLINK", :error_message => "#{hash}")
+  def parse_linked_txn(hash)
     if hash["txn_type"] == "SalesOrder"
       self.sales_order_id = hash["txn_id"]
     end
