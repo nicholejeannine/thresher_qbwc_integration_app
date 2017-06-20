@@ -55,7 +55,7 @@ module QuickbooksQueryable
   def process_linked_txn(ret = nil)
     return if (ret.nil? || !self.respond_to?(:parse_link))
     self.parse_link(ret) if ret.is_a?(Qbxml::Hash)
-    ret.each{|link|self.parse_link if ret.is_a?(Array)}
+    ret.each{|link|self.parse_link(link) if ret.is_a?(Array)}
   end
   
   
