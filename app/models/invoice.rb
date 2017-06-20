@@ -3,7 +3,7 @@ class Invoice < ApplicationRecord
   self.primary_key = :id
   belongs_to :customer, optional: true
   has_many :invoice_lines
-  before_save :parse_memo, :parse_linked_txn
+  before_save :parse_memo
 
 
   def parse_linked_txn hash
