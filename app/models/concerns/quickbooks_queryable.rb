@@ -61,7 +61,7 @@ module QuickbooksQueryable
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif linked_txn?(key)
-        parse_linked_txn(key)
+        parse_linked_txn(value)
       elsif address?(key)
         handle_address(key, value)
       elsif ref_type?(key)
