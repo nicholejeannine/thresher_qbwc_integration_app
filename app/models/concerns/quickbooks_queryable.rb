@@ -53,6 +53,7 @@ module QuickbooksQueryable
   end
 
   def process_linked_txn(ret = nil)
+    QbwcError.create(:worker_class => "#{self.class.name} Link", :error_message => "#{ret}")
     # return unless self.respond_to?(:parse_link))
     parse_link(ret) if ret.is_a?(Qbxml::Hash)
     ret.each{|link|parse_link(link) if ret.is_a?(Array)}
