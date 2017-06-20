@@ -52,7 +52,6 @@ class QueryWorker < QBWC::Worker
          },
        :include_line_items => true,
        :include_linked_txns => true
-
       }
      },
      {:vendor_query_rq => {
