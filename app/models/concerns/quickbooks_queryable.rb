@@ -61,7 +61,6 @@ module QuickbooksQueryable
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif linked_txn?(key)
-        QbwcError.create(:worker_class => "#{self.class.name}Link", :model_id => "#{value.class}", :error_message => "#{value}")
         value.each{|hash|parse_linked_txn(hash)}
       elsif address?(key)
         handle_address(key, value)
