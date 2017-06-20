@@ -59,8 +59,9 @@ module QuickbooksQueryable
     qb&.each do |key, value|
       next if ignored_type?(key) # skip ignored items.
       if line_item_type?(key)
-        process_line_items(self.class.name, self.id, value)       elsif linked_txn?(key)
-          process_linked_txn(self.class.name, self.id, value)
+        process_line_items(self.class.name, self.id, value)
+      elsif linked_txn?(key)
+        parse_linked_txn(key)
       elsif address?(key)
         handle_address(key, value)
       elsif ref_type?(key)
