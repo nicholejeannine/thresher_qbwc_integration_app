@@ -6,7 +6,7 @@ class Invoice < ApplicationRecord
   before_save :parse_memo
 
 
-  def parse_linked_txn hash
+  def parse_link(hash)
     if hash["txn_type"] == "SalesOrder"
       self.sales_order_id = hash["txn_id"]
     end

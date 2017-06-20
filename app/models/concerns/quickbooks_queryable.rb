@@ -51,6 +51,13 @@ module QuickbooksQueryable
       end
     end
   end
+
+  def process_linked_txn(ret = nil)
+    return if (ret.nil? || !self.respond_to?(:parse_link))
+    self.parse_link(ret) if ret.is_a?(Qbxml::Hash)
+    ret.each{|link|self.parse_link if ret.is_a?(Array)}
+  end
+  
   
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
@@ -61,7 +68,7 @@ module QuickbooksQueryable
       if line_item_type?(key)
         process_line_items(self.class.name, self.id, value)
       elsif linked_txn?(key)
-        self.parse_linked_txn(value)
+        process_linked_txn(value)
       elsif address?(key)
         handle_address(key, value)
       elsif ref_type?(key)
