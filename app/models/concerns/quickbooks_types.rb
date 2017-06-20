@@ -36,7 +36,7 @@ module QuickbooksTypes
 	end
 	
 	def linked_txn?(key)
-		key.match('linked_txn' || 'applied_to_txn_ret')
+		key.match(/linked_txn|applied_to_txn_ret/)
 	end
 
 end
