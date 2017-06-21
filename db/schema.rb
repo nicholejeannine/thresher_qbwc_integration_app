@@ -150,13 +150,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer "SortOrder",               null: false
   end
 
-  create_table "EmployeeSupervisors", primary_key: "EmployeeSupervisors_PKEY", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "FK_Employees_PKEY_Supervisor"
-    t.integer "FK_Employees_PKEY_DirectReport"
-    t.index ["FK_Employees_PKEY_DirectReport"], name: "FK_Employees_PKEY_DirectReport", using: :btree
-    t.index ["FK_Employees_PKEY_Supervisor"], name: "FK_Employees_PKEY_Supervisor", using: :btree
-  end
-
   create_table "Employees", primary_key: "Employees_PKEY", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "CreationTimeStamp"
     t.text     "CreationUser",                 limit: 65535
@@ -293,29 +286,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.text     "Holiday_JobID",             limit: 65535
     t.text     "Holiday_JobName",           limit: 65535
     t.text     "Holiday_Name",              limit: 65535
-  end
-
-  create_table "JoinFM", primary_key: "JoinFM_PKEY", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "FK_TickRel_Tickets_PKEY"
-    t.integer  "FK_TickRel_Jobs_PKEY"
-    t.integer  "FK_TickRel_Employees_PKEY"
-    t.integer  "FK_TickRel_Customers_PKEY"
-    t.integer  "FK_JobRel_Jobs_PKEY"
-    t.integer  "FK_JobRel_Employees_PKEY"
-    t.integer  "FK_JobRel_Customers_PKEY"
-    t.integer  "FK_EmpSup_Sup_Employees_PKEY"
-    t.integer  "FK_EmpSup_Employees_PKEY"
-    t.text     "EmpSup__FK_EmployeeID",        limit: 65535
-    t.text     "EmpSup__FK_EmployeeID_Sup",    limit: 65535
-    t.text     "Jobs__FK_CustomerID",          limit: 65535
-    t.text     "Jobs__FK_EmployeeID",          limit: 65535
-    t.text     "Jobs__FK_JobID",               limit: 65535
-    t.text     "Jobs__FK_TicketID",            limit: 65535
-    t.text     "Ticket__FK_CustomerID",        limit: 65535
-    t.text     "Ticket__FK_EmployeeID",        limit: 65535
-    t.text     "Ticket__FK_JobID",             limit: 65535
-    t.text     "Ticket__FK_TicketID",          limit: 65535
-    t.datetime "canIdieNow",                                 default: -> { "CURRENT_TIMESTAMP" }, null: false
   end
 
   create_table "List_Salutation", primary_key: "List_Salutation_PKEY", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

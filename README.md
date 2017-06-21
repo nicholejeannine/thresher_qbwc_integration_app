@@ -10,6 +10,10 @@
   * Replace keys for polymorphic joins in portal tables with the new table types (e.g., Tickets with ticket_type "Customer" can now read "Client").
   * Ensure permissions are set.
 
+1. Nichole's steps on this branch:
+- Delete JoinFM and EmployeeSupervisors tables. Remove from schema.
+2. Delete combo views and ops sync cleanup views from schema.
+;
 
 
 
