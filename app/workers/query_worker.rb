@@ -48,7 +48,7 @@ class QueryWorker < QBWC::Worker
        :xml_attributes => { :requestID =>1, :iterator  => "Start" },
        :max_returned => 100,
        :modified_date_range_filter => {
-#         :from_modified_date => last_ran
+         :from_modified_date => last_ran
          },
        :include_line_items => true,
        :include_linked_txns => true
@@ -65,7 +65,7 @@ class QueryWorker < QBWC::Worker
          :xml_attributes => { :requestID =>1, :iterator  => "Start" },
          :max_returned => 100,
           :modified_date_range_filter => {
- #        :from_modified_date => last_ran
+         :from_modified_date => last_ran
           },
            :include_line_items => true
         }
@@ -75,7 +75,7 @@ class QueryWorker < QBWC::Worker
   def handle_response(r, session, job, request, data)
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
-    begin
+   begin
       r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
       r['estimate_ret']&.each{|qb|Estimate.parse_qb_response(qb)}
       r['sales_order_ret']&.each{|qb|SalesOrder.parse_qb_response(qb)}
