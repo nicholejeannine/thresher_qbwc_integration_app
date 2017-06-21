@@ -13,10 +13,13 @@
 1. Nichole's additional steps on this branch:
 - Delete JoinFM and EmployeeSupervisors tables. Remove from schema.
 2. Delete combo views and ops sync cleanup views from schema.
-3. (Delete old non-qb tables?)
+3. CAREFULLY ENSURE INDEXES ARE SET UP RIGHT. All portal primary keys should be named "id" and set to an auto-incrementing primary key index. The quickbooks id should be called either "list_id" (for customers and vendors, or other list types), or "txn_id" (for all transaction types). This field should be a UNIQUE index. Additionally, the full_name fields on clients and vendors should be given a unique index. Keep trying to set the index to unique; when "duplicate entry" errors occur, keep deleting the "wrong" row of data until it succeeds.
+4. FOR PROJECTS: The process is similar; first `DELETE FROM projects WHERE list_id IS NULL`, followed by `DELETE FROM projects_copy WHERE list_id IS NOT NULL`.  Then, copy the known QB full_name matches to the backup table, using a statement like `UPDATE railstest_merge_test.projects_copy P JOIN Thresher.project_qb_portal_comparisons T ON T.Project_PKEY = P.id SET P.full_name = T.'Full name in Quickbooks'` Then copy/paste the contents of the `projects_backup` table into the `projects` table. Many entries will still be blank on all the Quickbooks fields, but some now will have the Quickbooks full_name, so the next web connnector update should fill in some of the missing data.
+5. (Delete old non-qb tables to minimize confusion, since all tables have now been merged. In real life we probably won't do this, until we're sure all references to the old tables have been updated or replaced, but this will minimize the confusion for now in this demo/trial).
 4. Rework the QBWC script to use :list_id and :txn_id instead of :id. Use :id for the portal id fields, and try to force foreign key updates on save.
 
 
+-- TODO: sales_orders, vendors
 
 
 
