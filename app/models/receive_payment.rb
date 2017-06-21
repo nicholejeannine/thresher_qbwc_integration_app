@@ -5,6 +5,7 @@ class ReceivePayment < ApplicationRecord
 
 
   def parse_linked_txn(hash)
+    QbwcError.create(:model_id => self.id, :worker_class=>"PaymentParse", :error_message=>"#{hash.inspect}")
     if hash["txn_type"] == "Invoice"
       self.invoice_id = hash["txn_id"]
     end
