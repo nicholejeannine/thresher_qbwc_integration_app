@@ -1,12 +1,15 @@
-# Quickbooks Web Connector Project 
-#### (Aka "What is Quickbooks syncing??")
+# STEPS IN ATTEMPT TO REFORMULATE QB SYNC IN THIS BRANCH:
 
-## TODO:
+1. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. 
+2. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. Disable (don't delete) all jobs in the qbwc_jobs table except either the 'initial' or 'query' job ("initial" for a "brave test", "query" for a "not sure about this" level of braveness test), truncate the qbwc_errors, qbwc_sessions, and qbwc_history tables. These tables should be most updated in the railstest_development database so use those table strucutres if necessary.
+2. Follow the instructions posted [here](http://bucket.alopias.com:7990/projects/WSS/repos/portal/browse/Login/include/Class/models/README.md?at=refs%2Fheads%2Ffeature%2FnewCompanyDisplay) to convert all view data into view. The important points:
+  * Copy view data (e.g., `client_combos`)as SQL statements. Tuncate the corresponding merged table (`clients`) and replace with the view data, and back up the table (`clients_backup`).   
+  * In the merged table, delete all records with null quickbooks_id fields. Rename the primary key column to "id", set it to be a true primary key (type string, not null, autoincrement), and reset the autoincrement value to the last ID. Also index all columns needed for joins, handle datetime/timestamp/null foreign key value issues as documented in the README. 
+  * In the backup table, delete all records with null portal primary keys. Copy and paste these records into the merge table (e.g., `clients`.)  Drop extra foreign keys, unused columns, permit nulls on foreign keys if needed to prevenet errors, and alias or handle removal of columns that reference duplicate information.
+  * Repeat for other tables!
+  * Replace keys for polymorphic joins in portal tables with the new table types (e.g., Tickets with ticket_type "Customer" can now read "Client").
+  * Ensure permissions are set.
 
-1. Correct QbwcError model column names
-2. Figure out the whole customer special rules thing.
-3. Get rid of the dupes in the customer request since the Customer model will just cheerfully smoke up anything a customer_ret passes it ... super useful ...
-4. Decide where line items handling should go (in the "parent model", or in itself)
 
 
 
