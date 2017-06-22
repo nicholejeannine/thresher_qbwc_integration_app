@@ -1,5 +1,4 @@
 class Project < ApplicationRecord
-  self.primary_key = :id
   include QuickbooksQueryable
   before_save :titleize_job_status
 

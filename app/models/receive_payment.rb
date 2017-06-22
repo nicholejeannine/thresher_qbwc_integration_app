@@ -1,6 +1,5 @@
 class ReceivePayment < ApplicationRecord
   include QuickbooksQueryable
-  self.primary_key = :id
   belongs_to :customer, optional: true
 
 
