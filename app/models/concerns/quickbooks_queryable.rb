@@ -29,9 +29,6 @@ module QuickbooksQueryable
   end
   
   def handle_custom_type(value)
-    self.send('site_contact=', nil)
-    self.send('site_email=', nil)
-    self.send('site_phone=', nil)
     value&.each do |arr|
       if arr['data_ext_name'] == 'Site Contact'
         update_attribute("site_contact", arr['data_ext_value'])
