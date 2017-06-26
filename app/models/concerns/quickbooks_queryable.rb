@@ -85,7 +85,7 @@ included do
         QbwcError.create(:worker_class => 'not persisted', :error_message => "#{c}")
       end
     rescue Exception => e
-      QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{id}", :error_message => "Error parsing response: #{e}")
+      QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb_value}", :error_message => "Error parsing response: #{e}")
     end
   end
 end
