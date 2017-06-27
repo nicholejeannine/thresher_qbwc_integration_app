@@ -4,8 +4,9 @@ class Project < ApplicationRecord
 
   def self.new_project(qb)
     begin
-      
-      p = self.find_by(:list_id => qb['list_id']) || self.find_or_initialize_by(:full_name => qb['full_name'])
+    p =   Project.where(:list_id => qb['list_id'])&.first
+    p ||= Project.find_or_initialize_by(:full_name => qb['full_name'])
+    p.list_id= qb['list_id']
     p.parse_hash(qb.to_hash)
     p.save
     rescue Exception => e
