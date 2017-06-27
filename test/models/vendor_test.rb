@@ -1,6 +1,12 @@
 require 'test_helper'
 
 class VendorTest < ActiveSupport::TestCase
+  test "can parse simple qb response" do
+    assert_equal(1, Vendor.count, "should equal one")
+    assert_equal(1, Vendor.first.id)
+    assert_equal("80000C47-1409351820", Vendor.first.list_id)
+    
+  end
   
   def setup
     Vendor.destroy_all
