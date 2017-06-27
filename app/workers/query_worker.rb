@@ -14,6 +14,13 @@ class QueryWorker < QBWC::Worker
         :owner_id => 0
        }
      },
+     {:vendor_query_rq => {
+            :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+            :max_returned => 100,
+            :active_status => "All",
+            :from_modified_date => last_ran
+             }
+      },
      {:estimate_query_rq => {
         :xml_attributes => { :requestID =>1, :iterator  => "Start" },
         :max_returned => 100,
@@ -54,13 +61,6 @@ class QueryWorker < QBWC::Worker
        :include_linked_txns => true
       }
      },
-     {:vendor_query_rq => {
-       :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-       :max_returned => 100,
-       :active_status => "All",
-       :from_modified_date => last_ran
-        }
-      },
       {:receive_payment_query_rq => {
          :xml_attributes => { :requestID =>1, :iterator  => "Start" },
          :max_returned => 100,
@@ -77,11 +77,11 @@ class QueryWorker < QBWC::Worker
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
    begin
       r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
+       r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
       r['estimate_ret']&.each{|qb|Estimate.parse_qb_response(qb)}
       r['sales_order_ret']&.each{|qb|SalesOrder.parse_qb_response(qb)}
       r['purchase_order_ret']&.each{|qb|PurchaseOrder.parse_qb_response(qb)}
       r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
-      r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
       r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
     rescue Exception => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
