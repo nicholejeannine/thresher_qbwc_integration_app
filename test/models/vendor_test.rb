@@ -3,7 +3,6 @@ require 'test_helper'
 class VendorTest < ActiveSupport::TestCase
   test "can parse simple qb response" do
     assert_equal(1, Vendor.count, "should equal one")
-    assert_equal(1, Vendor.first.id)
     assert_equal("80000C47-1409351820", Vendor.first.list_id)
   end
 
@@ -13,6 +12,12 @@ class VendorTest < ActiveSupport::TestCase
     assert_equal(1, Vendor.count)
     assert_equal("Innovations", Vendor.first.name)
     assert_equal(false, Vendor.first.is_active)
+  end
+  
+  test "Adds a second model when list id does not exist" do
+    hash =  {"list_id" => "8", :name => "Innovations", :is_active => true}
+    Vendor.parse_qb_response(hash)
+    assert_equal(2, Vendor.count)
   end
   
   def setup
