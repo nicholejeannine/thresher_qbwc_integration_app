@@ -10,9 +10,10 @@ class Project < ApplicationRecord
     p.parse_hash(qb.to_hash)
     p.save
     rescue Exception => e
-      puts e.backtrace
+      QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb['list_id']}", :error_message => "Error parsing response: #{e}")
     end
   end
+  
   private
   # job_status fields come back like "InProgress" - make it save as two separate words.
   def titleize_job_status
