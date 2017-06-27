@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class SalesOrderTest < ActiveSupport::TestCase
+  test "can parse a simple hash" do
+    assert_equal(1, SalesOrder.count, "should equal one")
+  end
   
   def setup
     SalesOrderLine.destroy_all

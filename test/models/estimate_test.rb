@@ -2,24 +2,10 @@ require 'test_helper'
 
 class EstimateTest < ActiveSupport::TestCase
   
-  test "can parse a simple hash" do assert_equal(1, Estimate.count, "should equal one")
+  test "can parse a simple hash" do
+    assert_equal(1, Estimate.count, "should equal one")
   end
   
-  # TODO
-  test "saves customer id" do assert_equal("1111", e.customer_id, "Estimate should parse customer_ref['list_id'] as customer_id")
-  end
-  
-  test "saves an estimate line that is passed in as a Qbxml Hash" do skip
-  end
-  
-  test "saves all estimate lines passed in as an array" do skip
-  end
-  test "estimate ignores ignored types" do skip
-  end
-  test "estimate handles ref type" do skip
-  end
-  test "estimate lines handle ref type" do skip
-  end
   
   def setup
     EstimateLine.destroy_all

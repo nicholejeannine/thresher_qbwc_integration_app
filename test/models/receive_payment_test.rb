@@ -1,6 +1,9 @@
 require 'test_helper'
 
 class ReceivePaymentTest < ActiveSupport::TestCase
+  test "can parse a simple hash" do
+    assert_equal(1, ReceivePayment.count, "should equal one")
+  end
   
   def setup
     ReceivePayment.destroy_all
