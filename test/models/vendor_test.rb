@@ -5,7 +5,14 @@ class VendorTest < ActiveSupport::TestCase
     assert_equal(1, Vendor.count, "should equal one")
     assert_equal(1, Vendor.first.id)
     assert_equal("80000C47-1409351820", Vendor.first.list_id)
-    
+  end
+
+  test "updates a model when the list id already exists in the database" do
+    hash = {"list_id" => "80000C47-1409351820", :name => "Innovations", :is_active => false}
+    Vendor.parse_qb_response(hash)
+    assert_equal(1, Vendor.count)
+    assert_equal("Innovations", Vendor.first.name)
+    assert_equal(false, Vendor.first.is_active)
   end
   
   def setup
