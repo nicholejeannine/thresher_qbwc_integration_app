@@ -10,7 +10,7 @@ class Customer < ApplicationRecord
 		elsif qb['sublevel'] > 0 && !qb['name'].upcase.start_with?('P-')
 			Job.parse_qb_response(qb)
 		elsif qb['sublevel'] > 0 && qb['name'].upcase.start_with?('P-')
-			Project.parse_qb_response(qb)
+			Project.new_project(qb)
 		end
 	end
 end

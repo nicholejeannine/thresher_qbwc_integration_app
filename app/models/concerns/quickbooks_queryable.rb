@@ -78,19 +78,12 @@ included do
     begin
       qb_id = (self.column_names.include?("list_id") ? "list_id" : "txn_id").to_s
     qb_value = qb[qb_id]
-      if self.class.name == 'Project'
-        p = Project.find_or_initialize_by("full_name" => qb['full_name'])
-        p.parse_hash(qb.to_hash)
-        p.save
-        else
-        c = self.find_or_initialize_by(qb_id => qb_value)
-        c.parse_hash(qb.to_hash)
-        c.save
-        end
+      c = self.find_or_initialize_by(qb_id => qb_value)
+      c.parse_hash(qb.to_hash)
+      c.save
     rescue Exception => e
       QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb_value}", :error_message => "Error parsing response: #{e}")
     end
   end
 end
-
 end
