@@ -1,21 +1,44 @@
-# Quickbooks Web Connector Project 
-#### (Aka "What is Quickbooks syncing??")
+# HOW DO I USE THIS THING?
 
-## TODO:
+The web connector has different "things it can do" at this point. 
+ Key things to know: 
+ 
+## How to change databases the web connector will point to:
+ 
+In the file  `config/database.yml`, change the development database by finding this:
+   
+   
+   ``
+   development:
+     <<: *default
+     database: taco_database
+   ``
 
-1. Correct QbwcError model column names
-2. Figure out the whole customer special rules thing.
-3. Get rid of the dupes in the customer request since the Customer model will just cheerfully smoke up anything a customer_ret passes it ... super useful ...
-4. Decide where line items handling should go (in the "parent model", or in itself)
+   and replacing `taco_database` with the ACTUAL name of database you want to point this to.
+   
+  The 3 databases, and the branches they should be unsed in conjunction with, are as follows:
+  
+  1. `railstest_development` - This database should only be used with the current master branch.  The data is PURELY Quickbooks data; there are views that contain merged QB/portal data, but all of the TABLES are from Quickbooks (or part of mysql/ActiveRecord, or they belong to the Quickbooks Web Connector).
+  2. `railstest_merge_test` - This is an experimental database, in a state where the tables are "merged quickbooks/portal tables". This is essentially the ThresherCS database, with the "duplicate data" and "zombie records" arbitrarily "resolved" (e.g., Nichole deleted one or the other randomly, as a way to build a program able to cope with realities of "a post-ops-sync world".)  Currently this database should be used in conjunction with the `master` branch ONLY! 
+  3. `railstest_test` - This is an experimental database, which is being used in conjunction with the `qb_ids` branch.  The `qb_ids` branch is an attempt to reshape the quickbooks web connector code to use portal primary keys instead of Quickbooks-generated "txn ids" and "list ids".  When ops has finished with data cleanup, and "transition day" (see below) has occured, this branch can be run with the "query" job enabled.  (See below section on qbwc_jobs)
+  
+  
+  ## QBWC_JOBS
+  
+  There are 2 things you can really do with the web connector right now:  You can import ALL the data, from the beginning of time, or you can import ALL the data FROM a specific point in time.  (This is the script that the web connector will use if you choose to autorun the script every `x` number of minutes).
+  
+  _PRIOR TO RUNNING THE WEB CONNECTOR!__
+  
+  1. Make sure you are on the latest master (or whatever branch you want to be on).  Make sure your database is set to the right development database, per the instructions above.  Then run the commands, from the root of the project, in order:  `rails restart`, `rails db:seed`, and `rails log:clear`.  Then go into the `qbwc_jobs` table in the database and set the `enable` value to 1 to enable the job you prefer.
+   
+  * _FULL SYNC_ The "initial" query can be run to do a FULL SYNC, for all Quickbooks data, active and inactive, from all time. 
+  
+  * _PARTIAL OR RECURRING SYNC_ The "query" job can be used to grab only new data (data which has been modified in Quickbooks only since the last time this job was updated).  If you need to back up and re-import any data (maybe due to an error, and you want to get "the last few days again just in case", change the "updated at" value for the "query" job in the qbwc_jobs table.  Quickbooks will attempt to pull in any data after that time. (The other jobs are experimental or incomplete at this time and should not be run in production. You may delete them if you like). 
 
 
-- railstest_development is the quickbooks data. Nothing from the portal side, except in views. This database is to be used with the MASTER branch.  change the 
-;
+# TRANSITION DAY STEPS:
 
-# STEPS IN ATTEMPT TO REFORMULATE QB SYNC IN THIS BRANCH:
-
-1. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. 
-2. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. Disable (don't delete) all jobs in the qbwc_jobs table except either the 'initial' or 'query' job ("initial" for a "brave test", "query" for a "not sure about this" level of braveness test), truncate the qbwc_errors, qbwc_sessions, and qbwc_history tables. These tables should be most updated in the railstest_development database so use those table strucutres if necessary.
+1. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is going to become the  the "final, new" database. 
 2. Follow the instructions posted [here](http://bucket.alopias.com:7990/projects/WSS/repos/portal/browse/Login/include/Class/models/README.md?at=refs%2Fheads%2Ffeature%2FnewCompanyDisplay) to convert all view data into view. The important points:
   * Copy view data (e.g., `client_combos`)as SQL statements. Tuncate the corresponding merged table (`clients`), remove primary key indexes, and replace the original data with the view data. back up the table (`clients_backup`).   
   * In the merged table, delete all records with null quickbooks_id fields. Rename the primary key column to "id", set it to be a true primary key (type string, not null, autoincrement), and reset the autoincrement value to the last ID. Also index all columns needed for joins, handle datetime/timestamp/null foreign key value issues as documented in the README. 
