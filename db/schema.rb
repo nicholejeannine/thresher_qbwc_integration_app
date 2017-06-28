@@ -2436,7 +2436,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.integer  "txn_number"
     t.string   "customer_id"
     t.string   "customer_type",              limit: 209
-    t.string   "estimate_id",                limit: 209,                                                                 null: false
+    t.string   "estimate_id",                limit: 209
     t.string   "template"
     t.date     "txn_date"
     t.string   "ref_number"
