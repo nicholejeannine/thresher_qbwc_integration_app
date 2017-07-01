@@ -68,7 +68,7 @@ module QuickbooksQueryable
       else update_attribute(key, value)
       end
     end
-    rescue Exception => e
+    rescue StandardError => e
       QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{self.id}", :error_message => "QB hash parsing error: #{e}")
     end
   end
