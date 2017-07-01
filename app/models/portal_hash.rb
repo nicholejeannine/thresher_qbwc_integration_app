@@ -9,6 +9,7 @@ module PortalHash
   
   PARSE_REF_TYPE = Proc.new{|ref_hash, column|{column => ref_hash['full_name']}}
 
+  PARSE_REFS = Proc.new{|hash, klass|hash.select{|key|key.in?(klass::REFERENCE_TYPES)}.keep_if{|key|hash[key].present?}.each{|key|PARSE_REF_TYPE.call(hash[key], key.to_s.remove("_ref"))}}
   
   included do
   
@@ -16,7 +17,7 @@ module PortalHash
       my_hash = Qbxml::Hash.from_hash(hash)
       my_hash.keep_if{|key|key.in?(self::QB_KEYS)}
       my_hash.merge!(PARSE_ADDRESS.call(hash['bill_address'], "bill")).merge!(PARSE_ADDRESS.call(hash['ship_address'], "ship"))
-      my_hash.merge!(PARSE_REF_TYPE.call(hash['sales_rep_ref'], "sales_rep"))
+      my_hash.merge!(PARSE_REFS.call(hash, self.name.constantize))
       my_hash
     end
 
