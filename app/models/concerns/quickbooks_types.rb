@@ -1,10 +1,18 @@
 module QuickbooksTypes
 	extend ActiveSupport::Concern
 	include QuickbooksLineItemUtils
-	# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
-	def address?(key)
-		key.match(/ship_address$|vendor_address$|bill_address$/)
+	
+	ADDRESS_REF = %w(ship_address vendor_address bill_address)
+	
+	PARSE_ADDRESS = Proc.new{|address_hash, prefix|address_hash.keep_if{|key|key.in?(ADDRESS_KEYS)}.transform_keys!{|k|"#{prefix}_#{k}"}}
+	
+	def is_address?(key)
+		key.in?(ADDRESS_TYPES)
 	end
+	
+	
+	
+	
 	
 	def name_type(key)
 		if key.match(/P-\d+$/)
