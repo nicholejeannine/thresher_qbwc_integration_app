@@ -17,8 +17,8 @@ class ClientSerializer < HashWithIndifferentAccess
     qb = hash.extract!(*valid_keys)
    addresses, refs, custom = hash.extract!(*ADDRESS_TYPES), hash.extract!(*REF_TYPES), PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
    qb.merge!(PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(PARSE_REF.call(refs))
-    custom&.each{|key|qb.merge!(key)}
-    attributes.merge(qb).extract!(*valid_keys)
+    custom&.each{|hash|qb.merge!(hash)}
+    qb = attributes.merge(qb).select{|key|key.in?(valid_keys)}
   end
   
   def valid_keys
