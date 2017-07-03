@@ -10,17 +10,15 @@ class ClientSerializer < HashWithIndifferentAccess
   
   PARSE_REF = lambda{|ref_hash|ref_hash.transform_keys!{|k|k.remove("_ref")}.transform_values!{|v|v["full_name"]}}
   
-  PARSE_CUSTOM = lambda{|data|data.present? ? [] : data.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
+  PARSE_CUSTOM = lambda{|data|data&.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
   
   def serialize_query_response(hash)
     hash = Qbxml::Hash.from_hash(hash)
     qb = hash.extract!(*valid_keys)
-   addresses, refs, custom = hash.extract!(*ADDRESS_TYPES), hash.extract!(*REF_TYPES), hash.extract!('data_ext_ret')['data_ext_ret']
+   addresses, refs, custom = hash.extract!(*ADDRESS_TYPES), hash.extract!(*REF_TYPES), PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
    qb.merge!(PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(PARSE_REF.call(refs))
-   unless custom.nil?
-     PARSE_CUSTOM.call(custom)&.each{|key|qb.merge!(key)}
-   end
-    attributes.merge(qb)
+    custom&.each{|key|qb.merge!(key)}
+    attributes.merge(qb).extract!(*valid_keys)
   end
   
   def valid_keys
