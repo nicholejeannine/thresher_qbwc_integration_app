@@ -15,6 +15,7 @@ module QuickbooksTypes
 	PARSE_CUSTOM = lambda{|data|data&.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
 	
 	
+	
 	def is_address?(key)
 		key.in?(ADDRESS_TYPES)
 	end

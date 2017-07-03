@@ -69,22 +69,5 @@ module QuickbooksQueryable
 
 included do
   
-  def self.serialize_query_response(hash)
-    hash = Qbxml::Hash.from_hash(hash)
-    qb = hash.extract!(*self.valid_keys)
-    addresses, refs, custom = hash.extract!(*QuickbooksTypes::ADDRESS_TYPES), hash.extract!(*QuickbooksTypes::REF_TYPES), QuickbooksTypes::PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
-    qb.merge!(QuickbooksTypes::PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(QuickbooksTypes::PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(QuickbooksTypes::PARSE_REF.call(refs))
-    custom&.each{|hash|qb.merge!(hash)}
-    qb
-  end
-  
-  def self.parse_qb_response(qb)
-      qb_id = (self.column_names.include?("list_id") ? "list_id" : "txn_id").to_s
-    qb_value = qb[qb_id]
-      c = self.find_or_initialize_by(qb_id => qb_value)
-      hash =  self.serialize_query_response(hash).select{|key|key.in?(self.valid_keys)}
-      c.attributes.merge(hash)
-      c.save
-  end
 end
 end
