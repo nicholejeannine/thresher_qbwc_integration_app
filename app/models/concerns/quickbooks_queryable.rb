@@ -1,3 +1,4 @@
+require 'qbxml'
 module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypes
@@ -39,15 +40,8 @@ module QuickbooksQueryable
       end
     end
   end
-  
-  def handle_address(key, value)
-    prefix = key.remove(/address/)
-    value&.each do |k, v|
-      unless ignored_type?(k)
-        update_attribute("#{prefix}#{k}", v)
-      end
-    end
-  end
+
+  PARSE_ADDRESS = lambda{|address_hash, prefix|address_hash.keep_if{|key|key.in?(ADDRESS_KEYS)}.transform_keys!{|k|"#{prefix}_#{k}"}}
 
   # Takes a quickbooks hash and deals with each key/value pair according to its xml type.
   # TODO: shorten this - maybe pull out contacts, and parse the remainder, as two separate method calls?
@@ -74,16 +68,23 @@ module QuickbooksQueryable
   end
 
 included do
+  
+  def self.serialize_query_response(hash)
+    hash = Qbxml::Hash.from_hash(hash)
+    qb = hash.extract!(*self.valid_keys)
+    addresses, refs, custom = hash.extract!(*QuickbooksTypes::ADDRESS_TYPES), hash.extract!(*QuickbooksTypes::REF_TYPES), QuickbooksTypes::PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
+    qb.merge!(QuickbooksTypes::PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(QuickbooksTypes::PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(QuickbooksTypes::PARSE_REF.call(refs))
+    custom&.each{|hash|qb.merge!(hash)}
+    qb
+  end
+  
   def self.parse_qb_response(qb)
-    begin
       qb_id = (self.column_names.include?("list_id") ? "list_id" : "txn_id").to_s
     qb_value = qb[qb_id]
       c = self.find_or_initialize_by(qb_id => qb_value)
-      c.parse_hash(qb.to_hash)
+      hash =  self.serialize_query_response(hash).select{|key|key.in?(self.valid_keys)}
+      c.attributes.merge(hash)
       c.save
-    rescue Exception => e
-      QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb_value}", :error_message => "Error parsing response: #{e}")
-    end
   end
 end
 end

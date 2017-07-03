@@ -2,9 +2,18 @@ module QuickbooksTypes
 	extend ActiveSupport::Concern
 	include QuickbooksLineItemUtils
 	
-	ADDRESS_REF = %w(ship_address vendor_address bill_address)
+	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
 	
-	PARSE_ADDRESS = Proc.new{|address_hash, prefix|address_hash.keep_if{|key|key.in?(ADDRESS_KEYS)}.transform_keys!{|k|"#{prefix}_#{k}"}}
+	ADDRESS_KEYS = %w(addr1 addr2 addr3 addr4 addr5 city state postal_code country note)
+	
+	REF_TYPES = %w(customer_type_ref terms_ref sales_rep_ref sales_tax_code_ref item_sales_tax_code_ref job_type_ref)
+	
+	PARSE_ADDRESS = lambda{|address_hash, prefix|address_hash.keep_if{|key|key.in?(ADDRESS_KEYS)}.transform_keys!{|k|"#{prefix}_#{k}"}}
+	
+	PARSE_REF = lambda{|ref_hash|ref_hash.transform_keys!{|k|k.remove("_ref")}.transform_values!{|v|v["full_name"]}}
+	
+	PARSE_CUSTOM = lambda{|data|data&.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
+	
 	
 	def is_address?(key)
 		key.in?(ADDRESS_TYPES)
@@ -25,11 +34,6 @@ module QuickbooksTypes
 	
 	def custom_type?(key)
 		key.match(/data_ext_ret/)
-	end
-
-# Is the xml fragment a "reference type"? (A reference type has additional key/value pairs that need to be processed separately)
-	def ref_type?(key)
-		key.match(/_ref$/)
 	end
 
 # Is the xml fragment part of a "line item?"
