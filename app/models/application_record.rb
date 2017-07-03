@@ -4,8 +4,8 @@ class ApplicationRecord < ActiveRecord::Base
   def self.serialize_query_response(hash)
     hash = Qbxml::Hash.from_hash(hash)
     qb = hash.extract!(*self.valid_keys)
-    addresses, refs, custom = hash.extract!(*ADDRESS_TYPES), hash.extract!(*QuickbooksTypes::REF_TYPES), QuickbooksTypes::PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
-    qb.merge!(QuickbooksTypes::PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(QuickbooksTypes::PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(QuickbooksTypes::PARSE_REF.call(refs))
+    addresses, refs, custom = hash.extract!(*ADDRESS_TYPES), hash.extract!(*REF_TYPES), PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
+    qb.merge!(PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(PARSE_REF.call(refs))
     custom&.each{|hash|qb.merge!(hash)}
     qb = self.attributes.merge(qb)
     qb.select{|key|is_valid_key?(key)}
