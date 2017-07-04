@@ -3,7 +3,10 @@ class Invoice < ApplicationRecord
   belongs_to :customer, optional: true
   has_many :invoice_lines
   before_save :parse_memo
-
+  
+  def self.qb_id
+    "txn_id"
+  end
 
   def parse_linked_txn(hash)
     if hash["txn_type"] == "SalesOrder"

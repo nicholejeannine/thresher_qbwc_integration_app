@@ -3,6 +3,10 @@ class SalesOrder < ApplicationRecord
   belongs_to :customer, optional: true
   has_many :sales_order_lines
   before_save :parse_memo
+
+  def self.qb_id
+    "txn_id"
+  end
   
   def parse_memo
     begin

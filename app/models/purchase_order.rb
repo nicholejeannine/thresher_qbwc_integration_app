@@ -2,7 +2,11 @@ class PurchaseOrder < ApplicationRecord
   include QuickbooksQueryable
   has_many :purchase_order_lines
   before_save :parse_memo
-
+  
+  def self.qb_id
+    "txn_id"
+  end
+  
   def parse_memo
     begin
       if self.sales_order_id.nil? && memo&.downcase&.include?("sales order")
