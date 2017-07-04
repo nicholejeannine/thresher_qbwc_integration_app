@@ -1,8 +1,14 @@
 module QuickbooksTypes
 	extend ActiveSupport::Concern
 	include QuickbooksLineItemUtils
+	
+	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
+	ADDRESS_KEYS = %w(addr1 addr2 addr3 addr4 addr5 city state postal_code country note)
+	REF_TYPES = %w(customer_type_ref terms_ref sales_rep_ref sales_tax_code_ref item_sales_tax_ref job_type_ref)
+	LINKED_TXN_TYPES = %w(linked_txn applied_to_txn_ret)
+	LINE_ITEM_TYPES = %w(estimate_line_ret invoice_line_ret purchase_order_line_ret sales_order_line_ret)
+	
 	included do
-		
 		def self.lookup_parent(hash, sublevel)
 			list_id = hash["parent_ref"]["list_id"]
 			klass = (sublevel == 1 ? Client : Job)
@@ -27,23 +33,7 @@ module QuickbooksTypes
 		def self.parse_custom(hash)
 			hash&.map{|data|
 				{data['data_ext_name'] => data['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}
-			end
+		end
+	
 	end
-	
-	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
-	
-	ADDRESS_KEYS = %w(addr1 addr2 addr3 addr4 addr5 city state postal_code country note)
-	
-	REF_TYPES = %w(customer_type_ref terms_ref sales_rep_ref sales_tax_code_ref item_sales_tax_ref job_type_ref)
-	
-	CUSTOMER_REF_TYPES = %w(customer_ref parent_ref)
-	
-	VENDOR_REF_TYPES = %w(vendor_ref)
-	
-	LINKED_TXN_TYPES = %w(linked_txn applied_to_txn_ret)
-	
-	LINE_ITEM_TYPES = %w(estimate_line_ret invoice_line_ret purchase_order_line_ret sales_order_line_ret)
-	
-	
-	
 end
