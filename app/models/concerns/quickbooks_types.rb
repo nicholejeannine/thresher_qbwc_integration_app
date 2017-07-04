@@ -16,6 +16,13 @@ module QuickbooksTypes
 			{"parent_id" => id}
 		end
 		
+		def self.lookup_customer(hash)
+			list_id = hash["customer_ref"]["list_id"]
+			klass = Customer.customer_type(hash["customer_ref"]["full_name"])
+			id = klass.constantize.find_by("list_id" => list_id).id
+			{"customer_type" => klass, "customer_id" => id}
+		end
+		
 		def self.parse_addresses(hash)
 			addresses = hash.extract!(*ADDRESS_TYPES)
 			addresses.map{|key, value|

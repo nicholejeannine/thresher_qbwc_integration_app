@@ -18,6 +18,9 @@ class ApplicationRecord < ActiveRecord::Base
     if is_valid_key?("parent_id")
       qb.merge!(self.lookup_parent(hash.extract!('parent_ref'), qb['sublevel']))
     end
+    if is_valid_key?("customer_id")
+      qb.merge!(self.lookup_customer(hash.extract!('customer_ref')))
+    end
     addresses = self.parse_addresses(hash)
     refs =  self.parse_refs(hash)
     custom = self.parse_custom(hash.extract!('data_ext_ret')['data_ext_ret'])
