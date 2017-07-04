@@ -2,12 +2,20 @@ module QuickbooksTypes
 	extend ActiveSupport::Concern
 	include QuickbooksLineItemUtils
 	included do
-	def self.parse_addresses(hash)
-		addresses = hash.extract!(*ADDRESS_TYPES)
-		addresses.map{|key, value|
-			name = key.to_s.remove(/_address/)
-			value.select!{|k|k.in?(ADDRESS_KEYS)}&.transform_keys!{|k|"#{name}_#{k}"}}
-	end
+		
+		def self.lookup_parent(hash, sublevel)
+			list_id = hash["parent_ref"]["list_id"]
+			klass = (sublevel == 1 ? Client : Job)
+			id = klass.find_by("list_id" => list_id).id
+			{"parent_id" => id}
+		end
+		
+		def self.parse_addresses(hash)
+			addresses = hash.extract!(*ADDRESS_TYPES)
+			addresses.map{|key, value|
+				name = key.to_s.remove(/_address/)
+				value.select!{|k|k.in?(ADDRESS_KEYS)}&.transform_keys!{|k|"#{name}_#{k}"}}
+		end
 		
 		def self.parse_refs(hash)
 			refs = hash.extract!(*REF_TYPES)
@@ -16,6 +24,7 @@ module QuickbooksTypes
 			}
 		end
 	end
+	
 	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
 	
 	ADDRESS_KEYS = %w(addr1 addr2 addr3 addr4 addr5 city state postal_code country note)

@@ -11,15 +11,17 @@ class ApplicationRecord < ActiveRecord::Base
     c.save
   end
   
-  protected
+  # protected
   def self.serialize_query_response(hash)
     hash = Qbxml::Hash.from_hash(hash)
     qb = hash.extract!(*self.attributes.keys)
     addresses = self.parse_addresses(hash)
     refs =  self.parse_refs(hash)
+    parent = self.lookup_parent(hash.extract!("parent_ref"), qb['sublevel'])
     custom = PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
     addresses&.each{|k|qb.merge!(k)}
     refs&.each{|k|qb.merge!(k)}
+    qb.merge!(parent)
     custom&.each{|hash|qb.merge!(hash)}
     qb = self.attributes.merge(qb)
     qb.select{|key|is_valid_key?(key)}
