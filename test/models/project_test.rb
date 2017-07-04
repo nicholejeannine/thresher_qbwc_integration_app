@@ -26,9 +26,9 @@ class ProjectTest < ActiveSupport::TestCase
   test "nullifies data extension values when not explicitly defined" do
     c = second_project_hash
     Customer.parse_customer_response(c)
-    assert_equal("", Project.first.site_contact, "Custom data types not present in hash should be treated as an empty string. (Failed to nullify site_contact.)")
-    assert_equal("", Project.first.site_phone, "Custom data types not present in hash should be treated as an empty string. (Failed to nullify site_phone.)")
-    assert_equal("", Project.first.site_email, "Custom data types not present in hash should be treated as an empty string. (Failed to nullify site_email.)")
+    assert_nil(Project.first.site_contact, "Custom data types not present in hash should be treated as an empty string. (Failed to nullify site_contact.)")
+    assert_nil(Project.first.site_phone, "Custom data types not present in hash should be treated as an empty string. (Failed to nullify site_phone.)")
+    assert_nil(Project.first.site_email, "Custom data types not present in hash should be treated as an empty string. (Failed to nullify site_email.)")
     assert_equal(1, Project.count)
   end
 
@@ -41,8 +41,8 @@ class ProjectTest < ActiveSupport::TestCase
 
   test "inserts a new record when the full name is not found" do
     c = new_project_record
-    Customer.parse_customer_response(c)
-    assert_equal(2, Project.count)
+    assert_raise(StandardError, Customer.parse_customer_response(c))
+    assert_equal(1, Project.count)
   end
 
   # Make sure "reference types" are handled appropriately
