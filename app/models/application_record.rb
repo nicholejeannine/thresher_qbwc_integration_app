@@ -1,12 +1,16 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
   include QuickbooksTypes
+  extend QuickbooksTypes
   
   def self.serialize_query_response(hash)
     hash = Qbxml::Hash.from_hash(hash)
     qb = hash.extract!(*self.attributes.keys)
-    addresses, refs, custom = hash.extract!(*ADDRESS_TYPES), hash.extract!(*REF_TYPES), PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
-    qb.merge!(PARSE_ADDRESS.call(addresses["bill_address"], "bill")).merge!(PARSE_ADDRESS.call(addresses["ship_address"], "ship")).merge!(PARSE_REF.call(refs))
+    addresses = self.parse_addresses(hash)
+    refs =  hash.extract!(*REF_TYPES)
+    custom = PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
+    addresses&.each{|k|qb.merge!(k)}
+    qb&.merge!(PARSE_REF.call(refs))
     custom&.each{|hash|qb.merge!(hash)}
     qb = self.attributes.merge(qb)
     qb.select{|key|is_valid_key?(key)}
