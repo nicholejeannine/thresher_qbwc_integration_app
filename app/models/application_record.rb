@@ -20,7 +20,7 @@ class ApplicationRecord < ActiveRecord::Base
     end
     addresses = self.parse_addresses(hash)
     refs =  self.parse_refs(hash)
-    custom = PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
+    custom = self.parse_custom(hash.extract!('data_ext_ret')['data_ext_ret'])
     addresses&.each{|k|qb.merge!(k)}
     refs&.each{|k|qb.merge!(k)}
     custom&.each{|hash|qb.merge!(hash)}

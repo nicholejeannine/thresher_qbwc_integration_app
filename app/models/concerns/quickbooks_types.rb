@@ -23,6 +23,11 @@ module QuickbooksTypes
 			  {"#{key.to_s.remove(/_ref$/)}" => value['full_name']}
 			}
 		end
+		
+		def self.parse_custom(hash)
+			hash&.map{|data|
+				{data['data_ext_name'] => data['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}
+			end
 	end
 	
 	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
@@ -39,7 +44,6 @@ module QuickbooksTypes
 	
 	LINE_ITEM_TYPES = %w(estimate_line_ret invoice_line_ret purchase_order_line_ret sales_order_line_ret)
 	
-	PARSE_CUSTOM = lambda{|data|data&.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
 	
 	
 end
