@@ -6,8 +6,7 @@ module QuickbooksTypes
 		addresses = hash.extract!(*ADDRESS_TYPES)
 		addresses.map{|key, value|
 			name = key.to_s.remove(/_address/)
-			PARSE_ADDRESS.call(value,name)
-		}
+			value.select!{|k|k.in?(ADDRESS_KEYS)}&.transform_keys!{|k|"#{name}_#{k}"}}
 	end
 		
 		def self.parse_refs(hash)
@@ -30,10 +29,6 @@ module QuickbooksTypes
 	LINKED_TXN_TYPES = %w(linked_txn applied_to_txn_ret)
 	
 	LINE_ITEM_TYPES = %w(estimate_line_ret invoice_line_ret purchase_order_line_ret sales_order_line_ret)
-	
-	PARSE_ADDRESS = lambda{|address_hash, prefix|address_hash&.select!{|key|key.in?(ADDRESS_KEYS)}&.transform_keys!{|k|"#{prefix}_#{k}"}}
-	
-	PARSE_REF = lambda{|ref_hash|ref_hash.transform_keys!{|k|k.remove("_ref")}.transform_values!{|v|v["full_name"]}}
 	
 	PARSE_CUSTOM = lambda{|data|data&.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
 	
