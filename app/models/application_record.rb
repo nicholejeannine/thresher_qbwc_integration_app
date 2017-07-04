@@ -3,6 +3,15 @@ class ApplicationRecord < ActiveRecord::Base
   include QuickbooksTypes
   extend QuickbooksTypes
   
+  def self.parse_qb_response(qb)
+    qb_value = qb[self.qb_id]
+    c = self.find_or_initialize_by(self.qb_id => qb_value)
+    hash =  self.serialize_query_response(qb)
+    c.update(hash)
+    c.save
+  end
+  
+  protected
   def self.serialize_query_response(hash)
     hash = Qbxml::Hash.from_hash(hash)
     qb = hash.extract!(*self.attributes.keys)
@@ -16,14 +25,6 @@ class ApplicationRecord < ActiveRecord::Base
     qb.select{|key|is_valid_key?(key)}
   end
 
-  def self.parse_qb_response(qb)
-    qb_value = qb[self.qb_id]
-    c = self.find_or_initialize_by(self.qb_id => qb_value)
-    hash =  self.serialize_query_response(qb)
-    c.update(hash)
-    c.save
-  end
-  
   def self.is_valid_key?(key)
     key.in?(self.attributes.keys)
   end
