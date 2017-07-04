@@ -4,7 +4,7 @@ module QuickbooksTypes
 	
 	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
 	ADDRESS_KEYS = %w(addr1 addr2 addr3 addr4 addr5 city state postal_code country note)
-	REF_TYPES = %w(customer_type_ref terms_ref sales_rep_ref sales_tax_code_ref item_sales_tax_ref job_type_ref)
+	REF_TYPES = %w(customer_type_ref terms_ref sales_rep_ref sales_tax_code_ref item_sales_tax_ref job_type_ref template_ref customer_sales_tax_code_ref vendor_type_ref billing_rate_ref)
 	LINKED_TXN_TYPES = %w(linked_txn applied_to_txn_ret)
 	LINE_ITEM_TYPES = %w(estimate_line_ret invoice_line_ret purchase_order_line_ret sales_order_line_ret)
 	
