@@ -9,6 +9,13 @@ module QuickbooksTypes
 			PARSE_ADDRESS.call(value,name)
 		}
 	end
+		
+		def self.parse_refs(hash)
+			refs = hash.extract!(*REF_TYPES)
+			refs.map{|key,value|
+			  {"#{key.to_s.remove(/_ref$/)}" => value['full_name']}
+			}
+		end
 	end
 	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
 	

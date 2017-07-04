@@ -7,10 +7,10 @@ class ApplicationRecord < ActiveRecord::Base
     hash = Qbxml::Hash.from_hash(hash)
     qb = hash.extract!(*self.attributes.keys)
     addresses = self.parse_addresses(hash)
-    refs =  hash.extract!(*REF_TYPES)
+    refs =  self.parse_refs(hash)
     custom = PARSE_CUSTOM.call(hash.extract!('data_ext_ret')['data_ext_ret'])
     addresses&.each{|k|qb.merge!(k)}
-    qb&.merge!(PARSE_REF.call(refs))
+    refs&.each{|k|qb.merge!(k)}
     custom&.each{|hash|qb.merge!(hash)}
     qb = self.attributes.merge(qb)
     qb.select{|key|is_valid_key?(key)}
