@@ -42,21 +42,4 @@ module QuickbooksTypes
 	PARSE_CUSTOM = lambda{|data|data&.map{|hash|{hash['data_ext_name'] => hash['data_ext_value']}}&.map{|h|h.transform_keys{|k|k.remove(" ").underscore}}}
 	
 	
-	
-	def name_type(key)
-		if key.match(/P-\d+$/)
-			"Project"
-		elsif key.match(/:/)
-			"Job"
-		else "Client"
-		end
-	end
-
-
-	# Keys we never care about handling
-	# TODO: add class_ref, price stuff, etc
-	def ignored_type?(key)
-		key.match(/card_txn_info|prefill_account_ref|external_guid|group_ret$|class_ref$|txn_line_id$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate/)
-	end
-	
 end

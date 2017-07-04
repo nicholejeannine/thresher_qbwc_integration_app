@@ -1,13 +1,17 @@
 class Customer < ApplicationRecord
 	self.abstract_class = true
- 
-	def self.parse_customer_response(qb)
-		if qb['sublevel'] == 0 && !qb['name'].upcase.start_with?('P-')
-			Client.parse_qb_response(qb)
-		elsif qb['sublevel'] > 0 && !qb['name'].upcase.start_with?('P-')
-			Job.parse_qb_response(qb)
-		elsif qb['sublevel'] > 0 && qb['name'].upcase.start_with?('P-')
-			Project.parse_project(qb)
+	
+	def self.customer_type(key)
+		if key.match(/P-\d+$/)
+			"Project"
+		elsif key.match(/:/)
+			"Job"
+		else "Client"
 		end
+	end
+	
+	def self.parse_customer_response(qb)
+		klass = self.customer_type(qb['full_name'])
+		klass.constantize.parse_qb_response(qb)
 	end
 end

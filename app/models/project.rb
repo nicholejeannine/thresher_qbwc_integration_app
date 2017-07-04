@@ -7,7 +7,7 @@ class Project < ApplicationRecord
   
   before_save :titleize_job_status
 
-  def self.parse_project(qb)
+  def self.parse_qb_response(qb)
     begin
       # First try to find by list id
     p =   Project.where("list_id" => qb['list_id'])&.first
