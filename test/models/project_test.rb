@@ -41,8 +41,10 @@ class ProjectTest < ActiveSupport::TestCase
 
   test "inserts a new record when the full name is not found" do
     c = new_project_record
+    QbwcError.destroy_all
     assert_raise(StandardError, Customer.parse_customer_response(c))
     assert_equal(1, Project.count)
+    assert_equal(1, QbwcError.count)
   end
 
   # Make sure "reference types" are handled appropriately
