@@ -20,32 +20,36 @@ module QuickbooksQueryable
   included do
     def self.parse_qb_response(qb)
       begin
-        hash = Qbxml::Hash.from_hash(qb).extract!(*self::QB_KEYS)
-        data = Hash.new(nil)
         qb_value = qb[self.qb_id]
         c = self.find_or_initialize_by(self.qb_id => qb_value)
-        hash.each do |key, value|
-          if key.match(/_ref$/)
-            name = key.remove(/_ref$/)
-            full_name = value['full_name']
-            data.store(name, full_name)
-          elsif key.match(/_address$/)
-            name = key.remove(/_address$/)
-            value.each do |k,v|
-              data.store("#{name}_#{k}", v) unless k == 'xml_attributes'
-            end
-          elsif key.match(/data_ext_ret/)
-            value&.each do |arr|
-              name = arr['data_ext_name'].remove(" ").underscore
-              data.store(name, arr["data_ext_value"])
-            end
-          end
-        end
-        hash.select!{|k|k.in?(self.attributes.keys)}.merge!(data)
-        c.update(c.attributes.merge!(hash))
+        hash = parse_hash(qb)
+        c.update(self.attributes.merge(hash))
       rescue StandardError => e
         QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{qb_value}", :error_message => "Error parsing response: #{e}")
       end
+    end
+    
+    def self.parse_hash(qb)
+      data = Hash.new(nil)
+      hash = Qbxml::Hash.from_hash(qb).extract!(*self::QB_KEYS)
+      hash.each do |key, value|
+        if key.match(/_ref$/)
+          name = key.remove(/_ref$/)
+          full_name = value['full_name']
+          data.store(name, full_name)
+        elsif key.match(/_address$/)
+          name = key.remove(/_address$/)
+          value.each do |k,v|
+            data.store("#{name}_#{k}", v) unless k == 'xml_attributes'
+          end
+        elsif key.match(/data_ext_ret/)
+          value&.each do |arr|
+            name = arr['data_ext_name'].remove(" ").underscore
+            data.store(name, arr["data_ext_value"])
+          end
+        end
+      end
+      hash.select!{|k|k.in?(self.attributes.keys)}.merge!(data)
     end
   end
 end
