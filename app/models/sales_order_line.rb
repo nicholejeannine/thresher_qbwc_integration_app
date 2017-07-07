@@ -1,7 +1,6 @@
 class SalesOrderLine < ApplicationRecord
   include QuickbooksQueryable
-  self.primary_key = :id
-  belongs_to :sales_order, optional: true
+  belongs_to :sales_order
 
   def self.qb_id
     "txn_line_id"

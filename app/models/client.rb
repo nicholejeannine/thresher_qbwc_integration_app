@@ -1,4 +1,5 @@
 class Client < ApplicationRecord
+  include QuickbooksQueryable
   def self.qb_id
     "list_id"
   end

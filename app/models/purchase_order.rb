@@ -2,9 +2,15 @@ class PurchaseOrder < ApplicationRecord
   include QuickbooksQueryable
   has_many :purchase_order_lines
   before_save :parse_memo
+  before_save :lookup_vendor
   
   def self.qb_id
     "txn_id"
+  end
+  
+  def lookup_vendor
+    id = Vendor.find_by("list_id", self.vendor_id).id
+    send.send("vendor_id=", id) unless id.nil?
   end
   
   def self.attributes

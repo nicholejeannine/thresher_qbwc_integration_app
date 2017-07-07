@@ -49,7 +49,6 @@ class JobTest < ActiveSupport::TestCase
     assert_equal("GJM", Job.first.sales_rep)
     assert_equal("Tax", Job.first.sales_tax_code)
     assert_equal("SM/CA", Job.first.item_sales_tax)
-    assert_equal("2", Job.first.parent_id)
   end
   
   def setup

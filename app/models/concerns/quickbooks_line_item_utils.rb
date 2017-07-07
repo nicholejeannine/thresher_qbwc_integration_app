@@ -6,7 +6,7 @@ module QuickbooksLineItemUtils
   def line_klass
     self.class.name.concat('Line').constantize
   end
-
+  
   # TODO: This can be using the already-built parse_hash method right?
   # Handle each line item instance. Find an existing row by id for updating, or create a new row.
   def handle_line(klass_name, instance_id, line)
@@ -15,16 +15,16 @@ module QuickbooksLineItemUtils
       instance_line = line_klass.find_or_initialize_by(:id => line['txn_line_id'])
       instance_line.send("#{klass_name.underscore}_id=", instance_id)
       # Send the hash off for processing. Save it to the database, and catch any errors that occur.
-      instance_line.parse_hash(line)
+      instance_line.parse_hash(Qbxml::Hash.from_hash(line))
       instance_line.save
     rescue Exception => e
       QbwcError.create(:worker_class => "#{klass_name}Line", :model_id => "#{instance_id}", :error_message => "Line item #{line['txn_line_id']} failed due to #{e}")
     end
   end
-
+  
   def process_line_items(klass_name, instance_id = nil, ret = nil)
     return if instance_id.nil? || ret.empty?
-    handle_line(klass_name, instance_id, ret) if ret.is_a?(Qbxml::Hash)
+    handle_line(klass_name, instance_id, ret) if ret.is_a?(Hash)
     ret.each{|line|handle_line(klass_name, instance_id, line)} if ret.is_a?(Array)
   end
 end

@@ -1,4 +1,6 @@
 class Job < ApplicationRecord
+  include QuickbooksQueryable
+  
   before_save :titleize_job_status
   
   def self.qb_id
