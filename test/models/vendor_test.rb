@@ -7,7 +7,7 @@ class VendorTest < ActiveSupport::TestCase
   end
 
   test "updates a model when the list id already exists in the database" do
-    hash = {"list_id" => "80000C47-1409351820", :name => "Innovations", :is_active => false}
+    hash = {"list_id" => "80000C47-1409351820", "name" => "Innovations", "is_active" => 0}
     Vendor.parse_qb_response(hash)
     assert_equal(1, Vendor.count)
     assert_equal("Innovations", Vendor.first.name)
@@ -15,7 +15,7 @@ class VendorTest < ActiveSupport::TestCase
   end
   
   test "Adds a second model when list id does not exist" do
-    hash =  {"list_id" => "8", :name => "Innovations", :is_active => true}
+    hash =  {"list_id" => "8", "name" => "Innovations", "is_active" => 1}
     Vendor.parse_qb_response(hash)
     assert_equal(2, Vendor.count)
   end

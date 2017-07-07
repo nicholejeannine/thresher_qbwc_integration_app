@@ -22,8 +22,10 @@ module QuickbooksQueryable
       begin
         qb_value = qb[self.qb_id]
         c = self.find_or_initialize_by(self.qb_id => qb_value)
-        hash = parse_hash(qb)
-        c.update(self.attributes.merge(hash))
+        qb.delete(qb[self.qb_id])
+        hash = self.parse_hash(qb)
+        c.update(hash)
+        c.save
       rescue StandardError => e
         QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{qb_value}", :error_message => "Error parsing response: #{e}")
       end
@@ -49,7 +51,8 @@ module QuickbooksQueryable
           end
         end
       end
-      hash.select!{|k|k.in?(self.attributes.keys)}.merge!(data)
+      hash.select!{|k|k.in?(self.attributes.keys)}&.merge!(data)
+      self.attributes.merge!(hash)
     end
   end
 end
