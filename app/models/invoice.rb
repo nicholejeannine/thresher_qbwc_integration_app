@@ -13,7 +13,8 @@ class Invoice < ApplicationRecord
 
   def parse_linked_txn(hash)
     if hash["txn_type"] == "SalesOrder"
-      self.sales_order_id = hash["txn_id"]
+      txn_id = hash["txn_id"]
+      self.sales_order_id = SalesOrder.find_by("txn_id" => txn_id)&.id
     end
   end
 
