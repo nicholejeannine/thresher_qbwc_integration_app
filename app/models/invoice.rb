@@ -25,7 +25,7 @@ class Invoice < ApplicationRecord
         ref = i[i.index("estimate") + 1]
         self.estimate_id = Estimate.where(:ref_number => ref).first&.id
       end
-    rescue Exception => e
+    rescue => e
       QbwcError.create(:worker_class => self.class.name, :model_id => self.id, :error_message => "Error parsing Invoice memo to assign estimate_id: #{e}")
     end
   end
