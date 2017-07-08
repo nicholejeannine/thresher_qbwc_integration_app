@@ -49,6 +49,8 @@ module QuickbooksQueryable
           end
         elsif key.match(/_line_ret$/)
           process_line_items(value)
+        elsif key.match(/linked_txn|applied_to_txn_ret/)
+          parse_linked_txn(value)
         end
       end
       hash.select!{|k|k.in?(self.class.attributes.keys)}&.merge!(data)
