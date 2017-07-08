@@ -33,14 +33,12 @@ module QuickbooksQueryable
       data = Hash.new(nil)
       hash = Qbxml::Hash.from_hash(qb).extract!(*self.class::QB_KEYS)
       hash.each do |key, value|
-        if key.match(/_ref$/)
-          name = key.remove(/_ref$/)
+        if key.match(/(.*)_ref$/)
           full_name = value['full_name']
-          data.store(name, full_name)
-        elsif key.match(/_address$/)
-          name = key.remove(/_address$/)
+          data.store("#{$1}", full_name)
+        elsif key.match(/(\A[a-z]*)_address$/)
           value.each do |k,v|
-            data.store("#{name}_#{k}", v) unless k == 'xml_attributes'
+            data.store("#{$1}_#{k}", v) unless k == 'xml_attributes'
           end
         elsif key.match(/data_ext_ret/)
           value&.each do |arr|
