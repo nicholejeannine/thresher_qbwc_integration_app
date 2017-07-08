@@ -1,7 +1,6 @@
 module QuickbooksQueryable
   extend ActiveSupport::Concern
   include QuickbooksTypes
-  include QuickbooksLineItemUtils
   
   # Handle reference types - save only the value labeled "full name"
   # def handle_ref_type(key, value)
@@ -21,9 +20,8 @@ module QuickbooksQueryable
     def self.parse_qb_response(qb)
       begin
         qb_value = qb[self.qb_id]
-        c = self.find_or_initialize_by(self.qb_id => qb_value)
-        qb.delete(qb[self.qb_id])
-        hash = self.parse_hash(qb)
+        c = self.find_or_create_by(self.qb_id => qb_value)
+        hash = c.parse_hash(qb)
         c.update(hash)
         c.save
       rescue StandardError => e
@@ -31,9 +29,9 @@ module QuickbooksQueryable
       end
     end
     
-    def self.parse_hash(qb)
+    def parse_hash(qb)
       data = Hash.new(nil)
-      hash = Qbxml::Hash.from_hash(qb).extract!(*self::QB_KEYS)
+      hash = Qbxml::Hash.from_hash(qb).extract!(*self.class::QB_KEYS)
       hash.each do |key, value|
         if key.match(/_ref$/)
           name = key.remove(/_ref$/)
@@ -49,10 +47,12 @@ module QuickbooksQueryable
             name = arr['data_ext_name'].remove(" ").underscore
             data.store(name, arr["data_ext_value"])
           end
+        elsif key.match(/_line_ret$/)
+          process_line_items(value)
         end
       end
-      hash.select!{|k|k.in?(self.attributes.keys)}&.merge!(data)
-      self.attributes.merge!(hash)
+      hash.select!{|k|k.in?(self.class.attributes.keys)}&.merge!(data)
+      self.class.attributes.merge!(hash)
     end
   end
 end

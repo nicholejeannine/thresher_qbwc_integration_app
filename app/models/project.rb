@@ -20,7 +20,7 @@ class Project < ApplicationRecord
       if p.nil?
         raise StandardError, "Project Not Found"
       else
-        hash = parse_hash(qb)
+        hash = p.parse_hash(qb)
         p.update(self.attributes.merge(hash))
       end
     rescue StandardError => e
