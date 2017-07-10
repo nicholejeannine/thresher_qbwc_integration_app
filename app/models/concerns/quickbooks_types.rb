@@ -1,6 +1,19 @@
 module QuickbooksTypes
 	extend ActiveSupport::Concern
 	include QuickbooksLineItemUtils
+	included do
+		def self.qb_id
+			case self.name
+			when "Client", "Job", "Project", "Vendor"
+				"list_id"
+			when "Estimate", "Invoice", "PurchaseOrder", "ReceivePayment", "SalesOrder"
+				"txn_id"
+			when "EstimateLine", "InvoiceLine", "PurchaseOrderLine", "SalesOrderLine"
+				"txn_line_id"
+				else "id"
+			end
+		end
+	end
 	
 	
 		# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)

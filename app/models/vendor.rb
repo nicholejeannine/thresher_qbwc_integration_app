@@ -1,8 +1,5 @@
 class Vendor < ApplicationRecord
   include QuickbooksQueryable
-  def self.qb_id
-    "list_id"
-  end
 
   QB_KEYS = %w(list_id time_created time_modified edit_sequence name is_active company_name salutation first_name middle_name last_name job_title vendor_address ship_address phone alt_phone fax email cc contact alt_contact name_on_check account_number vendor_type_ref terms_ref credit_limit vendor_tax_ident is_vendor_eligible_for1099 balance billing_rate_ref)
   

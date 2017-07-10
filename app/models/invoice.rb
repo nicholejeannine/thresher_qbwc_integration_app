@@ -2,10 +2,6 @@ class Invoice < ApplicationRecord
   include QuickbooksQueryable
   has_many :invoice_lines
   before_save :parse_memo
-  
-  def self.qb_id
-    "txn_id"
-  end
 
   QB_KEYS = %w(txn_id time_created time_modified edit_sequence txn_number customer_ref ar_account_ref template_ref txn_date ref_number bill_address ship_address is_pending is_finance_charge po_number terms_ref due_date sales_rep_ref fob ship_date ship_method_ref subtotal item_sales_tax_ref sales_tax_percentage sales_tax_total applied_amount balance_remaining memo is_paid customer_msg_ref is_to_be_printed is_to_be_emailed customer_sales_tax_code_ref suggested_discount_amount suggested_discount_date invoice_line_ret linked_txn)
   

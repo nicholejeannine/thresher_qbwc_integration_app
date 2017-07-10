@@ -1,10 +1,7 @@
 class ReceivePayment < ApplicationRecord
   include QuickbooksQueryable
   belongs_to :customer, optional: true
-  
-  def self.qb_id
-    "txn_id"
-  end
+
   QB_KEYS = %w(txn_id time_created time_modified edit_sequence txn_number customer_ref ar_account_ref txn_date ref_number total_amount payment_method_ref memo deposit_to_account_ref unused_payment unused_credits applied_to_txn_ret)
   
   def self.attributes

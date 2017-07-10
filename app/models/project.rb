@@ -1,9 +1,5 @@
 class Project < ApplicationRecord
   include QuickbooksQueryable
-  
-  def self.qb_id
-    "list_id"
-  end
 
   QB_KEYS = %w(list_id time_created time_modified edit_sequence name full_name is_active sublevel company_name salutation first_name middle_name last_name job_title bill_address ship_address phone alt_phone fax email cc contact alt_contact customer_type_ref terms_ref sales_rep_ref balance total_balance sales_tax_code_ref item_sales_tax_ref account_number job_status job_start_date job_projected_end_date job_end_date job_desc job_type_ref preferred_delivery_method data_ext_ret)
   
