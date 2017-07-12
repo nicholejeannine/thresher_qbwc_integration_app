@@ -7,12 +7,16 @@ namespace :db do
       
       if source_file and (sql_content = source_file.read)
         ActiveRecord::Base.transaction do
+          begin
           # Each statement ends with a semicolon followed by a newline.
           sql_lines = sql_content.split(/;[ \t]*$/)
           if sql_lines.respond_to?(:each)
             sql_lines.each do |line|
               ActiveRecord::Base.connection.execute "#{line};"
             end
+          end
+          rescue => e
+            puts "file_name resulted in error #{e}"
           end
         end # transaction
       end
