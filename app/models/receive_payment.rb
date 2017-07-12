@@ -5,7 +5,7 @@ class ReceivePayment < ApplicationRecord
   QB_KEYS = %w(txn_id time_created time_modified edit_sequence txn_number customer_ref ar_account_ref txn_date ref_number total_amount payment_method_ref memo deposit_to_account_ref unused_payment unused_credits applied_to_txn_ret)
   
   def self.attributes
-    {"txn_id" => nil, "time_created" => nil, "time_modified" => nil, "edit_sequence" => nil, "txn_number" => nil, "customer_id" => nil, "customer_type" => nil, "invoice_id" => nil, "ar_account" => nil, "txn_date" => nil, "ref_number" => nil, "total_amount" => nil, "payment_method" => nil, "memo" => nil, "deposit_to_account" => nil, "unused_payment" => nil, "unused_credits" => nil}
+  %w(txn_id time_created time_modified edit_sequence txn_number customer_id customer_type invoice_id ar_account txn_date ref_number total_amount payment_method memo deposit_to_account unused_payment unused_credits)
   end
 
   def parse_linked_txn(hash)
