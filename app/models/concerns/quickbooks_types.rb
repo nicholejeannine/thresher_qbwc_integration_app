@@ -1,6 +1,5 @@
 module QuickbooksTypes
 	extend ActiveSupport::Concern
-	include QuickbooksLineItemUtils
 	included do
 		def self.qb_id
 			case self.name

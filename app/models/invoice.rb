@@ -1,5 +1,7 @@
 class Invoice < ApplicationRecord
   include QuickbooksQueryable
+  include QuickbooksLineItemUtils
+
   has_many :invoice_lines
   before_save :parse_memo
 

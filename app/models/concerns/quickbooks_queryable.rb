@@ -10,6 +10,10 @@ module QuickbooksQueryable
         hash = c.parse_hash(qb)
         c.update(hash)
         c.save
+        if self.respond_to?("line_klass")
+          lines = qb.extract!(self.line_ret)
+          c.process_line_items(lines)
+        end
       rescue StandardError => e
         QbwcError.create(:worker_class => "#{self.class.name}", :model_id => "#{qb_value}", :error_message => "Error parsing response: #{e}")
       end
@@ -31,8 +35,6 @@ module QuickbooksQueryable
             name = arr['data_ext_name'].remove(" ").underscore
             data.store(name, arr["data_ext_value"])
           end
-        elsif key.match(/_line_ret$/)
-          process_line_items(value)
         elsif key.match(/linked_txn|applied_to_txn_ret/)
           parse_linked_txn(value)
         end

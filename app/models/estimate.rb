@@ -5,7 +5,7 @@ class Estimate < ApplicationRecord
   
   # TODO: RE-AD CUSTOMER REF
   
-  QB_KEYS = %w(txn_id time_created time_modified edit_sequence txn_number template_ref txn_date ref_number bill_address ship_address is_active po_number terms_ref due_date sales_rep_ref fob subtotal item_sales_tax_ref sales_tax_percentage sales_tax_total total_amount memo customer_msg_ref is_to_be_emailed customer_sales_tax_code_ref estimate_line_ret)
+  QB_KEYS = %w(txn_id time_created time_modified edit_sequence txn_number template_ref txn_date ref_number bill_address ship_address is_active po_number terms_ref due_date sales_rep_ref fob subtotal item_sales_tax_ref sales_tax_percentage sales_tax_total total_amount memo customer_msg_ref is_to_be_emailed customer_sales_tax_code_ref)
   
   # FIXME: RE-ADD CUSTOMER REF
   def self.attributes

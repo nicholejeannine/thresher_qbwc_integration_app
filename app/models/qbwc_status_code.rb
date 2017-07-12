@@ -1,0 +1,2 @@
+# class QbwcStatusCode < ApplicationRecord
+# end

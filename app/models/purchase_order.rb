@@ -1,5 +1,6 @@
 class PurchaseOrder < ApplicationRecord
   include QuickbooksQueryable
+  include QuickbooksLineItemUtils
   has_many :purchase_order_lines
   before_save :parse_memo
   before_save :lookup_vendor
