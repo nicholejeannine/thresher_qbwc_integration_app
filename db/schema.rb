@@ -65,59 +65,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "site_contact"
     t.string   "site_email"
     t.string   "site_phone"
-    t.datetime "CreationTimeStamp"
-    t.text     "CreationUser",              limit: 65535
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",      limit: 65535
-    t.text     "Cust_Address1",             limit: 65535
-    t.text     "Cust_Address2",             limit: 65535
-    t.text     "Cust_BillTo_Address1",      limit: 65535
-    t.text     "Cust_BillTo_Address2",      limit: 65535
-    t.text     "Cust_BillTo_City",          limit: 65535
-    t.text     "Cust_BillTo_Company",       limit: 65535
-    t.text     "Cust_BillTo_Country",       limit: 65535
-    t.text     "Cust_BillTo_Email",         limit: 65535,                                                       comment: "A/P Email"
-    t.text     "Cust_BillTo_Name",          limit: 65535
-    t.text     "Cust_AP_Name",              limit: 65535,                                                       comment: "A/P Name"
-    t.text     "Cust_BillTo_Phone",         limit: 65535,                                                       comment: "A/P Phone"
-    t.text     "Cust_BillTo_State",         limit: 65535
-    t.integer  "Cust_BillTo_Zip"
-    t.text     "Cust_City",                 limit: 65535
-    t.text     "Cust_CLNo",                 limit: 65535
-    t.text     "Cust_Company",              limit: 65535
-    t.text     "Cust_CompanyAbr",           limit: 65535,                                                       comment: "Customer Short Name"
-    t.text     "Cust_ContactAlt",           limit: 65535
-    t.text     "Cust_Country",              limit: 65535
-    t.text     "Cust_EmailCC",              limit: 65535
-    t.text     "Cust_EmailTo",              limit: 65535
-    t.text     "Cust_InactiveFlag",         limit: 65535
-    t.text     "Cust_NameAltFull",          limit: 65535
-    t.text     "Cust_NameFirst",            limit: 65535
-    t.text     "Cust_NameFull",             limit: 65535
-    t.text     "Cust_NameLast",             limit: 65535
-    t.text     "Cust_NameMiddle",           limit: 65535
-    t.text     "Cust_NameSalutation",       limit: 65535
-    t.text     "Cust_PhoneAlt",             limit: 65535
-    t.text     "Cust_PhoneCell",            limit: 65535
-    t.text     "Cust_PhoneFax",             limit: 65535,                                                       comment: "A/P FAX"
-    t.text     "Cust_PhoneOffice",          limit: 65535
-    t.text     "Cust_PONo",                 limit: 65535
-    t.text     "Cust_Rep",                  limit: 65535
-    t.text     "Cust_SaleTaxCode",          limit: 65535
-    t.text     "Cust_ShipTo_Address1",      limit: 65535
-    t.text     "Cust_ShipTo_Address2",      limit: 65535
-    t.text     "Cust_ShipTo_City",          limit: 65535
-    t.text     "Cust_ShipTo_Company",       limit: 65535
-    t.text     "Cust_ShipTo_Country",       limit: 65535
-    t.text     "Cust_ShipTo_Email",         limit: 65535
-    t.text     "Cust_ShipTo_Name",          limit: 65535
-    t.text     "Cust_ShipTo_Phone",         limit: 65535
-    t.text     "Cust_ShipTo_State",         limit: 65535
-    t.integer  "Cust_ShipTo_Zip"
-    t.text     "Cust_State",                limit: 65535
-    t.text     "Cust_Terms",                limit: 65535
-    t.text     "Cust_Type",                 limit: 65535
-    t.integer  "Cust_Zip"
     t.index ["full_name"], name: "full_name", unique: true, using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
@@ -189,41 +136,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "customer_msg",                 limit: 101
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code",      limit: 3
-    t.datetime "CreationTimeStamp"
-    t.text     "CreationUser",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",         limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "FK_Customers_PKEY"
-    t.integer  "FK_Jobs_PKEY"
-    t.integer  "FK_Project_PKEY"
-    t.decimal  "Est_Amount",                                 precision: 10, scale: 2
-    t.text     "Est_Company",                  limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_CompanyAbr",               limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_Contact",                  limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_ContactAlt",               limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_CPR",                      limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.date     "Est_DateCompletion_Actual"
-    t.date     "Est_DateCompletion_Estimated"
-    t.date     "Est_DateCreated"
-    t.date     "Est_DateFDOB"
-    t.date     "Est_DateStarted_Actual"
-    t.date     "Est_DateStarted_Estimated"
-    t.text     "Est_EmailCC",                  limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_EmailTo",                  limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_NameFirst",                limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_NameLast",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_NameMiddle",               limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_NameSalutation",           limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "Salutation -"
-    t.text     "Est_Notes",                    limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_Number",                   limit: 65535
-    t.integer  "Est_PercentComplete"
-    t.text     "Est_PhoneAlt",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_PhoneFax",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_PhoneOffice",              limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_ProjectName",              limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_Status",                   limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_URL",                      limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Est_URL BU",                   limit: 65535,                                                       collation: "utf8_unicode_ci"
     t.index ["customer_id", "customer_type"], name: "customer_id", using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
@@ -308,37 +220,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "customer_sales_tax_code",   limit: 3
     t.decimal  "suggested_discount_amount",               precision: 20, scale: 5
     t.date     "suggested_discount_date"
-    t.datetime "CreationTimeStamp",                                                                                                           comment: "Date Created"
-    t.text     "CreationUser",              limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",      limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "FK_Project_PKEY"
-    t.integer  "FK_qEstimates_PKEY"
-    t.integer  "FK_Jobs_PKEY"
-    t.integer  "FK_Customers_PKEY"
-    t.integer  "FK_qSalesOrders_PKEY"
-    t.decimal  "Inv_Amount",                              precision: 10, scale: 2,                                                            comment: "Inv Amount"
-    t.date     "Inv_DateCreated"
-    t.date     "Inv_DateInvoiceApproved",                                                                                                     comment: "Date Aprv -"
-    t.date     "Inv_DateInvoiceConfirmed",                                                                                                    comment: "Date Conf -"
-    t.date     "Inv_DateInvoicePaid"
-    t.date     "Inv_DateScheduled",                                                                                                           comment: "Sch Date -"
-    t.text     "Inv_DateSent",              limit: 65535,                                                                                     comment: "Date Sent"
-    t.text     "Inv_Description",           limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Inv_InvConfirmedNote",      limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "Conf # -"
-    t.text     "Inv_InvSentTo",             limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "To"
-    t.integer  "Inv_InvSentVia",            limit: 1,                                                                                         comment: "Via"
-    t.text     "Inv_Notes",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Inv_Number",                limit: 65535,                                                                                     comment: "Inv Number"
-    t.text     "Inv_PaidMethod",            limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Inv_PaymentURL",            limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Inv_PaymentURL BU",         limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "Inv_ProjectName",           limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "Inv_Status",                limit: 1,                                                                                         comment: "Inv Status"
-    t.integer  "Inv_Terms",                 limit: 1,                                                                                         comment: "Terms"
-    t.text     "Inv_URL",                   limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "Inv URL"
-    t.text     "Inv_URL BU",                limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "AutolinkPDF"
     t.index ["customer_id", "customer_type"], name: "customer_id", using: :btree
     t.index ["estimate_id"], name: "estimate_id", using: :btree
     t.index ["is_paid"], name: "is_paid", using: :btree
@@ -414,47 +295,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "site_contact"
     t.string   "site_email"
     t.string   "site_phone"
-    t.datetime "CreationTimeStamp"
-    t.text     "CreationUser",              limit: 65535
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",      limit: 65535
-    t.integer  "FK_JobID_Parent"
-    t.integer  "FK_Customers_PKEY"
-    t.text     "Job_Company",               limit: 65535
-    t.text     "Job_CompanyAbr",            limit: 65535
-    t.text     "Job_Contact",               limit: 65535
-    t.text     "Job_ContactAlt",            limit: 65535
-    t.text     "Job_ContactName",           limit: 65535
-    t.text     "Job_CustCLNo",              limit: 65535
-    t.text     "Job_CustPONo",              limit: 65535
-    t.date     "Job_DateEndActual",                                                                             comment: "Job Actual End Date"
-    t.date     "Job_DateEndProjected",                                                                          comment: "Job Projected End Date"
-    t.date     "Job_DateStartActual",                                                                           comment: "Job Actual Start Date"
-    t.date     "Job_DateStartProjected",                                                                        comment: "Job Projected Start Date"
-    t.text     "Job_DefaultJob",            limit: 65535
-    t.text     "Job_Description_Long",      limit: 65535
-    t.text     "Job_Description_Short",     limit: 65535
-    t.integer  "Job_DisplayIndent"
-    t.text     "Job_EmailCC",               limit: 65535
-    t.text     "Job_EmailTo",               limit: 65535
-    t.date     "Job_ExpiryDate"
-    t.integer  "Job_HoursAmount_Default"
-    t.integer  "Job_HoursAmount_Lock"
-    t.integer  "Job_HoursAmount_Max"
-    t.text     "Job_HourType",              limit: 65535
-    t.text     "Job_InactiveFlag",          limit: 65535,                                                       comment: "Job Is Active"
-    t.text     "Job_NameFirst",             limit: 65535
-    t.text     "Job_NameLast",              limit: 65535
-    t.text     "Job_NameMiddle",            limit: 65535
-    t.text     "Job_NameSalutation",        limit: 65535
-    t.text     "Job_Notes",                 limit: 65535
-    t.text     "Job_PhoneAlt",              limit: 65535
-    t.text     "Job_PhoneFax",              limit: 65535
-    t.text     "Job_PhoneOffice",           limit: 65535
-    t.text     "Job_QB_JobName",            limit: 65535
-    t.text     "Portal_Job_Status",         limit: 65535
-    t.text     "Portal_Job_Type",           limit: 65535
-    t.text     "Job_PhoneCell",             limit: 65535
     t.index ["full_name"], name: "full_name", unique: true, using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
@@ -523,67 +363,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "site_contact"
     t.string   "site_email"
     t.string   "site_phone"
-    t.datetime "CreationTimeStamp"
-    t.text     "CreationUser",                  limit: 16777215
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",          limit: 16777215
-    t.integer  "FK_Customers_PKEY"
-    t.integer  "FK_Jobs_PKEY"
-    t.integer  "FK_ProgMan_Employees_PKEY"
-    t.integer  "FK_ProjMan_Employees_PKEY"
-    t.integer  "FK_TechLead_Employees_PKEY"
-    t.integer  "FK_Foreman_Employees_PKEY"
-    t.integer  "FK_TechForeman_Employees_PKEY"
-    t.text     "Project_Name",                  limit: 65535
-    t.text     "Project_Type",                  limit: 65535
-    t.date     "Project_DateStartEstimated"
-    t.date     "Project_DateEndEstimated"
-    t.date     "Project_DateStartActual"
-    t.date     "Project_DateEndActual"
-    t.date     "Project_RoughInStart"
-    t.date     "Project_RoughInEnd"
-    t.date     "Project_DeviceInstallStart"
-    t.date     "Project_DeviceInstallEnd"
-    t.date     "Project_CommissioningStart"
-    t.date     "Project_CommissioningEnd"
-    t.text     "Project_ScopeText",             limit: 65535
-    t.text     "Project_NameSalutation",        limit: 65535
-    t.text     "Project_NameFirst",             limit: 65535
-    t.text     "Project_NameMiddle",            limit: 65535
-    t.text     "Project_NameLast",              limit: 65535
-    t.text     "Project_PhoneMain",             limit: 65535
-    t.text     "Project_EmailMain",             limit: 65535
-    t.text     "Project_PhoneAlternate",        limit: 65535
-    t.text     "Project_EmailCC",               limit: 65535
-    t.text     "Project_PhoneCell",             limit: 65535
-    t.text     "Project_PhoneFax",              limit: 65535
-    t.text     "Project_Address1",              limit: 65535,                                             comment: "Project Site Address"
-    t.text     "Project_Address2",              limit: 65535
-    t.text     "Project_Address_Parking1",      limit: 65535,                                             comment: "Project Primary Parking"
-    t.text     "Project_Address_Parking2",      limit: 65535,                                             comment: "Project Secondary Parking"
-    t.text     "Project_City",                  limit: 65535
-    t.text     "Project_State",                 limit: 65535
-    t.text     "Project_Zip",                   limit: 65535
-    t.text     "Project_Park_1_Address",        limit: 65535,                                             comment: "Primary Parking"
-    t.text     "Project_Park_1_Address_City",   limit: 65535,                                             comment: "Primary Parking City"
-    t.text     "Project_Park_1_Address_State",  limit: 65535,                                             comment: "Primary Parking State"
-    t.integer  "Project_Park_1_Address_Zip",                                                              comment: "Primary Parking Zip Code"
-    t.text     "Project_Park_2_Address",        limit: 65535,                                             comment: "Secondary Parking Address"
-    t.text     "Project_Park_2_Address_City",   limit: 65535,                                             comment: "Secondary Parking City"
-    t.text     "Project_Park_2_Address_State",  limit: 65535,                                             comment: "Secondary Parking State"
-    t.integer  "Project_Park_2_Address_Zip",                                                              comment: "Secondary Parking Zip Code"
-    t.integer  "Project_PercentComplete"
-    t.text     "Project_IsClosed",              limit: 65535
-    t.integer  "Project_Status",                limit: 1
-    t.integer  "Project_QuotedTechLabor"
-    t.integer  "Project_QuotedRILabor"
-    t.integer  "Project_QuotedDILabor"
-    t.integer  "Project_QuotedCOLabor"
-    t.integer  "Project_QuotedEngLabor"
-    t.integer  "Project_QuotedPMLabor"
-    t.text     "Project_UseCase",               limit: 65535
-    t.integer  "Project_QuotedLgstLabor"
-    t.integer  "Project_QuotedMaintLabor"
     t.index ["full_name"], name: "full_name", unique: true, using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
@@ -660,37 +439,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "vendor_msg"
     t.boolean  "is_to_be_printed"
     t.boolean  "is_to_be_emailed"
-    t.datetime "CreationTimeStamp"
-    t.text     "CreationUser",              limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",      limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "FK_Jobs_PKEY"
-    t.integer  "FK_Project_PKEY"
-    t.integer  "FK_qEstimates_PKEY"
-    t.integer  "FK_qSalesOrders_PKEY"
-    t.integer  "FK_Customers_PKEY"
-    t.decimal  "PO_Amount",                               precision: 10, scale: 2
-    t.text     "PO_ConfirmationNo",         limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.date     "PO_DateComplete"
-    t.date     "PO_DateConfirmed"
-    t.date     "PO_DateCreation"
-    t.date     "PO_DateDelivered"
-    t.date     "PO_DateETA"
-    t.date     "PO_DateReceived"
-    t.date     "PO_DateSent"
-    t.date     "PO_DateShipped"
-    t.date     "PO_ETA"
-    t.text     "PO_Notes",                  limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_Number",                 limit: 65535
-    t.text     "PO_ProjectName",            limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_ShippedTo",              limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_Status",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_URL",                    limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_URL BU",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_Vendor",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.date     "PO_NBD"
-    t.text     "PO_Bundle",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "PO_OrderByDate",            limit: 65535,                                                       collation: "utf8_unicode_ci"
     t.index ["is_fully_received"], name: "is_fully_received", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
@@ -844,40 +592,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.boolean  "is_to_be_printed"
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code"
-    t.datetime "CreationTimeStamp",                                                                                                            comment: "Date Created"
-    t.text     "CreationUser",               limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.datetime "LastModificationTimeStamp"
-    t.text     "LastModificationUser",       limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "FK_Jobs_PKEY"
-    t.integer  "FK_Project_PKEY"
-    t.integer  "FK_qEstimates_PKEY"
-    t.integer  "FK_Customers_PKEY"
-    t.decimal  "SO_Amount",                                precision: 10, scale: 2,                                                            comment: "Amount"
-    t.decimal  "SO_ClientPOAmount",                        precision: 10, scale: 2,                                                            comment: "Amount"
-    t.date     "SO_ClientPODate",                                                                                                              comment: "Date"
-    t.text     "SO_ClientPONo",              limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "Number"
-    t.text     "SO_ClientPOURL",             limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "URL to PO"
-    t.text     "SO_ClientPOURL BU",          limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.date     "SO_DateCompleted_Actual",                                                                                                      comment: "Act. Completion"
-    t.date     "SO_DateCompleted_Estimated",                                                                                                   comment: "Est. Completion"
-    t.date     "SO_DateCreated"
-    t.date     "SO_DateFDOB",                                                                                                                  comment: "FDOB"
-    t.date     "SO_DateStarted_Actual",                                                                                                        comment: "Act. Start"
-    t.date     "SO_DateStarted_Estimated",                                                                                                     comment: "Est. Start"
-    t.text     "SO_Notes",                   limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "Notes"
-    t.text     "SO_Number",                  limit: 65535,                                                                                     comment: "Number"
-    t.integer  "SO_PercentComplete",                                                                                                           comment: "% Complete"
-    t.text     "SO_ProjectForeman",          limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "SO_ProjectManager",          limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "SO_Status",                  limit: 1,                                                                                         comment: "SO Status"
-    t.text     "SO_URL",                     limit: 65535,                                                       collation: "utf8_unicode_ci", comment: "URL to SO"
-    t.text     "SO_URL BU",                  limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.date     "SO_MaterialsDateNeededBy"
-    t.text     "SO_MaterialsStatus",         limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.text     "SO_LOM_URL",                 limit: 65535,                                                       collation: "utf8_unicode_ci"
-    t.integer  "FK_ProgMan_Employees_PKEY"
-    t.integer  "FK_TechLead_Employees_PKEY"
-    t.text     "SO_Description",             limit: 65535,                                                       collation: "utf8_unicode_ci"
     t.index ["customer_id", "customer_type"], name: "customer_id", using: :btree
     t.index ["estimate_id"], name: "estimate_id", using: :btree
     t.index ["is_fully_invoiced"], name: "is_fully_invoiced", using: :btree
