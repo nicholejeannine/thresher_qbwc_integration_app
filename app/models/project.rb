@@ -1,9 +1,4 @@
 class Project < ApplicationRecord
-  include QuickbooksQueryable
-
-  QB_KEYS = %w(list_id time_created time_modified edit_sequence name full_name is_active sublevel company_name salutation first_name middle_name last_name job_title bill_address ship_address phone alt_phone fax email cc contact alt_contact customer_type_ref terms_ref sales_rep_ref balance total_balance sales_tax_code_ref item_sales_tax_ref account_number job_status job_start_date job_projected_end_date job_end_date job_desc job_type_ref preferred_delivery_method data_ext_ret)
-  
-  
   before_save :titleize_job_status
 
   def self.parse_qb_response(qb)
@@ -16,8 +11,8 @@ class Project < ApplicationRecord
       if p.nil?
         raise StandardError, "Project Not Found"
       else
-        hash = p.parse_hash(qb)
-        p.update(self.attributes.merge(hash))
+        hash = QuickbooksQueryResponse.parse(qb, self, p.id)
+        p.update(hash)
       end
     rescue StandardError => e
       QbwcError.create(:worker_class => "Project", :model_id => "#{qb["full_name"]}", :error_message => "#{e}")
