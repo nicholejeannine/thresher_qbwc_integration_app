@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170712030051) do
+ActiveRecord::Schema.define(version: 20170712220110) do
 
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "list_id",                                                          default: "",    null: false
@@ -123,7 +123,8 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
 
-  create_table "estimate_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "estimate_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "txn_line_id", default: "", null: false
     t.string  "estimate_id"
     t.string  "item"
     t.string  "desc",                    limit: 4095
@@ -139,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.decimal "markup_rate",                          precision: 20, scale: 5
     t.float   "markup_rate_percent",     limit: 24
     t.index ["estimate_id"], name: "estimate_id", using: :btree
+    t.index ["txn_line_id"], name: "index_estimate_lines_on_txn_line_id", unique: true, using: :btree
   end
 
   create_table "estimates", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -228,7 +230,8 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
   end
 
-  create_table "invoice_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "invoice_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "txn_line_id", default: "", null: false
     t.string  "invoice_id"
     t.string  "item"
     t.text    "desc",                    limit: 65535
@@ -245,6 +248,7 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.date    "service_date"
     t.string  "sales_tax_code"
     t.index ["invoice_id"], name: "invoice_id", using: :btree
+    t.index ["txn_line_id"], name: "index_invoice_lines_on_txn_line_id", unique: true, using: :btree
   end
 
   create_table "invoices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -341,6 +345,12 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
+  end
+
+  create_table "invoices_receive_payments", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "invoice_id",         null: false
+    t.integer "receive_payment_id", null: false
+    t.index ["receive_payment_id", "invoice_id"], name: "invoice_payment", unique: true, using: :btree
   end
 
   create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -581,7 +591,8 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.index ["sublevel"], name: "sublevel", using: :btree
   end
 
-  create_table "purchase_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "purchase_order_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "txn_line_id", default: "", null: false
     t.string  "purchase_order_id"
     t.string  "item"
     t.string  "manufacturer_part_number"
@@ -601,6 +612,7 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.boolean "is_manually_closed"
     t.index ["customer_id", "customer_type"], name: "customer_id", using: :btree
     t.index ["purchase_order_id"], name: "purchase_order_id", using: :btree
+    t.index ["txn_line_id"], name: "index_purchase_order_lines_on_txn_line_id", unique: true, using: :btree
   end
 
   create_table "purchase_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -759,7 +771,8 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
   end
 
-  create_table "sales_order_lines", id: :string, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "sales_order_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "txn_line_id", default: "", null: false
     t.string  "sales_order_id"
     t.string  "item"
     t.text    "desc",                    limit: 65535
@@ -777,6 +790,7 @@ ActiveRecord::Schema.define(version: 20170712030051) do
     t.decimal "invoiced",                              precision: 20, scale: 5
     t.boolean "is_manually_closed"
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
+    t.index ["txn_line_id"], name: "index_sales_order_lines_on_txn_line_id", unique: true, using: :btree
   end
 
   create_table "sales_orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
