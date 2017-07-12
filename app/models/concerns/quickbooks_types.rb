@@ -11,13 +11,18 @@ module QuickbooksTypes
 				"txn_line_id"
 			end
 		end
+
+		def self.ignored_type?(key)
+			key.match(/card_txn_info|prefill_account_ref|external_guid|group_ret$|class_ref$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate/)
+		end
+
+	end
+
 	end
 	
 	
 		# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
-		def address?(key)
-			key.match(/ship_address$|vendor_address$|bill_address$/)
-		end
+
 		
 		def custom_type?(key)
 			key.match(/data_ext_ret/)
@@ -35,16 +40,13 @@ module QuickbooksTypes
 		
 		# Keys we never care about handling
 		# TODO: add class_ref, price stuff, etc
-		def ignored_type?(key)
-			key.match(/card_txn_info|prefill_account_ref|external_guid|group_ret$|class_ref$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate/)
-		end
+
 		
 		def linked_txn?(key)
 			key.match(/linked_txn|applied_to_txn_ret/)
 		end
 	
-	end
-	
+
 # 	ADDRESS_TYPES = %w(ship_address bill_address vendor_address)
 # 	ADDRESS_KEYS = %w(addr1 addr2 addr3 addr4 addr5 city state postal_code country note)
 # 	REF_TYPES = %w(customer_type_ref terms_ref sales_rep_ref sales_tax_code_ref item_sales_tax_ref job_type_ref template_ref customer_sales_tax_code_ref vendor_type_ref billing_rate_ref vendor_ref inventory_site_ref ship_to_entity_ref ship_method_ref item_ref override_UOM_set_ref inventory_site_location_ref customer_msg ARA_account_ref payment_method_ref deposit_to_account_ref)
