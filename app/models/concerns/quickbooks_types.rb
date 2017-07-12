@@ -9,7 +9,6 @@ module QuickbooksTypes
 				"txn_id"
 			when "EstimateLine", "InvoiceLine", "PurchaseOrderLine", "SalesOrderLine"
 				"txn_line_id"
-				else "id"
 			end
 		end
 	end
@@ -18,15 +17,6 @@ module QuickbooksTypes
 		# Is the xml fragment a quickbooks address type that we care about? (we don't care about ship_to_address)
 		def address?(key)
 			key.match(/ship_address$|vendor_address$|bill_address$/)
-		end
-		
-		def name_type(key)
-			if key.match(/P-\d+$/)
-				"Project"
-			elsif key.match(/:/)
-				"Job"
-			else "Client"
-			end
 		end
 		
 		def custom_type?(key)
