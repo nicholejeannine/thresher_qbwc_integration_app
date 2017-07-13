@@ -3,6 +3,7 @@ require 'test_helper'
 class PurchaseOrderTest < ActiveSupport::TestCase
   test "can parse a simple hash" do
     assert_equal(1, PurchaseOrder.count, "should equal one")
+    assert_equal(3, PurchaseOrderLine.count, "should parse lines")
   end
   
   def setup
