@@ -42,6 +42,10 @@ class SalesOrderTest < ActiveSupport::TestCase
     assert_equal(true, SalesOrder.first.is_to_be_emailed)
     assert_equal("AAA", SalesOrder.first.customer_sales_tax_code)
   end
+
+  test "line items have correct foreign key" do
+    assert_equal(SalesOrderLine.first.sales_order_id, SalesOrder.first.id)
+  end
   
   def setup
     SalesOrderLine.destroy_all

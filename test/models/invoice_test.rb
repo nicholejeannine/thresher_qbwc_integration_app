@@ -48,7 +48,11 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal(true, Invoice.first.is_to_be_printed)
     assert_equal(true, Invoice.first.is_to_be_emailed)
   end
-  
+
+  test "line items have correct foreign key" do
+    assert_equal(InvoiceLine.first.invoice_id, Invoice.first.id)
+  end
+
   def setup
     InvoiceLine.destroy_all
     Invoice.destroy_all
