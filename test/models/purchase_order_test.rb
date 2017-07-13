@@ -42,6 +42,9 @@ class PurchaseOrderTest < ActiveSupport::TestCase
   end
 
   test "line items have correct foreign key" do
+    ids = PurchaseOrderLine.pluck("purchase_order_id").compact
+    assert_equal(PurchaseOrderLine.count, ids.count)
+    assert_not_nil(PurchaseOrderLine.first.purchase_order_id)
     assert_equal(PurchaseOrderLine.first.purchase_order_id, PurchaseOrder.first.id)
   end
   

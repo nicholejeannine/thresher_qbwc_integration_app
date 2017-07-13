@@ -37,6 +37,9 @@ class EstimateTest < ActiveSupport::TestCase
   end
 
   test "line items have correct foreign key" do
+    ids = EstimateLine.pluck("estimate_id").compact
+    assert_equal(EstimateLine.count, ids.count)
+    assert_not_nil(EstimateLine.first.estimate_id)
     assert_equal(EstimateLine.first.estimate_id, Estimate.first.id)
   end
   

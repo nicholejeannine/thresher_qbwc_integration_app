@@ -50,14 +50,25 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "line items have correct foreign key" do
+    ids = InvoiceLine.pluck("invoice_id").compact
+    assert_equal(InvoiceLine.count, ids.count)
+    assert_not_nil(InvoiceLine.first.invoice_id)
     assert_equal(InvoiceLine.first.invoice_id, Invoice.first.id)
   end
 
   test "invoice parses the sales order id" do
+    assert_not_nil(Invoice.first.sales_order_id)
     assert_equal(SalesOrder.first.id, Invoice.first.sales_order_id)
   end
 
+  test "invoice parses the estimate id" do
+    assert_not_nil(Invoice.first.estimate_id)
+    assert_equal(Estimate.first.id, Invoice.first.estimate_id)
+  end
+
   def setup
+    Estimate.destroy_all
+    Estimate.create!({"txn_id" => "1234567", "ref_number" => "10544"})
     SalesOrder.destroy_all
     SalesOrder.create!({"txn_id" => "53D529-1497631698"})
     InvoiceLine.destroy_all
