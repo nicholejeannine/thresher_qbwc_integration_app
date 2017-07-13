@@ -7,7 +7,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.default_hash
-    Hash[*self.attributes.map {|k| [k, nil]}.flatten]
+    Hash[*self.columns.map{|k|[k.name, k.default]}.flatten]
   end
 
   def self.parse_qb_response(qb)
