@@ -1,4 +1,2 @@
 class Client < ApplicationRecord
-
-
 end
