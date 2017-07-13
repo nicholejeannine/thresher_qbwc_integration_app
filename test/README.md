@@ -16,4 +16,3 @@
 
 
 1. Invoice sales order ids seem borked
-1. All line items refuse to save their parent id
