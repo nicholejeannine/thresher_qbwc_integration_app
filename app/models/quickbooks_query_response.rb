@@ -1,6 +1,5 @@
 class QuickbooksQueryResponse < Qbxml::Hash
   include QuickbooksTypes
-  include QuickbooksLineItemUtils
 
   def self.parse(hash, klass, id)
     default = klass.default_hash
@@ -23,7 +22,7 @@ class QuickbooksQueryResponse < Qbxml::Hash
           default["#{name}"] = arr["data_ext_value"]
         end
       elsif key.match(/line_ret$/)
-        process_line_items(value, klass, id)
+        klass.process_line_items(value, id)
       elsif key.match(/linked_txn|applied_to_txn_ret/)
         klass.parse_linked_txn(value, id)
       end

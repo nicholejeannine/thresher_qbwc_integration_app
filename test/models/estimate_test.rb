@@ -35,6 +35,10 @@ class EstimateTest < ActiveSupport::TestCase
     assert_equal(true, Estimate.first.is_to_be_emailed)
     assert_equal("AAA", Estimate.first.customer_sales_tax_code)
   end
+
+  test "line items have correct foreign key" do
+    assert_equal(EstimateLine.first.estimate_id, Estimate.first.id)
+  end
   
   def setup
     Job.destroy_all

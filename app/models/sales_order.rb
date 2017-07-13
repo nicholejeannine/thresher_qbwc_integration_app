@@ -1,4 +1,5 @@
 class SalesOrder < ApplicationRecord
+  include QuickbooksLineItemUtils
   has_many :sales_order_lines
   before_save :parse_memo
   def parse_memo

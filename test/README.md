@@ -15,6 +15,5 @@
 # TO FIX:
 
 
-1. POs don't parse at all - seems related to vendor id lookup
 1. Invoice sales order ids seem borked
 1. All line items refuse to save their parent id

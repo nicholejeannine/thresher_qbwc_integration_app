@@ -40,6 +40,10 @@ class PurchaseOrderTest < ActiveSupport::TestCase
     assert_equal(1, Vendor.count)
     assert_equal(Vendor.first.id, PurchaseOrder.first.vendor_id)
   end
+
+  test "line items have correct foreign key" do
+    assert_equal(PurchaseOrderLine.first.purchase_order_id, PurchaseOrder.first.id)
+  end
   
   def setup
     Vendor.destroy_all
