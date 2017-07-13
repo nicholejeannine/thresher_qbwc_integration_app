@@ -1,7 +1,6 @@
 # TESTS TO WRITE:
 
 
-1. Invoice.parse_linked_txn (saves sales order id)
 1. Invoice.parse_memo (saves estimate id)
 1. Job.titleize_job_status
 1. Project.titleize_job_status
@@ -11,8 +10,3 @@
 1. SalesOrder.parse_memo (saves estimate id)
 1. All line items - make sure foreign keys are being saved!
 1. Job parent, project parent, parents on txn types
-
-# TO FIX:
-
-
-1. Invoices don't want to save sales order id
