@@ -18,7 +18,7 @@ class EntityQueryWorker < QBWC::Worker
     begin
       r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
       r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
-    rescue Exception => e
+    rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
   
