@@ -1,4 +1,8 @@
-# STEPS IN ATTEMPT TO REFORMULATE QB SYNC IN THIS BRANCH:
+# General Notes:
+1. When importing projects from Quickbooks, they must ALREADY exist in the projects table, or they will NOT be saved to the projects table (they will show up in the qbwc_errors table as "No match found").
+
+
+# STEPS IN ATTEMPT TO REFORMULATE QB SYNC IN QB_IDS BRANCH:
 
 1. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. 
 2. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. Disable (don't delete) all jobs in the qbwc_jobs table except either the 'initial' or 'query' job ("initial" for a "brave test", "query" for a "not sure about this" level of braveness test), truncate the qbwc_errors, qbwc_sessions, and qbwc_history tables. These tables should be most updated in the railstest_development database so use those table strucutres if necessary.
