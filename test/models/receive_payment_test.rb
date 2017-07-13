@@ -5,33 +5,23 @@ class ReceivePaymentTest < ActiveSupport::TestCase
     assert_equal(1, ReceivePayment.count, "should equal one")
   end
 
-  test "can save billing address" do
-    assert_equal("Box HQ", ReceivePayment.first.bill_addr1, "Bill Address should parse")
-  end
-
-  test "can save ship address" do
-    assert_equal("900 Jefferson Road", ReceivePayment.first.ship_addr1, "Ship Address should parse")
-  end
-
   test "handles ref types" do
-    assert_equal("ARJ", ReceivePayment.first.sales_rep)
-    assert_equal("Custom ReceivePayment", ReceivePayment.first.template)
-    assert_equal("SM/CA", ReceivePayment.first.item_sales_tax)
-    assert_equal("Tax", ReceivePayment.first.customer_sales_tax_code)
+    assert_equal("Accounts Receivable", ReceivePayment.first.ar_account)
+    assert_equal("Check", ReceivePayment.first.payment_method)
+    assert_equal("Citi Checking", ReceivePayment.first.deposit_to_account)
   end
 
   test "updates existing hash" do
-    hash = {"txn_id" => "53D7E5-1497890620", "txn_date" => "2018-06-19", "ref_number" => "10634a",  "is_active" => false, "due_date" => "2019-06-19", "sales_tax_percentage" => 19.0, "sales_tax_total" => 100.00, "total_amount" => 100.00, "is_to_be_emailed" => true, "customer_sales_tax_code_ref" => {"xml_attributes" => {}, "list_id" => "10000-1009221895", "full_name" => "AAA"}}
+    hash = {"txn_id" => "53D8CC-1497894805", "txn_number" => 33, "txn_date" => "2018-06-19", "ref_number" => "10634a",  "total_amount" => 88.99, "memo" => "MEMO", "unused_payment" => 11.11, "unused_credits" => 17.17}
     ReceivePayment.parse_qb_response(hash)
     assert_equal(1, ReceivePayment.count)
+    assert_equal(33, ReceivePayment.first.txn_number)
     assert_equal("2018-06-19", ReceivePayment.first.txn_date.iso8601)
     assert_equal("10634a", ReceivePayment.first.ref_number)
-    assert_equal(false, ReceivePayment.first.is_active)
-    assert_equal("2019-06-19", ReceivePayment.first.due_date.iso8601)
-    assert_equal(19.0, ReceivePayment.first.sales_tax_percentage)
-    assert_equal(100.00, ReceivePayment.first.sales_tax_total.to_f)
-    assert_equal(true, ReceivePayment.first.is_to_be_emailed)
-    assert_equal("AAA", ReceivePayment.first.customer_sales_tax_code)
+    assert_equal(88.99, ReceivePayment.first.total_amount.to_f)
+    assert_equal("MEMO", ReceivePayment.first.memo)
+    assert_equal(11.11, ReceivePayment.first.unused_payment.to_f)
+    assert_equal(17.17, ReceivePayment.first.unused_credits.to_f)
   end
 
   def setup
