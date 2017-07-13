@@ -47,8 +47,15 @@ class PurchaseOrderTest < ActiveSupport::TestCase
     assert_not_nil(PurchaseOrderLine.first.purchase_order_id)
     assert_equal(PurchaseOrderLine.first.purchase_order_id, PurchaseOrder.first.id)
   end
+
+  test "purchase order parses the sales order id" do
+    assert_not_nil(PurchaseOrder.first.sales_order_id)
+    assert_equal(SalesOrder.first.id, PurchaseOrder.first.sales_order_id)
+  end
   
   def setup
+    SalesOrder.destroy_all
+    SalesOrder.create!({"txn_id" => "133283", "ref_number" => "5454"})
     Vendor.destroy_all
     Vendor.create!({"list_id" => "800007BF-1299525249", "name" => "Shure"})
     PurchaseOrderLine.destroy_all
