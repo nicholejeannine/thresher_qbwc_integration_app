@@ -4,7 +4,7 @@ class SalesOrderTest < ActiveSupport::TestCase
   
   test "can parse a simple hash" do
     assert_equal(1, SalesOrder.count, "Should equal one")
-    assert_equal(1, SalesOrderLine.count, "Should parse sales order lines")
+    assert_equal(10, SalesOrderLine.count, "Should parse sales order lines")
   end
   
   def setup

@@ -7,7 +7,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "can save billing address" do
-    assert_equal("Peninsula Innovation Partners", Invoice.first.bill_addr1, "Bill Address should parse")
+    assert_equal("Peninsula Innovation Partners, ", Invoice.first.bill_addr1, "Bill Address should parse")
   end
 
   test "can save ship address" do

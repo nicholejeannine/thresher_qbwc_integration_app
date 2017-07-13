@@ -21,7 +21,7 @@ class QuickbooksQueryResponse < Qbxml::Hash
       elsif key.match(/line_ret$/)
         process_line_items(value, klass, id)
       elsif key.match(/linked_txn|applied_to_txn_ret/)
-        parse_linked_txn(value)
+        klass.parse_linked_txn(value, id)
       end
     end
     default.merge!(hash)
