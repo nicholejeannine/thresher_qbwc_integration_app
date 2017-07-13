@@ -9,11 +9,12 @@
 1. PurchaseOrder.parse_memo (saves sales order id)
 1. ReceivePayment.parse_linked_txn(saves invoice id and payment id to the join table)
 1. SalesOrder.parse_memo (saves estimate id)
-1. All line items
+1. All line items - make sure foreign keys are being saved!
 
 
-# TO UDPATE IN DB SCHEMA:
+# TO FIX:
 
-1. Convert ids to int types
-1. Parent_id for parent_ref (full name and call the column "parent")
-1. Convert customer_type/customer_id to customer_full_name
+
+1. POs don't parse at all - seems related to vendor id lookup
+1. Invoice sales order ids seem borked
+1. All line items refuse to save their parent id
