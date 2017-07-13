@@ -1,5 +1,6 @@
 class Invoice < ApplicationRecord
   has_many :invoice_lines
+  has_many :receive_payments, through: :invoices_receive_payments
   before_save :parse_memo
 
   def self.parse_linked_txn(hash, id)

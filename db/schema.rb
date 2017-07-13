@@ -502,7 +502,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.integer  "txn_number"
     t.string   "customer_id"
     t.string   "customer_type",      limit: 209
-    t.string   "invoice_id"
     t.string   "ar_account",         limit: 159
     t.date     "txn_date"
     t.string   "ref_number",         limit: 20
@@ -512,9 +511,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "deposit_to_account", limit: 159
     t.decimal  "unused_payment",                   precision: 20, scale: 5, default: "0.0", null: false
     t.decimal  "unused_credits",                   precision: 20, scale: 5, default: "0.0", null: false
-    t.text     "URL",                limit: 65535
     t.index ["customer_id", "customer_type"], name: "customer", using: :btree
-    t.index ["invoice_id"], name: "invoice_id", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
   end
