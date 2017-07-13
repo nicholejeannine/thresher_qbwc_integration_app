@@ -7,7 +7,7 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def self.default_hash
-    Hash[*self.columns.map{|k|[k.name, k.default]}.flatten]
+    Hash[*self.columns.map{|k|[k.name, k.default]}.flatten].except("id")
   end
 
   def self.parse_qb_response(qb)
