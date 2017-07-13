@@ -12,7 +12,11 @@ class QuickbooksQueryResponse < Qbxml::Hash
           default["#{$1}_#{k}"] = v
         end
       elsif key.match(/(.*)_ref$/)
-        default["#{$1}"] = value['full_name']
+        if $1 == 'vendor'
+          default["vendor_id"] = Vendor.find_by("list_id", value)&.id
+        else
+          default["#{$1}"] = value['full_name']
+        end
       elsif key.match(/data_ext_ret/)
         value&.each do |arr|
           name = arr['data_ext_name'].remove(" ").underscore

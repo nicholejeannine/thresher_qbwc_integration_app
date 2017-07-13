@@ -1,12 +1,6 @@
 class PurchaseOrder < ApplicationRecord
   has_many :purchase_order_lines
   before_save :parse_memo
-  before_save :lookup_vendor
-  
-  def lookup_vendor
-    id = Vendor.find_by("list_id", self.vendor_id)&.id
-    send.send("vendor_id=", id) unless id.nil?
-  end
 
   def parse_memo
     begin
