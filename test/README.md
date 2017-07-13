@@ -15,4 +15,4 @@
 # TO FIX:
 
 
-1. Invoice sales order ids seem borked
+1. Invoices don't want to save sales order id
