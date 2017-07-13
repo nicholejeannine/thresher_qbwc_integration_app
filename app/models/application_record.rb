@@ -3,7 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
   def self.is_valid_key?(key)
-    key.in?(self.attributes)
+    key.in?(self.column_names)
   end
 
   def self.default_hash
