@@ -1,26 +1,6 @@
 namespace :db do
   desc "Update and create SQL views"
   task :views => :environment do
-    Dir["#{Rails.root}/db/sql_views/*.sql"].each do |file_name|
-      STDERR.puts "Applying the SQL view at #{file_name}"
-      source_file = File.new(file_name, 'r')
-      
-      if source_file and (sql_content = source_file.read)
-        ActiveRecord::Base.transaction do
-          begin
-          # Each statement ends with a semicolon followed by a newline.
-          sql_lines = sql_content.split(/;[ \t]*$/)
-          if sql_lines.respond_to?(:each)
-            sql_lines.each do |line|
-              ActiveRecord::Base.connection.execute "#{line};"
-            end
-          end
-          rescue => e
-            puts "file_name resulted in error #{e}"
-          end
-        end # transaction
-      end
-    
-    end # Dir.each
+    STDERR.puts "Don't run these view from this program. Leave them alone."
   end # task
 end
