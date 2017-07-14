@@ -39,7 +39,7 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal("ASG", Project.first.bill_addr1)
   end
 
-  test "inserts a new record when the full name is not found" do
+  test "does not insert a new record when the full name is not found" do
     c = new_project_record
     QbwcError.destroy_all
     assert_raise(StandardError, Customer.parse_customer_response(c))
@@ -53,6 +53,10 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal("Tax", Project.first.sales_tax_code)
     assert_equal("SC/CA", Project.first.item_sales_tax)
     assert_equal(1, Project.count)
+  end
+
+  test "parses parent reference" do
+    assert_equal("ASG:Construction", Project.first.parent)
   end
   
   
