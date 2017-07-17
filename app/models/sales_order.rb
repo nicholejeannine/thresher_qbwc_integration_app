@@ -5,8 +5,10 @@ class SalesOrder < ApplicationRecord
   def parse_memo
     begin
     if memo&.downcase&.include?("estimate")
-      ref = memo.try(:split)[1].remove(":")
-      self.estimate_id = Estimate.where(:ref_number => ref)&.first&.id
+      ref = memo&.downcase&.from("estimate ".size)&.split(" ")&.first&.remove(":")
+      unless ref.nil?
+        self.estimate_id = Estimate.where(:ref_number => ref)&.first&.id
+      end
     end
     rescue => e
       QbwcError.create(:worker_class => self.class.name, :model_id => self.id, :error_message => "Error parsing Sales Order memo to assign estimate_id: #{e}")

@@ -6,7 +6,8 @@ class PurchaseOrder < ApplicationRecord
   def parse_memo
     begin
       if memo&.downcase&.include?("sales order")
-          ref = memo.try(:split)[2].remove(":")
+        ref = memo&.downcase&.from("sales order ".size)&.split(" ")&.first&.remove(":")
+          # ref = memo.try(:split)[2]&.remove(":")
           self.sales_order_id = SalesOrder.where(:ref_number => ref).first&.id
       end
     rescue => e
