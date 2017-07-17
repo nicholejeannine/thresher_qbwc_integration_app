@@ -4,7 +4,7 @@ class SalesOrder < ApplicationRecord
   before_save :parse_memo
   def parse_memo
     begin
-    if self.estimate_id.nil? && memo&.downcase&.include?("estimate")
+    if memo&.downcase&.include?("estimate")
       ref = memo.try(:split)[1].remove(":")
       self.estimate_id = Estimate.where(:ref_number => ref)&.first&.id
     end
