@@ -169,7 +169,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "edit_sequence",             limit: 16
     t.integer  "txn_number"
     t.string   "customer",             limit: 209
-    t.integer   "estimate_id"
     t.integer   "sales_order_id"
     t.string   "ar_account",                limit: 159
     t.string   "template",                  limit: 31
@@ -219,7 +218,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.decimal  "suggested_discount_amount",               precision: 20, scale: 5
     t.date     "suggested_discount_date"
     t.index ["customer"], name: "customer_full_name", using: :btree
-    t.index ["estimate_id"], name: "estimate_id", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
@@ -239,8 +237,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "name",                      limit: 41
     t.string   "full_name",                 limit: 209
     t.boolean  "is_active",                                                        default: true,  null: false
-    t.string   "parent",                 limit: 209
-    t.integer  "sublevel",                                                         default: 0,     null: false
+    t.string   "parent_list_id"
     t.string   "company_name",              limit: 41
     t.string   "salutation",                limit: 15
     t.string   "first_name",                limit: 25
@@ -295,7 +292,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["full_name"], name: "full_name", unique: true, using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
-    t.index ["parent"], name: "parent_full_name", using: :btree
+    t.index ["parent_list_id"], name: "parent_list_id", using: :btree
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -306,8 +303,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "name",                          limit: 41
     t.string   "full_name",                     limit: 209
     t.boolean  "is_active",                                                               default: true
-    t.string   "parent",                     limit: 209
-    t.integer  "sublevel",                                                                default: 0
+    t.string   "parent_list_id"
     t.string   "company_name",                  limit: 41
     t.string   "salutation",                    limit: 15
     t.string   "first_name",                    limit: 25
@@ -362,8 +358,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["full_name"], name: "full_name", unique: true, using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
-    t.index ["parent"], name: "parent_full_name", using: :btree
-    t.index ["sublevel"], name: "sublevel", using: :btree
+    t.index ["parent_list_id"], name: "parent_list_id", using: :btree
   end
 
   create_table "purchase_order_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

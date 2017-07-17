@@ -2,7 +2,6 @@ class Invoice < ApplicationRecord
   include QuickbooksLineItemUtils
   has_many :invoice_lines
   has_many :receive_payments, through: :invoices_receive_payments
-  before_save :parse_memo
 
   def self.parse_linked_txn(ret, invoice_id)
     begin
@@ -19,15 +18,4 @@ class Invoice < ApplicationRecord
     end
   end
 
-  def parse_memo
-    begin
-      if self.estimate_id.nil? && memo&.downcase&.include?("estimate")
-        i = memo&.downcase&.remove(":")&.split
-        ref = i[i.index("estimate") + 1]
-        self.estimate_id = Estimate.where(:ref_number => ref).first&.id
-      end
-    rescue => e
-      QbwcError.create(:worker_class => self.class.name, :model_id => self.id, :error_message => "Error parsing Invoice memo to assign estimate_id: #{e}")
-    end
-  end
 end

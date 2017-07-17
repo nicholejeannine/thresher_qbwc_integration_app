@@ -1,6 +1,7 @@
 class Customer < ApplicationRecord
 	self.abstract_class = true
-	
+
+  # TODO: privatize
 	def self.customer_type(key)
 		if key.match(/P-\d+$/)
 			"Project"

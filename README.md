@@ -23,9 +23,6 @@
 4. Rework the QBWC script to use :list_id and :txn_id instead of :id. Use :id for the portal id fields, and try to force foreign key updates on save.
 
 
--- TODO: sales_orders, vendors
-
-
 
 
 # BASIC INSTALLATION (for first-time config on new machine or to replicate locally for funsies)
