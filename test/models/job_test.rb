@@ -50,6 +50,10 @@ class JobTest < ActiveSupport::TestCase
     assert_equal("Tax", Job.first.sales_tax_code)
     assert_equal("SM/CA", Job.first.item_sales_tax)
   end
+
+  test "parses parent reference" do
+    assert_equal("8000061D-1225912979", Job.first.parent_list_id)
+  end
   
   def setup
     Client.destroy_all

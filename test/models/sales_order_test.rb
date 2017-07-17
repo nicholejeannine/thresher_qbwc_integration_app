@@ -54,6 +54,10 @@ class SalesOrderTest < ActiveSupport::TestCase
     assert_not_nil(SalesOrder.first.estimate_id)
     assert_equal(Estimate.first.id, SalesOrder.first.estimate_id)
   end
+
+  test "parses customer reference" do
+    assert_equal("Square:Construction:P-3030", SalesOrder.first.customer)
+  end
   
   def setup
     Estimate.destroy_all

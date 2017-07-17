@@ -32,6 +32,10 @@ class ReceivePaymentTest < ActiveSupport::TestCase
     assert_equal(6, InvoicesReceivePayment.count)
   end
 
+  test "parses customer reference" do
+    assert_equal("Qualcomm", ReceivePayment.first.customer)
+  end
+
   def setup
     Invoice.destroy_all
     Invoice.create!([{"txn_id" => "4F88EC-1485382201"}, {"txn_id" =>"5077E7-1488586662"}, {"txn_id" => "525DCD-1494132430"}, {"txn_id" => "525F13-1494133027"}, {"txn_id" => "525FF7-1494133488"}, {"txn_id" => "5260D6-1494133876"}])

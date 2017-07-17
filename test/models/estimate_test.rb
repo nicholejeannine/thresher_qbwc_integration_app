@@ -42,6 +42,10 @@ class EstimateTest < ActiveSupport::TestCase
     assert_not_nil(EstimateLine.first.estimate_id)
     assert_equal(EstimateLine.first.estimate_id, Estimate.first.id)
   end
+
+  test "parses customer reference" do
+    assert_equal("Box:Construction:Redwood City", Estimate.first.customer)
+  end
   
   def setup
     Job.destroy_all

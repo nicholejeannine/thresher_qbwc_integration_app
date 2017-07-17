@@ -61,9 +61,8 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal(SalesOrder.first.id, Invoice.first.sales_order_id)
   end
 
-  test "invoice parses the estimate id" do
-    assert_not_nil(Invoice.first.estimate_id)
-    assert_equal(Estimate.first.id, Invoice.first.estimate_id)
+  test "parses customer reference" do
+    assert_equal("Facebook:Construction:Menlo Park Campus:Bld 59:P-2872", Invoice.first.customer)
   end
 
   def setup
