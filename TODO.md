@@ -3,14 +3,11 @@
 1. Dead weight or check:
 
 - clients:
-  - balance
   - job_type
   
 - jobs:
- - balance
  
 - projects
-  - balance
   - contact/alt_contact?
   - job_projected_end_date
   - job_end_date

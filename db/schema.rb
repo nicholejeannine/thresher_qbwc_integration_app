@@ -53,7 +53,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "customer_type",             limit: 159
     t.string   "terms",                     limit: 31
     t.string   "sales_rep",                 limit: 5
-    t.decimal  "balance",                                 precision: 20, scale: 5, default: "0.0", null: false
     t.decimal  "total_balance",                           precision: 20, scale: 5, default: "0.0", null: false
     t.string   "sales_tax_code",            limit: 3
     t.string   "item_sales_tax",            limit: 31
@@ -266,7 +265,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "customer_type",             limit: 159
     t.string   "terms",                     limit: 31
     t.string   "sales_rep",                 limit: 5
-    t.decimal  "balance",                                 precision: 20, scale: 5, default: "0.0", null: false
     t.decimal  "total_balance",                           precision: 20, scale: 5, default: "0.0", null: false
     t.string   "sales_tax_code",            limit: 3
     t.string   "item_sales_tax",            limit: 31
@@ -330,7 +328,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "customer_type",                 limit: 159
     t.string   "terms",                         limit: 31
     t.string   "sales_rep",                     limit: 5
-    t.decimal  "balance",                                        precision: 20, scale: 5, default: "0.0"
     t.decimal  "total_balance",                                  precision: 20, scale: 5, default: "0.0"
     t.string   "sales_tax_code",                limit: 3
     t.string   "item_sales_tax",                limit: 31
