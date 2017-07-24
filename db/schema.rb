@@ -158,7 +158,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.integer  "txn_number"
     t.string   "customer",             limit: 209
     t.integer   "sales_order_id"
-    t.string   "ar_account",                limit: 159
     t.string   "template",                  limit: 31
     t.date     "txn_date"
     t.string   "ref_number",                limit: 11
@@ -348,7 +347,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.decimal "rate",                                   precision: 20, scale: 5
     t.decimal "amount",                                 precision: 20, scale: 5, default: "0.0", null: false
     t.string  "customer",            limit: 209
-    t.date    "service_date"
     t.decimal "received_quantity",                      precision: 20, scale: 5
     t.decimal "unbilled_quantity",                      precision: 20, scale: 5
     t.boolean "is_billed"
@@ -392,7 +390,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "terms"
     t.date     "due_date"
     t.date     "expected_date"
-    t.string   "ship_method"
     t.decimal  "total_amount",                            precision: 20, scale: 5, default: "0.0", null: false
     t.boolean  "is_manually_closed"
     t.boolean  "is_fully_received"
@@ -461,7 +458,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "edit_sequence",      limit: 16
     t.integer  "txn_number"
     t.string   "customer",      limit: 209
-    t.string   "ar_account",         limit: 159
     t.date     "txn_date"
     t.string   "ref_number",         limit: 20
     t.decimal  "total_amount",                     precision: 20, scale: 5, default: "0.0", null: false

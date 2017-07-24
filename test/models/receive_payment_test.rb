@@ -6,7 +6,6 @@ class ReceivePaymentTest < ActiveSupport::TestCase
   end
 
   test "handles ref types" do
-    assert_equal("Accounts Receivable", ReceivePayment.first.ar_account)
     assert_equal("Check", ReceivePayment.first.payment_method)
     assert_equal("Citi Checking", ReceivePayment.first.deposit_to_account)
   end

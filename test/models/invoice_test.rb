@@ -15,7 +15,6 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "handles ref types" do
-    assert_equal("Accounts Receivable", Invoice.first.ar_account)
     assert_equal("ThresherStandard Invoice", Invoice.first.template)
     assert_equal("Net 30", Invoice.first.terms)
     assert_equal("GJM", Invoice.first.sales_rep)

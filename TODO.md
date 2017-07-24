@@ -20,18 +20,7 @@
   - serial_number
   - lot_number
   
-- purchase_orders:
-   - ship_method
-   
-- purchase_order_lines:
-  - service_date
 
-
-
-invoice_lines:
-
-payments:
-  - ar_account (always says "Accounts Receiveable")
   
 vendor:
 
