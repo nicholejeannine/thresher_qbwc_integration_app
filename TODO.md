@@ -1,26 +1,11 @@
 # DB MODS:
 
 1. Dead weight or check:
-
-- clients:
-  
-- jobs:
- 
 - projects
   - contact/alt_contact?
   - job_projected_end_date
   - job_end_date
   
-- estimate_lines:
-
-- sales_orders:
-   - ship_method
-   
-- sales_order_lines:
-  
-
-  
-vendor:
 
 # Things to ErrorLog:
 
