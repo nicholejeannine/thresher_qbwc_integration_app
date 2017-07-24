@@ -3,22 +3,19 @@
 1. Dead weight or check:
 
 - clients:
-  - bill_addr5
-  - ship_addr5
   - balance
   - job_type
   
 - jobs:
- - addr5, balance
+ - balance
  
 - projects
-  - addr5, balance
+  - balance
   - contact/alt_contact?
   - job_projected_end_date
   - job_end_date
   
 - estimates:
-  - addr5
   - po_number
   - fob
   
@@ -26,7 +23,6 @@
   - inventory_site_location
 
 - sales_orders:
-   - addr5
    - fob
    - ship_method
    
@@ -36,7 +32,6 @@
   - lot_number
   
 - purchase_orders:
-   - addr5
    - ship_method
    - fob
    
@@ -45,7 +40,6 @@
   - service_date
 
 - invoices:
- - addr5
  - is_pending
  - is_finance_charge
  - fob
@@ -61,7 +55,6 @@ payments:
   - ar_account (always says "Accounts Receiveable")
   
 vendor:
-   - addr5
 
 # Things to ErrorLog:
 
