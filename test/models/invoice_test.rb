@@ -32,8 +32,6 @@ class InvoiceTest < ActiveSupport::TestCase
     assert_equal("2019-06-16", Invoice.first.txn_date.iso8601)
     assert_equal("12", Invoice.first.ref_number)
     assert_equal("Pen", Invoice.first.bill_addr1)
-    assert_equal(true, Invoice.first.is_pending)
-    assert_equal(true, Invoice.first.is_finance_charge)
     assert_equal("99", Invoice.first.po_number)
     assert_equal("2019-01-16", Invoice.first.ship_date.iso8601)
     assert_equal(7.77, Invoice.first.subtotal.to_f)

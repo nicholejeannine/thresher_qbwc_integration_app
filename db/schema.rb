@@ -144,8 +144,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.float   "rate_percent",            limit: 24
     t.decimal "amount",                                precision: 20, scale: 5, default: "0.0", null: false
     t.string  "inventory_site"
-    t.string  "serial_number"
-    t.string  "lot_number"
     t.date    "service_date"
     t.string  "sales_tax_code"
     t.index ["invoice_id"], name: "invoice_id", using: :btree
@@ -182,8 +180,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_postal_code",          limit: 13
     t.string   "ship_country",              limit: 31
     t.string   "ship_note",                 limit: 41
-    t.boolean  "is_pending"
-    t.boolean  "is_finance_charge"
     t.string   "po_number",                 limit: 25
     t.string   "terms",                     limit: 31
     t.date     "due_date"
@@ -202,8 +198,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.boolean  "is_to_be_printed"
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code",   limit: 3
-    t.decimal  "suggested_discount_amount",               precision: 20, scale: 5
-    t.date     "suggested_discount_date"
     t.index ["customer"], name: "customer_full_name", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree

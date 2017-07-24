@@ -26,15 +26,9 @@
 - purchase_order_lines:
   - service_date
 
-- invoices:
- - is_pending
- - is_finance_charge
- - suggested_discount_amount (used once in 2011)
- - suggested_discount_date (used once in 2011)
+
 
 invoice_lines:
- - serial_number
- - lot_number
 
 payments:
   - ar_account (always says "Accounts Receiveable")
