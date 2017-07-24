@@ -17,8 +17,6 @@
    - ship_method
    
 - sales_order_lines:
-  - serial_number
-  - lot_number
   
 
   

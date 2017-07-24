@@ -483,8 +483,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.float   "rate_percent",            limit: 24
     t.decimal "amount",                                precision: 20, scale: 5
     t.string  "inventory_site"
-    t.string  "serial_number"
-    t.string  "lot_number"
     t.string  "sales_tax_code"
     t.decimal "invoiced",                              precision: 20, scale: 5
     t.boolean "is_manually_closed"
@@ -526,7 +524,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.date     "due_date"
     t.string   "sales_rep"
     t.date     "ship_date"
-    t.string   "ship_method"
     t.decimal  "subtotal",                                 precision: 20, scale: 5, default: "0.0", null: false
     t.string   "item_sales_tax"
     t.float    "sales_tax_percentage",       limit: 24
