@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "sales_tax_code",            limit: 3
     t.string   "item_sales_tax",            limit: 31
     t.string   "account_number",            limit: 99
-    t.string   "job_type",                  limit: 159
     t.string   "preferred_delivery_method", limit: 41
     t.string   "site_contact"
     t.string   "site_email"
@@ -116,11 +115,9 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_country",                 limit: 31
     t.string   "ship_note",                    limit: 41
     t.boolean  "is_active",                                                           default: true,  null: false
-    t.string   "po_number",                    limit: 25
     t.string   "terms",                        limit: 31
     t.date     "due_date"
     t.string   "sales_rep",                    limit: 5
-    t.string   "fob",                          limit: 13
     t.decimal  "subtotal",                                   precision: 20, scale: 5, default: "0.0", null: false
     t.string   "item_sales_tax",               limit: 31
     t.float    "sales_tax_percentage",         limit: 24

@@ -3,7 +3,6 @@
 1. Dead weight or check:
 
 - clients:
-  - job_type
   
 - jobs:
  
