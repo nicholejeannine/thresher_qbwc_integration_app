@@ -14,7 +14,6 @@
 - estimate_lines:
 
 - sales_orders:
-   - fob
    - ship_method
    
 - sales_order_lines:
@@ -23,7 +22,6 @@
   
 - purchase_orders:
    - ship_method
-   - fob
    
 - purchase_order_lines:
   - service_date
@@ -31,7 +29,6 @@
 - invoices:
  - is_pending
  - is_finance_charge
- - fob
  - suggested_discount_amount (used once in 2011)
  - suggested_discount_date (used once in 2011)
 

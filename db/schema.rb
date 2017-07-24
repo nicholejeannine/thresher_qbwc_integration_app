@@ -188,7 +188,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "terms",                     limit: 31
     t.date     "due_date"
     t.string   "sales_rep",                 limit: 5
-    t.string   "fob",                       limit: 13
     t.date     "ship_date"
     t.string   "ship_method",               limit: 15
     t.decimal  "subtotal",                                precision: 20, scale: 5, default: "0.0", null: false
@@ -400,7 +399,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.date     "due_date"
     t.date     "expected_date"
     t.string   "ship_method"
-    t.string   "fob"
     t.decimal  "total_amount",                            precision: 20, scale: 5, default: "0.0", null: false
     t.boolean  "is_manually_closed"
     t.boolean  "is_fully_received"
@@ -537,7 +535,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "terms"
     t.date     "due_date"
     t.string   "sales_rep"
-    t.string   "fob"
     t.date     "ship_date"
     t.string   "ship_method"
     t.decimal  "subtotal",                                 precision: 20, scale: 5, default: "0.0", null: false

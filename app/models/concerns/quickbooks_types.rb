@@ -13,7 +13,7 @@ module QuickbooksTypes
 		end
 
 		def self.ignored_type?(key)
-			key.match(/addr5$|card_txn_info|prefill_account_ref|external_guid|group_ret$|class_ref$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate|inventory_site_location_ref/)
+			key.match(/addr5$|card_txn_info|prefill_account_ref|external_guid|group_ret$|class_ref$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate|inventory_site_location_ref|^fob$/)
 		end
 
 	end
