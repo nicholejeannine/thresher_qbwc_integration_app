@@ -11,19 +11,13 @@
   - job_projected_end_date
   - job_end_date
   
-- estimates:
-  - po_number
-  - fob
-  
 - estimate_lines:
-  - inventory_site_location
 
 - sales_orders:
    - fob
    - ship_method
    
 - sales_order_lines:
-  - inventory_site_location
   - serial_number
   - lot_number
   
@@ -32,7 +26,6 @@
    - fob
    
 - purchase_order_lines:
-  - inventory_site_location
   - service_date
 
 - invoices:
@@ -43,7 +36,6 @@
  - suggested_discount_date (used once in 2011)
 
 invoice_lines:
- - inventory_site_location
  - serial_number
  - lot_number
 

@@ -78,7 +78,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.float   "rate_percent",            limit: 24
     t.decimal "amount",                               precision: 20, scale: 5, default: "0.0", null: false
     t.string  "inventory_site",          limit: 31
-    t.string  "inventory_site_location", limit: 31
     t.string  "sales_tax_code",          limit: 3
     t.decimal "markup_rate",                          precision: 20, scale: 5
     t.float   "markup_rate_percent",     limit: 24
@@ -145,7 +144,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.float   "rate_percent",            limit: 24
     t.decimal "amount",                                precision: 20, scale: 5, default: "0.0", null: false
     t.string  "inventory_site"
-    t.string  "inventory_site_location"
     t.string  "serial_number"
     t.string  "lot_number"
     t.date    "service_date"
@@ -356,7 +354,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string  "override_uom_set"
     t.decimal "rate",                                   precision: 20, scale: 5
     t.decimal "amount",                                 precision: 20, scale: 5, default: "0.0", null: false
-    t.string  "inventory_site_location"
     t.string  "customer",            limit: 209
     t.date    "service_date"
     t.decimal "received_quantity",                      precision: 20, scale: 5
@@ -498,7 +495,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.float   "rate_percent",            limit: 24
     t.decimal "amount",                                precision: 20, scale: 5
     t.string  "inventory_site"
-    t.string  "inventory_site_location"
     t.string  "serial_number"
     t.string  "lot_number"
     t.string  "sales_tax_code"
