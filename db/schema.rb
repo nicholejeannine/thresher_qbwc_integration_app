@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "bill_addr2",                limit: 41
     t.string   "bill_addr3",                limit: 41
     t.string   "bill_addr4",                limit: 41
-    t.string   "bill_addr5",                limit: 41
     t.string   "bill_city",                 limit: 31
     t.string   "bill_state",                limit: 21
     t.string   "bill_postal_code",          limit: 13
@@ -39,7 +38,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                limit: 41
     t.string   "ship_addr3",                limit: 41
     t.string   "ship_addr4",                limit: 41
-    t.string   "ship_addr5",                limit: 41
     t.string   "ship_city",                 limit: 31
     t.string   "ship_state",                limit: 21
     t.string   "ship_postal_code",          limit: 13
@@ -104,7 +102,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "bill_addr2",                   limit: 41
     t.string   "bill_addr3",                   limit: 41
     t.string   "bill_addr4",                   limit: 41
-    t.string   "bill_addr5",                   limit: 41
     t.string   "bill_city",                    limit: 31
     t.string   "bill_state",                   limit: 21
     t.string   "bill_postal_code",             limit: 13
@@ -114,7 +111,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                   limit: 41
     t.string   "ship_addr3",                   limit: 41
     t.string   "ship_addr4",                   limit: 41
-    t.string   "ship_addr5",                   limit: 41
     t.string   "ship_city",                    limit: 31
     t.string   "ship_state",                   limit: 21
     t.string   "ship_postal_code",             limit: 13
@@ -178,7 +174,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "bill_addr2",                limit: 41
     t.string   "bill_addr3",                limit: 41
     t.string   "bill_addr4",                limit: 41
-    t.string   "bill_addr5",                limit: 41
     t.string   "bill_city",                 limit: 31
     t.string   "bill_state",                limit: 21
     t.string   "bill_postal_code",          limit: 13
@@ -188,7 +183,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                limit: 41
     t.string   "ship_addr3",                limit: 41
     t.string   "ship_addr4",                limit: 41
-    t.string   "ship_addr5",                limit: 41
     t.string   "ship_city",                 limit: 31
     t.string   "ship_state",                limit: 21
     t.string   "ship_postal_code",          limit: 13
@@ -248,7 +242,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "bill_addr2",                limit: 41
     t.string   "bill_addr3",                limit: 41
     t.string   "bill_addr4",                limit: 41
-    t.string   "bill_addr5",                limit: 41
     t.string   "bill_city",                 limit: 31
     t.string   "bill_state",                limit: 21
     t.string   "bill_postal_code",          limit: 13
@@ -258,7 +251,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                limit: 41
     t.string   "ship_addr3",                limit: 41
     t.string   "ship_addr4",                limit: 41
-    t.string   "ship_addr5",                limit: 41
     t.string   "ship_city",                 limit: 31
     t.string   "ship_state",                limit: 21
     t.string   "ship_postal_code",          limit: 13
@@ -314,7 +306,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "bill_addr2",                    limit: 41
     t.string   "bill_addr3",                    limit: 41
     t.string   "bill_addr4",                    limit: 41
-    t.string   "bill_addr5",                    limit: 41
     t.string   "bill_city",                     limit: 31
     t.string   "bill_state",                    limit: 21
     t.string   "bill_postal_code",              limit: 13
@@ -324,7 +315,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                    limit: 41
     t.string   "ship_addr3",                    limit: 41
     t.string   "ship_addr4",                    limit: 41
-    t.string   "ship_addr5",                    limit: 41
     t.string   "ship_city",                     limit: 31
     t.string   "ship_state",                    limit: 21
     t.string   "ship_postal_code",              limit: 13
@@ -401,7 +391,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "vendor_addr2",              limit: 41
     t.string   "vendor_addr3",              limit: 41
     t.string   "vendor_addr4",              limit: 41
-    t.string   "vendor_addr5",              limit: 41
     t.string   "vendor_city",               limit: 31
     t.string   "vendor_state",              limit: 21
     t.string   "vendor_postal_code",        limit: 13
@@ -411,7 +400,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                limit: 41
     t.string   "ship_addr3",                limit: 41
     t.string   "ship_addr4",                limit: 41
-    t.string   "ship_addr5",                limit: 41
     t.string   "ship_city",                 limit: 31
     t.string   "ship_state",                limit: 21
     t.string   "ship_postal_code",          limit: 13
@@ -541,7 +529,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "bill_addr2",                 limit: 41
     t.string   "bill_addr3",                 limit: 41
     t.string   "bill_addr4",                 limit: 41
-    t.string   "bill_addr5",                 limit: 41
     t.string   "bill_city",                  limit: 31
     t.string   "bill_state",                 limit: 21
     t.string   "bill_postal_code",           limit: 13
@@ -551,7 +538,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                 limit: 41
     t.string   "ship_addr3",                 limit: 41
     t.string   "ship_addr4",                 limit: 41
-    t.string   "ship_addr5",                 limit: 41
     t.string   "ship_city",                  limit: 31
     t.string   "ship_state",                 limit: 21
     t.string   "ship_postal_code",           limit: 13
@@ -600,7 +586,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "vendor_addr2",               limit: 41
     t.string   "vendor_addr3",               limit: 41
     t.string   "vendor_addr4",               limit: 41
-    t.string   "vendor_addr5",               limit: 41
     t.string   "vendor_city",                limit: 31
     t.string   "vendor_state",               limit: 21
     t.string   "vendor_postal_code",         limit: 13
@@ -610,7 +595,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "ship_addr2",                 limit: 41
     t.string   "ship_addr3",                 limit: 41
     t.string   "ship_addr4",                 limit: 41
-    t.string   "ship_addr5",                 limit: 41
     t.string   "ship_city",                  limit: 31
     t.string   "ship_state",                 limit: 21
     t.string   "ship_postal_code",           limit: 13
