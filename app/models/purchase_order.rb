@@ -10,8 +10,14 @@ class PurchaseOrder < ApplicationRecord
           # ref = memo.try(:split)[2]&.remove(":")
           self.sales_order_id = SalesOrder.where(:ref_number => ref).first&.id
       end
+      if memo&.downcase&.include?("estimate")
+        e_ref = memo&.downcase&.from("estimate ".size)&.split(" ")&.first&.remove(":")
+        unless e_ref.nil?
+          self.estimate_id = Estimate.where(:ref_number => e_ref)&.first&.id
+        end
+      end
     rescue => e
-      QbwcError.create(:worker_class => self.class.name, :model_id => self.id, :error_message => "Error parsing Purchase Order memo to assign estimate_id: #{e}")
+      QbwcError.create(:worker_class => self.class.name, :model_id => self.id, :error_message => "Error parsing Purchase Order memo to assign estimate_id or sales order id: #{e}")
     end
   end
 end

@@ -363,6 +363,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "edit_sequence"
     t.integer  "txn_number"
     t.integer   "vendor_id"
+    t.integer   "estimate_id"
     t.integer   "sales_order_id"
     t.string   "inventory_site"
     t.string   "ship_to_entity"
