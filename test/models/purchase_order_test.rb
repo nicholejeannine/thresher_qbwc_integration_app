@@ -41,7 +41,7 @@ class PurchaseOrderTest < ActiveSupport::TestCase
 
   test "saves vendor id" do
     assert_equal(1, Vendor.count)
-    assert_equal(Vendor.first.id, PurchaseOrder.first.vendor_id)
+    assert_equal(7, PurchaseOrder.first.vendor_id)
   end
 
   test "line items have correct foreign key" do
@@ -55,12 +55,19 @@ class PurchaseOrderTest < ActiveSupport::TestCase
     assert_not_nil(PurchaseOrder.first.sales_order_id)
     assert_equal(SalesOrder.first.id, PurchaseOrder.first.sales_order_id)
   end
+
+  test "purchase order parses the estimate id" do
+    assert_not_nil(PurchaseOrder.first.estimate_id)
+    assert_equal(Estimate.first.id, PurchaseOrder.first.estimate_id)
+  end
   
   def setup
+    Estimate.destroy_all
+    Estimate.create!({"txn_id" => "111", "ref_number" => "10087"})
     SalesOrder.destroy_all
     SalesOrder.create!({"txn_id" => "133283", "ref_number" => "5454"})
     Vendor.destroy_all
-    Vendor.create!({"list_id" => "800007BF-1299525249", "name" => "Shure"})
+    Vendor.create!({"id" => 7, "list_id" => "800007BF-1299525249", "name" => "Shure"})
     PurchaseOrderLine.destroy_all
     PurchaseOrder.destroy_all
     PurchaseOrder.parse_qb_response(qb_hash)
