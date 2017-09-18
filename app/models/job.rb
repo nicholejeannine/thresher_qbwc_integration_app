@@ -1,6 +1,4 @@
 class Job < ApplicationRecord
-  self.primary_key = :id
-  include QuickbooksQueryable
   before_save :titleize_job_status
 
   # job_status fields come back like "InProgress" - make it save as two separate words.

@@ -6,10 +6,15 @@ class InitialWorker < QBWC::Worker
 	     :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	     :max_returned => 100,
 	     :active_status => "All",
-	      :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'EditSequence', 'Name', 'FullName', 'IsActive', 'ParentRef', 'Sublevel', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'JobTitle', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'Contact', 'AltContact', 'CustomerTypeRef', 'TermsRef', 'SalesRepRef', 'Balance', 'TotalBalance', 'SalesTaxCodeRef', 'ItemSalesTaxRef', 'AccountNumber', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'JobDesc', 'JobTypeRef', 'PreferredDeliveryMethod', 'DataExtRet'],
 	     :owner_id => 0
 	     }
 	    },
+	 {:vendor_query_rq => {
+			 :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+			 :max_returned => 100,
+			 :active_status => "All"
+	 }
+	 },
 	     {:estimate_query_rq => {
 	     	  :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 	    	  :max_returned => 100,
@@ -38,12 +43,6 @@ class InitialWorker < QBWC::Worker
 		    :include_linked_txns => true
 		  }
 		  },
-		   {:vendor_query_rq => {
-       :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-       :max_returned => 100,
-       :active_status => "All"
-		   }
-      },
 		    {:receive_payment_query_rq => {
 				    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
 				    :max_returned => 100,
@@ -58,13 +57,13 @@ class InitialWorker < QBWC::Worker
 		 complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
 		 begin
 			 r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
+			 r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
 			 r['estimate_ret']&.each{|qb|Estimate.parse_qb_response(qb)}
 			 r['sales_order_ret']&.each{|qb|SalesOrder.parse_qb_response(qb)}
 			 r['purchase_order_ret']&.each{|qb|PurchaseOrder.parse_qb_response(qb)}
 			 r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
-			 r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
 		   r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
-		 rescue Exception => e
+		 rescue StandardError => e
 		   QbwcError.create(:worker_class => self.class.name, :error_message => e)
 		 end
 

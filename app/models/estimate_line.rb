@@ -1,5 +1,3 @@
 class EstimateLine < ApplicationRecord
-  include QuickbooksQueryable
-  self.primary_key = :id
-  belongs_to :estimate, optional: true
+  belongs_to :estimate
 end

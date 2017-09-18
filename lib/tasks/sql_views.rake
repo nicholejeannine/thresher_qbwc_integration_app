@@ -4,7 +4,7 @@ namespace :db do
     Dir["#{Rails.root}/db/sql_views/*.sql"].each do |file_name|
       STDERR.puts "Applying the SQL view at #{file_name}"
       source_file = File.new(file_name, 'r')
-      
+
       if source_file and (sql_content = source_file.read)
         ActiveRecord::Base.transaction do
           # Each statement ends with a semicolon followed by a newline.
@@ -16,7 +16,7 @@ namespace :db do
           end
         end # transaction
       end
-    
+
     end # Dir.each
   end # task
 end

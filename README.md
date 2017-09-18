@@ -39,6 +39,14 @@ In the file  `config/database.yml`, change the development database by finding t
 # TRANSITION DAY STEPS:
 
 1. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is going to become the  the "final, new" database. 
+# General Notes:
+1. When importing projects from Quickbooks, they must ALREADY exist in the projects table, or they will NOT be saved to the projects table (they will show up in the qbwc_errors table as "No match found").
+
+
+# STEPS IN ATTEMPT TO REFORMULATE QB SYNC IN QB_IDS BRANCH:
+
+1. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. 
+2. Stop the QB web connector for awhile. Point the config/database.yml file's development database to whatever database is currently the "test" or perhaps even the "final, new" database. Disable (don't delete) all jobs in the qbwc_jobs table except either the 'initial' or 'query' job ("initial" for a "brave test", "query" for a "not sure about this" level of braveness test), truncate the qbwc_errors, qbwc_sessions, and qbwc_history tables. These tables should be most updated in the railstest_development database so use those table strucutres if necessary.
 2. Follow the instructions posted [here](http://bucket.alopias.com:7990/projects/WSS/repos/portal/browse/Login/include/Class/models/README.md?at=refs%2Fheads%2Ffeature%2FnewCompanyDisplay) to convert all view data into view. The important points:
   * Copy view data (e.g., `client_combos`)as SQL statements. Tuncate the corresponding merged table (`clients`), remove primary key indexes, and replace the original data with the view data. back up the table (`clients_backup`).   
   * In the merged table, delete all records with null quickbooks_id fields. Rename the primary key column to "id", set it to be a true primary key (type string, not null, autoincrement), and reset the autoincrement value to the last ID. Also index all columns needed for joins, handle datetime/timestamp/null foreign key value issues as documented in the README. 
@@ -54,12 +62,6 @@ In the file  `config/database.yml`, change the development database by finding t
 4. FOR PROJECTS: The process is similar; first `DELETE FROM projects WHERE list_id IS NULL`, followed by `DELETE FROM projects_copy WHERE list_id IS NOT NULL`.  Then, copy the known QB full_name matches to the backup table, using a statement like `UPDATE railstest_merge_test.projects_copy P JOIN Thresher.project_qb_portal_comparisons T ON T.Project_PKEY = P.id SET P.full_name = T.'Full name in Quickbooks'` Then copy/paste the contents of the `projects_backup` table into the `projects` table. Many entries will still be blank on all the Quickbooks fields, but some now will have the Quickbooks full_name, so the next web connnector update should fill in some of the missing data.
 5. (Delete old non-qb tables to minimize confusion, since all tables have now been merged. In real life we probably won't do this, until we're sure all references to the old tables have been updated or replaced, but this will minimize the confusion for now in this demo/trial).
 4. Rework the QBWC script to use :list_id and :txn_id instead of :id. Use :id for the portal id fields, and try to force foreign key updates on save.
-
-
--- TODO: sales_orders, vendors
->>>>>>> Stashed changes
-
-
 
 
 # BASIC INSTALLATION (for first-time config on new machine or to replicate locally for funsies)
