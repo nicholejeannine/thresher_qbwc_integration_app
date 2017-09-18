@@ -10,7 +10,7 @@ class PurchaseOrder < ApplicationRecord
         if slice.strip.match(/sales order|salesorder/)
           ref = slice.match(/(\d+)/)
           ref = $1
-          self.sales_order_id = SalesOrder.where(:ref_number => ref).first&.id
+          self.sales_order_id = SalesOrder.where(:ref_number => ref)&.first&.id
         elsif slice.strip.match(/estimate/)
           ref = slice.match(/(\d+)/)
           ref = $1
