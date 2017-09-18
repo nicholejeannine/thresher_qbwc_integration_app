@@ -11,9 +11,7 @@ class QuickbooksQueryResponse < Qbxml::Hash
           default["#{$1}_#{k}"] = v
         end
       elsif key.match(/(.*)_ref$/)
-        if $1 == 'vendor'
-          default["vendor_id"] = Vendor.find_by("list_id", value["list_id"])&.id
-        elsif $1 == 'parent'
+        if $1 == 'parent'
           default["parent_list_id"] = value["list_id"]
         else
           default["#{$1}"] = value['full_name']

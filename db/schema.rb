@@ -362,7 +362,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.integer  "txn_number"
-    t.integer   "vendor_id"
+    t.string   "vendor", limit: 41
     t.integer   "estimate_id"
     t.integer   "sales_order_id"
     t.string   "inventory_site"
@@ -401,7 +401,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
-    t.index ["vendor_id"], name: "vendor_id", using: :btree
+    t.index ["vendor"], name: "vendor", using: :btree
   end
 
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
