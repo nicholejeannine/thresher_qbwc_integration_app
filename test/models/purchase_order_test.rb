@@ -39,9 +39,9 @@ class PurchaseOrderTest < ActiveSupport::TestCase
     assert_equal(true, PurchaseOrder.first.is_to_be_emailed)
   end
 
-  test "saves vendor id" do
+  test "saves vendor" do
     assert_equal(1, Vendor.count)
-    assert_equal(7, PurchaseOrder.first.vendor_id)
+    assert_equal("Shure", PurchaseOrder.first.vendor)
   end
 
   test "line items have correct foreign key" do
