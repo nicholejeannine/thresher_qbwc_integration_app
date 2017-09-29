@@ -41,7 +41,7 @@ class PurchaseOrderTest < ActiveSupport::TestCase
 
   test "saves vendor" do
     assert_equal(1, Vendor.count)
-    assert_equal("Shure", PurchaseOrder.first.vendor)
+    assert_equal("Shure", PurchaseOrder.first.vendor_name)
   end
 
   test "line items have correct foreign key" do

@@ -58,7 +58,7 @@ class SalesOrderTest < ActiveSupport::TestCase
   end
 
   test "parses customer reference" do
-    assert_equal("Square:Construction:P-3030", SalesOrder.first.customer)
+    assert_equal("Square:Construction:P-3030", SalesOrder.first.customer_full_name)
   end
   
   def setup

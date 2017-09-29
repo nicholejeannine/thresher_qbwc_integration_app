@@ -35,7 +35,7 @@ class ReceivePaymentTest < ActiveSupport::TestCase
   end
 
   test "parses customer reference" do
-    assert_equal("Qualcomm", ReceivePayment.first.customer)
+    assert_equal("Qualcomm", ReceivePayment.first.customer_full_name)
   end
 
   def setup

@@ -46,7 +46,7 @@ class EstimateTest < ActiveSupport::TestCase
   end
 
   test "parses customer reference" do
-    assert_equal("Box:Construction:Redwood City", Estimate.first.customer)
+    assert_equal("Box:Construction:Redwood City", Estimate.first.customer_full_name)
   end
   
   def setup

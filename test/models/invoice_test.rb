@@ -62,7 +62,7 @@ class InvoiceTest < ActiveSupport::TestCase
   end
 
   test "parses customer reference" do
-    assert_equal("Facebook:Construction:Menlo Park Campus:Bld 59:P-2872", Invoice.first.customer)
+    assert_equal("Facebook:Construction:Menlo Park Campus:Bld 59:P-2872", Invoice.first.customer_full_name)
   end
 
   def setup
