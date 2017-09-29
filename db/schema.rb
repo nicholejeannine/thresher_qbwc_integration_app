@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence",                limit: 16
     t.integer  "txn_number"
-    t.string   "customer",                limit: 209
+    t.string   "customer_full_name",           limit: 209
     t.string   "template",                     limit: 159
     t.date     "txn_date"
     t.string   "ref_number",                   limit: 11
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "customer_msg",                 limit: 101
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code",      limit: 3
-    t.index ["customer"], name: "customer_full_name", using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
     t.index ["is_active"], name: "is_active", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
@@ -156,7 +156,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence",             limit: 16
     t.integer  "txn_number"
-    t.string   "customer",             limit: 209
+    t.string   "customer_full_name",        limit: 209
     t.integer   "sales_order_id"
     t.string   "template",                  limit: 31
     t.date     "txn_date"
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.boolean  "is_to_be_printed"
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code",   limit: 3
-    t.index ["customer"], name: "customer_full_name", using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
@@ -346,12 +346,12 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string  "override_uom_set"
     t.decimal "rate",                                   precision: 20, scale: 5
     t.decimal "amount",                                 precision: 20, scale: 5, default: "0.0", null: false
-    t.string  "customer",            limit: 209
+    t.string  "customer_full_name",            limit: 209
     t.decimal "received_quantity",                      precision: 20, scale: 5
     t.decimal "unbilled_quantity",                      precision: 20, scale: 5
     t.boolean "is_billed"
     t.boolean "is_manually_closed"
-    t.index ["customer"], name: "customer_full_name", using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
     t.index ["purchase_order_id"], name: "purchase_order_id", using: :btree
     t.index ["txn_line_id"], name: "index_purchase_order_lines_on_txn_line_id", unique: true, using: :btree
   end
@@ -362,7 +362,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.integer  "txn_number"
-    t.string   "vendor", limit: 41
+    t.string   "vendor_name",               limit: 41
     t.integer   "estimate_id"
     t.integer   "sales_order_id"
     t.string   "inventory_site"
@@ -401,7 +401,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["sales_order_id"], name: "sales_order_id", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
-    t.index ["vendor"], name: "vendor", using: :btree
+    t.index ["vendor_name"], name: "vendor_name", using: :btree
   end
 
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -458,7 +458,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence",      limit: 16
     t.integer  "txn_number"
-    t.string   "customer",      limit: 209
+    t.string   "customer_full_name",      limit: 209
     t.date     "txn_date"
     t.string   "ref_number",         limit: 20
     t.decimal  "total_amount",                     precision: 20, scale: 5, default: "0.0", null: false
@@ -467,7 +467,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "deposit_to_account", limit: 159
     t.decimal  "unused_payment",                   precision: 20, scale: 5, default: "0.0", null: false
     t.decimal  "unused_credits",                   precision: 20, scale: 5, default: "0.0", null: false
-    t.index ["customer"], name: "customer_full_name", using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
   end
@@ -497,7 +497,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence"
     t.integer  "txn_number"
-    t.string   "customer",              limit: 209
+    t.string   "customer_full_name",              limit: 209
     t.integer   "estimate_id"
     t.string   "template"
     t.date     "txn_date"
@@ -537,7 +537,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.boolean  "is_to_be_printed"
     t.boolean  "is_to_be_emailed"
     t.string   "customer_sales_tax_code"
-    t.index ["customer"], name: "customer_full_name", using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
     t.index ["estimate_id"], name: "estimate_id", using: :btree
     t.index ["is_fully_invoiced"], name: "is_fully_invoiced", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
