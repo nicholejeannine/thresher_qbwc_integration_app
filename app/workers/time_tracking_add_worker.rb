@@ -11,6 +11,9 @@ class TimeTrackingAddWorker <  QBWC::Worker
              :customer_ref => {
                  :full_name => "TCP:IT:P-903"
              },
+             :item_service_ref => {
+                 :full_name => "Video:0100"
+             },
              :duration => "PT8H0M0S",
              :payroll_item_wage_ref => {
                  :full_name => "Hourly Level 1"
