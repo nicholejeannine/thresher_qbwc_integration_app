@@ -7,7 +7,8 @@ class TimeTrackingQueryWorker <  QBWC::Worker
             :max_returned => 100,
            :modified_date_range_filter => {
            :from_modified_date => "2017-10-17T12:49"
-           },
+           }
+        }
         }]
   end
 
