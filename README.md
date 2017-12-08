@@ -162,3 +162,19 @@ QuickBooks stores addresses as a single string. It does not store address detail
 
 The ship_to_address field will return an array of shipping addresses that have been previously used for that customer (or job, etc).  Whichever shipping address has been declared the "default" (in the Quickbooks GUI) will be returned as the `ship_address` value.
 
+
+
+# Quickbooks TimeCard Entry
+Weekly Timesheet used.
+
+Customer Job is customer job
+Service Item is Video:0110 is the default service item unless we're able to derive what that item is from the ticket types
+Notes is the Ticket #
+Service Coe - from Tickets_List_Type (Construction:Rough In would be 110 - there's just a 0 at the end. Construction service code is 1, rough in service code is 1, then it just gets a 0).
+Payroll Item is always Hourly Level 1 for now.  (Hourly Holiday Rate for holidays). 
+More than 8 hours in one day or more than 40 hours in one week, she'll need a report to override (a human has to do any OT hours).
+Service Code comes from Time Card Admin page
+
+- Notes: EIther the holiday name or the ticket #.
+
+
