@@ -2,22 +2,23 @@ class TimeTrackingAddWorker <  QBWC::Worker
 
   def requests(job, session, data)
      [
-    {:time_tracking_add_rq => {
-       :xml_attributes => { :requestID =>1},
-       :txn_date => "2017-12-08",
-       :entity_ref => {
-        :full_name => "Klerk, Nichole"
-       },
-       :customer_ref => {
-        :full_name => "TCP:IT:P-903"
-       },
-       :duration => "PT8H0M0S",
-       :payroll_item_wage_ref => {
-        :full_name => "Hourly Level 1"
-       },
-       :billable_status => "Billable"
-     }
-     }]
+         {:time_tracking_add_rq => {
+         :time_tracking_add => {
+             :txn_date => "2017-12-08",
+             :entity_ref => {
+                 :full_name => "Klerk, Nichole"
+             },
+             :customer_ref => {
+                 :full_name => "TCP:IT:P-903"
+             },
+             :duration => "PT8H0M0S",
+             :payroll_item_wage_ref => {
+                 :full_name => "Hourly Level 1"
+             },
+             :billable_status => "Billable"
+         }
+    }}
+     ]
   end
 
 
