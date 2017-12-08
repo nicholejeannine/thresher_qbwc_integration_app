@@ -6,7 +6,7 @@ class TimeTrackingAddWorker <  QBWC::Worker
          :time_tracking_add => {
              :txn_date => "2017-12-08",
              :entity_ref => {
-                 :full_name => "Klerk, Nichole"
+                 :full_name => "Klerk, Nichole J"
              },
              :customer_ref => {
                  :full_name => "TCP:IT:P-903"
