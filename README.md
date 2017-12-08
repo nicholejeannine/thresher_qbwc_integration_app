@@ -177,4 +177,8 @@ Service Code comes from Time Card Admin page
 
 - Notes: EIther the holiday name or the ticket #.
 
+## IMPORTANT::::
+
+F2 when entering Quickbooks - look at path - nklerk 
+
 
