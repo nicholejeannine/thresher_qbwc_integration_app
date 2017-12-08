@@ -1,4 +1,4 @@
-class TimeTrackingAddWorker < ApplicationWorker
+class TimeTrackingAddWorker <  QBWC::Worker
 
   def requests(job, session, data)
      [

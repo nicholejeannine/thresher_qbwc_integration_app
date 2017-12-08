@@ -1,4 +1,4 @@
-class TimeTrackingQueryWorker < ApplicationWorker
+class TimeTrackingQueryWorker <  QBWC::Worker
 
   def requests(job, session, data)
     [
@@ -20,6 +20,6 @@ class TimeTrackingQueryWorker < ApplicationWorker
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
-
+ 
   end
 end
