@@ -18,6 +18,6 @@ class TimeTrackingQueryWorker <  QBWC::Worker
 
 
   def handle_response(r, session, job, request, data)
-    Rails.logger.warn("#{r}")
+    r['time_tracking_ret']&.each{|qb|QbwcError.create(:worker_class => "Time Tracking Query", :error_message => qb)}
   end
 end

@@ -4,7 +4,7 @@ class TimeTrackingAddWorker <  QBWC::Worker
      [
          {:time_tracking_add_rq => {
          :time_tracking_add => {
-             :txn_date => "2017-12-08",
+             :txn_date => "2017-12-09",
              :entity_ref => {
                  :full_name => "Klerk, Nichole J"
              },
@@ -27,6 +27,6 @@ class TimeTrackingAddWorker <  QBWC::Worker
 
   def handle_response(r, session, job, request, data)
     # handle_response will get customers in groups of 100. When this is 0, we're done.
-    Rails.logger.warn(r)
+    QBWC.delete_job(job)
   end
 end
