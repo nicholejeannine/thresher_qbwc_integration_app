@@ -4,8 +4,7 @@ class TimeTrackingQueryWorker <  QBWC::Worker
     [
         {:time_tracking_query_rq => {
             :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-            :max_returned => 100,
-            :owner_id => 0
+            :max_returned => 100
         }
         }]
   end
