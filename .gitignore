@@ -41,3 +41,4 @@ config/database.yml
 
 # Ignore seed data
 db/data
+time.xml
