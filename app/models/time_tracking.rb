@@ -1,0 +1,2 @@
+class TimeTracking < ApplicationRecord
+end
