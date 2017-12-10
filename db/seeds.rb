@@ -51,9 +51,10 @@
               }]
 
   QBWC.clear_jobs
-  QBWC.add_job(:initial, true, '', InitialWorker)
+  QBWC.add_job(:initial, false, '', InitialWorker)
   QBWC.add_job(:query, false, '', QueryWorker)
   QBWC.add_job(:list_del, false, '', ListDeletedQueryWorker)
   QBWC.add_job(:txn_del, false, '', TxnDeletedQueryWorker)
-  QBWC.add_job(:add_time, false, '', TimeTrackingAddWorker, requests)
+  QBWC.add_job(:time_tracking_query, false, '', TimeTrackingQueryWorker)
+  QBWC.add_job(:add_time, true, '', TimeTrackingAddWorker, requests)
 
