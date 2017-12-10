@@ -11,13 +11,18 @@ class TimeTrackingQueryWorker <  QBWC::Worker
             :max_returned => 100,
             :modified_date_range_filter => {
                 :from_modified_date => last_ran
-            }
+            },
         }
         }]
   end
 
 
   def handle_response(r, session, job, request, data)
-    r['time_tracking_ret']&.each{|qb|QbwcError.create(:worker_class => "Time Tracking Query", :error_message => qb)}
+    complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
+    begin
+      r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
+    rescue StandardError => e
+      QbwcError.create(:worker_class => self.class.name, :error_message => e)
+    end
   end
 end
