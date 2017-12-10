@@ -544,6 +544,18 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
   end
 
+  create_table "time_trackings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "txn_id", null: false, default: ""
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",              limit: 16
+    t.string   "entity_full_name",           limit: 209
+    t.string   "customer_full_name",           limit: 209
+    t.string   "item_service_full_name",           limit: 159
+    t.string   "duration",              limit: 16
+    t.string   "payroll_item_wage_full_name",           limit: 209
+  end
+
   create_table "vendors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "list_id",                                                          default: "",    null: false
     t.datetime "time_created"
