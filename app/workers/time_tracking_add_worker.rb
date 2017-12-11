@@ -4,6 +4,10 @@ class TimeTrackingAddWorker <  QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     QbwcError.create(:worker_class => "Test", :error_message => "#{r['xml_attributes']['iteratorRemainingCount']} remain for job #{job}")
+    Rails.logger.warn("SESSION: #{session}")
+    Rails.logger.warn("JOB: #{job}")
+    Rails.logger.warn("REQUEST: #{request}")
+    Rails.logger.warn("DATA: #{data}")
     begin
       r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
     rescue StandardError => e
