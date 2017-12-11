@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
 
+  create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "list_id", default: "", null: false
+    t.string "name", limit: 41
+    t.boolean "is_active", null: false, default: true
+    t.string "billing_rate"
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
+  end
+
   create_table "estimate_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "txn_line_id", default: "", null: false
     t.integer  "estimate_id"
@@ -557,6 +565,10 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "payroll_item_wage",           limit: 209
     t.string   "notes",           limit: 4095
     t.string   "billable_status",           limit: 20
+    t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
+    t.index ["entity"], name: "entity", using: :btree
+    t.index ["item_service"], name: "item_service", using: :btree
   end
 
   create_table "vendors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
