@@ -554,6 +554,8 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "item_service",           limit: 159
     t.string   "duration",              limit: 16
     t.string   "payroll_item_wage",           limit: 209
+    t.string   "notes",           limit: 4095
+    t.string   "billable_status",           limit: 20
   end
 
   create_table "vendors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
