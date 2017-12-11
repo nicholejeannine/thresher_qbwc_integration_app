@@ -16,7 +16,7 @@ class EmployeeQueryWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     begin
-      r['employee_ret']&.each{|qb|Employee.parse_customer_response(qb)}
+      r['employee_ret']&.each{|qb|Employee.parse_qb_response(qb)}
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
