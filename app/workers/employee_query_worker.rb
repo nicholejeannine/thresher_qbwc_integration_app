@@ -3,7 +3,6 @@ class EmployeeQueryWorker < QBWC::Worker
   def requests(job, session, data)
     [
         {:employee_query_rq => {
-            :max_returned => 100,
             :active_status => "All",
             :include_ret_element => ['ListID', 'Name', 'IsActive', 'FirstName', 'MiddleName', 'LastName']
         }
