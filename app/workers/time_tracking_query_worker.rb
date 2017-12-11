@@ -11,7 +11,7 @@ class TimeTrackingQueryWorker <  QBWC::Worker
             :max_returned => 100,
             :modified_date_range_filter => {
                 :from_modified_date => last_ran
-            },
+            }
         }
         }]
   end
