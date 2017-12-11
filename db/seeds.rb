@@ -6,5 +6,6 @@
   QBWC.add_job(:list_del, false, '', ListDeletedQueryWorker)
   QBWC.add_job(:txn_del, false, '', TxnDeletedQueryWorker)
   QBWC.add_job(:time_tracking_query, false, '', TimeTrackingQueryWorker)
-  QBWC.add_job(:add_time, true, '', TimeTrackingAddWorker, requests)
+  QBWC.add_job(:add_time, false, '', TimeTrackingAddWorker, requests)
+  QBWC.add_job(:employee_query, true, '', EmployeeQueryWorker)
 
