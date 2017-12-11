@@ -560,7 +560,8 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence",              limit: 16
     t.datetime "txn_date"
-    t.string   "entity",           limit: 209
+    t.string   "employee_list_id"
+    t.string   "employee_full_name",           limit: 209
     t.string   "customer_full_name",           limit: 209
     t.string   "item_service",           limit: 159
     t.string   "duration",              limit: 16

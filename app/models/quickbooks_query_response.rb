@@ -17,6 +17,9 @@ class QuickbooksQueryResponse < Qbxml::Hash
           default["vendor_name"] = value["full_name"]
         elsif $1 == 'customer'
           default["customer_full_name"] = value["full_name"]
+        elsif $1 == 'entity'
+          default['employee_list_id'] = value["list_id"]
+          default['employee_full_name'] = value["full_name"]
         else
           default["#{$1}"] = value['full_name']
         end
