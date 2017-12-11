@@ -560,7 +560,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "time_modified"
     t.string   "edit_sequence",              limit: 16
     t.datetime "txn_date"
-    t.string   "employee_list_id"
+    t.string   "employee_list_id",            limit: 209
     t.string   "employee_full_name",           limit: 209
     t.string   "customer_full_name",           limit: 209
     t.string   "item_service",           limit: 159
@@ -570,7 +570,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.string   "billable_status",           limit: 20
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
     t.index ["customer_full_name"], name: "customer_full_name", using: :btree
-    t.index ["entity"], name: "entity", using: :btree
+    t.index ["employee_list_id"], name: "employee_list_id", using: :btree
     t.index ["item_service"], name: "item_service", using: :btree
   end
 
