@@ -167,18 +167,13 @@ The ship_to_address field will return an array of shipping addresses that have b
 # Quickbooks TimeCard Entry
 Weekly Timesheet used.
 
-Customer Job is customer job
-Service Item is Video:0110 is the default service item unless we're able to derive what that item is from the ticket types
-Notes is the Ticket #
-Service Coe - from Tickets_List_Type (Construction:Rough In would be 110 - there's just a 0 at the end. Construction service code is 1, rough in service code is 1, then it just gets a 0).
-Payroll Item is always Hourly Level 1 for now.  (Hourly Holiday Rate for holidays). 
-More than 8 hours in one day or more than 40 hours in one week, she'll need a report to override (a human has to do any OT hours).
-Service Code comes from Time Card Admin page
+- Customer Job is customer job
+- Service Item is Video:0100 is the default service item unless we're able to derive what that item is from the ticket types OR holiday/PTO/TWOP
+- Notes is the Ticket #
+- Payroll Item is always Hourly Level 1.
+- Class is Cabling thing (look at pre-existing) for anything NOT [Holiday, TWOP, PTO]
+- Notes: Either the holiday name or the ticket # (Look at previous stuffs)
+- Billable Field: Always "NotBillable"
 
-- Notes: EIther the holiday name or the ticket #.
-
-## IMPORTANT::::
-
-F2 when entering Quickbooks - look at path - nklerk 
 
 
