@@ -12,8 +12,6 @@ class TimeTrackingAddWorker <  QBWC::Worker
       Rails.logger.warn("REQUEST: #{request}")
       Rails.logger.warn("\n\n\n")
       Rails.logger.warn("DATA: #{data}")
-    else
-      QbwcError.create(:worker_class => "AddTime Count", :error_message => "#{r['xml_attributes']['iteratorRemainingCount']} remain")
     end
     begin
       r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
