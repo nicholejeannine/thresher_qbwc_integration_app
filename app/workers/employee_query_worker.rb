@@ -12,6 +12,7 @@ class EmployeeQueryWorker < QBWC::Worker
 
 
   def handle_response(r, session, job, request, data)
+    complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     begin
       r['employee_ret']&.each{|qb|Employee.parse_qb_response(qb)}
     rescue StandardError => e
