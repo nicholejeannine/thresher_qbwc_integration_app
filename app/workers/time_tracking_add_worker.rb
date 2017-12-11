@@ -11,10 +11,4 @@ class TimeTrackingAddWorker <  QBWC::Worker
     end
   end
 
-
-  QBWC.session_complete_success = lambda do |session|
-    Rails.logger.warn(session)
-    total_time = Time.now - session.began_at
-    QbwcHistory.create(:began_at => session.began_at, :ticket => session.ticket, :run_time => total_time, :status_code_id => session.status_code, :status_code_severity => session.status_severity)
-  end
 end
