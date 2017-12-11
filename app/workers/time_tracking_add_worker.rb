@@ -7,11 +7,6 @@ class TimeTrackingAddWorker <  QBWC::Worker
     Rails.logger.warn("JOB: #{job}")
     Rails.logger.warn("REQUEST: #{request}")
     Rails.logger.warn("DATA: #{data}")
-    begin
-      r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
-    rescue StandardError => e
-      QbwcError.create(:worker_class => self.class.name, :error_message => e)
-    end
   end
 
 end
