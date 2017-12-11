@@ -68,9 +68,11 @@ ActiveRecord::Schema.define(version: 20170712220110) do
 
   create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "list_id", default: "", null: false
-    t.string "name", limit: 41
+    t.string "name",      limit: 41
+    t.string "first_name",      limit: 25
+    t.string "middle_name",     limit: 5
+    t.string "last_name",     limit: 25
     t.boolean "is_active", null: false, default: true
-    t.string "billing_rate"
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
 
