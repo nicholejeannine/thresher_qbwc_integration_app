@@ -6,7 +6,7 @@ class TimeTrackingsController < ApplicationController
     render json: @times
   end
 
-  # get '/time_trackings_add?employee_list_id=80001440-1460409806&txn_date=2017-12-13&duration=PT8H0M0S&customer_full_name=TCP:IT&notes=23024'
+  # get '/time_trackings_add?employee_list_id=80001440-1460409806&txn_date=2017-12-11&duration=PT8H0M0S&customer_full_name=TCP:IT:P-903&notes=23004'
   def add_request
     new_request = build_request(params)
     name = "AddTime_#{Time.now.to_i}"
