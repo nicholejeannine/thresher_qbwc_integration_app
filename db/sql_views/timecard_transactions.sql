@@ -1,0 +1,1 @@
+CREATE OR REPLACE ALGORITHM = UNDEFINED SQL SECURITY INVOKER VIEW `timecard_transactions` AS SELECT * FROM `Thresher`.`TimeCardTrans`;
