@@ -1,1 +1,6 @@
-CREATE OR REPLACE ALGORITHM = UNDEFINED SQL SECURITY INVOKER VIEW `timecard_transactions` AS SELECT * FROM `Thresher`.`TimeCardTrans`;
+ALTER
+ALGORITHM = UNDEFINED
+DEFINER = root@localhost
+SQL SECURITY INVOKER
+VIEW `timecard_transactions`
+AS select `Thresher`.`TimeCardTrans`.`TimeCardTrans_PKEY` AS `id`, `Thresher`.`TimeCardTrans`.`FK_Holidays_PKEY` AS `holiday_id`, `Thresher`.`TimeCardTrans`.`FK_Jobs_PKEY` AS `job_id`, `Thresher`.`TimeCardTrans`.`FK_Customers_PKEY` AS `customer_id`, `Thresher`.`TimeCardTrans`.`FK_Project_PKEY` AS `project_id`, `Thresher`.`TimeCardTrans`.`FK_TimeCards_PKEY` AS `timecard_id`, `Thresher`.`TimeCardTrans`.`FK_Tickets_PKEY` AS `ticket_id`, `Thresher`.`TimeCardTrans`.`FK_Employees_PKEY` AS `employee_id`, `Thresher`.`TimeCardTrans`.`TCT_Date` AS `tc_date`, `Thresher`.`TimeCardTrans`.`TCT_Date_01` AS `tc_date1`, `Thresher`.`TimeCardTrans`.`TCT_Date_02` AS `tc_date2`, `Thresher`.`TimeCardTrans`.`TCT_Date_03` AS `tc_date3`, `Thresher`.`TimeCardTrans`.`TCT_Date_04` AS `tc_date4`, `Thresher`.`TimeCardTrans`.`TCT_Date_05` AS `tc_date5`, `Thresher`.`TimeCardTrans`.`TCT_Date_06` AS `tc_date6`, `Thresher`.`TimeCardTrans`.`TCT_Date_07` AS `tc_date7`, `Thresher`.`TimeCardTrans`.`TCT_Hours` AS `duration`, `Thresher`.`TimeCardTrans`.`TCT_HoursType` AS `hours_type`, `Thresher`.`TimeCardTrans`.`TCT_QBJobName` AS `qb_job_name`, `Thresher`.`TimeCardTrans`.`TCT_Status` AS `tc_status` from `Thresher`.`TimeCardTrans`

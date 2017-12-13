@@ -1,1 +1,1 @@
-CREATE OR REPLACE ALGORITHM = UNDEFINED SQL SECURITY INVOKER VIEW `tickets` AS SELECT * FROM `Thresher`.`Tickets`;
+CREATE OR REPLACE ALGORITHM = UNDEFINED SQL SECURITY INVOKER VIEW `tickets` AS select `Thresher`.`Tickets`.`Tickets_PKEY` AS `id`, `Thresher`.`Tickets`.`Tickets_FT_TableName` AS `ticketable_type`, `Thresher`.`Tickets`.`FK_Table_PKEY` AS `ticketable_id`, `Thresher`.`Tickets`.`Tick_Type` AS `ticket_type_id`, `Thresher`.`Tickets`.`Tick_subType1` AS `ticket_subtype1_id`, `Thresher`.`Tickets`.`Tick_subType2` AS `ticket_subtype2_id` from `Thresher`.`Tickets`
