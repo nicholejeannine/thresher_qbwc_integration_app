@@ -13,9 +13,9 @@ class TimeTrackingsController < ApplicationController
     end_date = params[:end_date]
     timecard_employee_ids = TimecardTransaction.between(start_date, end_date)
     render plain: "#{timecard_employee_ids.join(', ')}"
-    timecard_ids.each do |timecard|
-
-    end
+    # timecard_ids.each do |timecard|
+    #
+    # end
 
     # new_request = build_request(params)
     # name = "AddTime_#{Time.now.to_i}"
