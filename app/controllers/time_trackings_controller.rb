@@ -9,7 +9,11 @@ class TimeTrackingsController < ApplicationController
 
   # post '/time_trackings
   def add_request
-    render plain:  "#{params[:start_date]} #{params[:end_date]}"
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    timecard_ids = Timecard.between(start_date, end_date)
+    render plain: "#{timecard_ids.join(', ')}"
+
     # new_request = build_request(params)
     # name = "AddTime_#{Time.now.to_i}"
     # @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
