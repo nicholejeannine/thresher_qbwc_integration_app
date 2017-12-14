@@ -6,13 +6,13 @@ class TimeTrackingsController < ApplicationController
     render json: @times
   end
 
-  # get '/time_trackings_add?employee_list_id=80001440-1460409806&txn_date=2017-12-11&duration=PT8H0M0S&customer_full_name=TCP:IT:P-903&notes=23004'
+  # post '/time_trackings
   def add_request
     new_request = build_request(params)
     name = "AddTime_#{Time.now.to_i}"
     @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
     if @job
-      render json: @job
+      render json: params
     end
   end
 
@@ -25,9 +25,9 @@ class TimeTrackingsController < ApplicationController
 
 
 
-  private
-  def time_tracking_params
-    params.require(:employee_list_id).permit(:txn_date, :customer_full_name, :item_service_ref, :duration, :notes)
-  end
+  # private
+  # def time_tracking_params
+  #   params.require(:start_date).permit(:end_date)
+  # end
 
 end
