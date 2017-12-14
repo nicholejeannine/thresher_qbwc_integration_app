@@ -8,15 +8,13 @@ class TimeTrackingsController < ApplicationController
 
   # post '/time_trackings
   def add_request
-    respond_to do |format|
-      format.json
-    end
+    render json: params
     # new_request = build_request(params)
     # name = "AddTime_#{Time.now.to_i}"
-    @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
-    if @job
-      render json: params
-    end
+    # @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
+    # if @job
+    #   render json: params
+    # end
   end
 
 
