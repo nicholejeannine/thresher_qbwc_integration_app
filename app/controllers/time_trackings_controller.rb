@@ -36,6 +36,8 @@ class TimeTrackingsController < ApplicationController
       # - the duration (format this the funky way quickbooks wants it
 
       # Pass the following params to build request: item_service_ref (or nil), txn_date, employee_list_id, customer_full_name, duration, notes (ticket_id)
+
+    # For each request, add a job to the qbwc job queue (see if Quickbooks supports bulk adds, at the moment it doens't appear to be working, but might just need to use an array instead of a hash?)
      #
   end
 
