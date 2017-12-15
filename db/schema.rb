@@ -66,16 +66,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
 
-  create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "list_id", default: "", null: false
-    t.string "name",      limit: 41
-    t.string "first_name",      limit: 25
-    t.string "middle_name",     limit: 5
-    t.string "last_name",     limit: 25
-    t.boolean "is_active", null: false, default: true
-    t.index ["list_id"], name: "list_id", unique: true, using: :btree
-  end
-
   create_table "estimate_lines", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "txn_line_id", default: "", null: false
     t.integer  "estimate_id"
@@ -460,6 +450,16 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.text     "pending_jobs", limit: 65535,             null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "qb_employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "list_id", default: "", null: false
+    t.string "name",      limit: 41
+    t.string "first_name",      limit: 25
+    t.string "middle_name",     limit: 5
+    t.string "last_name",     limit: 25
+    t.boolean "is_active", null: false, default: true
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
 
   create_table "receive_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
