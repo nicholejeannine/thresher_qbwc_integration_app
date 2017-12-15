@@ -1,4 +1,4 @@
-class EmployeeQueryWorker < QBWC::Worker
+class QbEmployeeQueryWorker < QBWC::Worker
 
   def requests(job, session, data)
     [
