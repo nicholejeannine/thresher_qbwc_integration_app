@@ -11,8 +11,8 @@ class TimeTrackingsController < ApplicationController
   def add_request
     start_date = params[:start_date]
     end_date = params[:end_date]
-    timecard_employee_ids = TimecardTransaction.between(start_date, end_date)
-    render plain: "#{timecard_employee_ids.join(', ')}"
+    timecards = TimecardTransaction.between(start_date, end_date).first
+    render plain: timecards.to_s
     # timecard_ids.each do |timecard|
     #
     # end
@@ -26,7 +26,7 @@ class TimeTrackingsController < ApplicationController
   end
 
 
-  def build_request(params)
+  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes)
     item_service_ref = params['item_service_ref'] ||= "Video:0100"
     {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => params['txn_date'], :entity_ref => {:list_id => params['employee_list_id']}, :customer_ref => {:full_name => params['customer_full_name']}, :item_service_ref => {:full_name => item_service_ref}, :duration => params['duration'], :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "Hourly Level 1"}, :notes => params['notes'], :billable_status => "NotBillable"}}}
   end
