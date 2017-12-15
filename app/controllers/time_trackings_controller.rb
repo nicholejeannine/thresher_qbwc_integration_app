@@ -13,7 +13,6 @@ class TimeTrackingsController < ApplicationController
     end_date = params[:end_date]
     timecards = TimecardTransaction.between(start_date, end_date).all
     response = []
-    # render plain: timecards.to_s
     timecards.each do |t|
       txn_date = t.tc_date.to_s
       employee_list_id = t.employee.employee_list_id
@@ -34,6 +33,14 @@ class TimeTrackingsController < ApplicationController
       render plain: "OK"
     end
     render plain: response.join(", ")
+  end
+    # response.each do |r|
+    #     new_request = build_request(r[0], r[1], r[2], r[3], r[4])
+    #     name = "AddTime_#{Time.now.to_i}"
+    #     @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
+    #   end
+    #   render plain: "OK"
+    # end
 
   def qb_duration duration
     "PT8H0M"
