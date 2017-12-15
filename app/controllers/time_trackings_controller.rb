@@ -25,15 +25,16 @@ class TimeTrackingsController < ApplicationController
         notes = t.ticket_id
       end
       response.push([txn_date, employee_list_id, customer_full_name, duration, notes])
-      response.each do |r|
-        new_request = build_request(r[0], r[1], r[2], r[3], r[4])
-        name = "AddTime_#{Time.now.to_i}"
-        @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
-      end
-      render plain: "OK"
     end
-    # render plain: response.join(", ")
+    response.each do |r|
+        new_request = build_request(r[0], r[1], r[2], r[3], r[4])
+        name = "AddTime_#{(1..100000).to_a.shuffle.first}"
+        @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
+        puts new_request
+    end
+    render plain: "OK"
   end
+    # render plain: response.join(", ")
     # response.each do |r|
     #     new_request = build_request(r[0], r[1], r[2], r[3], r[4])
     #     name = "AddTime_#{Time.now.to_i}"
@@ -52,14 +53,13 @@ class TimeTrackingsController < ApplicationController
   end
 
 
-  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes, item_service_ref = nil)
-    item_service_ref = params['item_service_ref'] ||= "Video:0100"
-    {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => params['txn_date'], :entity_ref => {:list_id => params['employee_list_id']}, :customer_ref => {:full_name => params['customer_full_name']}, :item_service_ref => {:full_name => item_service_ref}, :duration => params['duration'], :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "Hourly Level 1"}, :notes => params['notes'], :billable_status => "NotBillable"}}}
+  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes = '', item_service_ref = nil)
+    item_service_ref = item_service_ref ||= "Video:0100"
+    {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => txn_date, :entity_ref => {:list_id => employee_list_id}, :customer_ref => {:full_name => customer_full_name}, :item_service_ref => {:full_name => item_service_ref}, :duration => duration, :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "Hourly Level 1"}, :notes => notes, :billable_status => "NotBillable"}}}
   end
 
   private
 
-  def calculate_timecards
     # Take the start and end date and query the database to find:
       #  For each timecard entry that falls between this start date and this end date, get me:
       # - the transaction date
