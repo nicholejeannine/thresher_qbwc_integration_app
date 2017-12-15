@@ -25,12 +25,12 @@ class TimeTrackingsController < ApplicationController
         notes = t.ticket_id
       end
       response.push([txn_date, employee_list_id, customer_full_name, duration, notes])
-      response.each do |r|
-        new_request = build_request(r[0], r[1], r[2], r[3], r[4])
-        name = "AddTime_#{Time.now.to_i}"
-        @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
-      end
-      render plain: "OK"
+      # response.each do |r|
+      #   new_request = build_request(r[0], r[1], r[2], r[3], r[4])
+      #   name = "AddTime_#{Time.now.to_i}"
+      #   @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
+      # end
+      # render plain: "OK"
     end
     render plain: response.join(", ")
   end
