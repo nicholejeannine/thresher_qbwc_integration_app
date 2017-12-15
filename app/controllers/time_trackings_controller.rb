@@ -17,7 +17,7 @@ class TimeTrackingsController < ApplicationController
       txn_date = t.tc_date.to_s
       employee_list_id = t.employee.employee_list_id
       customer_full_name = t.lookup_customer_name
-      duration = qb_duration(t.duration)
+      duration = t.qb_duration
       notes = ''
       if t.holiday_id
         notes = t.holiday.name
@@ -30,7 +30,6 @@ class TimeTrackingsController < ApplicationController
         new_request = build_request(r[0], r[1], r[2], r[3], r[4])
         name = "AddTime_#{(1..100000).to_a.shuffle.first}"
         @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
-        puts new_request
     end
     render plain: "OK"
   end
@@ -42,11 +41,6 @@ class TimeTrackingsController < ApplicationController
     #   end
     #   render plain: "OK"
     # end
-
-  def qb_duration duration
-    "PT8H0M"
-  end
-
 
   def build_request(txn_date, employee_list_id, customer_full_name, duration, notes = '', item_service_ref = nil)
     item_service_ref = item_service_ref ||= "Video:0100"

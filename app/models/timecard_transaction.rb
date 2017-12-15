@@ -17,4 +17,8 @@ class TimecardTransaction < ActiveRecord::Base
     "TCP:IT:P-903"
   end
 
+  def qb_duration
+    "PT8H0M"
+  end
+
 end
