@@ -72,7 +72,6 @@ class TimeTrackingsController < ApplicationController
 
     # For each request, add a job to the qbwc job queue (see if Quickbooks supports bulk adds, at the moment it doens't appear to be working, but might just need to use an array instead of a hash?)
      #
-  end
 
 
 
