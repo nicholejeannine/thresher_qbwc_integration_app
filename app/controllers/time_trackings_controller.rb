@@ -16,7 +16,7 @@ class TimeTrackingsController < ApplicationController
     timecards.each do |t|
       txn_date = t.tc_date.to_s
       employee_list_id = t.employee.employee_list_id
-      customer_full_name = lookup_customer_name(t.customer_id, t.job_id, t.project_id)
+      customer_full_name = t.lookup_customer_name
       duration = qb_duration(t.duration)
       notes = ''
       if t.holiday_id
@@ -45,11 +45,6 @@ class TimeTrackingsController < ApplicationController
 
   def qb_duration duration
     "PT8H0M"
-  end
-
-
-  def lookup_customer_name(customer_id, job_id = nil, project_id = nil)
-    "TCP:IT:P-903"
   end
 
 
