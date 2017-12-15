@@ -3,7 +3,7 @@ module QuickbooksTypes
 	included do
 		def self.qb_id
 			case self.name
-			when "Client", "Job", "Project", "Vendor", "Employee"
+			when "Client", "Job", "Project", "Vendor", "Employee", "QbEmployee"
 				"list_id"
 			when "Estimate", "Invoice", "PurchaseOrder", "ReceivePayment", "SalesOrder", "TimeTracking"
 				"txn_id"
