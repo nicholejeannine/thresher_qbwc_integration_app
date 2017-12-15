@@ -15,7 +15,7 @@ class QbEmployeeQueryWorker < QBWC::Worker
     begin
       r['employee_ret']&.each{|qb|QbEmployee.parse_qb_response(qb)}
     rescue StandardError => e
-      QbwcError.create(:worker_class => self.class.name, :error_message => e)
+      QbwcError.create(:worker_class => self.class.name, :error_message => e.backtrace)
     end
   end
 end
