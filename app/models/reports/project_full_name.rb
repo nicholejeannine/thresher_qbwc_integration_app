@@ -1,4 +1,5 @@
-class ProjectFullName < ActiveRecord::Base
+module Report
+  class ProjectFullName < ActiveRecord::Base
     self.table_name = 'ProjectFullName'
-    self.primary_key = 
+  end
 end

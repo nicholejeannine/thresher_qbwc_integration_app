@@ -1,4 +1,5 @@
 class Project < ApplicationRecord
+  has_many :timecard_transactions
   before_save :titleize_job_status
 
   def self.parse_qb_response(qb)
