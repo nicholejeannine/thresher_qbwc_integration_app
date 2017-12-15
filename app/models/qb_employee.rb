@@ -1,2 +1,2 @@
-class QbEmployee
+class QbEmployee < ApplicationRecord
 end
