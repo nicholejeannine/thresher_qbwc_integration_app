@@ -11,11 +11,23 @@ class TimeTrackingsController < ApplicationController
   def add_request
     start_date = params[:start_date]
     end_date = params[:end_date]
-    timecards = TimecardTransaction.between(start_date, end_date).first
-    render plain: timecards.to_s
-    # timecard_ids.each do |timecard|
-    #
-    # end
+    timecards = TimecardTransaction.between(start_date, end_date).all
+    response = []
+    # render plain: timecards.to_s
+    timecards.each do |t|
+      txn_date = t.tc_date.to_s
+      employee_list_id = t.employee.employee_list_id
+      customer_full_name = lookup_customer_name(t.customer_id, t.job_id, t.project_id)
+      duration = qb_duration(t.duration)
+      notes = ''
+      if t.holiday_id
+        notes = t.holiday.name
+      elsif t.ticket_id
+        notes = t.ticket_id
+      end
+      response.push([txn_date, employee_list_id, customer_full_name, duration, notes])
+    end
+    render plain: response.join(", ")
 
     # new_request = build_request(params)
     # name = "AddTime_#{Time.now.to_i}"
@@ -25,8 +37,17 @@ class TimeTrackingsController < ApplicationController
     # end
   end
 
+  def qb_duration duration
+    "PT8H0M"
+  end
 
-  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes)
+
+  def lookup_customer_name(customer_id, job_id = nil, project_id = nil)
+    "TCP:IT:P-903"
+  end
+
+
+  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes, item_service_ref = nil)
     item_service_ref = params['item_service_ref'] ||= "Video:0100"
     {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => params['txn_date'], :entity_ref => {:list_id => params['employee_list_id']}, :customer_ref => {:full_name => params['customer_full_name']}, :item_service_ref => {:full_name => item_service_ref}, :duration => params['duration'], :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "Hourly Level 1"}, :notes => params['notes'], :billable_status => "NotBillable"}}}
   end
