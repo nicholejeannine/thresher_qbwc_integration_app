@@ -26,9 +26,9 @@ class TimeTrackingsController < ApplicationController
       end
       response.push([txn_date, employee_list_id, customer_full_name, duration, notes])
     end
-    response.each do |r|
+    response.each_with_index do |r, i|
         new_request = build_request(r[0], r[1], r[2], r[3], r[4])
-        name = "AddTime_#{(1..100000).to_a.shuffle.first}"
+        name = "AddTime_#{i}"
         @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
     end
     render plain: "OK"
