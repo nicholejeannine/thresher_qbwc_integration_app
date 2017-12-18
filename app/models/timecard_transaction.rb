@@ -14,7 +14,11 @@ class TimecardTransaction < ActiveRecord::Base
 
 
   def lookup_customer_name
-    client.full_name
+    if client_id && client.full_name
+      client.full_name
+    else
+      client_id
+    end
     # begin
     #   if holiday_id
     #     return "TCP:Business"
