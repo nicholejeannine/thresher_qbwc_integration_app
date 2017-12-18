@@ -32,8 +32,13 @@ class TimecardTransaction < ActiveRecord::Base
     end
   end
 
+  # Duration comes in as "0.875e1" - need to convert to format like "PT8H45M"
   def qb_duration
-    "PT8H0M"
+    # Convert exponential format to string, then split on the decimal
+    t = duration.to_f.to_s.split(".")
+    hours = t[0]
+    minutes = (t[1] * 60).to_i
+    "PT#{hours}H#{minutes}M"
   end
 
 end
