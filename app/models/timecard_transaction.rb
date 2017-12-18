@@ -54,6 +54,8 @@ class TimecardTransaction < ActiveRecord::Base
     "Video:0100"
   end
 
-
+  def qb_payroll_ref
+    "Hourly Level 1"
+  end
 
 end
