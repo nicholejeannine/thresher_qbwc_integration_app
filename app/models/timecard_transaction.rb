@@ -14,7 +14,22 @@ class TimecardTransaction < ActiveRecord::Base
 
 
   def lookup_customer_name
-    "TCP:IT:P-903"
+    begin
+      if holiday_id
+        return "TCP:Business"
+      elsif self.project_id && self.project.full_name
+        self.project.full_name
+      elsif self.job_id && self.job.full_name
+        self.job.full_name
+      else
+       self.client.full_name
+      end
+    rescue NoMethodError => e
+      return self.client&.full_name
+    rescue StandardError => e
+      QbwcError.create(:worker_class => self.class.name, :error_message => e)
+      return ""
+    end
   end
 
   def qb_duration
