@@ -50,6 +50,10 @@ class TimecardTransaction < ActiveRecord::Base
     end
   end
 
+  def qb_item_service
+    "Video:0100"
+  end
+
 
 
 end

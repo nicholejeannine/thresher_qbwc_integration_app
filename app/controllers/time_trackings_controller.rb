@@ -19,7 +19,8 @@ class TimeTrackingsController < ApplicationController
       customer_full_name = t.lookup_customer_name
       duration = t.qb_duration
       notes = t.qb_notes
-      response.push([txn_date, employee_list_id, customer_full_name, duration, notes])
+      item_service_ref = t.qb_item_service
+      response.push([txn_date, employee_list_id, customer_full_name, duration, notes, item_service_ref])
     end
     response.each_with_index do |r, i|
         new_request = build_request(r[0], r[1], r[2], r[3], r[4])
@@ -37,8 +38,7 @@ class TimeTrackingsController < ApplicationController
     #   render plain: "OK"
     # end
 
-  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes = '', item_service_ref = nil)
-    item_service_ref = item_service_ref ||= "Video:0100"
+  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes = '', item_service_ref)
     {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => txn_date, :entity_ref => {:list_id => employee_list_id}, :customer_ref => {:full_name => customer_full_name}, :item_service_ref => {:full_name => item_service_ref}, :duration => duration, :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "Hourly Level 1"}, :notes => notes, :billable_status => "NotBillable"}}}
   end
 
