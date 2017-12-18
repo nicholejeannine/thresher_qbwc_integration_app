@@ -37,7 +37,7 @@ class TimecardTransaction < ActiveRecord::Base
     # Convert exponential format to string, then split on the decimal
     t = duration.to_f.to_s.split(".")
     hours = t[0]
-    minutes = (t[1] * 60).to_i
+    minutes = ("0.#{t[1]}".to_f * 60).to_i
     "PT#{hours}H#{minutes}M"
   end
 
