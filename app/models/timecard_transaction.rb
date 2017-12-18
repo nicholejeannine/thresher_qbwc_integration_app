@@ -9,32 +9,27 @@ class TimecardTransaction < ActiveRecord::Base
 
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
   end
 
 
   def lookup_customer_name
-    if client_id && client.full_name
-      client.full_name
-    else
-      client_id
+    begin
+      if holiday_id
+        return "TCP:Business"
+      elsif self.project_id && self.project.full_name
+        self.project.full_name
+      elsif self.job_id && self.job.full_name
+        self.job.full_name
+      else
+       self.client.full_name
+      end
+    rescue NoMethodError => e
+      return self.client&.full_name
+    rescue StandardError => e
+      QbwcError.create(:worker_class => self.class.name, :error_message => e)
+      return ""
     end
-    # begin
-    #   if holiday_id
-    #     return "TCP:Business"
-    #   elsif self.project_id && self.project.full_name
-    #     self.project.full_name
-    #   elsif self.job_id && self.job.full_name
-    #     self.job.full_name
-    #   else
-    #    self.client.full_name
-    #   end
-    # rescue NoMethodError => e
-    #   return self.client&.full_name
-    # rescue StandardError => e
-    #   QbwcError.create(:worker_class => self.class.name, :error_message => e)
-    #   return ""
-    # end
   end
 
   def qb_duration

@@ -15,7 +15,7 @@ class TimeTrackingsController < ApplicationController
     response = []
     timecards.each do |t|
       txn_date = t.tc_date.to_s
-      employee_list_id = t.employee.employee_list_id
+      employee_list_id = t.employee&.employee_list_id
       customer_full_name = t.lookup_customer_name
       duration = t.qb_duration
       notes = ''
