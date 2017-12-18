@@ -41,4 +41,15 @@ class TimecardTransaction < ActiveRecord::Base
     "PT#{hours}H#{minutes}M"
   end
 
+  def qb_notes
+    if holiday_id
+      self.holiday.name
+    elsif ticket_id
+      self.ticket_id
+    else ""
+    end
+  end
+
+
+
 end

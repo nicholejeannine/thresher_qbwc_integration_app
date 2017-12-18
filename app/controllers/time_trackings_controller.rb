@@ -18,12 +18,7 @@ class TimeTrackingsController < ApplicationController
       employee_list_id = t.employee&.employee_list_id
       customer_full_name = t.lookup_customer_name
       duration = t.qb_duration
-      notes = ''
-      if t.holiday_id
-        notes = t.holiday.name
-      elsif t.ticket_id
-        notes = t.ticket_id
-      end
+      notes = t.qb_notes
       response.push([txn_date, employee_list_id, customer_full_name, duration, notes])
     end
     response.each_with_index do |r, i|
