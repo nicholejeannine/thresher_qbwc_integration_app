@@ -50,6 +50,18 @@ class TimecardTransaction < ActiveRecord::Base
     end
   end
 
+
+
+  # $ticketTypeQuery = " SELECT Tick_Type, Tick_subType1, Tick_subType2 FROM Tickets WHERE Tickets_PKEY = '".$ticketID."' ";
+  # $ticketTypeArray = pdoGetArray($ticketTypeQuery);
+  # $serviceCodeArray = array(0);
+  # $i = 0;
+  # if(!empty($ticketTypeArray)){// prevent errors while($i <= 2) {$serviceLookupQuery = " SELECT ServiceCode FROM Tickets_List_Type WHERE Tickets_List_Type_PKEY = '".$ticketTypeArray[0][$i]."' "; $serviceLookupArray = pdoGetResult($serviceLookupQuery);
+  # if($serviceLookupArray != NULL OR $serviceLookupArray != ""){$serviceCodeArray[] = $serviceLookupArray;} else {$serviceCodeArray[] = 0;}
+  # $i++;
+  # }
+  # }
+  # return implode("", $serviceCodeArray);
   def qb_item_service
     "Video:0100"
   end
