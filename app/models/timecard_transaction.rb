@@ -45,7 +45,7 @@ class TimecardTransaction < ActiveRecord::Base
     if holiday_id
       self.holiday.name
     elsif ticket_id
-      self.ticket_id
+      self.ticket_id.to_s
     else ""
     end
   end

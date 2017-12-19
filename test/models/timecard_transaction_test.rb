@@ -38,4 +38,10 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal("PT10H15M", TimecardTransaction.find(178407).qb_duration)
   end
 
+  test "qb_notes should return holiday name, ticket #, or blank" do
+    assert_equal("Christmas", TimecardTransaction.find(179352).qb_notes)
+    assert_equal("22648", TimecardTransaction.find(179772).qb_notes)
+    assert_equal("", TimecardTransaction.find(179702).qb_notes)
+  end
+
 end
