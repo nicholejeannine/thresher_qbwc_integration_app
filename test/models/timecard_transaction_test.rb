@@ -56,7 +56,12 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal("Hourly PTO Rate", TimecardTransaction.find(179540).qb_payroll_ref)
     assert_equal("Hourly TWOP Rate", TimecardTransaction.find(178825).qb_payroll_ref)
     assert_equal("Hourly Level 1", TimecardTransaction.find(178505).qb_payroll_ref)
+  end
 
+  test "build request for PTO, regular, and holiday types" do
+    assert_equal('{:time_tracking_add_rq=> {:time_tracking_add=> {:txn_date=>"2017-06-01", :entity_ref=>{:list_id=>"80000B99-1397871128"}, :customer_ref=>{:full_name=>"TCP:PTO:P-914"}, :item_service_ref=>{:full_name=>"Video:0100"}, :duration=>"PT8H0M", :class_ref=>{:list_id=>"200000-991719211"}, :payroll_item_wage_ref=>{:full_name=>"Hourly PTO Rate"}, :notes=>"", :billable_status=>"NotBillable"}}}', TimecardTransaction.find(158765).build_request)
+    assert_equal('{:time_tracking_add_rq=> {:time_tracking_add=> {:txn_date=>"2017-06-01", :entity_ref=>{:list_id=>"80001440-1460409806"}, :customer_ref=>{:full_name=>"TCP:IT:P-903"}, :item_service_ref=>{:full_name=>"Video:0100"}, :duration=>"PT8H0M", :class_ref=>{:list_id=>"200000-991719211"}, :payroll_item_wage_ref=>{:full_name=>"Hourly Level 1"}, :notes=>"", :billable_status=>"NotBillable"}}}', TimecardTransaction.find(167697).build_request)
+    assert_equal('{:time_tracking_add_rq=> {:time_tracking_add=> {:txn_date=>"2017-09-04", :entity_ref=>{:list_id=>"800007EF-1303964767"}, :customer_ref=>{:full_name=>"TCP:Business"}, :item_service_ref=>{:full_name=>"Video:0100"}, :duration=>"PT8H0M", :class_ref=>{:list_id=>"200000-991719211"}, :payroll_item_wage_ref=>{:full_name=>"Hourly Holiday Rate"}, :notes=>"Labor Day", :billable_status=>"NotBillable"}}}', TimecardTransaction.find(170346).build_request)
   end
 
 end
