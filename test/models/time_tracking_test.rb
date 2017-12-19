@@ -9,7 +9,7 @@ class TimeTrackingTest < ActiveSupport::TestCase
   end
 
   test "handles ref types" do
-    assert_equal("Apikelis, Roland", TimeTracking.first.entity)
+    assert_equal("Apikelis, Roland", TimeTracking.first.employee_full_name)
     assert_equal("Google:Construction", TimeTracking.first.customer_full_name)
     assert_equal("Video:0100", TimeTracking.first.item_service)
     assert_equal("PT8H0M", TimeTracking.first.duration)
@@ -23,7 +23,7 @@ class TimeTrackingTest < ActiveSupport::TestCase
     TimeTracking.parse_qb_response(hash)
     assert_equal(1, TimeTracking.count)
     assert_equal("2017-06-11T00:00:00-07:00", TimeTracking.first.txn_date.iso8601)
-    assert_equal("Joe Bean", TimeTracking.first.entity)
+    assert_equal("Joe Bean", TimeTracking.first.employee_full_name)
     assert_equal("Google:Construction:Rooftop:P-11", TimeTracking.first.customer_full_name)
     assert_equal("PT7H30M", TimeTracking.first.duration)
     assert_equal("Ticket 10", TimeTracking.first.notes)
