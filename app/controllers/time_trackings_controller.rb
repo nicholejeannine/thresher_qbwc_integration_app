@@ -16,7 +16,7 @@ class TimeTrackingsController < ApplicationController
     timecards.each_with_index do |t, i|
       request.push(request, t.build_request)
     end
-      @job = QBWC.add_job("AddTimeCards", true, '', TimeTrackingAddWorker, new_request)
+      @job = QBWC.add_job("AddTimeCards", true, '', TimeTrackingAddWorker, request)
     render plain: "OK"
   end
 
