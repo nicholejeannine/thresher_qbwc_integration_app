@@ -5,8 +5,8 @@ class TimeTrackingsController < ApplicationController
   def index
     start_date = params[:start_date]
     end_date = params[:end_date]
-    @timecards = TimecardTransaction.between(start_date, end_date).all
-    render json: @timecards
+    @entries = TimeTracking.between(start_date, end_date).all
+    render json: @entries
   end
 
   # post '/time_trackings
