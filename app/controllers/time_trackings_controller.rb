@@ -14,14 +14,7 @@ class TimeTrackingsController < ApplicationController
     timecards = TimecardTransaction.between(start_date, end_date).all
     response = []
     timecards.each do |t|
-      txn_date = t.tc_date.to_s
-      employee_list_id = t.employee&.employee_list_id
-      customer_full_name = t.lookup_customer_name
-      duration = t.qb_duration
-      notes = t.qb_notes
-      item_service_ref = t.qb_item_service
-      payroll_ref = t.qb_payroll_ref
-      response.push([txn_date, employee_list_id, customer_full_name, duration, notes, item_service_ref, payroll_ref])
+      t.build_request
     end
     response.each_with_index do |r, i|
         new_request = build_request(r[0], r[1], r[2], r[3], r[4], r[5], r[6])
