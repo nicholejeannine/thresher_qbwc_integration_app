@@ -12,31 +12,13 @@ class TimeTrackingsController < ApplicationController
     start_date = params[:start_date]
     end_date = params[:end_date]
     timecards = TimecardTransaction.between(start_date, end_date).all
-    response = []
-    timecards.each do |t|
-      t.build_request
-    end
-    response.each_with_index do |r, i|
-        new_request = build_request(r[0], r[1], r[2], r[3], r[4], r[5], r[6])
-        name = "AddTime_#{i}"
-        @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
+    timecards.each_with_index do |t, i|
+      new_request = t.build_request
+      name = "AddTime_#{i}"
+      @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
     end
     render plain: "OK"
   end
-    # render plain: response.join(", ")
-    # response.each do |r|
-    #     new_request = build_request(r[0], r[1], r[2], r[3], r[4])
-    #     name = "AddTime_#{Time.now.to_i}"
-    #     @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
-    #   end
-    #   render plain: "OK"
-    # end
-
-  def build_request(txn_date, employee_list_id, customer_full_name, duration, notes = '', item_service_ref, payroll_ref)
-    {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => txn_date, :entity_ref => {:list_id => employee_list_id}, :customer_ref => {:full_name => customer_full_name}, :item_service_ref => {:full_name => item_service_ref}, :duration => duration, :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => payroll_ref}, :notes => notes, :billable_status => "NotBillable"}}}
-  end
-
-  private
 
     # Take the start and end date and query the database to find:
       #  For each timecard entry that falls between this start date and this end date, get me:
