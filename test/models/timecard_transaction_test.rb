@@ -15,7 +15,7 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal(0, TimecardTransaction.between("2017-12-03", "2017-12-09").where(:tc_date => "2017-12-02").count)
   end
 
-  test "lookup_customer_name works for holiday" do
+  test "lookup_customer_name works for holidays" do
     assert_equal("TCP:Business", TimecardTransaction.find(117878).lookup_customer_name)
   end
 
@@ -42,6 +42,21 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal("Christmas", TimecardTransaction.find(179352).qb_notes)
     assert_equal("22648", TimecardTransaction.find(179772).qb_notes)
     assert_equal("", TimecardTransaction.find(179702).qb_notes)
+  end
+
+
+  test "qb_item_service should return item service code based on ticket type" do
+    assert_equal("Video:0100", TimecardTransaction.find(179753).qb_item_service)
+    assert_equal("Video:0300", TimecardTransaction.find(19838).qb_item_service)
+    assert_equal("Video:0120", TimecardTransaction.find(175126).qb_item_service)
+  end
+
+  test "qb_payroll_ref" do
+    assert_equal("Hourly Holiday Rate", TimecardTransaction.find(179753).qb_payroll_ref)
+    assert_equal("Hourly PTO Rate", TimecardTransaction.find(179540).qb_payroll_ref)
+    assert_equal("Hourly TWOP Rate", TimecardTransaction.find(178825).qb_payroll_ref)
+    assert_equal("Hourly Level 1", TimecardTransaction.find(178505).qb_payroll_ref)
+
   end
 
 end

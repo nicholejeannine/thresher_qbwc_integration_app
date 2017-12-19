@@ -176,4 +176,13 @@ Weekly Timesheet used.
 - Billable Field: Always "NotBillable"
 
 
+PTO: "Hourly PTO Rate" also "Hourly TWOP Rate"
+- HOLIDAYS: Put Payroll Item to "Hourly Holiday Rate"
+- grey out button after click on QB Export
+
+
+19838  Types:  1  99  0   code: video 0300
+
+type 1 service code = 3
+type 99 service code = 
 
