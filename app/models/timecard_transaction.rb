@@ -57,6 +57,10 @@ class TimecardTransaction < ActiveRecord::Base
   def qb_payroll_ref
     if holiday_id
       "Hourly Holiday Rate"
+    elsif project_id == 914
+      "Hourly PTO Rate"
+    elsif project_id == 913
+      "Hourly TWOP Rate"
     else
     "Hourly Level 1"
     end
