@@ -12,11 +12,11 @@ class TimeTrackingsController < ApplicationController
     start_date = params[:start_date]
     end_date = params[:end_date]
     timecards = TimecardTransaction.between(start_date, end_date).all
+    request = []
     timecards.each_with_index do |t, i|
-      new_request = t.build_request
-      name = "AddTime_#{i}"
-      @job = QBWC.add_job(name, true, '', TimeTrackingAddWorker, new_request)
+      request.push(request, t.build_request)
     end
+      @job = QBWC.add_job("AddTimeCards", true, '', TimeTrackingAddWorker, new_request)
     render plain: "OK"
   end
 
