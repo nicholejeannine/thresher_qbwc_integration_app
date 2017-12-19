@@ -63,10 +63,10 @@ class TimecardTransaction < ActiveRecord::Base
   # }
   # return implode("", $serviceCodeArray);
   def qb_item_service
-    return "Video:0100" unless ticket_id.present?
-    service_code_array = [self.ticket.ticket_type_id, self.ticket.ticket_subtype1_id, self.ticket.ticket_subtype2_id]
-    # return tick_types
-    # "Video:0100/"
+    # return "Video:0100" unless ticket_id.present?
+    # service_code_array = [self.ticket.ticket_type_id, self.ticket.ticket_subtype1_id, self.ticket.ticket_subtype2_id]
+    # # return tick_types
+    "Video:0100"
   end
 
 
