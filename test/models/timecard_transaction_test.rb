@@ -31,4 +31,11 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal("LLESD", TimecardTransaction.find(164864).lookup_customer_name)
   end
 
+  test "qb_duration" do
+    assert_equal("PT2H0M", TimecardTransaction.find(164864).qb_duration)
+    assert_equal("PT8H30M", TimecardTransaction.find(179588).qb_duration)
+    assert_equal("PT0H45M", TimecardTransaction.find(179699).qb_duration)
+    assert_equal("PT10H15M", TimecardTransaction.find(178407).qb_duration)
+  end
+
 end
