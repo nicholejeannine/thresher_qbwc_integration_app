@@ -28,6 +28,7 @@ class TimecardTransaction < ActiveRecord::Base
       return self.client&.full_name
     rescue StandardError => e
       Rails.logger.error("Lookup customer name failed for Timecard #{self.id} with error #{e}")
+      return ""
     end
   end
 
