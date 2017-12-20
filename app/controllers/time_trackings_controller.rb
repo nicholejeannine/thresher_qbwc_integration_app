@@ -36,10 +36,4 @@ class TimeTrackingsController < ApplicationController
      #
 
 
-
-
-  # def time_tracking_params
-  #   params.require(:start_date).permit(:end_date)
-  # end
-
 end
