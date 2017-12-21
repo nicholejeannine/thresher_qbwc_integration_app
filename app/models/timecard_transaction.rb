@@ -9,13 +9,13 @@ class TimecardTransaction < ActiveRecord::Base
 
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where('`tc_status` = "Locked"')
   end
 
 
   def lookup_customer_name
     begin
-      if holiday_id
+      if holiday_id && holiday_id > 0
         return "TCP:Business"
       elsif self.project_id && self.project.full_name
         self.project.full_name
@@ -42,7 +42,7 @@ class TimecardTransaction < ActiveRecord::Base
   end
 
   def qb_notes
-    if holiday_id
+    if holiday_id && holiday_id > 0
       self.holiday.name
     elsif ticket_id
       self.ticket_id.to_s
