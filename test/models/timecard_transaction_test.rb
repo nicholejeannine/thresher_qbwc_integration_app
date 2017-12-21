@@ -11,7 +11,7 @@ class TimecardTransactionTest < ActiveSupport::TestCase
 
 
   test "between" do
-    assert_equal(363, TimecardTransaction.between("2017-12-03", "2017-12-09").count)
+    assert_equal(358, TimecardTransaction.between("2017-12-03", "2017-12-09").count)
     assert_equal(0, TimecardTransaction.between("2017-12-03", "2017-12-09").where(:tc_date => "2017-12-02").count)
   end
 
@@ -42,6 +42,10 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal("Christmas", TimecardTransaction.find(179352).qb_notes)
     assert_equal("22648", TimecardTransaction.find(179772).qb_notes)
     assert_equal("", TimecardTransaction.find(179702).qb_notes)
+  end
+
+  test "qb_notes should return holiday name, even when holiday_id is 0" do
+    assert_equal("New Year&#039;s Day", TimecardTransaction.find(177681).qb_notes)
   end
 
 
