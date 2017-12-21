@@ -27,7 +27,7 @@ class TimecardTransaction < ActiveRecord::Base
     rescue NoMethodError => e
       return self.client&.full_name
     rescue StandardError => e
-      Rails.logger.error("Lookup customer name failed for Timecard #{self.id} with error #{e}")
+      QbwcError.create(:worker_class => "TimecardTransaction#lookup_customer_name", :model_id => self.id, :error_message => "#{e}")
       return ""
     end
   end
