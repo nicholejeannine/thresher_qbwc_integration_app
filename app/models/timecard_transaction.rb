@@ -43,7 +43,7 @@ class TimecardTransaction < ActiveRecord::Base
 
   def qb_notes
     if holiday_id
-      self.holiday.name
+      Holiday.where(:date => self.tc_date).first.name
     elsif ticket_id
       self.ticket_id.to_s
     else ""
