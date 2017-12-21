@@ -15,7 +15,7 @@ class TimecardTransaction < ActiveRecord::Base
 
   def lookup_customer_name
     begin
-      if holiday_id && holiday_id > 0
+      if holiday_id
         return "TCP:Business"
       elsif self.project_id && self.project.full_name
         self.project.full_name
@@ -42,7 +42,7 @@ class TimecardTransaction < ActiveRecord::Base
   end
 
   def qb_notes
-    if holiday_id && holiday_id > 0
+    if holiday_id
       self.holiday.name
     elsif ticket_id
       self.ticket_id.to_s
