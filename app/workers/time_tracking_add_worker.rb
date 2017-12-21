@@ -6,7 +6,7 @@ class TimeTrackingAddWorker <  QBWC::Worker
     timecard = TimecardTransaction.find(data.to_i)
     timecard.tc_status =  "QB Stored"
     timecard.save
-      
+
     rescue StandardError => e
       QbwcError.create(:worker_class => "Time Tracking Add", :error_message => "#{e.backtrace}")
     end
