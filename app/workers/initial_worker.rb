@@ -48,7 +48,13 @@ class InitialWorker < QBWC::Worker
 				    :max_returned => 100,
 				    :include_line_items => true
 		    }
-		    }]
+		    },
+	    {:employee_query_rq => {
+			 :active_status => "All",
+			 :from_modified_date => last_ran,
+	  :include_ret_element => ['ListID', 'Name', 'IsActive', 'FirstName', 'MiddleName', 'LastName']
+			 }
+	}]
 	end
 
 
@@ -63,6 +69,7 @@ class InitialWorker < QBWC::Worker
 			 r['purchase_order_ret']&.each{|qb|PurchaseOrder.parse_qb_response(qb)}
 			 r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
 		   r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
+			 r['employee_ret']&.each{|qb|QbEmployee.parse_qb_response(qb)}
 		 rescue StandardError => e
 		   QbwcError.create(:worker_class => self.class.name, :error_message => e)
 		 end

@@ -69,7 +69,13 @@ class QueryWorker < QBWC::Worker
           },
            :include_line_items => true
         }
-        }]
+        },
+        {:employee_query_rq => {
+                    :active_status => "All",
+                    :from_modified_date => last_ran,
+                    :include_ret_element => ['ListID', 'Name', 'IsActive', 'FirstName', 'MiddleName', 'LastName']
+                }
+                }]
   end
 
   def handle_response(r, session, job, request, data)
@@ -77,12 +83,13 @@ class QueryWorker < QBWC::Worker
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
    begin
       r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
-       r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
+      r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
       r['estimate_ret']&.each{|qb|Estimate.parse_qb_response(qb)}
       r['sales_order_ret']&.each{|qb|SalesOrder.parse_qb_response(qb)}
       r['purchase_order_ret']&.each{|qb|PurchaseOrder.parse_qb_response(qb)}
       r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
       r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
+      r['employee_ret']&.each{|qb|QbEmployee.parse_qb_response(qb)}
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
