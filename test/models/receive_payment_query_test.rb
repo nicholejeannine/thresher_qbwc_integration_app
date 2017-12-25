@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/receive_payment_hash'
 
-class ReceivePaymentTest < ActiveSupport::TestCase
+class ReceivePaymentQueryTest < ActiveSupport::TestCase
   include ReceivePaymentHash
 
   test "can parse a simple hash" do

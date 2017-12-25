@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/job_hash'
 
-class JobTest < ActiveSupport::TestCase
+class JobQueryTest < ActiveSupport::TestCase
   include JobHash
 
   test "can parse simple qb response" do

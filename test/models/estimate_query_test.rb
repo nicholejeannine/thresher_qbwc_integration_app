@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/estimate_hash'
 
-class EstimateTest < ActiveSupport::TestCase
+class EstimateQueryTest < ActiveSupport::TestCase
   include EstimateHash
 
   test "can parse a simple hash" do

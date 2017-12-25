@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/vendor_hash'
 
-class VendorTest < ActiveSupport::TestCase
+class VendorQueryTest < ActiveSupport::TestCase
   include VendorHash
 
   test "can parse simple qb response" do

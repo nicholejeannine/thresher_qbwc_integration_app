@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/client_hash'
 
-class ClientTest < ActiveSupport::TestCase
+class ClientQueryTest < ActiveSupport::TestCase
   include ClientHash
 
   test "can parse simple qb response" do

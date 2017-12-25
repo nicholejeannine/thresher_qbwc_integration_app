@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/project_hash'
 
-class ProjectTest < ActiveSupport::TestCase
+class ProjectQueryTest < ActiveSupport::TestCase
   include ProjectHash
 
   test "can parse simple qb response" do assert_equal(1, Project.count, "should equal one")
