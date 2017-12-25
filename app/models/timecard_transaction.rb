@@ -62,10 +62,11 @@ class TimecardTransaction < ActiveRecord::Base
   # }
   # }
   # return implode("", $serviceCodeArray);
-  def qb_item_service
-    # return "Video:0100" unless ticket_id.present?
-    # service_code_array = [self.ticket.ticket_type_id, self.ticket.ticket_subtype1_id, self.ticket.ticket_subtype2_id]
-    # # return tick_types
+  def service_code
+    if ticket_id.present?
+      service_code = "Video:0".concat(self.ticket.service_code)
+      return "Video:0100" if service_code == "Video:0000"
+    end
     "Video:0100"
   end
 
@@ -83,7 +84,7 @@ class TimecardTransaction < ActiveRecord::Base
   end
 
   def build_request
-      {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => "#{tc_date}", :entity_ref => {:list_id => "#{self.employee.employee_list_id}"}, :customer_ref => {:full_name => "#{self.lookup_customer_name}"}, :item_service_ref => {:full_name => "#{self.qb_item_service}"}, :duration => "#{qb_duration}", :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "#{self.qb_payroll_ref}"}, :notes => "#{self.qb_notes}", :billable_status => "NotBillable"}}}
+      {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => "#{tc_date}", :entity_ref => {:list_id => "#{self.employee.employee_list_id}"}, :customer_ref => {:full_name => "#{self.lookup_customer_name}"}, :item_service_ref => {:full_name => "#{self.service_code}"}, :duration => "#{qb_duration}", :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "#{self.qb_payroll_ref}"}, :notes => "#{self.qb_notes}", :billable_status => "NotBillable"}}}
   end
 
 end

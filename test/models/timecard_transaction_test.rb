@@ -49,10 +49,10 @@ class TimecardTransactionTest < ActiveSupport::TestCase
   end
 
 
-  test "qb_item_service should return item service code based on ticket type" do
-    assert_equal("Video:0100", TimecardTransaction.find(179753).qb_item_service)
-    assert_equal("Video:0300", TimecardTransaction.find(19838).qb_item_service)
-    assert_equal("Video:0120", TimecardTransaction.find(175126).qb_item_service)
+  test "TimecardTransaction#service_code should be based on ticket type" do
+    assert_equal("Video:0100", TimecardTransaction.find(179753).service_code)
+    assert_equal("Video:0300", TimecardTransaction.find(19838).service_code)
+    assert_equal("Video:0120", TimecardTransaction.find(175126).service_code)
   end
 
   test "qb_payroll_ref" do
