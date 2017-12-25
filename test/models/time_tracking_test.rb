@@ -2,7 +2,7 @@ require 'test_helper'
 ENV['RAILS_ENV'] = 'development'
 class TimeTrackingTest < ActiveSupport::TestCase
 
-  test "between" do
+  test "between - run in console" do
     assert_not_equal(0, TimeTracking.between("2017-11-03", "2017-12-09").count)
     assert_equal(0, TimeTracking.between("2017-12-03", "2017-12-09").where(:txn_date => "2017-12-02").count)
   end
