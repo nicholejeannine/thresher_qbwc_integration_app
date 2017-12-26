@@ -10,10 +10,6 @@ class TimeTrackingsController < ApplicationController
     else
       @entries = TimeTracking.all
     end
-    @entries.each do |e|
-      e.format_qb_duration
-      e.tc_date
-    end
     render json: @entries
   end
 

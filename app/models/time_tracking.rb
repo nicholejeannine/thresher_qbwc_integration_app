@@ -1,4 +1,5 @@
 class TimeTracking < ApplicationRecord
+  after_find :tc_date, :format_qb_duration
 
   # grab all time tracking entries between a specified start and end date
   def self.between(start_date, end_date)
