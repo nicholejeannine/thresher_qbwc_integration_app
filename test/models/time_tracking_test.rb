@@ -7,10 +7,10 @@ class TimeTrackingTest < ActiveSupport::TestCase
     assert_equal(0, TimeTracking.between("2017-12-03", "2017-12-09").where(:txn_date => "2017-12-02").count)
   end
 
-  test "from_qb_duration - run in console" do
-    assert_equal(8.0, TimeTracking.first.from_qb_duration)
-    assert_equal(7.5, TimeTracking.find(260).from_qb_duration)
-    assert_equal(2.25, TimeTracking.find(88).from_qb_duration)
+  test "format_qb_duration - run in console" do
+    assert_equal(8.0, TimeTracking.first.format_qb_duration)
+    assert_equal(7.5, TimeTracking.find(260).format_qb_duration)
+    assert_equal(2.25, TimeTracking.find(88).format_qb_duration)
   end
 
   test "tc_date - run in console" do
