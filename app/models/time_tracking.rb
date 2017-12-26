@@ -1,6 +1,8 @@
 class TimeTracking < ApplicationRecord
-  after_find :format_qb_duration
-  after_find :tc_date
+  after_find do |t|
+    t.duration = format_qb_duration
+    t.txn_date = tc_date
+  end
 
   # grab all time tracking entries between a specified start and end date
   def self.between(start_date, end_date)
@@ -12,11 +14,11 @@ class TimeTracking < ApplicationRecord
     hours = self.duration.remove(/PT/).match(/[\d]+/).to_s || 0
     minutes = (self.duration.split("H")[1].remove("M").to_f/60.0 || 0)
     minutes = minutes.to_s.split(".")[1] || 0
-    self.duration = "#{hours}.#{minutes}"
+    "#{hours}.#{minutes}"
   end
 
   def tc_date
-    self.txn_date = txn_date.strftime('%F')
+    self.txn_date.strftime('%F')
   end
 end
 
