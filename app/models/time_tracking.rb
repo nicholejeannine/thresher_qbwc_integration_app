@@ -7,8 +7,8 @@ class TimeTracking < ApplicationRecord
   end
 
   def format_fields
-    format_qb_duration
     tc_date
+    format_qb_duration
   end
 
 
@@ -23,7 +23,7 @@ class TimeTracking < ApplicationRecord
   end
 
   def tc_date
-    self.txn_date = self.txn_date.strftime('%F')
+    self.duration = txn_date.strftime('%F')
   end
 end
 
