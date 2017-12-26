@@ -10,7 +10,7 @@ class TimeTrackingsController < ApplicationController
     else
       @entries = TimeTracking.all
     end
-    render json: @entries
+    render json: @entries.to_json(:only => [:employee_full_name, :customer_full_name, :item_service, :notes], :methods => [:format_qb_duration, :tc_date])
   end
 
   # post '/time_trackings
