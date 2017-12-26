@@ -11,8 +11,8 @@ class TimeTrackingsController < ApplicationController
       @entries = TimeTracking.all
     end
     @entries.each do |e|
-      e.duration = e.format_qb_duration
-      e.txn_date = e.tc_date
+      e.format_qb_duration
+      e.tc_date
     end
     render json: @entries
   end
