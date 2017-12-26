@@ -9,6 +9,7 @@ class TimeTrackingsController < ApplicationController
       @entries = TimeTracking.between(start_date, end_date).all
     else
       @entries = TimeTracking.all
+    end
     @entries.each do |e|
       e.duration = e.format_qb_duration
       e.txn_date = e.tc_date
