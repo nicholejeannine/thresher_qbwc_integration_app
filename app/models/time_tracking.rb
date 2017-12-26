@@ -1,12 +1,18 @@
 class TimeTracking < ApplicationRecord
-  after_find :tc_date, :format_qb_duration
+  after_find :format_fields
 
   # grab all time tracking entries between a specified start and end date
   def self.between(start_date, end_date)
     where('`txn_date` >= ?', start_date).where('`txn_date` <= ?', end_date).order(:employee_full_name, :txn_date)
   end
 
+  def format_fields
+    format_qb_duration
+    tc_date
+  end
 
+
+  private
 
   # Time tracking in Quickbooks is formatted as "PT8H0M" ... Need to convert to "8.0" for API.
   def format_qb_duration
@@ -17,7 +23,7 @@ class TimeTracking < ApplicationRecord
   end
 
   def tc_date
-    self.txn_date = self.txn_date.to_date.iso8601
+    self.txn_date = self.txn_date.strftime('%F')
   end
 end
 
