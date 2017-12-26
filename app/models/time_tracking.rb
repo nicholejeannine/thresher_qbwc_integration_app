@@ -17,5 +17,10 @@ class TimeTracking < ApplicationRecord
     self.txn_date = txn_date.strftime('%F')
   end
 
+  # Format the "notes" column so that the nulls show up as blanks, instead of the word "null"
+  def format_notes
+    self.notes = notes.blank? ? "" : notes
+  end
+
 end
 
