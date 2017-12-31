@@ -6,9 +6,9 @@ class TimecardTransactionsController < ApplicationController
     if params[:start_date] && params[:end_date]
       start_date = params[:start_date]
       end_date = params[:end_date]
-      @entries = TimecardTransaction.between(start_date, end_date).all
+      @entries = TimecardTransaction.between(start_date, end_date).where(:tc_status => "Locked").all
     else
-      @entries = TimecardTransaction.all
+      @entries = TimecardTransaction.where(:tc_status => "Locked").all
     end
     render json: @entries
   end
