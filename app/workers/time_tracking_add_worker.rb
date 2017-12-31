@@ -8,7 +8,7 @@ class TimeTrackingAddWorker <  QBWC::Worker
     timecard.save
     QBWC.delete_job(job)
     rescue StandardError => e
-      QbwcError.create(:worker_class => "Time Tracking Add", :error_message => "#{e.backtrace}")
+      QbwcError.create(:worker_class => "TimeTrackingAddWorker", :model_id => data, :error_message => "#{e}")
     end
   end
 end
