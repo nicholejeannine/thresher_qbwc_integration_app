@@ -9,9 +9,16 @@ class TimecardTransaction < ActiveRecord::Base
 
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where('`tc_status` = "Locked"')
+    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
   end
 
+  scope :stored, -> {
+    where(:tc_status => "QB Stored")
+  }
+
+  scope :locked, -> {
+    where(:tc_status => "Locked")
+  }
 
   def lookup_customer_name
     begin
