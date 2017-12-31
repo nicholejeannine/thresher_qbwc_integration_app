@@ -7,11 +7,6 @@ class TimecardTransaction < ActiveRecord::Base
   belongs_to :project, optional: true
   belongs_to :ticket, optional: true
 
-  # grab all timecards between a specified start and end date
-  def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
-  end
-
   scope :stored, -> {
     where(:tc_status => "QB Stored")
   }
@@ -20,9 +15,18 @@ class TimecardTransaction < ActiveRecord::Base
     where(:tc_status => "Locked")
   }
 
-  scope :holiday, -> {
-     where.not(:holiday_id => nil)
-  }
+  def holiday?
+    holiday_id.present?
+  end
+
+  
+  
+  # grab all timecards between a specified start and end date
+  def self.between(start_date, end_date)
+    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+  end
+
+
 
   def lookup_customer_name
     begin
