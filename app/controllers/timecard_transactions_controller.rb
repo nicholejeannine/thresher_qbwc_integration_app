@@ -1,4 +1,4 @@
-class TimeTrackingsController < ApplicationController
+class TimecardTransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   # get '/time_trackings'
