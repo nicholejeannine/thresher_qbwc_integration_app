@@ -10,7 +10,7 @@ class Ticket < ActiveRecord::Base
     two = self.ticket_subtype1&.service_code || "0"
     three = self.ticket_subtype2&.service_code || "0"
     service_code = "Video:0#{one}#{two}#{three}"
-    if service_code == "Video:O000"
+    if service_code == "Video:0000"
       "Video:0100"
     else
       service_code
