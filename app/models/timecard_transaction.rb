@@ -29,10 +29,10 @@ class TimecardTransaction < ActiveRecord::Base
 
 
   def lookup_customer_name
-    begin
-      if self.project_id && self.project.full_name
+      begin
+      if self.project_id && self.project.list_id
         self.project.full_name
-      elsif self.job_id && self.job.full_name
+      elsif self.job_id && self.job.list_id
         self.job.full_name
       else
        self.client.full_name
