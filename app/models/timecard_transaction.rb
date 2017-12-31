@@ -30,9 +30,7 @@ class TimecardTransaction < ActiveRecord::Base
 
   def lookup_customer_name
     begin
-      if holiday_id
-        return "TCP:Business"
-      elsif self.project_id && self.project.full_name
+      if self.project_id && self.project.full_name
         self.project.full_name
       elsif self.job_id && self.job.full_name
         self.job.full_name
@@ -73,9 +71,7 @@ class TimecardTransaction < ActiveRecord::Base
 
 
   def qb_payroll_ref
-    if holiday_id
-      "Hourly Holiday Rate"
-    elsif project_id == 914
+    if project_id == 914
       "Hourly PTO Rate"
     elsif project_id == 913
       "Hourly TWOP Rate"
@@ -85,7 +81,11 @@ class TimecardTransaction < ActiveRecord::Base
   end
 
   def build_request
+    if holiday?
+      {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => "#{tc_date}", :entity_ref => {:list_id => "#{self.employee.employee_list_id}"}, :customer_ref => {:full_name => "TCP:Business"}, :duration => "#{qb_duration}", :payroll_item_wage_ref => {:full_name => "Hourly Holiday Rate"}, :notes => "#{self.qb_notes}", :billable_status => "NotBillable"}}}
+    else
       {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => "#{tc_date}", :entity_ref => {:list_id => "#{self.employee.employee_list_id}"}, :customer_ref => {:full_name => "#{self.lookup_customer_name}"}, :item_service_ref => {:full_name => "#{self.service_code}"}, :duration => "#{qb_duration}", :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "#{self.qb_payroll_ref}"}, :notes => "#{self.qb_notes}", :billable_status => "NotBillable"}}}
+    end
   end
 
 end
