@@ -1,7 +1,7 @@
 class TimecardTransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  # get '/time_trackings'
+  # get '/timecard_transactions'
   def index
     if params[:start_date] && params[:end_date]
       start_date = params[:start_date]
