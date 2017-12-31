@@ -2,21 +2,22 @@ class TimecardTransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   # get '/timecard_transactions' - "Portal-side" timecards that may or may not have been stored yet
-  ## TODO: THIS COULD REALLY SUPPORT A PARAM FOR LOCKED/STORED
-  def index
-    if params[:start_date] && params[:end_date]
-      start_date = params[:start_date]
-      end_date = params[:end_date]
-      @entries = TimecardTransaction.between(start_date, end_date).all
-    else
-      @entries = TimecardTransaction.all
-    end
-    render json: @entries
-  end
+  # def index
+  #   if params[:start_date] && params[:end_date]
+  #     start_date = params[:start_date]
+  #     end_date = params[:end_date]
+  #     @entries = TimecardTransaction.between(start_date, end_date).all
+  #   else
+  #     @entries = TimecardTransaction.all
+  #   end
+  #   render json: @entries
+  # end
   
-  def show
-    @timecard = TimecardTransaction.find(params[:id])
-    render json: @timecard
+  # show the timecard transactions that are about to be sent to Quickbooks
+  def new
+    start_date = params[:start_date]
+    end_date = params[:end_date]
+    @timecards = TimecardTransaction.between(start_date, end_date).locked.order(:tc_status, :tc_date, :employee_id)
   end
 
   # post '/time_trackings - creates new "TimeTrackingAdd Requests" for the Web Connector, only if time card transaction is locked but not already "QB Stored"

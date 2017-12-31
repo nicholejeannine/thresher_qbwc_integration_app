@@ -6,6 +6,7 @@ class TimecardTransaction < ActiveRecord::Base
   belongs_to :job, optional: true
   belongs_to :project, optional: true
   belongs_to :ticket, optional: true
+  belongs_to :qb_employee, class_name: "QbEmployee", foreign_key: "employee_id"
 
   scope :stored, -> {
     where(:tc_status => "QB Stored")
@@ -23,10 +24,8 @@ class TimecardTransaction < ActiveRecord::Base
   
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+    includes(:employee, :qb_employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
   end
-
-
 
   def lookup_customer_name
       begin
