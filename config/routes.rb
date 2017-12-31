@@ -6,9 +6,8 @@ Rails.application.routes.draw do
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
   get 'qbwc_jobs' => 'qbwc_jobs#index'
-  resources :timecard_transactions, only: [:index, :show]
+  resources :timecard_transactions, only: [:index, :show, :create]
   get 'time_trackings' => 'time_trackings#index'
-  post 'time_trackings' => 'time_trackings#add_request'
 
   root to: 'home#index'
 end
