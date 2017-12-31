@@ -20,6 +20,10 @@ class TimecardTransaction < ActiveRecord::Base
     where(:tc_status => "Locked")
   }
 
+  scope :holiday, -> {
+     where.not(:holiday_id => nil)
+  }
+
   def lookup_customer_name
     begin
       if holiday_id
