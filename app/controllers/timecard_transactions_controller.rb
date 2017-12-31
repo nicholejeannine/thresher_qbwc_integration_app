@@ -10,11 +10,13 @@ class TimecardTransactionsController < ApplicationController
     else
       @entries = TimecardTransaction.all
     end
+    render json: @entries
   end
   
   def show
     jobs = QBWC::ActiveRecord::Job::QbwcJob.where(:worker_class => "TimeTrackingAddWorker").pluck(:data)
     @timecards = TimecardTransaction.find(jobs)
+    render json: @timecards
   end
 
 end
