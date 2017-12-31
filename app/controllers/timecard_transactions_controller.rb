@@ -1,7 +1,8 @@
 class TimecardTransactionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  # get '/timecard_transactions'
+  # get '/timecard_transactions' - "Portal-side" timecards that may or may not have been stored yet
+  ## TODO: THIS COULD REALLY SUPPORT A PARAM FOR LOCKED/STORED
   def index
     if params[:start_date] && params[:end_date]
       start_date = params[:start_date]
@@ -18,7 +19,7 @@ class TimecardTransactionsController < ApplicationController
     render json: @timecard
   end
 
-  # post '/time_trackings
+  # post '/time_trackings - creates new "TimeTrackingAdd Requests" for the Web Connector, only if time card transaction is locked but not already "QB Stored"
   def create
     start_date = params[:start_date]
     end_date = params[:end_date]
