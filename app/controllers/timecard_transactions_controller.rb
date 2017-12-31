@@ -14,9 +14,8 @@ class TimecardTransactionsController < ApplicationController
   end
   
   def show
-    jobs = QBWC::ActiveRecord::Job::QbwcJob.where(:worker_class => "TimeTrackingAddWorker").pluck(:data)
-    @timecards = TimecardTransaction.find(jobs)
-    render json: @timecards
+    @timecard = TimecardTransaction.find(params[:id])
+    render json: @timecard
   end
 
 end

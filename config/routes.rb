@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
   get 'qbwc_jobs' => 'qbwc_jobs#index'
-  get 'time_card_transactions' => 'timecard_transactions#index'
+  resources :timecard_transactions, only: [:index, :show]
   get 'time_trackings' => 'time_trackings#index'
   post 'time_trackings' => 'time_trackings#add_request'
 
