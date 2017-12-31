@@ -11,9 +11,8 @@ class Ticket < ActiveRecord::Base
     three = self.ticket_subtype2&.service_code || "0"
     service_code = "Video:0#{one}#{two}#{three}"
     if service_code == "Video:0000"
-      "Video:0100"
-    else
-      service_code
+      return nil
     end
+    service_code
   end
 end
