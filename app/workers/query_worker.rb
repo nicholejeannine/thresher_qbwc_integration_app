@@ -75,7 +75,15 @@ class QueryWorker < QBWC::Worker
                     :from_modified_date => last_ran,
                     :include_ret_element => ['ListID', 'Name', 'IsActive', 'FirstName', 'MiddleName', 'LastName']
                 }
-                }]
+                },
+    {:time_tracking_query_rq => {
+        :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+        :max_returned => 100,
+        :modified_date_range_filter => {
+            :from_modified_date => last_ran
+        }
+    }
+    }]
   end
 
   def handle_response(r, session, job, request, data)
@@ -90,6 +98,7 @@ class QueryWorker < QBWC::Worker
       r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
       r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
       r['employee_ret']&.each{|qb|QbEmployee.parse_qb_response(qb)}
+      r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
