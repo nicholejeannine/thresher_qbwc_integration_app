@@ -1,3 +1,5 @@
+# "TimeTracking" is what Quickbooks calls a TimecardTransaction. A "TimeTracking" is therefore a Thresher TimecardTransaction that has been properly handled by Quickbooks. After the entry is imported into Quickbooks, it returns the record as the response, which gets stored in the time_trackings table.
+
 class TimeTracking < ApplicationRecord
 
   # grab all time tracking entries between a specified start and end date
@@ -5,7 +7,7 @@ class TimeTracking < ApplicationRecord
     where('`txn_date` >= ?', start_date).where('`txn_date` <= ?', end_date).order(:employee_full_name, :txn_date)
   end
 
-  # Time tracking in Quickbooks is formatted as "PT8H0M" ... Need to convert to "8.0" for API.
+  # Time tracking in Quickbooks is formatted as "PT8H0M" ... Need to convert to "8.0" for display.
   def format_qb_duration
     hours = self.duration.remove(/PT/).match(/[\d]+/).to_s || 0
     minutes = (self.duration.split("H")[1].remove("M").to_f/60.0 || 0)
@@ -13,6 +15,7 @@ class TimeTracking < ApplicationRecord
     self.duration = "#{hours}.#{minutes}"
   end
 
+  # Change the Quickbooks-formatted datetime string to a regular date ("Y-m-d")
   def tc_date
     self.txn_date = txn_date.strftime('%F')
   end

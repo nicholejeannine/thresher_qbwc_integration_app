@@ -1,3 +1,4 @@
+# This is one long functional mess. It takes a Quickbooks Query Hash and parses it into keys and values that can then be stored in the database as a serializable hash.
 class QuickbooksQueryResponse < Qbxml::Hash
   include QuickbooksTypes
 

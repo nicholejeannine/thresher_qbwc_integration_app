@@ -6,10 +6,12 @@ class ApplicationRecord < ActiveRecord::Base
     key.in?(self.column_names)
   end
 
+  # Grabs all "appropriate" column names from the model stored in the database.
   def self.default_hash
     Hash[*self.columns.map{|k|[k.name, k.default]}.flatten].except("id")
   end
 
+  # To parse the QueryResponse, we determine whether the qb_id is "list_id" (for list types), "txn_id" (for transaction types), or "txn_line_id" (for line items). We then search for the id in the appropriate table, and either retrieve it (if it already exists) or create it. The QueryResponse hash is then parsed into key/value pairs, and the record is updated in the database.
   def self.parse_qb_response(qb)
     begin
       qb_value = qb[self.qb_id]
