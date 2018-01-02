@@ -29,8 +29,7 @@ module Railstest
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
-        # origins '65.19.134.198, 10.10.20.21, http://local.alopias.com'
-        resource '*', :headers => :any, :methods => [:get, :post, :options]
+        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
 
