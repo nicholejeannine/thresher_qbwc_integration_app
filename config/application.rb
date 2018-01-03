@@ -32,6 +32,10 @@ module Railstest
         resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
       end
     end
+    
+    def set_access_control_headers
+      headers['Access-Control-Allow-Origin'] = '*'
+    end
 
     config.beginning_of_week = :sunday
     config.time_zone = 'Pacific Time (US & Canada)'
