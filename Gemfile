@@ -6,11 +6,11 @@ gem 'rails', '>= 5.1.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
 # Use Puma as the app server
-gem 'puma'
-gem 'rack-cors', :require => 'rack/cors'
+# gem 'rack-cors', :require => 'rack/cors'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 group :development, :test do
+  gem 'puma'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   # Provides a better error page for Rails and other Rack apps. Includes source code inspection, a live REPL and local/instance variable inspection for all stack frames.

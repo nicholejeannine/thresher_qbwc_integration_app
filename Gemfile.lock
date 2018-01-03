@@ -96,7 +96,6 @@ GEM
       builder (~> 3.0)
       nokogiri (~> 1.5)
     rack (2.0.3)
-    rack-cors (1.0.2)
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
     rails (5.1.4)
@@ -166,7 +165,6 @@ DEPENDENCIES
   pry-rails
   puma
   qbwc!
-  rack-cors
   rails (>= 5.1.1)
   spring
   spring-watcher-listen
