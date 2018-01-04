@@ -12,7 +12,7 @@ class TimeTrackingAddWorker <  QBWC::Worker
       QbwcError.create(:worker_class => "TimeTrackingAddWorker", :model_id => data, :error_message => "#{e}")
     end
     else
-      QbwcError.create(:worker_class => "TimeTrackingAddWorker", :model_id => data, :error_message => "#{r['xml_attributes']['statusMessage']}")
+      QbwcTimecardError.create(:worker_class => "TimeTrackingAddWorker", :model_id => data, :error_message => "#{r['xml_attributes']['statusMessage']}")
     end
   end
 end
