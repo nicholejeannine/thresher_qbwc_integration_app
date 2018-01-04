@@ -7,16 +7,20 @@ class TimecardTransactionsController < ApplicationController
   #     end_date = params[:end_date]
   #     @entries = TimecardTransaction.between(start_date, end_date).all
   #   else
-  #     @entries = TimecardTransaction.all
+  #     @entries = TimecardTransaction.locked
   #   end
   #   render json: @entries
   # end
   
-  # show the timecard transactions that are about to be sent to Quickbooks
+  # show the timecard transactions that are in "locked" state
   def new
-    start_date = params[:start_date]
-    end_date = params[:end_date]
-    @timecards = TimecardTransaction.between(start_date, end_date).locked.order(:tc_status, :tc_date, :employee_id)
+    if params[:start_date] && params[:end_date]
+      start_date = params[:start_date]
+      end_date = params[:end_date]
+      @timecards = TimecardTransaction.between(start_date, end_date).locked.order(:tc_status, :tc_date, :employee_id)
+    else
+      @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)
+    end
   end
 
   # post '/time_trackings - creates new "TimeTrackingAdd Requests" for the Web Connector, only if time card transaction is locked but not already "QB Stored"

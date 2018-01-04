@@ -12,7 +12,9 @@ class TimeTrackingsController < ApplicationController
     render json: @entries.to_json(:only => [:customer_full_name, :item_service, :payroll_item_wage, :notes, :employee_full_name], :methods => [:format_qb_duration, :tc_date, :format_notes])
   end
 
-  
-
+  # get '/time_trackings/errors'
+  def errors
+    render plain: "ERRORS!"
+  end
 
 end
