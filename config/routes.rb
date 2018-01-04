@@ -1,17 +1,25 @@
 # For details on this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
  
-  # Quickbooks stuff
+  # SOAP / Web Connector required routes
   get 'qbwc/action' => 'qbwc#_generate_wsdl'
   get 'qbwc/qwc' => 'qbwc#qwc'
   wash_out :qbwc
   
-  # View all the timecard-related jobs
-  get 'qbwc_jobs' => 'qbwc_jobs#index'
+  # Custom routes
+  # QBWC jobs - just display right now, TODO: add edit/update routes
+  resources :qbwc_jobs, only: [:index]
   
-  # Page to view previous exports (when button pressed, a link to "successes", a link to "errors")
+  # Timecard Transactions come from Thresher - they are timecard entries, not necessarily in Quickbooks yet.
+  # TODO: "new/create actions might go in the qbwc_jobs controller ..."
   resources :timecard_transactions, only: [:new, :create]
+  
+  # Time trackings are successfully exported time card transactions - we can just view those
   get 'time_trackings' => 'time_trackings#index'
+  
+  # View errors in time trackings? (TODO: might go in jobs??)
+  get 'time_trackings/errors' => 'time_trackings#errors'
+  
 
-  root to: 'home#index'
+  root to: 'qbwc_jobs#index'
 end
