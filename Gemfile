@@ -5,6 +5,8 @@ ruby '2.4.2'
 gem 'rails', '>= 5.1.1'
 # Use mysql as the database for Active Record
 gem 'mysql2'
+gem 'jquery-rails'
+gem 'turbolinks', '~> 5.0.0'
 # Use Puma as the app server
 # gem 'rack-cors', :require => 'rack/cors'
 # Use Capistrano for deployment

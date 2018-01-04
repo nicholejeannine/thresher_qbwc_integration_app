@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   # View errors in time trackings? (TODO: might go in jobs??)
   get 'time_trackings/errors' => 'time_trackings#errors'
   
+  # Time card exports
+  get 'timecard_exports' => 'timecard_exports#index'
+  post 'timecard_exports' => 'timecard_exports#create', as: :create_export
 
   root to: 'qbwc_jobs#index'
 end
