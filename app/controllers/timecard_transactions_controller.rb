@@ -1,4 +1,5 @@
 class TimecardTransactionsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   # get '/timecard_transactions' - "Portal-side" timecards that may or may not have been stored yet
   # def index

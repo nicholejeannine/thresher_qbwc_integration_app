@@ -1,4 +1,5 @@
 class TimeTrackingsController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   # get '/time_trackings' - time trackings are only returned after successful import (they are received in the response from the QBWC Add Request - so these will all be "QB Stored")
   def index
