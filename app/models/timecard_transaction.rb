@@ -25,6 +25,12 @@ class TimecardTransaction < ActiveRecord::Base
   def holiday?
     holiday_id.present?
   end
+  
+  # Determine whether the lookup_customer_name method will produce a valid Quickbooks Customer
+  ### TODO: FILL IN THIS METHOD
+  def valid_customer?
+    true
+  end
 
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
