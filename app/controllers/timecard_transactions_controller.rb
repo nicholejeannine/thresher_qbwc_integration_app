@@ -24,7 +24,7 @@ class TimecardTransactionsController < ApplicationController
       @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)\
     end
     if @timecards.count == 0
-      render plain: "All Timecard Transactions Successfully Stored in Quickbooks"
+      render inline: "<p class='text-center'>No Pending Timecard Transactions for this date range.</p>"
     end
   end
 
