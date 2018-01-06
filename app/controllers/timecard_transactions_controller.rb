@@ -22,6 +22,9 @@ class TimecardTransactionsController < ApplicationController
       @timecards = TimecardTransaction.between(start_date, end_date).locked.order(:tc_status, :tc_date, :employee_id)
     else
       @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)
+      if @timecards.count == 0
+        render plain: "All Timecard Transactions Successfully Stored in Quickbooks"
+      end
     end
   end
 
