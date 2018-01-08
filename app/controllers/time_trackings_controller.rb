@@ -11,6 +11,9 @@ class TimeTrackingsController < ApplicationController
     else
       @entries = TimeTracking.all
     end
+    if @entries.count == 0
+      render inline: "<p class='text-center'>No Successful Timecard Transactions stored in Quickbooks for this date range.</p>"
+    end
   end
 
   # get '/time_trackings/errors'
