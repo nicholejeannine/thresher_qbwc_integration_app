@@ -29,7 +29,7 @@ class TimecardTransaction < ActiveRecord::Base
   # Determine whether the lookup_customer_name method will produce a valid Quickbooks Customer
   ### TODO: FILL IN THIS METHOD
   def valid_customer?
-    true
+    !self.lookup_customer_name.nil?
   end
 
   # grab all timecards between a specified start and end date
@@ -39,19 +39,22 @@ class TimecardTransaction < ActiveRecord::Base
 
   # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
   def lookup_customer_name
-      begin
-      if self.project_id && self.project.list_id
+    begin
+      if holiday_id
+        "TCP:Business"
+      elsif project_id
         self.project.full_name
-      elsif self.job_id && self.job.list_id
+      elsif job_id
         self.job.full_name
       else
-       self.client.full_name
+        self.client.full_name
       end
     rescue NoMethodError => e
-      return self.client&.full_name
+      QbwcTimecardError.create(:worker_class => "TimecardTransaction#lookup_customer_name", :model_id => self.id, :error_message => "#{e}")
+      return nil
     rescue StandardError => e
       QbwcError.create(:worker_class => "TimecardTransaction#lookup_customer_name", :model_id => self.id, :error_message => "#{e}")
-      return ""
+      return nil
     end
   end
 

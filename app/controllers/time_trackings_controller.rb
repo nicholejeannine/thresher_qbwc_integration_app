@@ -1,5 +1,6 @@
 class TimeTrackingsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  layout false
 
   # get '/time_trackings' - time trackings are only returned after successful import (they are received in the response from the QBWC Add Request - so these will all be "QB Stored")
   def index
@@ -10,7 +11,6 @@ class TimeTrackingsController < ApplicationController
     else
       @entries = TimeTracking.all
     end
-    render json: @entries.to_json(:only => [:customer_full_name, :item_service, :payroll_item_wage, :notes, :employee_full_name], :methods => [:format_qb_duration, :tc_date, :format_notes])
   end
 
   # get '/time_trackings/errors'
