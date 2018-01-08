@@ -10,6 +10,7 @@ class TimecardTransaction < ActiveRecord::Base
   belongs_to :project, optional: true
   belongs_to :ticket, optional: true
   belongs_to :qb_employee, class_name: "QbEmployee", foreign_key: "employee_id"
+  attr_reader :customer_full_name
 
   # Queries for records that have been stored by Quickbooks.
   scope :stored, -> {
@@ -26,15 +27,25 @@ class TimecardTransaction < ActiveRecord::Base
     holiday_id.present?
   end
   
-  # Determine whether the lookup_customer_name method will produce a valid Quickbooks Customer
-  ### TODO: FILL IN THIS METHOD
-  def valid_customer?
-    !self.lookup_customer_name.nil?
-  end
-
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
     includes(:employee, :qb_employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+  end
+  
+  def customer_full_name
+    begin
+      if holiday_id
+       return "TCP:Business"
+      elsif project_id
+        return project.full_name
+      elsif job_id
+        return self.job.full_name
+      else
+        return self.client.full_name
+      end
+    rescue NoMethodError => e
+        return nil
+    end
   end
 
   # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
