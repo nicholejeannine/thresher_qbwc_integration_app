@@ -31,7 +31,8 @@ class TimecardTransaction < ActiveRecord::Base
   def self.between(start_date, end_date)
     includes(:employee, :qb_employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
   end
-  
+
+  # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
   def customer_full_name
     begin
       if holiday_id
@@ -45,27 +46,6 @@ class TimecardTransaction < ActiveRecord::Base
       end
     rescue NoMethodError => e
         return nil
-    end
-  end
-
-  # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
-  def lookup_customer_name
-    begin
-      if holiday_id
-        "TCP:Business"
-      elsif project_id
-        self.project.full_name
-      elsif job_id
-        self.job.full_name
-      else
-        self.client.full_name
-      end
-    rescue NoMethodError => e
-      QbwcTimecardError.create(:worker_class => "TimecardTransaction#lookup_customer_name", :model_id => self.id, :error_message => "#{e}")
-      return nil
-    rescue StandardError => e
-      QbwcError.create(:worker_class => "TimecardTransaction#lookup_customer_name", :model_id => self.id, :error_message => "#{e}")
-      return nil
     end
   end
   

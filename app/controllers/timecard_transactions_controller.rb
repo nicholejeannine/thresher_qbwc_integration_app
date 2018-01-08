@@ -33,8 +33,10 @@ class TimecardTransactionsController < ApplicationController
     timecards.each_with_index do |t, i|
       if t.valid_customer?
         request = t.build_request
-      # Process each request as a separate job, and store the TimecardTransaction PKEY in the data field. This field can be accessed by the response returned from the Web Connector, so we will use it to find the same TimeCard Transaction and change the status to "QB Stored" if it is successful
+       # Process each request as a separate job, and store the TimecardTransaction PKEY in the data field. This field can be accessed by the response returned from the Web Connector, so we will use it to find the same TimeCard Transaction and change the status to "QB Stored" if it is successful
         QBWC.add_job("AddTimeCards#{t.id}", true, '', TimeTrackingAddWorker, request, t.id)
+      else
+        QbwcTimecardError.create(:worker_class => "TimeCardTransaction Add Reqeust", :model_id => t.id, :error_message => "No Quickbooks customer found for request #{i}t, Timecard transaction with id #{t.id}")
       end
     end
     render plain: "OK"
