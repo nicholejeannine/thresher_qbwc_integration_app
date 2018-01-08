@@ -2,6 +2,9 @@
   <div class="col-md-12 text-center">
     <div><a class="btn btn-warning" data-toggle="collapse" aria-expanded="true" aria-controls="collapse-1" role="button" href="#collapse-1">Not in Quickbooks<span class="caret"> </span></a>
       <div class="collapse in" id="collapse-1">
+        <% if @timecards.count == 0 %>
+          <p class='text-center'>No Pending Timecard Transactions for this date range.</p>
+        <% else %>
         <h3><%=@timecards.size %> pending </h3>
         <table class="table table-striped table-bordered table-condensed">
           <thead>
@@ -37,6 +40,7 @@
           <div class="col-md-12 text-center">
             <button id="exportToQb" class="btn btn-primary" type="submit">Send To Quickbooks</button>
           </div>
+          <% end %>
       </div>
     </div>
   </div>

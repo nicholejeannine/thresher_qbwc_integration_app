@@ -23,9 +23,6 @@ class TimecardTransactionsController < ApplicationController
     else
       @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)
     end
-    if @timecards.count == 0
-      render inline: "<p class='text-center'>No Pending Timecard Transactions for this date range.</p>"
-    end
   end
 
   # post '/time_trackings - creates new "TimeTrackingAdd Requests" for the Web Connector, only if time card transaction is locked but not already "QB Stored"
