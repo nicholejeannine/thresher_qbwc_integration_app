@@ -68,6 +68,10 @@ class TimecardTransaction < ActiveRecord::Base
       return nil
     end
   end
+  
+  def valid_customer?
+    customer_full_name.present?
+  end
 
   # The "duration" field comes in as an exponential number - e.g., "0.875e1".  For Quickbooks to handle it, we need to convert it to a really strange QB format, e.g. "PT8H45M"
   def qb_duration
