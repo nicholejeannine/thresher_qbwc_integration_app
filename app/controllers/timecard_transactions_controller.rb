@@ -21,7 +21,7 @@ class TimecardTransactionsController < ApplicationController
       end_date = params[:end_date]
       @timecards = TimecardTransaction.between(start_date, end_date).locked.order(:tc_status, :tc_date, :employee_id)
     else
-      @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)\
+      @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)
     end
     if @timecards.count == 0
       render inline: "<p class='text-center'>No Pending Timecard Transactions for this date range.</p>"
