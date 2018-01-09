@@ -10,6 +10,7 @@ class TimecardTransaction < ActiveRecord::Base
   belongs_to :project, optional: true
   belongs_to :ticket, optional: true
   attr_reader :customer_full_name
+  attr_reader :employee_name
 
   # Queries for records that have been stored by Quickbooks.
   scope :stored, -> {
