@@ -28,7 +28,7 @@ class TimecardTransaction < ActiveRecord::Base
   
   # grab all timecards between a specified start and end date
   def self.between(start_date, end_date)
-    includes(:employee, :qb_employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
   end
 
   # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
