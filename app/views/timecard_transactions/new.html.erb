@@ -21,7 +21,7 @@
           <tbody>
           <% @timecards.each do |t| %>
               <tr>
-                <td> <%= t.employee&.first_name %> <% t.employee&.last_name %></td>
+                <td> <%= t.employee_name %></td>
                 <td> <%= t.customer_full_name %></td>
                 <td> <%= t.qb_notes %></td>
                 <td> <%= t.duration %></td>
