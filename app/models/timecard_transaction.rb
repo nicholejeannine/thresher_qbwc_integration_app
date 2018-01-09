@@ -3,13 +3,12 @@
 class TimecardTransaction < ActiveRecord::Base
   # We're using a view, so tell the view to treat "id" as a primary key
   self.primary_key= :id
-  belongs_to :employee
+  belongs_to :employee, optional: true
   belongs_to :holiday, optional: true
   belongs_to :client
   belongs_to :job, optional: true
   belongs_to :project, optional: true
   belongs_to :ticket, optional: true
-  belongs_to :qb_employee, class_name: "QbEmployee", foreign_key: "employee_id"
   attr_reader :customer_full_name
 
   # Queries for records that have been stored by Quickbooks.
