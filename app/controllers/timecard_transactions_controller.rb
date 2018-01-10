@@ -19,9 +19,9 @@ class TimecardTransactionsController < ApplicationController
     if params[:start_date] && params[:end_date]
       start_date = params[:start_date]
       end_date = params[:end_date]
-      @timecards = TimecardTransaction.between(start_date, end_date).locked.order(:employee_id, :tc_date)
+      @timecards = TimecardTransaction.between(start_date, end_date).locked.sort_by(&:employee_name)
     else
-      @timecards = TimecardTransaction.locked.order(:tc_status, :tc_date, :employee_id)
+      @timecards = TimecardTransaction.locked.sort_by(&:employee_name)
     end
   end
 

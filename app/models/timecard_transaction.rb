@@ -27,9 +27,9 @@ class TimecardTransaction < ActiveRecord::Base
     holiday_id.present?
   end
   
-  # grab all timecards between a specified start and end date
+  # grab all timecards between a specified start and end date - only query active employees
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date)
+    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(employees: { is_active: 1 })
   end
 
   # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
@@ -54,7 +54,7 @@ class TimecardTransaction < ActiveRecord::Base
   end
   
   def employee_name
-    "#{self.employee&.last_name}, #{self.employee&.first_name} #{self.employee&.middle_name}"
+    "#{self.employee&.last_name}, #{self.employee&.first_name} #{self.employee&.middle_name}".strip
   end
 
   # The "duration" field comes in as an exponential number - e.g., "0.875e1".  For Quickbooks to handle it, we need to convert it to a really strange QB format, e.g. "PT8H45M"
