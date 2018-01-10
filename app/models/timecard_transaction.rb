@@ -34,23 +34,24 @@ class TimecardTransaction < ActiveRecord::Base
 
   # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
   def customer_full_name
-    begin
-      if holiday_id
-       return "TCP:Business"
-      elsif project_id
-        return project.full_name
-      elsif job_id
-        return self.job.full_name
-      else
-        return self.client.full_name
-      end
-    rescue NoMethodError => e
-        return nil
+    c = nil
+    if self.holiday_id
+        c = "TCP:Business"
+    elsif self.project_id && self.project.list_id
+       c = self.project.full_name
+      elsif self.job_id && self.job.list_id
+        c = self.job.full_name
+      elsif self.client_id && self.client.list_id
+        c = self.client.full_name
     end
+    if c.nil?
+      QbwcTimecardError.create(:worker_class => "TimecardTransaction#customer_full_name", :model_id => self.id, :error_message => "Customer lookup failed")
+    end
+    c
   end
   
   def valid_customer?
-    customer_full_name.present?
+    !customer_full_name.nil?
   end
   
   def employee_name
