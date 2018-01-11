@@ -1,9 +1,5 @@
 class CustomerQueryWorker < QBWC::Worker
   
-  def last_ran
-    QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_customers').first&.updated_at&.localtime&.strftime '%FT%R'
-  end
-  
   
   def requests(job, session, data)
     [
@@ -11,7 +7,6 @@ class CustomerQueryWorker < QBWC::Worker
             :xml_attributes => { :requestID =>1, :iterator  => "Start" },
             :max_returned => 100,
             :active_status => "All",
-            :from_modified_date => last_ran,
             :include_ret_element => ['ListID', 'FullName']
         }
         }]
