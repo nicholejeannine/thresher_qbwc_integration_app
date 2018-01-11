@@ -1,1 +1,0 @@
-CREATE OR REPLACE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `ProjectFullName` AS SELECT `p`.`Project_PKEY` AS `Project_PKEY`,concat(`f`.`FullName`,':P-',`p`.`Project_PKEY`) AS `project_full_name` FROM (`Thresher`.`Project` `p` join `Thresher`.`FullName` `f` on((`f`.`Jobs_PKEY` = `p`.`FK_Jobs_PKEY`)))
