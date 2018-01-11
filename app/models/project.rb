@@ -6,7 +6,15 @@ class Project < ApplicationRecord
   def self.parse_qb_response(qb)
     begin
       # First try to find by list id
-      p = Project.find_by("list_id" => qb['list_id']) || Project.find_by("full_name" => qb["full_name"])
+      p = Project.find_by("list_id" => qb['list_id'])
+      if p.nil?
+        p_id = ProjectFullName.find_by("project_full_name" => qb["full_name"])&.project_full_name
+        if p_id
+          p = Project.new
+          p.id = p_id
+          p.list_id = qb['list_id']
+        end
+      end
       if p.nil?
         raise StandardError, "Project Not Found"
       else
