@@ -404,6 +404,15 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["vendor_name"], name: "vendor_name", using: :btree
   end
 
+  create_table "qb_customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", primary_key: false do |t|
+    t.string "list_id"
+    t.string "full_name"
+    t.string "customer_type"
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
+    t.index ["full_name"], name: "full_name", unique: true, using: :btree
+  end
+  
+
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "worker_class",                null: false
     t.string   "model_id"
