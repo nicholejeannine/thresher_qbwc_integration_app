@@ -1,2 +1,2 @@
-class QbwcTimecardError < ApplicationRecord
+class QbwcError < ApplicationRecord
 end
