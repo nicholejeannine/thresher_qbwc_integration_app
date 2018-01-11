@@ -14,7 +14,7 @@ class QbCustomer < ApplicationRecord
     begin
       c = self.find_or_create_by(:list_id => qb['list_id'])
       c.full_name = qb['full_name']
-      c.customer_type = self.customer_type(qb['full_name'])
+      # c.customer_type = self.customer_type(qb['full_name'])
       c.save
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
