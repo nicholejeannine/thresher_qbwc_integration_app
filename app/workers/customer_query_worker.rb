@@ -1,4 +1,4 @@
-class CustomerQueryWorker < ApplicationWorker
+class CustomerQueryWorker < QBWC::Worker
   
   def last_ran
     QBWC::ActiveRecord::Job::QbwcJob.where(:name => 'list_customers').first&.updated_at&.localtime&.strftime '%FT%R'
@@ -26,6 +26,5 @@ class CustomerQueryWorker < ApplicationWorker
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
-
   end
 end
