@@ -12,10 +12,10 @@ class QbCustomer < ApplicationRecord
   
   def self.parse_qb_customer_response(qb)
     begin
-      c = self.find_or_create_by("list_id" => qb['list_id'])
-      c.full_name = qb['full_name']
-      # c.customer_type = self.customer_type(qb['full_name'])
-      c.save
+      qb_value = qb[self.qb_id]
+      c = self.find_or_create_by(self.qb_id => qb_value)
+      hash = QuickbooksQueryResponse.parse(qb, self, c.id)
+      c.update(hash)
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end

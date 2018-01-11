@@ -5,7 +5,7 @@ module QuickbooksTypes
 		# Determine whether the model's unique id is called "list_id", "txn_id", or "txn_line_id"
 		def self.qb_id
 			case self.name
-			when "Client", "Job", "Project", "Vendor", "Employee", "QbEmployee"
+			when "Client", "Job", "Project", "Vendor", "Employee", "QbEmployee", "QbCustomer"
 				"list_id"
 			when "Estimate", "Invoice", "PurchaseOrder", "ReceivePayment", "SalesOrder", "TimeTracking"
 				"txn_id"
