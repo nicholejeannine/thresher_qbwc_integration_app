@@ -1,6 +1,7 @@
 class Project < ApplicationRecord
   before_save :titleize_job_status
 
+  # FIXME: THIS MUST LOOK AT A THE VIEW OF STUFF IN THE PORTAL
   def self.parse_qb_response(qb)
     begin
       # First try to find by list id
