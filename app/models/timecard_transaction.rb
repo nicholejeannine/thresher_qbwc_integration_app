@@ -8,6 +8,7 @@ class TimecardTransaction < ActiveRecord::Base
   belongs_to :ticket, optional: true
   # belongs_to :thresher_customer_full_name, optional: true
   attr_reader :employee_name
+  attr_reader :customer_full_name
 
   # Queries for records that have been stored by Quickbooks.
   scope :stored, -> {
@@ -43,13 +44,14 @@ class TimecardTransaction < ActiveRecord::Base
     end
     # TODO - NOW CHECK IF THIS RECORD THAT EXISTS IN THE PORTAL EXISTS IN QUICKBOOKS
     if c.blank?
-      QbwcTimecardError.create(:worker_class => "TimecardTransaction#customer_full_name", :model_id => self.id, :error_message => "Customer lookup failed")
+      QbwcTimecardError.create(:worker_class => "TimecardTransaction#customer_full_name", :model_id => self.id, :error_message => "Unable to follow Portal breadcrumbs to retrieve full name for TimecardTrans_PKEY #{self.id}")
     end
     c
   end
   
   def valid_customer?
-    !customer_full_name.blank?
+    ## TODO
+    true
   end
   
   def employee_name
