@@ -50,8 +50,7 @@ class TimecardTransaction < ActiveRecord::Base
   end
   
   def valid_customer?
-    ## TODO
-    true
+    QbCustomer.where(:full_name => self.customer_full_name).exists?
   end
   
   def employee_name
