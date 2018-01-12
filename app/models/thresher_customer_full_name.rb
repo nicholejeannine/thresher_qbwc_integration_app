@@ -1,5 +1,5 @@
 class ThresherCustomerFullName < ActiveRecord::Base
-  self.primary_key= :id
-  has_many :timecard_transactions
+  # belongs_to :nameable, polymorphic: true
+  # has_many :timecard_transactions
   
 end

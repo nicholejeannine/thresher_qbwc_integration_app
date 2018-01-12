@@ -6,7 +6,7 @@ class TimecardTransaction < ActiveRecord::Base
   belongs_to :employee, optional: true
   belongs_to :holiday, optional: true
   belongs_to :ticket, optional: true
-  belongs_to :thresher_customer_full_name, optional: true
+  # belongs_to :thresher_customer_full_name, optional: true
   attr_reader :employee_name
 
   # Queries for records that have been stored by Quickbooks.
@@ -26,7 +26,7 @@ class TimecardTransaction < ActiveRecord::Base
   
   # grab all timecards between a specified start and end date - only query active employees
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :project, :job, :client, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(employees: { is_active: 1 })
+    includes(:employee, :holiday, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(employees: { is_active: 1 })
   end
 
   # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
@@ -34,13 +34,14 @@ class TimecardTransaction < ActiveRecord::Base
     c = ""
     if self.holiday_id
         c = "TCP:Business"
-    elsif self.project_id && self.project&.list_id
-       c = self.project.full_name
-      elsif self.job_id && self.job&.list_id
-        c = self.job.full_name
-      elsif self.client_id && self.client.list_id
-        c = self.client.full_name
+    elsif self.project_id
+        c = ThresherCustomerFullName.where(:customer_type => "Project").where(:customer_id => self.project_id).first.full_name
+    elsif self.job_id
+      c = ThresherCustomerFullName.where(:customer_type => "Job").where(:customer_id => self.job_id).first.full_name
+    elsif self.client_id
+      c = ThresherCustomerFullName.where(:customer_type => "Client").where(:customer_id => self.client_id).first.full_name
     end
+    # TODO - NOW CHECK IF THIS RECORD THAT EXISTS IN THE PORTAL EXISTS IN QUICKBOOKS
     if c.blank?
       QbwcTimecardError.create(:worker_class => "TimecardTransaction#customer_full_name", :model_id => self.id, :error_message => "Customer lookup failed")
     end
