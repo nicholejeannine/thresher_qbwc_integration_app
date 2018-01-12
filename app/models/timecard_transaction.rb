@@ -5,11 +5,8 @@ class TimecardTransaction < ActiveRecord::Base
   self.primary_key= :id
   belongs_to :employee, optional: true
   belongs_to :holiday, optional: true
-  belongs_to :client
-  belongs_to :job, optional: true
-  belongs_to :project, optional: true
   belongs_to :ticket, optional: true
-  attr_reader :customer_full_name
+  belongs_to :thresher_customer_full_name, optional: true
   attr_reader :employee_name
 
   # Queries for records that have been stored by Quickbooks.
@@ -41,7 +38,7 @@ class TimecardTransaction < ActiveRecord::Base
        c = self.project.full_name
       elsif self.job_id && self.job&.list_id
         c = self.job.full_name
-      elsif self.client_id && self&.client.list_id
+      elsif self.client_id && self.client.list_id
         c = self.client.full_name
     end
     if c.blank?
