@@ -27,7 +27,7 @@
         <% if t.valid_customer? %>
           <td class="bg-success"><i class="glyphicon glyphicon-ok"></i></td>
         <% else %>
-          <td class="bg-danger">Invalid customer name for Timecard Transation <%= t.id %></td>
+          <td class="bg-danger">No matching customer name found in Quickbooks</td>
         <% end %>
       </tr>
     <% end %>
