@@ -3,34 +3,46 @@
 class TimecardTransaction < ActiveRecord::Base
   # We're using a view, so tell the view to treat "id" as a primary key
   self.primary_key= :id
+  
+  # belongs_to has optional: true attributes to protect for nulls (in the case of an inactive employee who still has a time card entry, a non-holiday, or hours logged to a project without a ticket)
   belongs_to :employee, optional: true
   belongs_to :holiday, optional: true
   belongs_to :ticket, optional: true
-  # belongs_to :thresher_customer_full_name, optional: true
+  
+  # Lookups are required to obtain the employee's full name and the customer full name (on the portal side)
   attr_reader :employee_name
   attr_reader :customer_full_name
 
-  # Queries for records that have been stored by Quickbooks.
+  # Creates a scope of all PORTAL time card records that have been marked as "stored by Quickbooks"
   scope :stored, -> {
     where(:tc_status => "QB Stored")
   }
 
-  # Queries for records that are "Locked" (ready to be processed, but not processed yet)
+  # Creates a scope of all PORTAL time card records that have been marked "Locked", eg not yet stored by Quickbooks, but ready to be sent to Quickbooks
   scope :locked, -> {
     where(:tc_status => "Locked")
   }
 
-  # A function to determine if the timecard transaction date is a holiday
+  # Creates a scope of all PORTAL time card records that have been marked "Pending", eg in the Quickbooks job queue, but not yet successfully stored in Quickbooks.
+  scope :pending, -> {
+    where(:tc_status => "Pending")
+  }
+
+  # Returns a boolean - was the time card transaction on a holiday?
   def holiday?
     holiday_id.present?
   end
   
   # grab all timecards between a specified start and end date - only query active employees
+  # CLEANUP: Create a separate scope for "is active employees", or rename "between" to be more clear that only ACTIVE employees are returned in the scope.
+  # THe "includes" command preloads all relevant table table, allowing faster data processing
   def self.between(start_date, end_date)
     includes(:employee, :holiday, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(employees: { is_active: 1 })
   end
 
-  # Attempt to find the Quickbooks Customer name assigned to the current client/job/project/holiday
+  # TODO: CHANGE METHOD TO thresher_full_name
+  # Checks the calculated thresher_customer_full_name, from the thresher_customer_full_name view.
+  # If no match is found, it currently puts an error in the QbwcTimecardError table, with some information about where the error took place
   def customer_full_name
     c = ""
     if self.holiday_id
@@ -49,10 +61,12 @@ class TimecardTransaction < ActiveRecord::Base
     c
   end
   
+  # Checks THIS portal record, and checks the Quickooks customers list for a match
   def valid_customer?
     QbCustomer.where(:full_name => self.customer_full_name).exists?
   end
   
+  # Calculates the employee's full name as it is shown in the portal. This is for display purposes ONLY, it is NOT send to Quickboks in the form (when it's sent to Quickbooks, we use the Quickbooks entity_ref_list_id, because that always matches and doesn't change)
   def employee_name
     "#{self.employee&.last_name}, #{self.employee&.first_name} #{self.employee&.middle_name}".strip
   end
@@ -65,7 +79,7 @@ class TimecardTransaction < ActiveRecord::Base
     "PT#{hours}H#{minutes}M"
   end
 
-  # The "notes" field is either the name of the holiday, or the ticket id
+  # The "notes" field is either the name of the holiday, or the ticket id, or it is blank.
   def qb_notes
     if holiday_id
       Holiday.where(:date => self.tc_date).first.name
@@ -91,7 +105,7 @@ class TimecardTransaction < ActiveRecord::Base
     end
   end
 
-  # Build the TimeTrackingAdd Request. This looks slightly different for holidays than non-holidays. The QBWC Programmers Guide specifically states NOT to send empty vallues when possible, so the holiday request is necessarily shorter.
+  # Build the TimeTrackingAdd Request. This looks slightly different for holidays than non-holidays. The QBWC Programmers Guide specifically states NOT to send empty values when possible (it could break the XML); holidays require mostly static fields, and fewer lookups, so the request is much shorter.
   def build_request
     if holiday?
       {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => "#{tc_date}", :entity_ref => {:list_id => "#{self.employee.employee_list_id}"}, :customer_ref => {:full_name => "TCP:Business"}, :duration => "#{qb_duration}", :payroll_item_wage_ref => {:full_name => "Hourly Holiday Rate"}, :notes => "#{self.qb_notes}", :billable_status => "NotBillable"}}}
