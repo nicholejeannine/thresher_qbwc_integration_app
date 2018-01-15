@@ -186,3 +186,5 @@ PTO: "Hourly PTO Rate" also "Hourly TWOP Rate"
 type 1 service code = 3
 type 99 service code = 
 
+# Put this error on a title attribute in HTML on views/timecard_transactions/new
+QbwcTimecardError.create(:worker_class => "TimeTrackingsController#create", :model_id => t.id, :error_message => "No Quickbooks customer found for request TimecardTrans #{t.id}, project_id #{t.project_id}, job_id #{t.job_id}, customer #{t.client_id}, employee #{t&.employee&.employee_list_id}, date #{t.tc_date}")
