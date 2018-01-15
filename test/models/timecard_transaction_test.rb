@@ -19,11 +19,12 @@ class TimecardTransactionTest < ActiveSupport::TestCase
 
   
   test "customer_full_name returns TCP:Business on holidays with holiday=0 (bug in portal code)" do
-    # assert_equal("TCP:Business", TimecardTransaction.find(179936).customer_full_name)
+    assert_equal("TCP:Business", TimecardTransaction.find(179936).customer_full_name)
   end
   
   test "customer_full_name returns the Quickbooks customer full name if there's a match" do
-  
+    assert_equal("General Assembly:Construction:P-659", TimecardTransaction.find(98686).customer_full_name)
+    
   end
   
   test "customer_full_name returns empty if no match" do
@@ -91,6 +92,7 @@ class TimecardTransactionTest < ActiveSupport::TestCase
   
   def setup
     QbwcTimecardError.destroy_all
+    QbwcError.destroy_all
   end
 
 end

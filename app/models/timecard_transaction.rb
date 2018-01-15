@@ -54,9 +54,6 @@ class TimecardTransaction < ActiveRecord::Base
     elsif self.client_id
       c = ThresherCustomerFullName.where(:customer_type => "Client").where(:customer_id => self.client_id).first.full_name
     end
-    if c.blank?
-      QbwcTimecardError.create(:worker_class => "TimecardTransaction#customer_full_name", :model_id => self.id, :error_message => "Unable to follow Portal breadcrumbs to retrieve full name for TimecardTrans_PKEY #{self.id}")
-    end
     c
   end
   
