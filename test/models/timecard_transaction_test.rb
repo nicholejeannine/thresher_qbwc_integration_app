@@ -24,23 +24,19 @@ class TimecardTransactionTest < ActiveSupport::TestCase
   
   test "customer_full_name returns the Quickbooks customer full name if there's a match" do
     assert_equal("General Assembly:Construction:P-659", TimecardTransaction.find(98686).customer_full_name)
-    
   end
   
   test "customer_full_name returns empty if no match" do
-  
-  end
-  
-  test "customer_full_name writes an entry to Timecard errors if no match" do
-  
+    assert_equal("", TimecardTransaction.find(181023).customer_full_name)
   end
   
   test "valid_customer? method determines whether customer_full_name is blank" do
-  
+    assert_equal(false, TimecardTransaction.find(181023).valid_customer?)
+    assert_equal(true, TimecardTransaction.find(98686).valid_customer?)
   end
   
   test "employee_name returns employee's name" do
-  
+    assert_equal("Castillo, Juan R", TimecardTransaction.find(98686).employee_name)
   end
   
   test "qb_duration returns a string formatted to Quickbooks-friendy duration format" do
@@ -85,11 +81,6 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal({:time_tracking_add_rq=> {:time_tracking_add=> {:txn_date=>"2017-09-04", :entity_ref=>{:list_id=>"800007EF-1303964767"}, :customer_ref=>{:full_name=>"TCP:Business"}, :item_service_ref=>{:full_name=>"Video:0100"}, :duration=>"PT8H0M", :class_ref=>{:list_id=>"200000-991719211"}, :payroll_item_wage_ref=>{:full_name=>"Hourly Holiday Rate"}, :notes=>"Labor Day", :billable_status=>"NotBillable"}}}, TimecardTransaction.find(170346).build_request)
   end
 
-  test "build request writes an error to Time card errors table for in invalid customer" do
-  
-  end
- 
-  
   def setup
     QbwcTimecardError.destroy_all
     QbwcError.destroy_all

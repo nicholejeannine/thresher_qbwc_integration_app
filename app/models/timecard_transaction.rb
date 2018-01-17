@@ -44,17 +44,19 @@ class TimecardTransaction < ActiveRecord::Base
   # Checks the calculated thresher_customer_full_name, from the thresher_customer_full_name view.
   # If no match is found, it currently puts an error in the QbwcTimecardError table, with some information about where the error took place
   def customer_full_name
-    c = ""
-    if self.holiday_id
-        c = "TCP:Business"
-    elsif self.project_id
-        c = ThresherCustomerFullName.where(:customer_type => "Project").where(:customer_id => self.project_id).first.full_name
-    elsif self.job_id
-      c = ThresherCustomerFullName.where(:customer_type => "Job").where(:customer_id => self.job_id).first.full_name
-    elsif self.client_id
-      c = ThresherCustomerFullName.where(:customer_type => "Client").where(:customer_id => self.client_id).first.full_name
+    begin
+      if self.holiday_id
+        "TCP:Business"
+      elsif self.project_id
+        ThresherCustomerFullName.where(:customer_type => "Project").where(:customer_id => self.project_id).first.full_name
+      elsif self.job_id
+        ThresherCustomerFullName.where(:customer_type => "Job").where(:customer_id => self.job_id).first.full_name
+      elsif self.client_id
+        ThresherCustomerFullName.where(:customer_type => "Client").where(:customer_id => self.client_id).first.full_name
+      end
+    rescue NoMethodError => e
+        return ""
     end
-    c
   end
   
   # Checks THIS portal record, and checks the Quickooks customers list for a match
