@@ -98,7 +98,7 @@ class QueryWorker < QBWC::Worker
       r['invoice_ret']&.each{|qb|Invoice.parse_qb_response(qb)}
       r['receive_payment_ret']&.each{|qb|ReceivePayment.parse_qb_response(qb)}
       r['employee_ret']&.each{|qb|QbEmployee.parse_qb_response(qb)}
-      r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
+      # r['time_tracking_ret']&.each{|qb|TimeTracking.parse_qb_response(qb)}
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
