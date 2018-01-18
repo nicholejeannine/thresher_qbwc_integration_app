@@ -27,7 +27,7 @@
         <% if t.valid_customer? %>
           <td class="bg-success"><i class="glyphicon glyphicon-ok"></i></td>
         <% else %>
-          <td class="bg-danger">No QB Customer found</td>
+          <td title='<%="No Quickbooks customer found for request TimecardTrans #{t.id}, project #{t.project_id}, job #{t.job_id}, customer #{t.client_id}"%>' class="bg-danger">No QB Customer found</td>
         <% end %>
       </tr>
     <% end %>
