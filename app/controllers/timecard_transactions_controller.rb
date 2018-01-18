@@ -34,6 +34,6 @@ class TimecardTransactionsController < ApplicationController
   def set_entries
     start_date = params[:start_date]
     end_date = params[:end_date]
-    @entries = TimecardTransaction.between(start_date, end_date).locked.reject{|x|x.valid_customer?}.map{|y|y.customer_full_name}.reject{|y|y.empty?}.uniq
+    @entries = TimecardTransaction.between(start_date, end_date).locked.reject{|x|x.valid_customer?}.map{|y|y.customer_full_name}.reject{|y|y.nil?}.uniq
   end
 end
