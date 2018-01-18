@@ -1,7 +1,7 @@
 <%- headers = ['Invalid Name'] -%>
 <%= CSV.generate_line headers %>
 <%- @entries.each do |entry| -%>
-  <% if entry.nil? %>
+  <% if entry.empty? %>
     <%= CSV.generate_line(["Blank entry"]) -%>
     <% else %>
   <%= CSV.generate_line([entry]) -%>
