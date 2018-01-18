@@ -1,9 +1,5 @@
-<%- headers = ['Invalid Name'] -%>
+<%- headers = ["Invalid Customer Name"] -%>
 <%= CSV.generate_line headers %>
 <%- @entries.each do |entry| -%>
-  <% if entry.empty? %>
-    <%= CSV.generate_line(["Blank entry"]) -%>
-    <% else %>
   <%= CSV.generate_line([entry]) -%>
-    <% end %>
 <%- end -%>
