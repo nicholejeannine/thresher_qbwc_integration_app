@@ -111,5 +111,13 @@ class TimecardTransaction < ActiveRecord::Base
       {:time_tracking_add_rq => {:time_tracking_add => {:txn_date => "#{tc_date}", :entity_ref => {:list_id => "#{self.employee.employee_list_id}"}, :customer_ref => {:full_name => "#{self.customer_full_name}"}, :item_service_ref => {:full_name => "#{self.service_code}"}, :duration => "#{qb_duration}", :class_ref => {:list_id => "200000-991719211"}, :payroll_item_wage_ref => {:full_name => "#{self.qb_payroll_ref}"}, :notes => "#{self.qb_notes}", :billable_status => "NotBillable"}}}
     end
   end
+  
+  # # Export to csv format
+  # def self.to_csv
+  #   attributes = %w(&:customer_full_name)
+  #   CSV.generate do |csv|
+  #     csv << attributes
+  #   end
+  # end
 
 end
