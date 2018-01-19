@@ -1,5 +1,5 @@
-<%- headers = ["Invalid Customer Name"] -%>
+<%- headers = ['Employee Name', 'Customer/Job', 'Notes', 'Duration', 'Date'] -%>
 <%= CSV.generate_line headers %>
 <%- @entries.each do |entry| -%>
-  <%= CSV.generate_line([entry]) -%>
+  <%= CSV.generate_line([entry.employee_name, entry.customer_full_name, entry.qb_notes, entry.duration, entry.date ]) -%>
 <%- end -%>
