@@ -1,38 +1,30 @@
-<div class="row">
-  <div class="col-md-12 text-center">
-    <div><a class="btn btn-success" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-2" role="button" href="#collapse-2">Stored in Quickbooks<span class="caret"> </span></a>
-      <div class="collapse" id="collapse-2">
-       <% if @entries.count == 0 %>
-        <p class='text-center'>No Successful Timecard Transactions stored in Quickbooks for this date range.</p>
-        <% else %>
-          <h4 class="text-center"><%= "#{@entries.size} successful entries" %></h4>
-        <table id="success" class="table table-condensed table-bordered table-striped">
-          <thead>
-          <tr>
-            <th>Employee Name</th>
-            <th>Customer/Job</th>
-            <th>Notes</th>
-            <th>Duration</th>
-            <th>Date</th>
-            <th>Timestamp</th>
-          </tr>
-          </thead>
-          <tbody id="previousImports">
+<% if @entries.count == 0 %>
+  <p class='text-center'>No Successful Timecard Transactions stored in Quickbooks for this date range.</p>
+<% else %>
+  <h4 class="text-center"><%= "#{@entries.size} successful entries" %></h4>
+  <table id="success" class="table table-condensed table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Employee Name</th>
+      <th>Customer/Job</th>
+      <th>Notes</th>
+      <th>Duration</th>
+      <th>Date</th>
+      <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody id="previousImports">
 
-       <%   @entries.each do |e| %>
-          <tr>
-            <td><%=  e.employee_full_name %></td>
-            <td><%= e.customer_full_name %></td>
-            <td><%= e.format_notes %></td>
-            <td><%= e.format_qb_duration %></td>
-            <td><%= e.tc_date %></td>
-            <td><%= e.time_modified %></td>
-          </tr>
-            <% end %>
-          </tbody>
-        </table>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</div>
+    <% @entries.each do |e| %>
+      <tr>
+        <td><%= e.employee_full_name %></td>
+        <td><%= e.customer_full_name %></td>
+        <td><%= e.format_notes %></td>
+        <td><%= e.format_qb_duration %></td>
+        <td><%= e.tc_date %></td>
+        <td><%= e.time_modified %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
