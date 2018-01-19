@@ -36,7 +36,7 @@ class TimecardTransactionTest < ActiveSupport::TestCase
   end
   
   test "employee_name returns employee's name" do
-    assert_equal("Castillo, Juan R", TimecardTransaction.find(98686).employee_name)
+    assert_equal("Castillo, Juan", TimecardTransaction.find(98686).employee_name)
   end
   
   test "qb_duration returns a string formatted to Quickbooks-friendy duration format" do
