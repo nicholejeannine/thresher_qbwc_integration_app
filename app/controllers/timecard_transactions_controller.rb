@@ -3,7 +3,7 @@ class TimecardTransactionsController < ApplicationController
   before_action :set_entries, only: :index
   layout false
 
-  # get '/timecard_transactions' - "Portal-side" timecards that may or may not have been stored yet
+  # get '/timecard_transactions.csv?start_date=2018-01-01&end_date=2018-01-07' - exports a csv file of time card entries with invalid customer names
   def index
     if params[:start_date] && params[:end_date]
       start_date = params[:start_date]
@@ -30,7 +30,7 @@ class TimecardTransactionsController < ApplicationController
   end
   
   private
-  # For index method (export to csv), export only the Thresher customer names associated with the unique set of time card transactions that have invalid customers. Reject empty values.
+  # For index method (export to csv), export only the Thresher customer names associated with the unique set of time card transactions that have invalid customers. 
   def set_entries
     start_date = params[:start_date]
     end_date = params[:end_date]
