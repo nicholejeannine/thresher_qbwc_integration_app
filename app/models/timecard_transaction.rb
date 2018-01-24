@@ -23,11 +23,6 @@ class TimecardTransaction < ActiveRecord::Base
     where(:tc_status => "Locked")
   }
 
-  # Creates a scope of all PORTAL time card records that have been marked "Pending", eg in the Quickbooks job queue, but not yet successfully stored in Quickbooks.
-  scope :pending, -> {
-    where(:tc_status => "Pending")
-  }
-
   # Returns a boolean - was the time card transaction on a holiday?
   def holiday?
     holiday_id.present?
