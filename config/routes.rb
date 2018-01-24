@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   # Timecard Transactions come from Thresher - they are timecard entries, not necessarily in Quickbooks yet.
   # TODO: "new/create actions might go in the qbwc_jobs controller ..."
   resources :timecard_transactions, only: [:index, :new]
-  
+  get '/timecard_transactions/preflight' => 'timecard_transactions#preflight'
+
   # Time trackings are successfully exported time card transactions - we can just view those
   resources :time_trackings, only: [:index, :create]
   
