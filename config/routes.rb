@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   # Time trackings are successfully exported time card transactions - we can just view those
   resources :time_trackings, only: [:index, :create]
   
-  # View errors in time trackings? (TODO: might go in jobs??)
-  get 'time_trackings/errors' => 'time_trackings#errors'
+  # # View errors in time trackings? (TODO: might go in jobs??)
+  # get 'time_trackings/errors' => 'time_trackings#errors'
   
   root to: 'qbwc_jobs#index'
 end
