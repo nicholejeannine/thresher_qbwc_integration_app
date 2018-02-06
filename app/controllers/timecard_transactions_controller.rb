@@ -29,15 +29,6 @@ class TimecardTransactionsController < ApplicationController
     end
   end
   
-  def preflight
-    if params[:start_date] && params[:end_date]
-      start_date = params[:start_date]
-      end_date = params[:end_date]
-      @timecards = TimecardTransaction.between(start_date, end_date).reject{|x|x.valid_customer?}.sort_by(&:employee_name)
-      render 'timecard_transactions/preflight'
-    end
-  end
-  
   private
   # For index method (export to csv), export only the Thresher customer names associated with the unique set of time card transactions that have invalid customers.
   def set_entries

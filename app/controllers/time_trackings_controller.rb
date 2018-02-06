@@ -13,11 +13,6 @@ class TimeTrackingsController < ApplicationController
     end
   end
 
-  # get '/time_trackings/errors'
-  def errors
-    render plain: "ERRORS!"
-  end
-
   # post '/time_trackings - creates new "TimeTrackingAdd Requests" for the Web Connector, only if time card transaction is locked but not already "QB Stored"
   def create
     start_date = params[:start_date]
