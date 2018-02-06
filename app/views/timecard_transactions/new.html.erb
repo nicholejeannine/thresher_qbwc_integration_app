@@ -2,7 +2,7 @@
   <p class='text-center'>No Pending Timecard Transactions for this date range.</p>
 <% else %>
   <div class="row">
-    <div class="text-center"><span class="bg-success">&emsp; <%= @timecards.count %> locked timecard transactions</span></div>
+    <div class="text-center"><span class="bg-success">There are <%= @timecards.count %> locked timecard transactions</span></div>
     <div class="text-center"><span class="bg-danger "><%= @timecards.count{|x|!x.valid_customer?} %> invalid customers</span></div>
     <div class="text-center"><span><a href="https://qb.thresher.com/timecard_transactions.csv?start_date=<%= params['start_date']%>&end_date=<%=params['end_date']%>">Export Invalid Customers</a></span></div>
 
