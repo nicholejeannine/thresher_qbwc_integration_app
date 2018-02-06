@@ -43,7 +43,7 @@ class TimecardTransactionsController < ApplicationController
   def set_entries
     start_date = params[:start_date]
     end_date = params[:end_date]
-    @entries = TimecardTransaction.between(start_date, end_date).locked.reject{|x|x.valid_customer?}.sort_by(&:employee_name)
+    @entries = TimecardTransaction.between(start_date, end_date).reject{|x|x.valid_customer?}.sort_by(&:employee_name)
   end
   
 end
