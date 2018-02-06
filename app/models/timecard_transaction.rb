@@ -14,8 +14,8 @@ class TimecardTransaction < ActiveRecord::Base
   attr_reader :customer_full_name
 
   # Creates a scope of all PORTAL time card records that have been marked as "stored by Quickbooks"
-  scope :stored, -> {
-    where(:tc_status => "QB Stored")
+  scope :unstored, -> {
+    where.not(:tc_status => "QB Stored")
   }
 
   # Creates a scope of all PORTAL time card records that have been marked "Locked", eg not yet stored by Quickbooks, but ready to be sent to Quickbooks
