@@ -1,4 +1,6 @@
+<hr/>
 <div class="text-center"><span><a href="https://qb.thresher.com/timecard_transactions.csv?start_date=<%= params['start_date']%>&end_date=<%=params['end_date']%>">Export Invalid Customers</a></span></div>
+<hr/>
 <% if @timecards.count == 0 %>
   <p class='text-center'>No Pending Timecard Transactions for this date range.</p>
 <% else %>
