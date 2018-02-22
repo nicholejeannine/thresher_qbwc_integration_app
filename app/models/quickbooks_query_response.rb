@@ -1,3 +1,4 @@
+# This is one long functional mess. It takes a Quickbooks Query Hash and parses it into keys and values that can then be stored in the database as a serializable hash.
 class QuickbooksQueryResponse < Qbxml::Hash
   include QuickbooksTypes
 
@@ -17,6 +18,9 @@ class QuickbooksQueryResponse < Qbxml::Hash
           default["vendor_name"] = value["full_name"]
         elsif $1 == 'customer'
           default["customer_full_name"] = value["full_name"]
+        elsif $1 == 'entity'
+          default['employee_list_id'] = value["list_id"]
+          default['employee_full_name'] = value["full_name"]
         else
           default["#{$1}"] = value['full_name']
         end

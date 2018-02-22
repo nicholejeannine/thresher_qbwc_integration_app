@@ -1,0 +1,30 @@
+<% if @entries.count == 0 %>
+  <p class='text-center'>No Successful Timecard Transactions stored in Quickbooks for this date range.</p>
+<% else %>
+  <h4 class="text-center"><%= "#{@entries.size} successful entries" %></h4>
+  <table id="successTable" class="table table-condensed table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Employee Name</th>
+      <th>Customer/Job</th>
+      <th>Notes</th>
+      <th>Duration</th>
+      <th>Date</th>
+      <th>Timestamp</th>
+    </tr>
+    </thead>
+    <tbody id="previousImports">
+
+    <% @entries.each do |e| %>
+      <tr>
+        <td><%= e.employee_full_name %></td>
+        <td><%= e.customer_full_name %></td>
+        <td><%= e.format_notes %></td>
+        <td><%= e.format_qb_duration %></td>
+        <td><%= e.tc_date %></td>
+        <td><%= e.time_modified %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

@@ -36,4 +36,4 @@ AS SELECT
    `PS`.`FK_ProgMan_Employees_PKEY` AS `FK_ProgMan_Employees_PKEY`,
    `PS`.`FK_TechLead_Employees_PKEY` AS `FK_TechLead_Employees_PKEY`,
    `PS`.`SO_Description` AS `SO_Description`
-FROM (`railstest_development`.`sales_orders` `RS` left join `Thresher`.`qSalesOrders` `PS` on((concat('SO-',`RS`.`ref_number`) = `PS`.`SO_Number`)));
+FROM (`qb`.`sales_orders` `RS` left join `Thresher`.`qSalesOrders` `PS` on((concat('SO-',`RS`.`ref_number`) = `PS`.`SO_Number`)));

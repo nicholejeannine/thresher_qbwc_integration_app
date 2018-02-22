@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/sales_order_hash'
 
-class SalesOrderTest < ActiveSupport::TestCase
+class SalesOrderQueryTest < ActiveSupport::TestCase
   include SalesOrderHash
 
   test "can parse a simple hash" do

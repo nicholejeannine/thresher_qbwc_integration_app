@@ -1,0 +1,6 @@
+<%- headers = ['Employee Last Name', 'Employee First Name', 'Customer/Job', 'Notes', 'Duration', 'Date', 'Status'] -%>
+<%= CSV.generate_line headers %>
+<%- @entries.each do |entry| -%>
+  <%- row = [entry.employee.last_name, entry.employee.first_name, entry.customer_full_name, entry.qb_notes, entry.duration, entry.tc_date.to_formatted_s(:db), entry.tc_status] -%>
+  <%= raw CSV.generate_line row -%>
+<%- end -%>

@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'fixtures/invoice_hash'
 
-class InvoiceTest < ActiveSupport::TestCase
+class InvoiceQueryTest < ActiveSupport::TestCase
   include InvoiceHash
 
   test "can parse a simple hash" do

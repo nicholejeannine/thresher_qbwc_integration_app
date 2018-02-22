@@ -404,6 +404,14 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["vendor_name"], name: "vendor_name", using: :btree
   end
 
+  create_table "qb_customers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", primary_key: false do |t|
+    t.string "list_id"
+    t.string "full_name"
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
+    t.index ["full_name"], name: "full_name", unique: true, using: :btree
+  end
+  
+
   create_table "qbwc_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "worker_class",                null: false
     t.string   "model_id"
@@ -412,6 +420,14 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.datetime "updated_at",                  null: false
   end
 
+  create_table "qbwc_timecard_errors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "worker_class"
+    t.string   "model_id"
+    t.text     "error_message", limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+  
   create_table "qbwc_history", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "began_at"
     t.string   "ticket"
@@ -450,6 +466,16 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.text     "pending_jobs", limit: 65535,             null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "qb_employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "list_id", default: "", null: false
+    t.string "name",      limit: 41
+    t.string "first_name",      limit: 25
+    t.string "middle_name",     limit: 5
+    t.string "last_name",     limit: 25
+    t.boolean "is_active", null: false, default: true
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
 
   create_table "receive_payments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -542,6 +568,26 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["is_fully_invoiced"], name: "is_fully_invoiced", using: :btree
     t.index ["ref_number"], name: "ref_number", using: :btree
     t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
+  end
+
+  create_table "time_trackings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "txn_id", null: false, default: ""
+    t.datetime "time_created"
+    t.datetime "time_modified"
+    t.string   "edit_sequence",              limit: 16
+    t.datetime "txn_date"
+    t.string   "employee_list_id",            limit: 209
+    t.string   "employee_full_name",           limit: 209
+    t.string   "customer_full_name",           limit: 209
+    t.string   "item_service",           limit: 159
+    t.string   "duration",              limit: 16
+    t.string   "payroll_item_wage",           limit: 209
+    t.string   "notes",           limit: 4095
+    t.string   "billable_status",           limit: 20
+    t.index ["txn_id"], name: "txn_id", unique: true, using: :btree
+    t.index ["customer_full_name"], name: "customer_full_name", using: :btree
+    t.index ["employee_list_id"], name: "employee_list_id", using: :btree
+    t.index ["item_service"], name: "item_service", using: :btree
   end
 
   create_table "vendors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

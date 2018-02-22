@@ -1,5 +1,7 @@
 class ReceivePayment < ApplicationRecord
   has_many :invoices, through: :invoices_receive_payments
+  
+  # A payment can have many invoices, and an invoice can have many payments. This method parses the "linked transactions" from the payments to create th invoices_receive_payments join table.
   def self.parse_linked_txn(ret, payment_id)
     begin
       ret.each do |hash|

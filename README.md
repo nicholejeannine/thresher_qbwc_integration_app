@@ -162,3 +162,29 @@ QuickBooks stores addresses as a single string. It does not store address detail
 
 The ship_to_address field will return an array of shipping addresses that have been previously used for that customer (or job, etc).  Whichever shipping address has been declared the "default" (in the Quickbooks GUI) will be returned as the `ship_address` value.
 
+
+
+# Quickbooks TimeCard Entry
+Weekly Timesheet used.
+
+- Customer Job is customer job
+- Service Item is Video:0100 is the default service item unless we're able to derive what that item is from the ticket types OR holiday/PTO/TWOP
+- Notes is the Ticket #
+- Payroll Item is always Hourly Level 1.
+- Class is Cabling thing (look at pre-existing) for anything NOT [Holiday, TWOP, PTO]
+- Notes: Either the holiday name or the ticket # (Look at previous stuffs)
+- Billable Field: Always "NotBillable"
+
+
+PTO: "Hourly PTO Rate" also "Hourly TWOP Rate"
+- HOLIDAYS: Put Payroll Item to "Hourly Holiday Rate"
+- grey out button after click on QB Export
+
+
+19838  Types:  1  99  0   code: video 0300
+
+type 1 service code = 3
+type 99 service code = 
+
+# Put this error on a title attribute in HTML on views/timecard_transactions/new
+QbwcTimecardError.create(:worker_class => "TimeTrackingsController#create", :model_id => t.id, :error_message => "No Quickbooks customer found for request TimecardTrans #{t.id}, project_id #{t.project_id}, job_id #{t.job_id}, customer #{t.client_id}, employee #{t&.employee&.employee_list_id}, date #{t.tc_date}")

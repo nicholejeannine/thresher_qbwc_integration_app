@@ -1,0 +1,46 @@
+<hr/>
+<div class="text-center"><span><a href="https://qb.thresher.com/timecard_transactions.csv?start_date=<%= params['start_date']%>&end_date=<%=params['end_date']%>">Export Invalid Customers</a></span></div>
+<hr/>
+<% if @timecards.count == 0 %>
+  <p class='text-center'>No Pending Timecard Transactions for this date range.</p>
+<% else %>
+  <div class="row">
+    <div class="text-center"><span id="timecardCount" class="bg-success">There are <%= @timecards.count %> locked timecard transactions</span></div>
+    <div class="text-center"><span class="bg-danger "><%= @timecards.count{|x|!x.valid_customer?} %> invalid customers</span></div>
+  </div>
+  <table id="pendingTable" class="table table-striped table-bordered table-condensed">
+    <thead>
+    <tr class="center">
+      <th>Employee Name</th>
+      <th>Customer/Job</th>
+      <th>Notes</th>
+      <th>Duration</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Error</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @timecards.each do |t| %>
+      <tr>
+        <td> <%= t.employee_name %></td>
+        <td> <%= t.customer_full_name %></td>
+        <td> <%= t.qb_notes %></td>
+        <td> <%= t.duration %></td>
+        <td> <%= t.tc_date.to_formatted_s(:db) %></td>
+        <td> <%= t.tc_status %></td>
+
+        <% if t.valid_customer? %>
+          <td class="bg-success"><i class="glyphicon glyphicon-ok"></i></td>
+        <% else %>
+          <td title='<%="No Quickbooks customer found for request TimecardTrans #{t.id}, project #{t.project_id}, job #{t.job_id}, customer #{t.client_id}"%>' class="bg-danger">No QB Customer found</td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <div class="col-md-12 text-center">
+    <button id="exportToQb" class="btn btn-primary" type="submit">Send To Quickbooks</button>
+  </div>
+<% end %>
+
