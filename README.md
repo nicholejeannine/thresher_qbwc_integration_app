@@ -188,3 +188,31 @@ type 99 service code =
 
 # Put this error on a title attribute in HTML on views/timecard_transactions/new
 QbwcTimecardError.create(:worker_class => "TimeTrackingsController#create", :model_id => t.id, :error_message => "No Quickbooks customer found for request TimecardTrans #{t.id}, project_id #{t.project_id}, job_id #{t.job_id}, customer #{t.client_id}, employee #{t&.employee&.employee_list_id}, date #{t.tc_date}")
+
+
+
+## HOW TO SELECT/GROUP BY CLIENTS (OUT OF ALL CUSTOMERS/JOBS/PROJECTS):
+
+`SELECT SUBSTRING_INDEX(customer_full_name, ':', 1 ) FROM TABLE`
+
+FULL QUERY (without date ranges) for estimates:
+
+`SELECT SUBSTRING_INDEX(customer_full_name, ':', 1 ) AS client, sales_rep, COUNT(*) AS count, SUM(total_amount) AS amount FROM `estimates` GROUP BY sales_rep, client`
+
+FULL QUERY WITH VARIABLE DATE RANGES:
+
+given date1 and date2:
+
+SELECT SUBSTRING_INDEX(customer_full_name, ':', 1 ) AS client, sales_rep, COUNT(*) AS count, SUM(total_amount) AS amount FROM `estimates` WHERE time_created BETWEEN 'date1' AND 'date2' GROUP BY sales_rep, client
+
+WITHOUT VARIABLES AT ALL:
+
+```
+SELECT EXTRACT(YEAR_MONTH FROM `time_created`) AS monthyear, SUBSTRING**_INDEX(customer_full_name, ':', 1 ) AS client, sales_rep, COUNT(*) AS count, SUM(total_amount) AS amount FROM `estimates` GROUP BY sales_rep, client, monthyear
+```
+
+ESTIMATES (with formatting $)
+``` 
+sql = "SELECT EXTRACT(YEAR_MONTH FROM `time_created`) AS monthyear, SUBSTRING_INDEX(customer_full_name, ':', 1 ) AS client, sales_rep, COUNT(*) AS count, CONCAT('$', TRUNCATE(SUM(total_amount), 2)) AS amount FROM `estimates` WHERE time_created BETWEEN '2017-01-01' AND '2018-12-31' GROUP BY sales_rep, client, monthyear"
+records_array = ActiveRecord::Base.connection.execute(sql).to_a
+```
