@@ -11,7 +11,7 @@ class CustomerQueryWorker < QBWC::Worker
             :xml_attributes => { :requestID =>1, :iterator  => "Start" },
             :max_returned => 100,
             :active_status => "All",
-            # :from_modified_date => last_ran,
+            :from_modified_date => last_ran,
             :include_ret_element => ['ListID', 'FullName', 'Sublevel', 'SalesRepRef']
         }
         }]
