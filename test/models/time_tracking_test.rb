@@ -1,5 +1,4 @@
 require 'test_helper'
-ENV['RAILS_ENV'] = 'development'
 class TimeTrackingTest < ActiveSupport::TestCase
 
   test "between - run in console" do
