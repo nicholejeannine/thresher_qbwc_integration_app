@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   resources :time_trackings, only: [:index, :create]
   
   
-  root to: 'qbwc_jobs#index'
+  root to: 'home#index'
 end
