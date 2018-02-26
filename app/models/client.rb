@@ -2,6 +2,7 @@ class Client < ApplicationRecord
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
   
+  # TODO: HAVE TO HANDLE NULL INDEXES (e.g., places where is no "bill address")
   def self.save_to_portal qb
     customer = Client.where(:Cust_CompanyAbr => qb['full_name'])&.first
     if customer.nil?
@@ -18,32 +19,32 @@ class Client < ApplicationRecord
       customer.Cust_EmailCC = qb['cc']
       # customer.Cust_PhoneCell = qb['']
       customer.Cust_PhoneFax = qb['fax']
-      customer.Cust_BillTo_Company = qb['bill_address']['bill_addr1']
-      customer.Cust_BillTo_Name = qb['bill_address']['bill_addr2']
-      customer.Cust_BillTo_Address1 = qb['bill_address']['bill_addr3']
-      customer.Cust_BillTo_Address2 = qb['bill_address']['bill_addr4']
-      customer.Cust_BillTo_City = qb['bill_address']['bill_city']
-      customer.Cust_BillTo_State = qb['bill_address']['bill_state']
-      customer.Cust_BillTo_Zip	 = qb['bill_address']['bill_postal_code']
-      customer.Cust_ShipTo_Company = qb['ship_address']['ship_addr1']
-      customer.Cust_ShipTo_Name = qb['ship_address']['ship_addr2']
-      customer.Cust_ShipTo_Address1 = qb['ship_address']['ship_addr3']
-      customer.Cust_ShipTo_Address2 = qb['ship_address']['ship_addr4']
-      customer.Cust_ShipTo_City = qb['ship_address']['ship_city']
-      customer.Cust_ShipTo_State = qb['ship_address']['ship_state']
-      customer.Cust_ShipTo_Zip = qb['ship_address']['ship_postal_code']
+      customer.Cust_BillTo_Company = qb["bill_address"]["addr1"]
+      customer.Cust_BillTo_Name = qb['bill_address']['addr2']
+      customer.Cust_BillTo_Address1 = qb['bill_address']['addr3']
+      customer.Cust_BillTo_Address2 = qb['bill_address']['addr4']
+      customer.Cust_BillTo_City = qb['bill_address']['city']
+      customer.Cust_BillTo_State = qb['bill_address']['state']
+      customer.Cust_BillTo_Zip	 = qb['bill_address']['postal_code']
+      customer.Cust_ShipTo_Company = qb['ship_address']['addr1']
+      customer.Cust_ShipTo_Name = qb['ship_address']['addr2']
+      customer.Cust_ShipTo_Address1 = qb['ship_address']['addr3']
+      customer.Cust_ShipTo_Address2 = qb['ship_address']['addr4']
+      customer.Cust_ShipTo_City = qb['ship_address']['city']
+      customer.Cust_ShipTo_State = qb['ship_address']['state']
+      customer.Cust_ShipTo_Zip = qb['ship_address']['postal_code']
+      customer.sales_rep = qb['sales_rep_ref']['full_name']
+      if qb['is_active'] == 1
+          customer.Cust_InactiveFlag = ""
+      else
+          customer.Cust_InactiveFlag = "X"
+      end
       customer.save
     end
-    #   if qb['is_active'] == 1
-    #       customer.Cust_InactiveFlag = ""
-    #   else
-    #       customer.Cust_InactiveFlag = "X"
-    #   end
     # end
     #   # customer.site_contact = qb['data_ext_ret']['data_ext_name']
     #   # customer.site_phone =  qb['data_ext_ret']['data_ext_name']
     #   # customer.site_email =  qb['data_ext_ret']['data_ext_name']
-    #   customer.sales_rep = qb['sales_rep_ref']['full_name']
     #
     #   customer
     end

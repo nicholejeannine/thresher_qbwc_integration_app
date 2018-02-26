@@ -20,25 +20,25 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("999-999-9999", c.Cust_PhoneAlt)
     # assert_equal("999-999-9999", c.Cust_PhoneCell)
     assert_equal("999-999-9999", c.Cust_PhoneFax)
-    # assert_equal("ADDR1", c.Cust_BillTo_Company)
-    # assert_equal("ADDR2", c.Cust_BillTo_Name)
-    # assert_equal("ADDR3", c.Cust_BillTo_Address1)
+    assert_equal("ADDR1", c.Cust_BillTo_Company)
+    assert_equal("ADDR2", c.Cust_BillTo_Name)
+    assert_equal("ADDR3", c.Cust_BillTo_Address1)
     # assert_equal("ADDR4", c.Cust_BillTo_Address2)
-    # assert_equal("CITY", c.Cust_BillTo_City)
-    # assert_equal("AA", c.Cust_BillTo_State)
-    # assert_equal("99999", c.Cust_BillTo_Zip)
-    # assert_equal("ADDR1", c.Cust_ShipTo_Company)
-    # assert_equal("ADDR2", c.Cust_ShipTo_Name)
-    # assert_equal("ADDR3", c.Cust_ShipTo_Address1)
+    assert_equal("CITY", c.Cust_BillTo_City)
+    assert_equal("AA", c.Cust_BillTo_State)
+    assert_equal(99999, c.Cust_BillTo_Zip)
+    assert_equal("ADDR1", c.Cust_ShipTo_Company)
+    assert_equal("ADDR2", c.Cust_ShipTo_Name)
+    assert_equal("ADDR3", c.Cust_ShipTo_Address1)
     # assert_equal("ADDR4", c.Cust_ShipTo_Address2)
-    # assert_equal("CITY", c.Cust_ShipTo_City)
-    # assert_equal("AA", c.Cust_ShipTo_State)
-    # assert_equal("99999", c.Cust_ShipTo_Zip)
-    # assert_equal("X", c.Cust_InactiveFlag)
+    assert_equal("CITY", c.Cust_ShipTo_City)
+    assert_equal("AA", c.Cust_ShipTo_State)
+    assert_equal(99999, c.Cust_ShipTo_Zip)
+    assert_equal("X", c.Cust_InactiveFlag)
     # assert_equal("CONTACT", c.site_contact)
     # assert_equal("EMAIL@EMAIL.COM", c.site_email)
     # assert_equal("999-999-9999", c.site_phone)
-    # assert_equal("AAA", c.sales_rep)
+    assert_equal("AAA", c.sales_rep)
     
   end
   
@@ -51,6 +51,10 @@ VALUES
   end
 
 
+  ## TODO:
+  # Test for nil blocks (bill, ship, sales rep, etc and handling the array indexes in there - fields should be blank if not specified)
+  # Test that fields NOT specified to be modified by Web Connector are NOT be modified
+  # Figure out mismatching names situation - now they should error log, later they will be new entries
   
 
 
