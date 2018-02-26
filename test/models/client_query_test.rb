@@ -5,35 +5,40 @@ class ClientQueryTest < ActiveSupport::TestCase
   include ClientHash
 
 
+  # after sending a test pass of "silly data", grab the customer where the full name matches, and assert that all of the fields names were correctly updated
   test "when processing the query request, it updates the correct fields" do
     assert_equal(1, Client.count)
     c = Client.where("Cust_CompanyAbr" => "Slack").first
     assert_equal("Slack", c.Cust_CompanyAbr)
-    # assert_equals(customer.Cust_Company, "COMPANYNAME")
-    # customer.Cust_NameSalutation = qb['salutation']
-    # customer.Cust_NameFirst = qb['first_name']
-    # customer.Cust_NameMiddle = qb['middle_name']
-    # customer.Cust_NameLast = qb['last_name']
-    # customer.Cust_PhoneOffice = qb['phone']
-    # customer.Cust_EmailTo = qb['email']
-    # customer.Cust_PhoneAlt = qb['alt_phone']
-    # customer.Cust_EmailCC = qb['cc']
-    # # customer.Cust_PhoneCell = qb['']
-    # customer.Cust_PhoneFax = qb['fax']
-    # customer.Cust_BillTo_Company = qb['bill_addr1']
-    # customer.Cust_BillTo_Name = qb['bill_addr2']
-    # customer.Cust_BillTo_Address1 = qb['bill_addr3']
-    # customer.Cust_BillTo_Address2 = qb['bill_addr4']
-    # customer.Cust_BillTo_City = qb['bill_city']
-    # customer.Cust_BillTo_State = qb['bill_state']
-    # customer.Cust_BillTo_Zip	 = qb['bill_postal_code']
-    # customer.Cust_ShipTo_Company = qb['ship_addr1']
-    # customer.Cust_ShipTo_Name = qb['ship_addr2']
-    # customer.Cust_ShipTo_Address1 = qb['ship_addr3']
-    # customer.Cust_ShipTo_Address2 = qb['ship_addr4']
-    # customer.Cust_ShipTo_City = qb['ship_city']
-    # customer.Cust_ShipTo_State = qb['ship_state']
-    # customer.Cust_ShipTo_Zip = qb['ship_postal_code']
+    assert_equal("COMPANYNAME", c.Cust_Company)
+    assert_equal("SA", c.Cust_NameSalutation)
+    assert_equal("FIRST", c.Cust_NameFirst)
+    assert_equal("M", c.Cust_NameMiddle)
+    assert_equal("LAST", c.Cust_NameLast)
+    assert_equal("999-999-9999", c.Cust_PhoneOffice)
+    assert_equal("EMAIL@EMAIL.COM", c.Cust_EmailTo)
+    assert_equal("999-999-9999", c.Cust_PhoneAlt)
+    # assert_equal("999-999-9999", c.Cust_PhoneCell)
+    assert_equal("999-999-9999", c.Cust_PhoneFax)
+    # assert_equal("ADDR1", c.Cust_BillTo_Company)
+    # assert_equal("ADDR2", c.Cust_BillTo_Name)
+    # assert_equal("ADDR3", c.Cust_BillTo_Address1)
+    # assert_equal("ADDR4", c.Cust_BillTo_Address2)
+    # assert_equal("CITY", c.Cust_BillTo_City)
+    # assert_equal("AA", c.Cust_BillTo_State)
+    # assert_equal("99999", c.Cust_BillTo_Zip)
+    # assert_equal("ADDR1", c.Cust_ShipTo_Company)
+    # assert_equal("ADDR2", c.Cust_ShipTo_Name)
+    # assert_equal("ADDR3", c.Cust_ShipTo_Address1)
+    # assert_equal("ADDR4", c.Cust_ShipTo_Address2)
+    # assert_equal("CITY", c.Cust_ShipTo_City)
+    # assert_equal("AA", c.Cust_ShipTo_State)
+    # assert_equal("99999", c.Cust_ShipTo_Zip)
+    # assert_equal("X", c.Cust_InactiveFlag)
+    # assert_equal("CONTACT", c.site_contact)
+    # assert_equal("EMAIL@EMAIL.COM", c.site_email)
+    # assert_equal("999-999-9999", c.site_phone)
+    # assert_equal("AAA", c.sales_rep)
     
   end
   
