@@ -5,7 +5,6 @@ class Client < ApplicationRecord
   self.primary_key = "Customers_PKEY"
   
   def self.save_to_portal qb
-    ActiveRecord::Base.establish_connection(:production)
     begin
       customer = Client.where(:Cust_CompanyAbr => qb['full_name'])&.first
       # If customer if found, save the qb fields to their corresponding Thresher fields.
