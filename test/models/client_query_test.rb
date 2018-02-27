@@ -18,7 +18,7 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("999-999-9999", c.Cust_PhoneOffice)
     assert_equal("EMAIL@EMAIL.COM", c.Cust_EmailTo)
     assert_equal("999-999-9999", c.Cust_PhoneAlt)
-    # assert_equal("999-999-9999", c.Cust_PhoneCell)
+    assert_equal("999-999-9999", c.Cust_PhoneCell)
     assert_equal("999-999-9999", c.Cust_PhoneFax)
     assert_equal("ADDR1", c.Cust_BillTo_Company)
     assert_equal("ADDR2", c.Cust_BillTo_Name)

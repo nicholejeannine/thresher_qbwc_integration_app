@@ -1,4 +1,9 @@
 class Client < ApplicationRecord
+  
+  FIELD_MAP = {
+    :Cust_Company => 'company_name',
+    :Cust_NameSalutation => 'salutation'
+  }
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
   
@@ -8,6 +13,7 @@ class Client < ApplicationRecord
     if customer.nil?
       self.handle_error qb
     else
+      
       customer.Cust_Company = qb['company_name']
       customer.Cust_NameSalutation = qb['salutation']
       customer.Cust_NameFirst = qb['first_name']
@@ -17,7 +23,12 @@ class Client < ApplicationRecord
       customer.Cust_EmailTo = qb['email']
       customer.Cust_PhoneAlt = qb['alt_phone']
       customer.Cust_EmailCC = qb['cc']
-      # customer.Cust_PhoneCell = qb['']
+      if qb.has_key?("additional_contact_ref")
+        ref = qb["additional_contact_ref"]
+        if ref.pluck("contact_name").include?("Mobile")
+          customer.Cust_PhoneCell =  ref.find_all { |e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
+        end
+      end
       customer.Cust_PhoneFax = qb['fax']
       customer.Cust_BillTo_Company = qb["bill_address"]["addr1"]
       customer.Cust_BillTo_Name = qb['bill_address']['addr2']
