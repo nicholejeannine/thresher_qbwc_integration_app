@@ -53,10 +53,7 @@ class Client < ApplicationRecord
         if qb.has_key?("sales_rep_ref")
           customer.sales_rep = qb['sales_rep_ref']['full_name']
         end
-        if qb['is_active'] == 1
-          customer.Cust_InactiveFlag = ""
-        else customer.Cust_InactiveFlag = "X"
-        end
+        customer.Cust_InactiveFlag = "X" if qb['is_active'] == false
         if qb.has_key?("data_ext_ret")
           data = qb['data_ext_ret']
           if data.pluck("data_ext_name").include?("Site Contact")
