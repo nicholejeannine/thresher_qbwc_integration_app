@@ -220,3 +220,16 @@ records_array = ActiveRecord::Base.connection.execute(sql).to_a
 
 ### COMPLETE HASH WITH ALL FIELDS WE NEED FOR CLIENT
 {"xml_attributes"=>{}, "list_id"=>"80000FEE-1430232657", "time_created"=>"2015-04-28T07:50:57-08:00", "time_modified"=>"2018-02-26T15:23:00-08:00", "edit_sequence"=>"1519687380", "name"=>"99Designs", "full_name"=>"99Designs", "is_active"=>true, "sublevel"=>0, "company_name"=>"99Designs", "first_name"=>"Paul", "last_name"=>"Annesley", "bill_address"=>{"xml_attributes"=>{}, "addr1"=>"99Designs", "addr2"=>"Gareth Tilley", "addr3"=>"2201 Broadway Avenue", "city"=>"Oakland", "state"=>"CA", "postal_code"=>"94612"}, "bill_address_block"=>{"xml_attributes"=>{}, "addr1"=>"99Designs", "addr2"=>"Gareth Tilley", "addr3"=>"2201 Broadway Avenue", "addr4"=>"Oakland, CA 94612"}, "ship_address"=>{"xml_attributes"=>{}, "addr1"=>"99Designs", "addr2"=>"Gareth Tilley", "addr3"=>"2201 Broadway Avenue", "city"=>"Oakland", "state"=>"CA", "postal_code"=>"94612"}, "ship_address_block"=>{"xml_attributes"=>{}, "addr1"=>"99Designs", "addr2"=>"Gareth Tilley", "addr3"=>"2201 Broadway Avenue", "addr4"=>"Oakland, CA 94612"}, "ship_to_address"=>[{"xml_attributes"=>{}, "name"=>"99Design", "addr1"=>"99Designs", "addr2"=>"Gareth Tilley", "addr3"=>"2201 Broadway Avenue", "city"=>"Oakland", "state"=>"CA", "postal_code"=>"94612", "default_ship_to"=>true}], "phone"=>"415-994-0598", "email"=>"Paul.Annesley@99designs.com", "additional_contact_ref"=>[{"xml_attributes"=>{}, "contact_name"=>"Main Phone", "contact_value"=>"415-994-0598"}, {"xml_attributes"=>{}, "contact_name"=>"Mobile", "contact_value"=>"999-999-9999"}, {"xml_attributes"=>{}, "contact_name"=>"Main Email", "contact_value"=>"Paul.Annesley@99designs.com"}], "terms_ref"=>{"xml_attributes"=>{}, "list_id"=>"20000-875338872", "full_name"=>"Net 30"}, "sales_rep_ref"=>{"xml_attributes"=>{}, "list_id"=>"8000000C-1380320671", "full_name"=>"ILK"}, "balance"=>0.0, "total_balance"=>0.0, "sales_tax_code_ref"=>{"xml_attributes"=>{}, "list_id"=>"10000-1009221895", "full_name"=>"Tax"}, "item_sales_tax_ref"=>{"xml_attributes"=>{}, "list_id"=>"48F0000-1024441649", "full_name"=>"AL/CA"}, "job_status"=>"None", "preferred_delivery_method"=>"None", "data_ext_ret"=>[{"xml_attributes"=>{}, "owner_id"=>"0", "data_ext_name"=>"Site Contact", "data_ext_type"=>"STR255TYPE", "data_ext_value"=>"site"}, {"xml_attributes"=>{}, "owner_id"=>"0", "data_ext_name"=>"Site Email", "data_ext_type"=>"STR255TYPE", "data_ext_value"=>"email"}, {"xml_attributes"=>{}, "owner_id"=>"0", "data_ext_name"=>"Site Phone", "data_ext_type"=>"STR255TYPE", "data_ext_value"=>"999-999-9999"}]}
+
+
+
+# QBWC Corrina Meeting
+
+## TODO:
+  1. salary people should be "salary level 1" instead of "hourly level 1"
+
+## Wish List
+  
+  - some kind of "In Progress" indicator that shows the web connector is still processing jobs for the week.
+  
+  - when the green button clicks, needs to say "this many successful entries" out of "how many"
