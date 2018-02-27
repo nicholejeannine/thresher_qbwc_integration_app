@@ -1,17 +1,19 @@
 class Client < ApplicationRecord
-  
   FIELDS = %w(Cust_Company Cust_NameSalutation Cust_NameFirst Cust_NameMiddle Cust_NameLast Cust_PhoneOffice Cust_EmailTo Cust_PhoneAlt Cust_EmailCC Cust_PhoneCell Cust_PhoneFax Cust_BillTo_Company Cust_BillTo_Name Cust_BillTo_Address1 Cust_BillTo_Address2 Cust_BillTo_City Cust_BillTo_State Cust_BillTo_Zip Cust_ShipTo_Company Cust_ShipTo_Name Cust_ShipTo_Address1 Cust_ShipTo_Address2 Cust_ShipTo_City Cust_ShipTo_State Cust_ShipTo_Zip Cust_InactiveFlag site_contact site_email site_phone sales_rep)
   
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
   
   def self.save_to_portal qb
+    ActiveRecord::Base.establish_connection(:production)
     begin
       customer = Client.where(:Cust_CompanyAbr => qb['full_name'])&.first
       # If customer if found, save the qb fields to their corresponding Thresher fields.
       # IF CUSTOMER IS NOT FOUND, handle it. (This part of the code will change - we may write the customer to an error table, but later when people can NO LONGER enter new clients into the portal, we need to quickly switch to a method that permits new records to be saved to the table. We can simply swap out the "error handler" here.)
       if customer.nil?
         self.handle_error qb
+        # customer = Client.new
+        # customer.Cust_CompanyAbr = qb['full_name']
       else # SET ALL FIELDS TO DEFAULT VALUES
         Client::FIELDS.each {|x| customer[x] = ""}
         customer.Cust_Company = qb['company_name']
