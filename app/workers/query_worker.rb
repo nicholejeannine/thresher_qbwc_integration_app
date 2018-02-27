@@ -9,7 +9,7 @@ class QueryWorker < QBWC::Worker
        :xml_attributes => { :requestID =>1, :iterator  => "Start" },
        :max_returned => 100,
        :active_status => "All",
-       :from_modified_date => last_ran,
+       # :from_modified_date => last_ran,
        :include_ret_element => ['FullName', 'IsActive', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'AdditionalContactRef', 'SalesRepRef', 'DataExtRet'],
        :owner_id => 0
        }
