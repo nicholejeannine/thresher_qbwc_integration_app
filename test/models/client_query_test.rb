@@ -41,9 +41,9 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("AA", c.Cust_ShipTo_State)
     assert_equal(99999, c.Cust_ShipTo_Zip)
     assert_equal("X", c.Cust_InactiveFlag)
-    # assert_equal("CONTACT", c.site_contact)
-    # assert_equal("EMAIL@EMAIL.COM", c.site_email)
-    # assert_equal("999-999-9999", c.site_phone)
+    assert_equal("CONTACT", c.site_contact)
+    assert_equal("EMAIL@EMAIL.COM", c.site_email)
+    assert_equal("999-999-9999", c.site_phone)
     assert_equal("AAA", c.sales_rep)
     
   end

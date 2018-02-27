@@ -30,31 +30,58 @@ class Client < ApplicationRecord
         end
       end
       customer.Cust_PhoneFax = qb['fax']
-      customer.Cust_BillTo_Company = qb["bill_address"]["addr1"]
-      customer.Cust_BillTo_Name = qb['bill_address']['addr2']
-      customer.Cust_BillTo_Address1 = qb['bill_address']['addr3']
-      customer.Cust_BillTo_Address2 = qb['bill_address']['addr4']
-      customer.Cust_BillTo_City = qb['bill_address']['city']
-      customer.Cust_BillTo_State = qb['bill_address']['state']
-      customer.Cust_BillTo_Zip	 = qb['bill_address']['postal_code']
-      customer.Cust_ShipTo_Company = qb['ship_address']['addr1']
-      customer.Cust_ShipTo_Name = qb['ship_address']['addr2']
-      customer.Cust_ShipTo_Address1 = qb['ship_address']['addr3']
-      customer.Cust_ShipTo_Address2 = qb['ship_address']['addr4']
-      customer.Cust_ShipTo_City = qb['ship_address']['city']
-      customer.Cust_ShipTo_State = qb['ship_address']['state']
-      customer.Cust_ShipTo_Zip = qb['ship_address']['postal_code']
-      customer.sales_rep = qb['sales_rep_ref']['full_name']
+      if qb.has_key?("bill_address")
+        customer.Cust_BillTo_Company = qb["bill_address"]["addr1"]
+        customer.Cust_BillTo_Name = qb['bill_address']['addr2']
+        customer.Cust_BillTo_Address1 = qb['bill_address']['addr3']
+        customer.Cust_BillTo_Address2 = qb['bill_address']['addr4']
+        customer.Cust_BillTo_City = qb['bill_address']['city']
+        customer.Cust_BillTo_State = qb['bill_address']['state']
+        customer.Cust_BillTo_Zip	 = qb['bill_address']['postal_code']
+      end
+      if qb.has_key?("ship_address")
+        customer.Cust_ShipTo_Company = qb['ship_address']['addr1']
+        customer.Cust_ShipTo_Name = qb['ship_address']['addr2']
+        customer.Cust_ShipTo_Address1 = qb['ship_address']['addr3']
+        customer.Cust_ShipTo_Address2 = qb['ship_address']['addr4']
+        customer.Cust_ShipTo_City = qb['ship_address']['city']
+        customer.Cust_ShipTo_State = qb['ship_address']['state']
+        customer.Cust_ShipTo_Zip = qb['ship_address']['postal_code']
+        customer.sales_rep = qb['sales_rep_ref']['full_name']
+      end
       if qb['is_active'] == 1
           customer.Cust_InactiveFlag = ""
       else
           customer.Cust_InactiveFlag = "X"
       end
+      unless qb.has_key?("data_ext_ret")
+        customer.site_contact = ""
+        customer.site_contact = ""
+        customer.site_contact = ""
+      end
+      if qb.has_key?("data_ext_ret")
+        data = qb['data_ext_ret']
+        if data.pluck("data_ext_name").include?("Site Contact")
+          customer.site_contact = data.find_all { |x| x['data_ext_name'] == 'Site Contact'}.pluck("data_ext_value")[0]
+        else
+          customer.site_contact = ""
+        end
+        if data.pluck("data_ext_name").include?("Site Email")
+          customer.site_email = data.find_all { |x| x['data_ext_name'] == 'Site Email'}.pluck("data_ext_value")[0]
+        else
+          customer.site_email = ""
+        end
+        if data.pluck("data_ext_name").include?("Site Phone")
+          customer.site_phone = data.find_all { |x| x['data_ext_name'] == 'Site Phone'}.pluck("data_ext_value")[0]
+        else
+          customer.site_phone = ""
+        end
+      end
       customer.save
     end
     # end
-    #   # customer.site_contact = qb['data_ext_ret']['data_ext_name']
-    #   # customer.site_phone =  qb['data_ext_ret']['data_ext_name']
+    #   #  = qb['data_ext_ret']['data_ext_name']
+    #   # customer. =  qb['data_ext_ret']['data_ext_name']
     #   # customer.site_email =  qb['data_ext_ret']['data_ext_name']
     #
     #   customer
@@ -66,7 +93,7 @@ class Client < ApplicationRecord
     #
   
   def self.handle_error qb
-    QbwcError.create(:worker_class => "Thresher.Customers", :error_message => "#{qb['full_name']} not found in Customers.Cust_CompanyAbr")
+    QbwcError.create(:worker_class => "Thresher.Customers - name not found", :error_message => "#{qb['full_name']}")
   end
   
   
