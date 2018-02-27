@@ -33,7 +33,7 @@ class Client < ApplicationRecord
       customer.Cust_BillTo_Company = qb["bill_address"]["addr1"]
       customer.Cust_BillTo_Name = qb['bill_address']['addr2']
       customer.Cust_BillTo_Address1 = qb['bill_address']['addr3']
-      customer.Cust_BillTo_Address2 = qb['bill_address']['addr4'] || ""
+      customer.Cust_BillTo_Address2 = qb['bill_address']['addr4']
       customer.Cust_BillTo_City = qb['bill_address']['city']
       customer.Cust_BillTo_State = qb['bill_address']['state']
       customer.Cust_BillTo_Zip	 = qb['bill_address']['postal_code']
