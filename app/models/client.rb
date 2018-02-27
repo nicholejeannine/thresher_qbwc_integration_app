@@ -26,6 +26,7 @@ class Client < ApplicationRecord
         customer.Cust_EmailTo = qb['email']
         customer.Cust_PhoneAlt = qb['alt_phone']
         customer.Cust_EmailCC = qb['cc']
+        customer.Cust_PhoneCell = nil
         if qb.has_key?("additional_contact_ref")
           ref = qb["additional_contact_ref"]
           if ref.pluck("contact_name").include?("Mobile")
@@ -33,6 +34,8 @@ class Client < ApplicationRecord
           end
         end
         customer.Cust_PhoneFax = qb['fax']
+        
+        # TODO: MAKE NIL IF NOT
         if qb.has_key?("bill_address")
           customer.Cust_BillTo_Company = qb["bill_address"]["addr1"]
           customer.Cust_BillTo_Name = qb['bill_address']['addr2']
@@ -50,7 +53,11 @@ class Client < ApplicationRecord
           customer.Cust_ShipTo_City = qb['ship_address']['city']
           customer.Cust_ShipTo_State = qb['ship_address']['state']
           customer.Cust_ShipTo_Zip = qb['ship_address']['postal_code']
+        end
+        if qb.has_key?("sales_rep_ref")
           customer.sales_rep = qb['sales_rep_ref']['full_name']
+        else
+          customer.sales_rep = nil
         end
         if qb['is_active'] == 1
             customer.Cust_InactiveFlag = ""
