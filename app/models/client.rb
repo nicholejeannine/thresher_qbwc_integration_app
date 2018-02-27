@@ -1,19 +1,21 @@
 class Client < ApplicationRecord
   
-  FIELD_MAP = {
-    :Cust_Company => 'company_name',
-    :Cust_NameSalutation => 'salutation'
-  }
+  # FIELD_MAP = {
+  #   :Cust_Company => 'company_name',
+  #   :Cust_NameSalutation => 'salutation'
+  # }
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
   
   # TODO: HAVE TO HANDLE NULL INDEXES (e.g., places where is no "bill address")
   def self.save_to_portal qb
     customer = Client.where(:Cust_CompanyAbr => qb['full_name'])&.first
+
+    # If customer if found, save the qb fields to their corresponding Thresher fields.
+    # IF CUSTOMER IS NOT FOUND, handle it. (This part of the code will change - we may write the customer to an error table, but later when people can NO LONGER enter new clients into the portal, we need to quickly switch to a method that permits new records to be saved to the table. We can simply swap out the "error handler" here.)
     if customer.nil?
       self.handle_error qb
     else
-      
       customer.Cust_Company = qb['company_name']
       customer.Cust_NameSalutation = qb['salutation']
       customer.Cust_NameFirst = qb['first_name']
@@ -56,8 +58,8 @@ class Client < ApplicationRecord
       end
       unless qb.has_key?("data_ext_ret")
         customer.site_contact = ""
-        customer.site_contact = ""
-        customer.site_contact = ""
+        customer.site_email = ""
+        customer.site_phone = ""
       end
       if qb.has_key?("data_ext_ret")
         data = qb['data_ext_ret']
@@ -87,10 +89,7 @@ class Client < ApplicationRecord
     #   customer
     end
     
-    # If customer if found, save the qb fields to their corresponding Thresher fields.
-    
-    # IF CUSTOMER IS NOT FOUND, handle it. (This part of the code will change - we may write the customer to an error table, but later when people can NO LONGER enter new clients into the portal, we need to quickly switch to a method that permits new records to be saved to the table. We can simply swap out the "error handler" here.)
-    #
+   
   
   def self.handle_error qb
     QbwcError.create(:worker_class => "Thresher.Customers - name not found", :error_message => "#{qb['full_name']}")

@@ -57,7 +57,6 @@ VALUES
 
 
   ## TODO:
-  # Test for nil blocks (bill, ship, sales rep, etc and handling the array indexes in there - fields should be blank if not specified)
   # Test that fields NOT specified to be modified by Web Connector are NOT be modified
   # Figure out mismatching names situation - now they should error log, later they will be new entries
   
