@@ -55,7 +55,9 @@ class Client < ApplicationRecord
     #
   
   def self.handle_error qb
-    
+    QbwcError.create(:worker_class => "Thresher.Customers", :error_message => "#{qb['full_name']} not found in Customers.Cust_CompanyAbr")
   end
+  
+  
     
 end

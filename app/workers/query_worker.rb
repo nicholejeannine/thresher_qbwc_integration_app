@@ -10,7 +10,8 @@ class QueryWorker < QBWC::Worker
        :max_returned => 100,
        :active_status => "All",
        :from_modified_date => last_ran,
-        :owner_id => 0
+       :include_ret_element => ['FullName', 'IsActive', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'AdditionalContactRef' 'SalesRepRef', 'DataExtRet'],
+       :owner_id => 0
        }
      },
      # {:vendor_query_rq => {
