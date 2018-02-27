@@ -23,7 +23,7 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("ADDR1", c.Cust_BillTo_Company)
     assert_equal("ADDR2", c.Cust_BillTo_Name)
     assert_equal("ADDR3", c.Cust_BillTo_Address1)
-    # assert_equal("ADDR4", c.Cust_BillTo_Address2)
+    assert_equal("ADDR4", c.Cust_BillTo_Address2)
     assert_equal("CITY", c.Cust_BillTo_City)
     assert_equal("AA", c.Cust_BillTo_State)
     assert_equal(99999, c.Cust_BillTo_Zip)
