@@ -82,21 +82,15 @@ class Client < ApplicationRecord
         end
         customer.save
       end
-      # end
-      #   #  = qb['data_ext_ret']['data_ext_name']
-      #   # customer. =  qb['data_ext_ret']['data_ext_name']
-      #   # customer.site_email =  qb['data_ext_ret']['data_ext_name']
-      #
-      #   customer
     rescue StandardError => e
-      QbwcError.create(:worker_class => "Client.save_to_portal", :error_message => e)
+      QbwcError.create(:worker_class => "Client.save_to_portal", :model_id =>  "#{qb['full_name']}", :error_message => e)
     end
   end
     
    
   
   def self.handle_error qb
-    QbwcError.create(:worker_class => "Thresher.Customers - name not found", :error_message => "#{qb['full_name']}")
+    QbwcError.create(:worker_class => "Thresher.Customers - name not found", :model_id =>  "#{qb['full_name']}", :error_message => "Client not found")
   end
   
   

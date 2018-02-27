@@ -45,7 +45,12 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("EMAIL@EMAIL.COM", c.site_email)
     assert_equal("999-999-9999", c.site_phone)
     assert_equal("AAA", c.sales_rep)
-    
+  end
+  
+  test "sending a nonmatching client name writes to error log" do
+    QbwcError.destroy_all
+    Customer.parse_customer_response(no_matching_name)
+    assert_equal(1, QbwcError.count)
   end
   
   def setup
