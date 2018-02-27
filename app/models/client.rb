@@ -83,7 +83,7 @@ class Client < ApplicationRecord
         customer.save
       end
     rescue StandardError => e
-      QbwcError.create(:worker_class => "Client.save_to_portal", :model_id =>  "#{qb['full_name']}", :error_message => e)
+      QbwcError.create(:worker_class => "Client.save_to_portal", :model_id =>  "#{qb['full_name']}", :error_message => "#{qb}")
     end
   end
     
