@@ -13,62 +13,62 @@ class QueryWorker < QBWC::Worker
         :owner_id => 0
        }
      },
-     {:vendor_query_rq => {
-            :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-            :max_returned => 100,
-            :active_status => "All",
-            :from_modified_date => last_ran
-             }
-      },
-     {:estimate_query_rq => {
-        :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-        :max_returned => 100,
-        :modified_date_range_filter => {
-           :from_modified_date => last_ran
-           },
-        :include_line_items => true,
-        :include_linked_txns => false
-       }
-     },
-     {:sales_order_query_rq => {
-       :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-       :max_returned => 100,
-       :modified_date_range_filter => {
-         :from_modified_date => last_ran
-         },
-       :include_line_items => true,
-       :include_linked_txns => false
-       }
-     },
-     {:purchase_order_query_rq => {
-       :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-       :max_returned => 100,
-       :modified_date_range_filter => {
-         :from_modified_date => last_ran
-         },
-       :include_line_items => true,
-       :include_linked_txns => false
-     }
-     },
-     {:invoice_query_rq => {
-       :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-       :max_returned => 100,
-       :modified_date_range_filter => {
-         :from_modified_date => last_ran
-         },
-       :include_line_items => true,
-       :include_linked_txns => true
-      }
-     },
-      {:receive_payment_query_rq => {
-         :xml_attributes => { :requestID =>1, :iterator  => "Start" },
-         :max_returned => 100,
-          :modified_date_range_filter => {
-         :from_modified_date => last_ran
-          },
-           :include_line_items => true
-        }
-        },
+     # {:vendor_query_rq => {
+     #        :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+     #        :max_returned => 100,
+     #        :active_status => "All",
+     #        :from_modified_date => last_ran
+     #         }
+     #  },
+     # {:estimate_query_rq => {
+     #    :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+     #    :max_returned => 100,
+     #    :modified_date_range_filter => {
+     #       :from_modified_date => last_ran
+     #       },
+     #    :include_line_items => true,
+     #    :include_linked_txns => false
+     #   }
+     # },
+     # {:sales_order_query_rq => {
+     #   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+     #   :max_returned => 100,
+     #   :modified_date_range_filter => {
+     #     :from_modified_date => last_ran
+     #     },
+     #   :include_line_items => true,
+     #   :include_linked_txns => false
+     #   }
+     # },
+     # {:purchase_order_query_rq => {
+     #   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+     #   :max_returned => 100,
+     #   :modified_date_range_filter => {
+     #     :from_modified_date => last_ran
+     #     },
+     #   :include_line_items => true,
+     #   :include_linked_txns => false
+     # }
+     # },
+     # {:invoice_query_rq => {
+     #   :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+     #   :max_returned => 100,
+     #   :modified_date_range_filter => {
+     #     :from_modified_date => last_ran
+     #     },
+     #   :include_line_items => true,
+     #   :include_linked_txns => true
+     #  }
+     # },
+     #  {:receive_payment_query_rq => {
+     #     :xml_attributes => { :requestID =>1, :iterator  => "Start" },
+     #     :max_returned => 100,
+     #      :modified_date_range_filter => {
+     #     :from_modified_date => last_ran
+     #      },
+     #       :include_line_items => true
+     #    }
+     #    },
         {:employee_query_rq => {
                     :active_status => "All",
                     :from_modified_date => last_ran,
@@ -89,7 +89,7 @@ class QueryWorker < QBWC::Worker
     # handle_response will get customers in groups of 100. When this is 0, we're done.
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
    begin
-      r['customer_ret']&.each{|qb|Rails.logger.warn(qb)}
+      # r['customer_ret']&.each{|qb|Rails.logger.warn(qb)}
       r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
       r['estimate_ret']&.each{|qb|Estimate.parse_qb_response(qb)}
       r['sales_order_ret']&.each{|qb|SalesOrder.parse_qb_response(qb)}
