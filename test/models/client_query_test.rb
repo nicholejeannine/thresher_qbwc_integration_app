@@ -44,7 +44,7 @@ class ClientQueryTest < ActiveSupport::TestCase
     # assert_equal("CONTACT", c.site_contact)
     # assert_equal("EMAIL@EMAIL.COM", c.site_email)
     # assert_equal("999-999-9999", c.site_phone)
-    # assert_equal("AAA", c.sales_rep)
+    assert_equal("AAA", c.sales_rep)
   end
   
   test "sending a nonmatching client name writes to error log" do

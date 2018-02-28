@@ -29,7 +29,7 @@ class Client < ApplicationRecord
       :Cust_ShipTo_City => {"ship_address" => "city"},
       :Cust_ShipTo_State => {"ship_address" => "state"},
       :Cust_ShipTo_Zip => {"ship_address" => "postal_code"},
-      # :sales_rep => {:sales_rep_ref => "full_name"}
+      :sales_rep => {"sales_rep_ref" => "full_name"}
   }
   
   self.table_name = "Customers"
@@ -57,23 +57,11 @@ class Client < ApplicationRecord
             customer[k] = qb[v]
           end
         end
-        # customer.Cust_Company = qb['company_name']
-        # customer.Cust_NameSalutation = qb['salutation']
-        # customer.Cust_NameFirst = qb['first_name']
-        # customer.Cust_NameMiddle = qb['middle_name']
-        # customer.Cust_NameLast = qb['last_name']
-        # customer.Cust_PhoneOffice = qb['phone']
-        # customer.Cust_EmailTo = qb['email']
-        # customer.Cust_PhoneAlt = qb['alt_phone']
-        # customer.Cust_EmailCC = qb['cc']
         if qb.has_key?("additional_contact_ref")
           ref = qb["additional_contact_ref"]
           if ref.pluck("contact_name").include?("Mobile")
             customer.Cust_PhoneCell = ref.find_all {|e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
           end
-        end
-        if qb.has_key?("sales_rep_ref")
-          customer.sales_rep = qb['sales_rep_ref']['full_name']
         end
         customer.Cust_InactiveFlag = "X" if qb['is_active'] == false
         if qb.has_key?("data_ext_ret")
