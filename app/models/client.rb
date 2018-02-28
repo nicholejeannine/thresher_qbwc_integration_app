@@ -41,46 +41,48 @@ class Client < ApplicationRecord
       # If customer if found, save the qb fields to their corresponding Thresher fields.
       # IF CUSTOMER IS NOT FOUND, handle it. (This part of the code will change - we may write the customer to an error table, but later when people can NO LONGER enter new clients into the portal, we need to quickly switch to a method that permits new records to be saved to the table. We can simply swap out the "error handler" here.)
       if customer.nil?
-        self.handle_error qb
-        # customer = Client.new
-        # customer.Cust_CompanyAbr = qb['full_name']
-      else # SET ALL FIELDS TO DEFAULT VALUES
-        Client::FIELDS.each {|x| customer[x] = ""}
-        Client::FIELD_MAP.each do |k, v|
-          if v.is_a?(Hash)
-            v.each do |key, value|
-              if qb.has_key?(key)
+        customer = Client.new
+        customer.Cust_CompanyAbr = qb['full_name']
+      end
+      Client::FIELDS.each {|x| customer[x] = ""}
+      Client::FIELD_MAP.each do |k, v|
+        if v.is_a?(Hash)
+          v.each do |key, value|
+            if qb.has_key?(key)
+              if value.is_a?(String)
                 customer[k] = qb[key][value]
+                elsif value.is_a(Array)
+                 ref = qb[key]
               end
             end
-          elsif v.is_a?(String)
-            customer[k] = qb[v]
           end
+        elsif v.is_a?(String)
+          customer[k] = qb[v]
         end
-        if qb.has_key?("additional_contact_ref")
-          ref = qb["additional_contact_ref"]
-          if ref.pluck("contact_name").include?("Mobile")
-            customer.Cust_PhoneCell = ref.find_all {|e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
-          end
-        end
-        customer.Cust_InactiveFlag = "X" if qb['is_active'] == false
-        if qb.has_key?("data_ext_ret")
-          data = qb['data_ext_ret']
-          if data.pluck("data_ext_name").include?("Site Contact")
-            customer.site_contact = data.find_all {|x| x['data_ext_name'] == 'Site Contact'}.pluck("data_ext_value")[0]
-          end
-          if data.pluck("data_ext_name").include?("Site Email")
-            customer.site_email = data.find_all {|x| x['data_ext_name'] == 'Site Email'}.pluck("data_ext_value")[0]
-          end
-          if data.pluck("data_ext_name").include?("Site Phone")
-            customer.site_phone = data.find_all {|x| x['data_ext_name'] == 'Site Phone'}.pluck("data_ext_value")[0]
-          end
-        end
-        customer.save
       end
-    rescue StandardError => e
-      QbwcError.create(:worker_class => "Client.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{qb}")
-    end
+      if qb.has_key?("additional_contact_ref")
+        ref = qb["additional_contact_ref"]
+        if ref.pluck("contact_name").include?("Mobile")
+          customer.Cust_PhoneCell = ref.find_all {|e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
+        end
+      end
+      customer.Cust_InactiveFlag = "X" if qb['is_active'] == false
+      if qb.has_key?("data_ext_ret")
+        data = qb['data_ext_ret']
+        if data.pluck("data_ext_name").include?("Site Contact")
+          customer.site_contact = data.find_all {|x| x['data_ext_name'] == 'Site Contact'}.pluck("data_ext_value")[0]
+        end
+        if data.pluck("data_ext_name").include?("Site Email")
+          customer.site_email = data.find_all {|x| x['data_ext_name'] == 'Site Email'}.pluck("data_ext_value")[0]
+        end
+        if data.pluck("data_ext_name").include?("Site Phone")
+          customer.site_phone = data.find_all {|x| x['data_ext_name'] == 'Site Phone'}.pluck("data_ext_value")[0]
+        end
+      end
+      customer.save
+  rescue StandardError => e
+    QbwcError.create(:worker_class => "Client.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{qb}")
+  end
   end
   
   
