@@ -24,7 +24,6 @@ class Client < ApplicationRecord
         customer.Cust_EmailTo = qb['email']
         customer.Cust_PhoneAlt = qb['alt_phone']
         customer.Cust_EmailCC = qb['cc']
-        customer.Cust_PhoneCell = nil
         if qb.has_key?("additional_contact_ref")
           ref = qb["additional_contact_ref"]
           if ref.pluck("contact_name").include?("Mobile")
