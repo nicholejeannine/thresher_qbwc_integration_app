@@ -145,6 +145,11 @@
     <td>Cust_InactiveFlag</td>
     <td>Customer is inactive</td>
   </tr>
+  <tr class="table-danger">
+    <td>list_id</td>
+    <td>list_id</td>
+    <td>-</td>
+  </tr>
 
   </tbody>
 </table>
@@ -185,6 +190,11 @@
   </tbody>
 
 </table>
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Alter Tables Statements - Customers</h4>
+  GRANT SELECT, INSERT, UPDATE (`Cust_BillTo_Address1`, `Cust_BillTo_Address2`, `Cust_BillTo_City`, `Cust_BillTo_Company`, `Cust_BillTo_Name`, `Cust_BillTo_State`, `Cust_BillTo_Zip`, `Cust_Company`, `Cust_CompanyAbr`, `Cust_EmailCC`, `Cust_EmailTo`, `Cust_InactiveFlag`, `Cust_NameFirst`, `Cust_NameLast`, `Cust_NameMiddle`, `Cust_NameSalutation`, `Cust_PhoneAlt`, `Cust_PhoneCell`, `Cust_PhoneFax`, `Cust_PhoneOffice`, `sales_rep`, `Cust_ShipTo_Address1`, `Cust_ShipTo_Address2`, `Cust_ShipTo_City`, `Cust_ShipTo_Company`, `Cust_ShipTo_Name`, `Cust_ShipTo_State`, `Cust_ShipTo_Zip`, `site_contact`, `site_email`, `site_phone`) ON `ThresherSB`.`Customers` TO 'qb'@'%';
+</div>
 
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Grant Statement - Customers</h4>
