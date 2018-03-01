@@ -1,0 +1,192 @@
+<h1>Customers</h1>
+
+<table class="table table-striped">
+
+  <thead>
+  <tr>
+    <th>QB</th>
+    <th>Portal</th>
+    <th>Label</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="table-primary">
+    <td>full_name</td>
+    <td>Cust_CompanyAbr</td>
+    <td>Customer Name</td>
+  </tr>
+  <tr>
+    <td>company_name</td>
+    <td>Cust_Company</td>
+    <td>Company Name</td>
+  </tr>
+  <tr>
+    <td>salutation</td>
+    <td>Cust_NameSalutation</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>first_name</td>
+    <td>Cust_NameFirst</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>middle_name</td>
+    <td>Cust_NameMiddle</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>last_name</td>
+    <td>Cust_NameLast</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>phone</td>
+    <td>Cust_PhoneOffice</td>
+    <td>Main Phone</td>
+  </tr>
+  <tr>
+    <td>email</td>
+    <td>Cust_EmailTo</td>
+    <td>Main Email</td>
+  </tr>
+  <tr>
+    <td>alt_phone</td>
+    <td>Cust_PhoneAlt</td>
+    <td>Alt. Phone</td>
+  </tr>
+  <tr>
+    <td>cc</td>
+    <td>Cust_EmailCC</td>
+    <td>CC Email</td>
+  </tr>
+  <tr class="table-danger">
+    <td>additional_contact_ref[contact_value] where additional_contact_ref['contact_name = 'mobile]</td>
+    <td>Cust_PhoneCell</td>
+    <td>Mobile</td>
+  </tr>
+  <tr>
+    <td>fax</td>
+    <td>Cust_PhoneFax</td>
+    <td>Fax</td>
+  </tr>
+  <tr>
+    <td>bill_addr1</td>
+    <td>Cust_BillTo_Company</td>
+    <td>Invoice/BillTo['Company']</td>
+  </tr>
+  <tr>
+    <td>bill_addr2</td>
+    <td>Cust_BillTo_Name</td>
+    <td>Invoice/BillTo['Att. Name']</td>
+  </tr>
+  <tr>
+    <td>bill_addr3</td>
+    <td>Cust_BillTo_Address1</td>
+    <td>Invoice/BillTo['Address']</td>
+  </tr>
+  <tr>
+    <td>bill_addr4</td>
+    <td>Cust_BillTo_Address2</td>
+    <td>Invoice/BillTo['Address2']</td>
+  </tr>
+  <tr>
+    <td>bill_city</td>
+    <td>Cust_BillTo_City</td>
+    <td>Invoice/BillTo['City']</td>
+  </tr>
+  <tr>
+    <td>bill_state</td>
+    <td>Cust_BillTo_State</td>
+    <td>Invoice/BillTo['State']</td>
+  </tr>
+  <tr>
+    <td>bill_postal_code</td>
+    <td>Cust_BillTo_Zip</td>
+    <td>Invoice/BillTo['Zip']</td>
+  </tr>
+  <tr>
+    <td>ship_addr1</td>
+    <td>Cust_ShipTo_Company</td>
+    <td>Ship To['Company']</td>
+  </tr>
+  <tr>
+    <td>ship_addr2</td>
+    <td>Cust_ShipTo_Name</td>
+    <td>Ship To['Name']</td>
+  </tr>
+  <tr>
+    <td>ship_addr3</td>
+    <td>Cust_ShipTo_Address1</td>
+    <td>Ship To['Address']</td>
+  </tr>
+  <tr>
+    <td>ship_addr4</td>
+    <td>Cust_ShipTo_Address2</td>
+    <td>Ship To['Address2']</td>
+  </tr>
+  <tr>
+    <td>ship_city</td>
+    <td>Cust_ShipTo_City</td>
+    <td>Ship To['City']</td>
+  </tr>
+  <tr>
+    <td>ship_state</td>
+    <td>Cust_ShipTo_State</td>
+    <td>Ship To['State']</td>
+  </tr>
+  <tr>
+    <td>ship_postal_code</td>
+    <td>Cust_ShipTo_Zip</td>
+    <td>Ship To['Zip']</td>
+  </tr>
+  <tr>
+    <td>(case is_active when 0 then "X" else "" end)</td>
+    <td>Cust_InactiveFlag</td>
+    <td>Customer is inactive</td>
+  </tr>
+
+  </tbody>
+</table>
+
+<hr/>
+
+<h2 class="text-center">EXTRA FIELDS</h2>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>QB</th>
+    <th>Portal</th>
+    <th>Label</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="table-danger">
+    <td>site_contact</td>
+    <td>site_contact</td>
+    <td>Site Contact</td>
+  </tr>
+  <tr class="table-danger">
+    <td>site_email</td>
+    <td>site_email</td>
+    <td>Site Email</td>
+  </tr>
+  <tr class="table-danger">
+    <td>site_phone</td>
+    <td>site_phone</td>
+    <td>Site Phone</td>
+  </tr>
+  <tr class="table-danger">
+    <td>sales_rep</td>
+    <td>sales_rep (in SB; Cust_Rep in Thresher)</td>
+    <td>Rep</td>
+  </tr>
+  </tbody>
+
+</table>
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - Customers</h4>
+  GRANT SELECT, INSERT, UPDATE (`Cust_BillTo_Address1`, `Cust_BillTo_Address2`, `Cust_BillTo_City`, `Cust_BillTo_Company`, `Cust_BillTo_Name`, `Cust_BillTo_State`, `Cust_BillTo_Zip`, `Cust_Company`, `Cust_CompanyAbr`, `Cust_EmailCC`, `Cust_EmailTo`, `Cust_InactiveFlag`, `Cust_NameFirst`, `Cust_NameLast`, `Cust_NameMiddle`, `Cust_NameSalutation`, `Cust_PhoneAlt`, `Cust_PhoneCell`, `Cust_PhoneFax`, `Cust_PhoneOffice`, `sales_rep`, `Cust_ShipTo_Address1`, `Cust_ShipTo_Address2`, `Cust_ShipTo_City`, `Cust_ShipTo_Company`, `Cust_ShipTo_Name`, `Cust_ShipTo_State`, `Cust_ShipTo_Zip`, `site_contact`, `site_email`, `site_phone`) ON `ThresherSB`.`Customers` TO 'qb'@'%';
+</div>
