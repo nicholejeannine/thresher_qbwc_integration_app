@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.text "Cust_PhoneCell"
     t.text "Cust_PhoneFax", comment: "A/P FAX"
     t.text "Cust_PhoneOffice"
-    t.string "sales_rep", limit: 5, default: ""
     t.text "Cust_ShipTo_Address1"
     t.text "Cust_ShipTo_Address2"
     t.text "Cust_ShipTo_City"
@@ -48,9 +47,12 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.text "Cust_ShipTo_Name"
     t.text "Cust_ShipTo_State"
     t.integer "Cust_ShipTo_Zip"
-    t.string "site_contact"
-    t.string "site_email"
-    t.string "site_phone"
+    t.string  "list_id", limit: 41, default: "",    null: false
+    t.string "sales_rep",  null: false, limit: 5, default: ""
+    t.string "site_contact", null: false, default: ""
+    t.string "site_email", null: false, default: ""
+    t.string "site_phone", null: false, default: ""
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
   end
   
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
