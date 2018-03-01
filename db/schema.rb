@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.text "Cust_BillTo_Address2"
     t.text "Cust_BillTo_City"
     t.text "Cust_BillTo_Company"
-    t.text "Cust_BillTo_Email"
+    t.text "Cust_BillTo_Email", comment: "A/P Email"
     t.text "Cust_BillTo_Name"
     t.text "Cust_AP_Name", comment: "A/P Name"
     t.text "Cust_BillTo_Phone", comment: "A/P Phone"
