@@ -19,6 +19,8 @@ class Customer < ApplicationRecord
 		# if the class name is "Client", we're going to save it to the Threshers Customers table.  Otherwise, we're going to handle it the "old" way (by saving it in the qb database).
 		if klass == 'Client'
 			Client.save_to_portal(qb)
+		elsif klass == 'Job'
+			Job.save_to_portal(qb)
 		# else
 		# 	klass.constantize.parse_qb_response(qb)
 		end
