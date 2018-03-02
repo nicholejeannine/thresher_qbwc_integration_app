@@ -124,5 +124,5 @@
   GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`weekly_crew_notes` TO 'dblord'@'%';
   <br/><hr>
   <h2><small>After Customers Table Revision:</small></h2>
-  GRANT SELECT, UPDATE (`Customers_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
+  GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
 </div>
