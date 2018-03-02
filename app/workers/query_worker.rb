@@ -10,7 +10,7 @@ class QueryWorker < QBWC::Worker
        :max_returned => 100,
        :active_status => "All",
        # :from_modified_date => last_ran,
-       :include_ret_element => ['FullName', 'IsActive', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'AdditionalContactRef', 'SalesRepRef', 'DataExtRet'],
+       :include_ret_element => ['ListID', 'TimeCreated', 'TimeModified', 'Name', 'FullName', 'IsActive', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'BillAddress', 'ShipAddress','Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'AdditionalContactRef', 'SalesRepRef', 'JobStatus', 'JobStartDate', 'JobProjectedEndDate', 'JobEndDate', 'DataExtRet'],
        :owner_id => 0
        }
      },
