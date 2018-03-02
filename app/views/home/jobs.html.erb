@@ -233,3 +233,17 @@
   REVOKE ALL PRIVILEGES ON  `ThresherSB`.`Jobs` FROM 'qb'@'%';  GRANT SELECT, INSERT, UPDATE (`Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON  `ThresherSB`.`Jobs` TO 'qb'@'%';
   REVOKE ALL PRIVILEGES ON  `Thresher`.`Jobs` FROM 'qb'@'%';  GRANT SELECT, INSERT, UPDATE (`Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON  `Thresher`.`Jobs` TO 'qb'@'%';
 </div>
+
+<h4 class="bg-warning text-center">WHEN going live:</h4>
+<ol class="bg-warning">
+  <li>Run the "alter table" statement on Jobs table.</li>
+  <li>Export the FullName view to a real table, jobs2.</li>
+  <li>Run this command:  UPDATE `Jobs` INNER JOIN `jobs2`
+    ON `Jobs`.`Jobs_PKEY` = `jobs2`.`Jobs_PKEY`
+    SET `Jobs`.`full_name` = `jobs2`.`FullName`</li>
+  <li>Delete the jobs2 table.</li>
+  <li>Run the web connector inital query for Customers/Jobs</li>
+  <li>Run permissions commands</li>
+  <li>Turn off the "initial" job and start using the "query" job.</li>
+  <li>Make the portal branches with the new QB interface live.</li>
+</ol>
