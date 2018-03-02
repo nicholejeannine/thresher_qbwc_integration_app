@@ -40,22 +40,24 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("CITY", c.Cust_ShipTo_City)
     assert_equal("AA", c.Cust_ShipTo_State)
     assert_equal(99999, c.Cust_ShipTo_Zip)
-    # assert_equal("X", c.Cust_InactiveFlag)
-    # assert_equal("CONTACT", c.site_contact)
-    # assert_equal("EMAIL@EMAIL.COM", c.site_email)
-    # assert_equal("999-999-9999", c.site_phone)
+    assert_equal("X", c.Cust_InactiveFlag)
+    assert_equal("CONTACT", c.site_contact)
+    assert_equal("EMAIL@EMAIL.COM", c.site_email)
+    assert_equal("999-999-9999", c.site_phone)
     assert_equal("AAA", c.sales_rep)
   end
   
-  test "sending a nonmatching client name writes to error log" do
+  test "sending a nonmatching client name writes another customer" do
+    Customer.parse_customer_response(qb_hash)
     Customer.parse_customer_response(no_matching_name)
-    assert_equal(1, QbwcError.count)
+    assert_equal(2, Client.count)
   end
   
   def setup
+    Client.destroy_all
     sql = "INSERT INTO `Customers` (`Customers_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Address1`, `Cust_BillTo_Address2`, `Cust_BillTo_City`, `Cust_BillTo_Company`, `Cust_BillTo_Email`, `Cust_BillTo_Name`, `Cust_AP_Name`, `Cust_BillTo_Phone`, `Cust_BillTo_State`, `Cust_BillTo_Zip`, `Cust_Company`, `Cust_CompanyAbr`, `Cust_EmailCC`, `Cust_EmailTo`, `Cust_InactiveFlag`, `Cust_NameFirst`, `Cust_NameLast`, `Cust_NameMiddle`, `Cust_NameSalutation`, `Cust_PhoneAlt`, `Cust_PhoneCell`, `Cust_PhoneFax`, `Cust_PhoneOffice`, `sales_rep`, `Cust_ShipTo_Address1`, `Cust_ShipTo_Address2`, `Cust_ShipTo_City`, `Cust_ShipTo_Company`, `Cust_ShipTo_Name`, `Cust_ShipTo_State`, `Cust_ShipTo_Zip`, `site_contact`, `site_email`, `site_phone`)
 VALUES
-	(238, '2015-04-13 12:25:16', 'ikang', '2015-11-16 09:18:05', 'jsavage', '155 5th Street', '', 'San Francisco', 'Slack', NULL, '', '', '', 'CA', 0, 'Slack', 'Slack', '', 'dana@slack-corp.com', '', 'Dana', 'Campbell', '', 'Mr.', '', '', '', '650-452-8298', NULL, '155 5th Street', 'This is an address', 'San Francisco', 'Slack', 'Justin Wilson', 'CA', 0, NULL, NULL, NULL);"
+	(238, '2015-04-13 12:25:16', 'ikang', '2015-11-16 09:18:05', 'jsavage', '155 5th Street', '', 'San Francisco', 'Slack', NULL, '', '', '', 'CA', 0, 'Slack', 'Slack', '', 'dana@slack-corp.com', '', 'Dana', 'Campbell', '', 'Mr.', '', '', '', '650-452-8298', '', '155 5th Street', 'This is an address', 'San Francisco', 'Slack', 'Justin Wilson', 'CA', 0, '', '', '');"
     ActiveRecord::Base.connection.execute(sql)
     QbwcError.destroy_all
   end

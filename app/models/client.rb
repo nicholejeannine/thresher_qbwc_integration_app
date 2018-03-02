@@ -37,13 +37,9 @@ class Client < ApplicationRecord
   
   def self.save_to_portal qb
     begin
-      customer = Client.where(:Cust_CompanyAbr => qb['full_name'])&.first
+      customer = Client.find_or_create_by(:Cust_CompanyAbr => qb['full_name'])
       # If customer if found, save the qb fields to their corresponding Thresher fields.
       # IF CUSTOMER IS NOT FOUND, handle it. (This part of the code will change - we may write the customer to an error table, but later when people can NO LONGER enter new clients into the portal, we need to quickly switch to a method that permits new records to be saved to the table. We can simply swap out the "error handler" here.)
-      if customer.nil?
-        customer = Client.new
-        customer.Cust_CompanyAbr = qb['full_name']
-      end
       Client::FIELDS.each {|x| customer[x] = ""}
       Client::FIELD_MAP.each do |k, v|
         if v.is_a?(Hash)
@@ -51,8 +47,8 @@ class Client < ApplicationRecord
             if qb.has_key?(key)
               if value.is_a?(String)
                 customer[k] = qb[key][value]
-                elsif value.is_a(Array)
-                 ref = qb[key]
+                # elsif value.is_a(Array)
+                #  ref = qb[key]
               end
             end
           end
@@ -86,9 +82,4 @@ class Client < ApplicationRecord
   end
   
   
-  def self.handle_error qb
-    QbwcError.create(:worker_class => "Thresher.Customers - name not found", :model_id => "#{qb['full_name']}", :error_message => "Client not found")
-  end
-
-
 end
