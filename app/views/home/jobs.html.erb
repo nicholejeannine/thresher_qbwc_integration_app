@@ -206,22 +206,22 @@
     ALTER TABLE Jobs DROP COLUMN Job_PhoneCell;
     ALTER TABLE Jobs ADD list_id varchar(41) NOT NULL DEFAULT "";
     ALTER TABLE Jobs ADD full_name varchar(209) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD mobile varchar(255) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_addr1 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_addr2 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_addr3 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_addr4 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_city varchar(31) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_state varchar(13) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD bill_postal_code varchar(31) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_addr1 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_addr2 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_addr3 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_addr4 varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_city varchar(31) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_state varchar(13) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD ship_postal_code varchar(31) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD sales_rep varchar(5) NOT NULL DEFAULT "";
+    ALTER TABLE Jobs ADD mobile varchar(255);
+    ALTER TABLE Jobs ADD bill_addr1 varchar(41);
+    ALTER TABLE Jobs ADD bill_addr2 varchar(41);
+    ALTER TABLE Jobs ADD bill_addr3 varchar(41);
+    ALTER TABLE Jobs ADD bill_addr4 varchar(41);
+    ALTER TABLE Jobs ADD bill_city varchar(31);
+    ALTER TABLE Jobs ADD bill_state varchar(13);
+    ALTER TABLE Jobs ADD bill_postal_code varchar(31);
+    ALTER TABLE Jobs ADD ship_addr1 varchar(41);
+    ALTER TABLE Jobs ADD ship_addr2 varchar(41);
+    ALTER TABLE Jobs ADD ship_addr3 varchar(41);
+    ALTER TABLE Jobs ADD ship_addr4 varchar(41);
+    ALTER TABLE Jobs ADD ship_city varchar(31);
+    ALTER TABLE Jobs ADD ship_state varchar(13);
+    ALTER TABLE Jobs ADD ship_postal_code varchar(31);
+    ALTER TABLE Jobs ADD sales_rep varchar(5);
   </p>
   <hr>
   <h3 class="text-center">AFTER FIRST PASS:</h3>
