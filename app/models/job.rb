@@ -81,7 +81,7 @@ class Job < ApplicationRecord
       job.Job_InactiveFlag = "X" if qb['is_active'] == false
       job.save
     rescue StandardError => e
-      QbwcError.create(:worker_class => "Job.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{qb}")
+      QbwcError.create(:worker_class => "Job.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{e}")
     end
   end
 end
