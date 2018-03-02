@@ -11,7 +11,50 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20170712220110) do
-
+  
+  create_table "Customers", primary_key: "Customers_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.timestamp "CreationTimeStamp"
+    t.text "CreationUser"
+    t.timestamp "LastModificationTimeStamp"
+    t.text "LastModificationUser"
+    t.text "Cust_BillTo_Address1"
+    t.text "Cust_BillTo_Address2"
+    t.text "Cust_BillTo_City"
+    t.text "Cust_BillTo_Company"
+    t.text "Cust_BillTo_Email", comment: "A/P Email"
+    t.text "Cust_BillTo_Name"
+    t.text "Cust_AP_Name", comment: "A/P Name"
+    t.text "Cust_BillTo_Phone", comment: "A/P Phone"
+    t.text "Cust_BillTo_State"
+    t.integer "Cust_BillTo_Zip"
+    t.text "Cust_Company"
+    t.text "Cust_CompanyAbr", comment: "Customer Short Name"
+    t.text "Cust_EmailCC"
+    t.text "Cust_EmailTo"
+    t.text "Cust_InactiveFlag"
+    t.text "Cust_NameFirst"
+    t.text "Cust_NameLast"
+    t.text "Cust_NameMiddle"
+    t.text "Cust_NameSalutation"
+    t.text "Cust_PhoneAlt"
+    t.text "Cust_PhoneCell"
+    t.text "Cust_PhoneFax", comment: "A/P FAX"
+    t.text "Cust_PhoneOffice"
+    t.text "Cust_ShipTo_Address1"
+    t.text "Cust_ShipTo_Address2"
+    t.text "Cust_ShipTo_City"
+    t.text "Cust_ShipTo_Company"
+    t.text "Cust_ShipTo_Name"
+    t.text "Cust_ShipTo_State"
+    t.integer "Cust_ShipTo_Zip"
+    t.string  "list_id", limit: 41, default: "",    null: false
+    t.string "sales_rep",  null: false, limit: 5, default: ""
+    t.string "site_contact", null: false, default: ""
+    t.string "site_email", null: false, default: ""
+    t.string "site_phone", null: false, default: ""
+    t.index ["list_id"], name: "list_id", unique: true, using: :btree
+  end
+  
   create_table "clients", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "list_id",                                                          default: "",    null: false
     t.datetime "time_created"

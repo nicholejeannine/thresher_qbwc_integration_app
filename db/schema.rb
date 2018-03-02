@@ -252,67 +252,55 @@ ActiveRecord::Schema.define(version: 20170712220110) do
     t.index ["receive_payment_id", "invoice_id"], name: "invoice_payment", unique: true, using: :btree
   end
 
-  create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "list_id",                                                          default: "",    null: false
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string   "edit_sequence",             limit: 16
-    t.string   "name",                      limit: 41
-    t.string   "full_name",                 limit: 209
-    t.boolean  "is_active",                                                        default: true,  null: false
-    t.string   "parent_list_id"
-    t.string   "company_name",              limit: 41
-    t.string   "salutation",                limit: 15
-    t.string   "first_name",                limit: 25
-    t.string   "middle_name",               limit: 25
-    t.string   "last_name",                 limit: 25
-    t.string   "job_title",                 limit: 41
-    t.string   "bill_addr1",                limit: 41
-    t.string   "bill_addr2",                limit: 41
-    t.string   "bill_addr3",                limit: 41
-    t.string   "bill_addr4",                limit: 41
-    t.string   "bill_city",                 limit: 31
-    t.string   "bill_state",                limit: 21
-    t.string   "bill_postal_code",          limit: 13
-    t.string   "bill_country",              limit: 31
-    t.string   "bill_note",                 limit: 41
-    t.string   "ship_addr1",                limit: 41
-    t.string   "ship_addr2",                limit: 41
-    t.string   "ship_addr3",                limit: 41
-    t.string   "ship_addr4",                limit: 41
-    t.string   "ship_city",                 limit: 31
-    t.string   "ship_state",                limit: 21
-    t.string   "ship_postal_code",          limit: 13
-    t.string   "ship_country",              limit: 31
-    t.string   "ship_note",                 limit: 41
-    t.string   "phone",                     limit: 21
-    t.string   "alt_phone",                 limit: 21
-    t.string   "fax",                       limit: 21
-    t.string   "email",                     limit: 1023
-    t.string   "cc",                        limit: 1023
-    t.string   "contact",                   limit: 41
-    t.string   "alt_contact",               limit: 41
-    t.string   "customer_type",             limit: 159
-    t.string   "terms",                     limit: 31
-    t.string   "sales_rep",                 limit: 5
-    t.decimal  "total_balance",                           precision: 20, scale: 5, default: "0.0", null: false
-    t.string   "sales_tax_code",            limit: 3
-    t.string   "item_sales_tax",            limit: 31
-    t.string   "account_number",            limit: 99
-    t.string   "job_status",                limit: 41
-    t.date     "job_start_date"
-    t.date     "job_projected_end_date"
-    t.date     "job_end_date"
-    t.string   "job_desc",                  limit: 99
-    t.string   "job_type",                  limit: 159
-    t.string   "preferred_delivery_method", limit: 41
-    t.string   "site_contact"
-    t.string   "site_email"
-    t.string   "site_phone"
-    t.index ["full_name"], name: "full_name", unique: true, using: :btree
-    t.index ["is_active"], name: "is_active", using: :btree
-    t.index ["list_id"], name: "list_id", unique: true, using: :btree
-    t.index ["parent_list_id"], name: "parent_list_id", using: :btree
+  create_table "Jobs", primary_key: "Jobs_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.timestamp "CreationTimeStamp"
+    t.text "CreationUser"
+    t.timestamp "LastModificationTimeStamp"
+    t.text "LastModificationUser"
+    t.integer "FK_JobID_Parent"
+    t.integer "FK_Customers_PKEY"
+    t.text "Job_Company"
+    t.text "Job_CompanyAbr"
+    t.text "Job_Contact"
+    t.text "Job_ContactAlt"
+    t.date "Job_DateEndActual", comment: "Job Actual End Date"
+    t.date "Job_DateEndProjected", comment: "Job Projected End Date"
+    t.date "Job_DateStartActual", comment: "Job Actual Start Date"
+    t.date "Job_DateStartProjected", comment: "Job Projected Start Date"
+    t.text "Job_Description_Long"
+    t.text "Job_Description_Short"
+    t.text "Job_EmailCC"
+    t.text "Job_EmailTo"
+    t.text "Job_InactiveFlag", comment: "Job Is Active"
+    t.text "Job_NameFirst"
+    t.text "Job_NameLast"
+    t.text "Job_NameMiddle"
+    t.text "Job_NameSalutation"
+    t.text "Job_PhoneAlt"
+    t.text "Job_PhoneFax"
+    t.text "Job_PhoneOffice"
+    t.text "Job_QB_JobName"
+    t.text "Job_Status"
+    t.string "list_id", limit: 41, default: "", null: false
+    t.string "full_name", limit: 209, default: "", null: false
+    t.string "mobile", default: "", null: false
+    t.string "bill_addr1", limit: 41, default: "", null: false
+    t.string "bill_addr2", limit: 41, default: "", null: false
+    t.string "bill_addr3", limit: 41, default: "", null: false
+    t.string "bill_addr4", limit: 41, default: "", null: false
+    t.string "bill_city", limit: 31, default: "", null: false
+    t.string "bill_state", limit: 13, default: "", null: false
+    t.string "bill_postal_code", limit: 31, default: "", null: false
+    t.string "ship_addr1", limit: 41, default: "", null: false
+    t.string "ship_addr2", limit: 41, default: "", null: false
+    t.string "ship_addr3", limit: 41, default: "", null: false
+    t.string "ship_addr4", limit: 41, default: "", null: false
+    t.string "ship_city", limit: 31, default: "", null: false
+    t.string "ship_state", limit: 13, default: "", null: false
+    t.string "ship_postal_code", limit: 31, default: "", null: false
+    t.string "sales_rep", limit: 5, default: "", null: false
+    t.index ["FK_Customers_PKEY"], name: "FK_Customers_PKEY"
+    t.index ["FK_JobID_Parent"], name: "FK_JobID_Parent"
   end
 
   create_table "projects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
