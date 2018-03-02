@@ -45,7 +45,7 @@ class Job < ApplicationRecord
   
   # job_status fields come back like "InProgress" - make it save as two separate words.
   def titleize_job_status
-    self.job_status = self.job_status&.titleize
+    self.Job_Status = self['Job_Status']&.titleize
   end
   
   def self.save_to_portal(qb)
@@ -56,7 +56,7 @@ class Job < ApplicationRecord
         job = Job.find_or_create_by(:full_name => qb['full_name'])
       end
       # If customer if found, save the qb fields to their corresponding Thresher fields.
-      Job::FIELDS.each {|x| customer[x] = ""}
+      Job::FIELDS.each {|x| job[x] = ""}
       Job::FIELD_MAP.each do |k, v|
         if v.is_a?(Hash)
           v.each do |key, value|
@@ -78,7 +78,7 @@ class Job < ApplicationRecord
           job.mobile = ref.find_all {|e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
         end
       end
-      job.Cust_InactiveFlag = "X" if qb['is_active'] == false
+      job.Job_InactiveFlag = "X" if qb['is_active'] == false
       job.save
     rescue StandardError => e
       QbwcError.create(:worker_class => "Job.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{qb}")
