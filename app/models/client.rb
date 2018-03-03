@@ -1,6 +1,10 @@
 class Client < ApplicationRecord
   include QuickbooksTypes
-  
+
+  self.table_name = "Customers"
+  self.primary_key = "Customers_PKEY"
+
+
   FIELD_MAP = {
       :list_id => "list_id",
       :Cust_Company => 'company_name',
@@ -34,9 +38,6 @@ class Client < ApplicationRecord
       :Cust_PhoneCell => {"additional_contact_ref" => MOBILE_CAST},
       :Cust_InactiveFlag => {"is_active" => INACTIVE_FLAG_CAST}
   }
-  
-  self.table_name = "Customers"
-  self.primary_key = "Customers_PKEY"
   
   def self.save_to_portal qb
     begin
