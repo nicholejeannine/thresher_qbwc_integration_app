@@ -22,6 +22,10 @@ class Client < ApplicationRecord
       data.find_all {|e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
     end
   }
+
+  INACTIVE_FLAG_CAST = Proc.new{|data|
+    "X" unless data
+  }
   
   FIELDS = %w(Cust_Company Cust_NameSalutation Cust_NameFirst Cust_NameMiddle Cust_NameLast Cust_PhoneOffice Cust_EmailTo Cust_PhoneAlt Cust_EmailCC Cust_PhoneCell Cust_PhoneFax Cust_BillTo_Company Cust_BillTo_Name Cust_BillTo_Address1 Cust_BillTo_Address2 Cust_BillTo_City Cust_BillTo_State Cust_BillTo_Zip Cust_ShipTo_Company Cust_ShipTo_Name Cust_ShipTo_Address1 Cust_ShipTo_Address2 Cust_ShipTo_City Cust_ShipTo_State Cust_ShipTo_Zip Cust_InactiveFlag site_contact site_email site_phone sales_rep)
   
@@ -55,7 +59,8 @@ class Client < ApplicationRecord
       :site_contact => {"data_ext_ret" => SITE_CONTACT_CAST},
       :site_phone => {"data_ext_ret" => SITE_PHONE_CAST},
       :site_email => {"data_ext_ret" => SITE_EMAIL_CAST},
-      :Cust_PhoneCell => {"additional_contact_ref" => MOBILE_CAST}
+      :Cust_PhoneCell => {"additional_contact_ref" => MOBILE_CAST},
+      :Cust_InactiveFlag => {"is_active" => INACTIVE_FLAG_CAST}
   }
   
   self.table_name = "Customers"
@@ -85,7 +90,6 @@ class Client < ApplicationRecord
           customer[k] = qb[v]
         end
       end
-      customer.Cust_InactiveFlag = "X" if qb['is_active'] == false
       customer.save
   rescue StandardError => e
     QbwcError.create(:worker_class => "Client.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{e}")
