@@ -28,6 +28,17 @@ module QuickbooksTypes
 		INACTIVE_FLAG_CAST = Proc.new{|data|
 			"X" unless data
 		}
+		
+		def self.qb_id
+			case self.name
+			when "Client", "Job", "Project", "Vendor", "Employee", "QbEmployee", "QbCustomer"
+				"list_id"
+			when "Estimate", "Invoice", "PurchaseOrder", "ReceivePayment", "SalesOrder", "TimeTracking"
+				"txn_id"
+			when "EstimateLine", "InvoiceLine", "PurchaseOrderLine", "SalesOrderLine"
+				"txn_line_id"
+			end
+		end
 
 	end
 

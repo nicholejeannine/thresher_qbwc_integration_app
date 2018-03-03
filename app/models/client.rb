@@ -1,9 +1,10 @@
 class Client < ApplicationRecord
-  include QuickbooksTypes
 
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
 
+  QB_MATCHING_FIELD = "Cust_CompanyAbr"
+  PORTAL_MATCHING_FIELD = "full_name"
 
   FIELD_MAP = {
       :list_id => "list_id",
@@ -38,36 +39,6 @@ class Client < ApplicationRecord
       :Cust_PhoneCell => {"additional_contact_ref" => MOBILE_CAST},
       :Cust_InactiveFlag => {"is_active" => INACTIVE_FLAG_CAST}
   }
-  
-  def self.save_to_portal qb
-    begin
-      # Look for customer by list id first. If not found, search by full name. If not found, create a new one.
-      customer = Client.find_by("list_id" => qb['list_id'])
-      if customer.nil?
-        customer = Client.find_or_create_by(:Cust_CompanyAbr => qb['full_name'])
-      end
-      # If customer if found, save the qb fields to their corresponding Thresher fields.
-      Client::FIELD_MAP.keys.each {|x| customer[x] = ""}
-      Client::FIELD_MAP.each do |k, v|
-        if v.is_a?(Hash)
-          v.each do |key, value|
-            if qb.has_key?(key)
-              if value.is_a?(String)
-                customer[k] = qb[key][value]
-              elsif value.is_a?(Proc)
-                customer[k] = value.call(qb[key])
-              end
-            end
-          end
-        elsif v.is_a?(String)
-          customer[k] = qb[v]
-        end
-      end
-      customer.save
-  rescue StandardError => e
-    QbwcError.create(:worker_class => "Client.save_to_portal", :model_id => "#{qb['full_name']}", :error_message => "#{e}")
-  end
-  end
   
   
 end
