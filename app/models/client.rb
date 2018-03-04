@@ -2,9 +2,9 @@ class Client < ApplicationRecord
 
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
-
-  QB_MATCHING_FIELD = "Cust_CompanyAbr"
+ 
   PORTAL_MATCHING_FIELD = "full_name"
+  QB_MATCHING_FIELD = "Cust_CompanyAbr"
 
   FIELD_MAP = {
       :list_id => "list_id",

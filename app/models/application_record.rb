@@ -1,12 +1,13 @@
 class ApplicationRecord < ActiveRecord::Base
   include QuickbooksTypes
   self.abstract_class = true
+  
+  
 
   # Every table that syncs data with the portal needs to define 3 constants:
-  #
-  # 1. PORTAL_MATCHING_FIELD = string or a Proc (a Ruby method that can be called anytime in the program, which returns a value). This is the value the Web Connector should "match" portal fields on.
-  # 2. QB_MATCHING_FIELD = the string value or method to be used to compare the Quickbooks value with the protal matching value.
-  # 3. A hash constant, FIELD_MAP.  The hash keys are the portal columns that the web connector can update. The hash values are "lookup" values, e.g., they specify where/how to obtain the correct values from the Quickbooks query hash.  The value types are either a string, a hash, or a proc (a special method that can be performed on a portion of the quickbooks hash to obtain the correct value.
+    #  1.  PORTAL_MATCHING_FIELD = string or a Proc (a Ruby method that can be called anytime in the program, which returns a value). This is the value the Web Connector should "match" portal fields on.
+    #  2.  QB_MATCHING_FIELD = the string value or method to be used to compare the Quickbooks value with the protal matching value.
+    #  3.  FIELD_MAP - a hash.  The hash keys are sybmols with the names of the portal columns that the web connector can update. The hash values are "lookups" values, e.g., they specify where and how to obtain the correct values from the Quickbooks query hash.  Each value should be either a string, a hash, or a proc (a proc is simply a method that can be called to do perform any complicated logic needed to obtain the correct value).
 
   # To parse the QueryResponse, we determine whether the qb_id is "list_id" (for list types), "txn_id" (for transaction types), or "txn_line_id" (for line items). We then search for the id in the appropriate table, and either retrieve it (if it already exists) or create it. The QueryResponse hash is then parsed into key/value pairs, and the record is updated in the database.
   # # OLD WAY
@@ -56,7 +57,7 @@ class ApplicationRecord < ActiveRecord::Base
   
   # These lines of code are intented to help anyone who might come along after Nichole and wants to add a new class for the web connector to pull data from. If you haven't yet implemented the above constants, you should do so.
   not_implemented_error = Proc.new{NoMethodError.new("You must define the constants MATCHING_FIELD, QB_ID, and FIELD_MAP in order to sync a new table with the web connector.  Please see app/models/application_record.php and see other tables for examples")}
-  MATCHING_FIELD = not_implemented_error.call
-  QB_ID = not_implemented_error.call
+  PORTAL_MATCHING_FIELD = not_implemented_error.call
+  QB_MATCHING_FIELD = not_implemented_error.call
   FIELD_MAP = not_implemented_error.call
 end
