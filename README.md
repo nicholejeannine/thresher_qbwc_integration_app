@@ -188,6 +188,11 @@ type 99 service code =
 
 # Put this error on a title attribute in HTML on views/timecard_transactions/new
 QbwcTimecardError.create(:worker_class => "TimeTrackingsController#create", :model_id => t.id, :error_message => "No Quickbooks customer found for request TimecardTrans #{t.id}, project_id #{t.project_id}, job_id #{t.job_id}, customer #{t.client_id}, employee #{t&.employee&.employee_list_id}, date #{t.tc_date}")
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> master
 
 
 
@@ -223,13 +228,13 @@ records_array = ActiveRecord::Base.connection.execute(sql).to_a
 
 
 
-# QBWC Corrina Meeting
-
 ## TODO:
-  1. salary people should be "salary level 1" instead of "hourly level 1"
-
+  1. If the physical address (THE SHIP ADDRESS) of the job site is within the city or county of San Francisco, the class should be set to "SF Labor" otherwise it's going to be blank (TODO BY MARCH 31 IF POSSIBLE)
+  
+  
+# QBWC Corrina Meeting
 ## Wish List
   
   - some kind of "In Progress" indicator that shows the web connector is still processing jobs for the week.
-  
   - when the green button clicks, needs to say "this many successful entries" out of "how many"
+  
