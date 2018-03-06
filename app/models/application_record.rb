@@ -28,9 +28,9 @@ class ApplicationRecord < ActiveRecord::Base
   def self.save_to_portal qb
     begin
       # Look for customer by list id first. If not found, seearch by full name. If not found, create a new one.
-      row = self.find_by(self.qb_id => qb[qb_id])
+      row = self.find_by(self.qb_id => qb[self.qb_id])
       if row.nil?
-        row = self.name.constantize.find_or_create_by(self::QB_MATCHING_FIELD =>qb['full_name'])
+        row = self.name.constantize.find_or_create_by(self::QB_MATCHING_FIELD => qb[self::PORTAL_MATCHING_FIELD])
       end
       # If customer if found, save the qb fields to their corresponding Thresher fields.
       self::FIELD_MAP.keys.each {|x| row[x] = ""}

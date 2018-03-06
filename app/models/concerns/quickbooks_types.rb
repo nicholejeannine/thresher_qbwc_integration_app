@@ -2,6 +2,14 @@ module QuickbooksTypes
 	extend ActiveSupport::Concern
 	included do
 		
+		# def custom_data_cast variable
+		# 	return Proc.new{|data|
+		# 		if data.pluck("data_ext_name").include?("Site Contact")
+		# 			data.find_all {|x| x['data_ext_name'] == 'Site Contact'}.pluck("data_ext_value")[0]
+		# 		end
+		# 	}
+		# end
+		
 		# Given an ugly quickbooks hash (see test/fixutes/client_hash.rb),  we want to pull out ONLY the "data_ext_value" where the data_ext_name == "Site Contact"
 		SITE_CONTACT_CAST = Proc.new{|data|
 			if data.pluck("data_ext_name").include?("Site Contact")

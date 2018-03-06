@@ -238,3 +238,9 @@ records_array = ActiveRecord::Base.connection.execute(sql).to_a
   - some kind of "In Progress" indicator that shows the web connector is still processing jobs for the week.
   - when the green button clicks, needs to say "this many successful entries" out of "how many"
   
+1. NAMES:
+  Modules: QbListType, QbTxnType, QbCanPushtoPortal, PortalCanPushToQb
+  
+  "Match and push to portal"
+  "Push to portal"
+;

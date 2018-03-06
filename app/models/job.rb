@@ -1,12 +1,11 @@
 class Job < ApplicationRecord
-  before_save :titleize_job_status
+  # before_save :titleize_job_status
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"
 
   PORTAL_MATCHING_FIELD = "full_name"
   QB_MATCHING_FIELD = "full_name"
-  
-  # TODO: I think mobile is missing. Check all fields and make sure they're here.
+
   FIELD_MAP = {
       :Job_QB_JobName => 'name',
       :Job_NameSalutation => 'salutation',
@@ -17,6 +16,7 @@ class Job < ApplicationRecord
       :Job_EmailTo => 'email',
       :Job_PhoneAlt => 'alt_phone',
       :Job_EmailCC => 'cc',
+      :mobile => {"additional_contact_ref" => MOBILE_CAST},
       :Job_PhoneFax => 'fax',
       :bill_addr1 => {"bill_address" => "addr1"},
       :bill_addr2 => {"bill_address" => "addr2"},
@@ -32,13 +32,14 @@ class Job < ApplicationRecord
       :ship_city => {"ship_address" => "city"},
       :ship_state => {"ship_address" => "state"},
       :ship_postal_code => {"ship_address" => "postal_code"},
+      :Job_InactiveFlag => {"is_active" => INACTIVE_FLAG_CAST},
+      :sales_rep => {"sales_rep_ref" => "full_name"},
       :Job_Status => "job_status",
       :Job_DateStartActual => "job_start_date",
       :Job_DateEndProjected => "job_projected_end_date",
       :Job_DateEndActual => "job_end_date",
       :list_id => "list_id",
-      :full_name => "full_name",
-      :sales_rep => {"sales_rep_ref" => "full_name"}
+      :full_name => "full_name"
   }
   
   # job_status fields come back like "InProgress" - make it save as two separate words.
