@@ -39,7 +39,7 @@ class JobQueryTest < ActiveSupport::TestCase
     assert_equal(99999, j.ship_postal_code)
     assert_equal("X", j.Job_InactiveFlag)
     assert_equal("AAA", j.sales_rep)
-    assert_equal("JOB", j.Job_Status)
+    assert_equal("Job", j.Job_Status)
     assert_equal("1982-12-30", j.Job_DateStartActual)
     assert_equal("1982-12-30", j.Job_DateEndProjected)
     assert_equal("1982-12-30", j.Job_DateEndActual)
