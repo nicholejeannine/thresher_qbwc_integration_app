@@ -18,6 +18,7 @@ class Initializers::ClientWorker < QBWC::Worker
           Client.initialize_sync(qb, :Cust_CompanyAbr, qb['full_name'])
         end
       }
+      QBWC.delete_job(job) if complete
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
