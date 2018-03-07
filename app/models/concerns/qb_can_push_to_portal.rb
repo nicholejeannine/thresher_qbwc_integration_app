@@ -13,6 +13,7 @@ module QbCanPushToPortal
       self.save_to_portal(qb)
     end
   
+    ## TODO: CREATIONUSER FOR NEW RECORDS
     def self.save_to_portal qb
       begin
         row = self.find_or_create_by(self.qb_id => qb[self.qb_id])
