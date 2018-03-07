@@ -187,9 +187,9 @@
 
 
 <div class="alert alert-info">
-  <h4 class="alert-heading">Mysql Alter Tables Statements - Customers</h4>
+  <h4 class="alert-heading">Mysql Alter Tables Statements - Jobs</h4>
   <p>ALTER TABLE `Jobs` DROP COLUMN `Job_Company_QBName_Display.calc`;
-    ALTER TABLE Jobs DROP COLUMN Job_ContactName;
+    ALTER TABLE Jobs DROP COLUMN 	Job_ContactName;
     ALTER TABLE Jobs DROP COLUMN Job_CustCLNo;
     ALTER TABLE Jobs DROP COLUMN Job_CustPoNo;
     ALTER TABLE Jobs DROP COLUMN Job_DefaultJob;
@@ -204,28 +204,26 @@
     ALTER TABLE `Jobs` DROP COLUMN `Job_QB_JobName_Hierarc.calc`;
     ALTER TABLE Jobs DROP COLUMN Job_Type;
     ALTER TABLE Jobs DROP COLUMN Job_PhoneCell;
-    ALTER TABLE Jobs ADD list_id varchar(41) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD full_name varchar(209) NOT NULL DEFAULT "";
-    ALTER TABLE Jobs ADD mobile varchar(255);
-    ALTER TABLE Jobs ADD bill_addr1 varchar(41);
-    ALTER TABLE Jobs ADD bill_addr2 varchar(41);
-    ALTER TABLE Jobs ADD bill_addr3 varchar(41);
-    ALTER TABLE Jobs ADD bill_addr4 varchar(41);
-    ALTER TABLE Jobs ADD bill_city varchar(31);
-    ALTER TABLE Jobs ADD bill_state varchar(41);
-    ALTER TABLE Jobs ADD bill_postal_code varchar(31);
-    ALTER TABLE Jobs ADD ship_addr1 varchar(41);
-    ALTER TABLE Jobs ADD ship_addr2 varchar(41);
-    ALTER TABLE Jobs ADD ship_addr3 varchar(41);
-    ALTER TABLE Jobs ADD ship_addr4 varchar(41);
-    ALTER TABLE Jobs ADD ship_city varchar(31);
-    ALTER TABLE Jobs ADD ship_state varchar(41);
-    ALTER TABLE Jobs ADD ship_postal_code varchar(31);
-    ALTER TABLE Jobs ADD sales_rep varchar(5);
+    ALTER TABLE Jobs ADD list_id varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD full_name varchar(209) DEFAULT NULL;
+    ALTER TABLE Jobs ADD mobile varchar(255) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr1 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr2 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr3 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr4 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_city varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_state varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_postal_code varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr1 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr2 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr3 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr4 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_city varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_state varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_postal_code varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD sales_rep varchar(5) DEFAULT NULL; ALTER TABLE Jobs ADD UNIQUE KEY `list_id` (`list_id`) USING BTREE; ALTER TABLE Jobs ADD UNIQUE KEY `full_name` (`full_name`) USING BTREE;
   </p>
   <hr>
-  <h3 class="text-center">AFTER FIRST PASS:</h3>
-  <p>ALTER TABLE Jobs ADD UNIQUE KEY `list_id` (`list_id`) USING BTREE; ALTER TABLE Jobs ADD UNIQUE KEY `full_name` (`full_name`) USING BTREE;</p>
 </div>
 
 <div class="alert alert-info">

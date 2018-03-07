@@ -3,9 +3,6 @@ class Job < Customer
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"
 
-  PORTAL_MATCHING_FIELD = "full_name"
-  QB_MATCHING_FIELD = "full_name"
-
   FIELD_MAP = {
       :Job_QB_JobName => 'name',
       :Job_NameSalutation => 'salutation',
