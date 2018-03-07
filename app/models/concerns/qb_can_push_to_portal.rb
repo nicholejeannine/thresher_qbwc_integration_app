@@ -7,7 +7,8 @@ module QbCanPushToPortal
     def self.initialize_sync (qb, portal_field, qb_value)
       row = self.find_or_initialize_by(portal_field => qb_value)
       row[self.qb_id] = qb[self.qb_id]
-      row.creation_user
+      row.send("CreationUser=", "QB") if self.column_names.include?("CreationUser")
+      row.send("CreationTimeStamp=", Time.now) if self.column_names.include?("CreationTimeStamp")
       row.save
       self.save_to_portal(qb)
     end
@@ -36,11 +37,6 @@ module QbCanPushToPortal
       rescue StandardError => e
         QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb[self.qb_id]}", :error_message => "save_to_portal failed: #{e}")
       end
-    end
-    
-    def creation_user
-      self.send("CreationUser=", "QB") if self.class.column_names.include?("CreationUser")
-      self.send("CreationTimeStamp=", Time.now) if self.class.column_names.include?("CreationTimeStamp")
     end
     
     def modification_user
