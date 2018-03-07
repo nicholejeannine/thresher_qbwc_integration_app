@@ -1,4 +1,4 @@
-class Job < ApplicationRecord
+class Job < Customer
   before_save :titleize_job_status
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"

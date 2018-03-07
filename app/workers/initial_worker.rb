@@ -69,7 +69,7 @@ class InitialWorker < QBWC::Worker
   # handle_response will get customers in groups of 100. When this is 0, we're done.
 		 complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
 		 begin
-			 r['customer_ret']&.each{|qb|Customer.parse_customer_response(qb)}
+			 r['customer_ret']&.each{|qb|Client.initialize_sync(qb, :Cust_CompanyAbr, qb['full_name'])}
 			 r['vendor_ret']&.each{|qb|Vendor.parse_qb_response(qb)}
 			 r['estimate_ret']&.each{|qb|Estimate.parse_qb_response(qb)}
 			 r['sales_order_ret']&.each{|qb|SalesOrder.parse_qb_response(qb)}

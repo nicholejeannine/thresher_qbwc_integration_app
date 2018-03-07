@@ -9,6 +9,8 @@ class JobQueryTest < ActiveSupport::TestCase
   test "when processing the query request, it updates the correct fields" do
     # first assert we have one client in the database, that our sql method in "setup" worked
     assert_equal(1, Job.count)
+    Customer.parse_customer_response(qb_hash)
+    assert_equal(1, Job.count)
     j = Job.where("full_name" => "Facebook:Construction").first
     # assert that the ship to address is the fake value we assigned it, BEFORE we run the update, so then we can assert that it becomes nil afterward.
     # Reassign the value c and check the fields were all updated
@@ -55,10 +57,8 @@ class JobQueryTest < ActiveSupport::TestCase
   
   def setup
     Job.destroy_all
-    sql = "INSERT INTO `Jobs` (`Jobs_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) VALUES
-(41, '2010-03-02 21:20:01', 'user', '2018-03-02 21:53:54', NULL, 6, 2, 'Google, Inj.', 'Google', 'Mr. John Sheldon ', '', '2000-01-01', '2000-01-01', '2000-01-01', '2000-01-01', 'Charleston 2000Moutain View,  CA', 'Charleston 2000', '', 'sheldonj@google.com', '', 'John', 'Sheldon', '', 'Mr.', '', '', '', 'Charleston 2000', 'In Progress', '', 'Facebook:Construction', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');"
+    sql = "INSERT INTO `Jobs` (`Jobs_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) VALUES (41, '2010-03-02 21:20:01', 'user', '2018-03-02 21:53:54', NULL, 6, 2, 'Google, Inj.', 'Google', 'Mr. John Sheldon ', '', '2000-01-01', '2000-01-01', '2000-01-01', '2000-01-01', 'Charleston 2000Moutain View,  CA', 'Charleston 2000', '', 'sheldonj@google.com', '', 'John', 'Sheldon', '', 'Mr.', '', '', '', 'Charleston 2000', 'In Progress', '', 'Facebook:Construction', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');"
     ActiveRecord::Base.connection.execute(sql)
     QbwcError.destroy_all
-    Customer.parse_customer_response(qb_hash)
   end
 end

@@ -43,19 +43,6 @@ module QuickbooksTypes
 			"X" unless data
 		}
 		
-		
-		# TODO: Put this somewhere
-		def self.qb_id
-			case self.name
-			when "Client", "Job", "Project", "Vendor", "Employee", "QbEmployee", "QbCustomer"
-				"list_id"
-			when "Estimate", "Invoice", "PurchaseOrder", "ReceivePayment", "SalesOrder", "TimeTracking"
-				"txn_id"
-			when "EstimateLine", "InvoiceLine", "PurchaseOrderLine", "SalesOrderLine"
-				"txn_line_id"
-			end
-		end
-
 	end
 
 	end

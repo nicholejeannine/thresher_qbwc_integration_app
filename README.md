@@ -244,3 +244,7 @@ records_array = ActiveRecord::Base.connection.execute(sql).to_a
   "Match and push to portal"
   "Push to portal"
 ;
+
+
+## ADDING NEW TABLES
+ - Every table that syncs data with the portal needs to define a hash constant, called FIELD_MAP.  The hash keys are sybmols with the names of the portal columns that the web connector can update. The hash values are "lookups" values, e.g., they specify where and how to obtain the correct values from the Quickbooks query hash.  Each value should be either a string, a hash, or a proc (a proc is simply a method that can be called to do perform any complicated logic needed to obtain the correct value).
