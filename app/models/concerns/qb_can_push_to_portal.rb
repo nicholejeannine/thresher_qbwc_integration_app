@@ -2,13 +2,11 @@ module QbCanPushToPortal
   extend ActiveSupport::Concern
   include QuickbooksTypes
   included do
-    before_save :modification_user
+    before_save :creation_user, :modification_user
     
     def self.initialize_sync (qb, portal_field, qb_value)
       row = self.find_or_initialize_by(portal_field => qb_value)
       row[self.qb_id] = qb[self.qb_id]
-      row.send("CreationUser=", "QB") if self.column_names.include?("CreationUser") && row.new_record?
-      row.send("CreationTimeStamp=", Time.now) if self.column_names.include?("CreationTimeStamp") && row.new_record?
       row.save
       self.save_to_portal(qb)
     end
@@ -16,7 +14,7 @@ module QbCanPushToPortal
     ## TODO: CREATIONUSER FOR NEW RECORDS
     def self.save_to_portal qb
       begin
-        row = self.find_or_create_by(self.qb_id => qb[self.qb_id])
+        row = self.find_or_initialize_by(self.qb_id => qb[self.qb_id])
         # save the qb fields to their corresponding Thresher fields.
         self::FIELD_MAP.keys.each {|x| row[x] = ""}
         self::FIELD_MAP.each do |k, v|
@@ -43,6 +41,11 @@ module QbCanPushToPortal
     def modification_user
       self.send("LastModificationUser=", "QB") if self.class.column_names.include?("LastModificationUser")
       self.send("LastModificationTimeStamp=", Time.now) if self.class.column_names.include?("LastModificationTimeStamp")
+    end
+    
+    def creation_user
+      self.send("CreationUser=", "QB") if self.class.column_names.include?("CreationUser") && self.new_record?
+      self.send("CreationTimeStamp=", Time.now) if self.class.column_names.include?("CreationTimeStamp") && self.new_record?
     end
 
 
