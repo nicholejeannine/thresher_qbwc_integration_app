@@ -34,7 +34,7 @@ module QbCanPushToPortal
         end
         row.save
       rescue StandardError => e
-        QbwcError.create(:worker_class => "#{self.name}.save_to_portal", :model_id => "#{qb[self.qb_id]}", :error_message => "#{e}")
+        QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb[self.qb_id]}", :error_message => "save_to_portal failed: #{e}")
       end
     end
     
