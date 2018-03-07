@@ -7,8 +7,8 @@ module QbCanPushToPortal
     def self.initialize_sync (qb, portal_field, qb_value)
       row = self.find_or_initialize_by(portal_field => qb_value)
       row[self.qb_id] = qb[self.qb_id]
-      row.send("CreationUser=", "QB") if self.column_names.include?("CreationUser")
-      row.send("CreationTimeStamp=", Time.now) if self.column_names.include?("CreationTimeStamp")
+      row.send("CreationUser=", "QB") if self.column_names.include?("CreationUser") && row.new_record?
+      row.send("CreationTimeStamp=", Time.now) if self.column_names.include?("CreationTimeStamp") && row.new_record?
       row.save
       self.save_to_portal(qb)
     end

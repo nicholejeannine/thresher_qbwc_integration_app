@@ -13,7 +13,7 @@ class ClientQueryTest < ActiveSupport::TestCase
     Client.initialize_sync(qb_hash, :Cust_CompanyAbr, qb_hash['full_name'])
     assert_equal(1, Client.count)
     c = Client.first
-    assert_equal("QB", c.CreationUser)
+    assert_equal("QB", c.LastModificationUser)
     assert_equal("Slack", c.Cust_CompanyAbr)
     assert_equal("COMPANYNAME", c.Cust_Company)
     assert_equal("SA", c.Cust_NameSalutation)
@@ -56,6 +56,7 @@ class ClientQueryTest < ActiveSupport::TestCase
   test "can initialize sync" do
     Client.initialize_sync(no_matching_name, :Cust_CompanyAbr, no_matching_name['full_name'])
     assert_equal(2, Client.count)
+    assert_equal("QB", Client.last.CreationUser)
   end
   
   test "can update the same record with save_to_portal method" do
