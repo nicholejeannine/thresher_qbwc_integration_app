@@ -2,12 +2,12 @@ module QbCanPushToPortal
   extend ActiveSupport::Concern
   include QuickbooksTypes
   included do
-    after_create :creation_user
     before_save :modification_user
     
     def self.initialize_sync (qb, portal_field, qb_value)
       row = self.find_or_initialize_by(portal_field => qb_value)
       row[self.qb_id] = qb[self.qb_id]
+      row.creation_user
       row.save
       self.save_to_portal(qb)
     end
