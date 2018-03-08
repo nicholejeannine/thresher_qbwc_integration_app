@@ -231,6 +231,17 @@
   REVOKE ALL PRIVILEGES ON `ThresherSB`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `ThresherSB`.`Jobs` TO 'qb'@'%'; REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `Thresher`.`Jobs` TO 'qb'@'%';
 </div>
 
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher and ThresherSB</h4>
+  <p>REVOKE ALL PRIVILEGES ON `ThresherSB`.`Jobs` FROM 'sblord'@'%'; GRANT SELECT, UPDATE (`FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `ThresherSB`.`Jobs` TO 'sblord'@'%';</p>
+  <p>REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `Thresher`.`Jobs` TO 'dblord'@'%';</p>
+
+</div>
+
+
+
+
 <h4 class="bg-warning text-center">WHEN going live:</h4>
 <ol class="bg-warning">
   <li>Run the "alter table" statement on Jobs table.</li>
