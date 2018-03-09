@@ -246,6 +246,7 @@
 <ol class="bg-warning">
   <li>Run the "alter table" statement on Jobs table.</li>
   <li>Export the FullName view to a real table, jobs2.</li>
+  <li>IMPORTANT! RUN THIS COMMAND TO FIND DUPLICATE JOBS - HAVE TO FIX THE DUPLICATE JOBS BEFORE PROCEEDING: SELECT count(*) AS count, FullName FROM jobs2 GROUP BY FullName HAVING count > 1. This will show jobs where there are 2 rows in the portal that match on full_name. Delete/move dupes before proceeding.</li>
   <li>Run this command:  UPDATE `Jobs` INNER JOIN `jobs2`
     ON `Jobs`.`Jobs_PKEY` = `jobs2`.`Jobs_PKEY`
     SET `Jobs`.`full_name` = `jobs2`.`FullName`</li>
