@@ -13,12 +13,13 @@ class Customer < ApplicationRecord
 		end
 	end
 	
-	# Activate quickbooks sync to portal for Client model. Ignore jobs and projects for now.
+	# Activate quickbooks sync to portal for Client model. Use old method for jobs and projects for now.
 	def self.parse_customer_response(qb)
 		klass = self.customer_type(qb['full_name'])
 		if klass == 'Client'
 			Client.save_to_portal(qb)
+		else
+		  klass.constantize.parse_customer_response(qb)
 		end
-		# klass.constantize.save_to_portal(qb)
 	end
 end
