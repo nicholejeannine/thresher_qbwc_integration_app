@@ -1,6 +1,6 @@
 module QbCanPushToPortal
   extend ActiveSupport::Concern
-  include QuickbooksTypes
+  include QuickbooksProcs
   included do
     before_save :creation_user, :modification_user
     

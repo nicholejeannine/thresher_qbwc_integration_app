@@ -13,9 +13,12 @@ class Customer < ApplicationRecord
 		end
 	end
 	
-	# All other QBWC QueryRequests can be handled by the "parse_qb_response" method, but we need to override that for client/job/projects because we first have to determine which of the three tables to store the record in.
+	# Activate quickbooks sync to portal for Client model. Ignore jobs and projects for now.
 	def self.parse_customer_response(qb)
 		klass = self.customer_type(qb['full_name'])
-		klass.constantize.save_to_portal(qb)
+		if klass == 'Client'
+			Client.save_to_portal(qb)
+		end
+		# klass.constantize.save_to_portal(qb)
 	end
 end

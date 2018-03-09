@@ -1,50 +1,24 @@
 module QuickbooksTypes
-	extend ActiveSupport::Concern
-	included do
-		
-		# def custom_data_cast variable
-		# 	return Proc.new{|data|
-		# 		if data.pluck("data_ext_name").include?("Site Contact")
-		# 			data.find_all {|x| x['data_ext_name'] == 'Site Contact'}.pluck("data_ext_value")[0]
-		# 		end
-		# 	}
-		# end
-		
-		# Given an ugly quickbooks hash (see test/fixutes/client_hash.rb),  we want to pull out ONLY the "data_ext_value" where the data_ext_name == "Site Contact"
-		SITE_CONTACT_CAST = Proc.new{|data|
-			if data.pluck("data_ext_name").include?("Site Contact")
-				data.find_all {|x| x['data_ext_name'] == 'Site Contact'}.pluck("data_ext_value")[0]
-			end
-		}
-		
-		# Given an ugly quickbooks hash (see test/fixutes/client_hash.rb),  we want to pull out ONLY the "data_ext_value" where the data_ext_name == "Site Phone"
-		SITE_PHONE_CAST = Proc.new{|data|
-			if data.pluck("data_ext_name").include?("Site Phone")
-				data.find_all {|x| x['data_ext_name'] == 'Site Phone'}.pluck("data_ext_value")[0]
-			end
-		}
-		
-		# Given an ugly quickbooks hash (see test/fixutes/client_hash.rb),  we want to pull out ONLY the "data_ext_value" where the data_ext_name == "Site Email"
-		SITE_EMAIL_CAST = Proc.new{|data|
-			if data.pluck("data_ext_name").include?("Site Email")
-				data.find_all {|x| x['data_ext_name'] == 'Site Email'}.pluck("data_ext_value")[0]
-			end
-		}
-		
-		# Given an ugly quickbooks hash (see test/fixutes/client_hash.rb),  we want to pull out ONLY the "contact_value" where "contact_name" == "Mobile"
-		MOBILE_CAST = Proc.new{|data|
-			if data.pluck("contact_name").include?("Mobile")
-				data.find_all {|e| e['contact_name'] == 'Mobile'}.pluck("contact_value")[0]
-			end
-		}
-		
-		# Return "X" if false (not active)
-		INACTIVE_FLAG_CAST = Proc.new{|data|
-			"X" unless data
-		}
-		
-	end
+  extend ActiveSupport::Concern
+  included do
+    
+    # Determine whether the model's unique id is called "list_id", "txn_id", or "txn_line_id"
+    def self.qb_id
+      case self.name
+      when "Client", "Job", "Project", "Vendor", "Employee", "QbEmployee", "QbCustomer"
+        "list_id"
+      when "Estimate", "Invoice", "PurchaseOrder", "ReceivePayment", "SalesOrder", "TimeTracking"
+        "txn_id"
+      when "EstimateLine", "InvoiceLine", "PurchaseOrderLine", "SalesOrderLine"
+        "txn_line_id"
+      end
+    end
+    
+    # These are fields Quickbooks returns that we never care about and can discard immediately.
+    def self.ignored_type?(key)
+      key.match(/addr5$|card_txn_info|prefill_account_ref|external_guid|group_ret$|^other|contact_ref$|contacts_ret$|card_info$|currency_ref$|ship_to_address$|block$|xml_attributes|notes_ret|currency$|exchange_rate|inventory_site_location_ref|^fob$|ar_account_ref$/)
+    end
+  
+  end
 
-	end
-	
-	
+end
