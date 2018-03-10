@@ -8,11 +8,11 @@ module QbCanPushToPortal
       row = self.find_or_initialize_by(portal_field => qb_value)
       row[self.qb_id] = qb[self.qb_id]
       row.save
-      self.save_to_portal(qb)
+      self.update_qb_sync(qb)
     end
   
     ## TODO: CREATIONUSER FOR NEW RECORDS
-    def self.save_to_portal qb
+    def self.update_qb_sync qb
       begin
         row = self.find_or_initialize_by(self.qb_id => qb[self.qb_id])
         # save the qb fields to their corresponding Thresher fields.
@@ -34,7 +34,7 @@ module QbCanPushToPortal
         end
         row.save
       rescue StandardError => e
-        QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb[self.qb_id]}", :error_message => "save_to_portal failed: #{e}")
+        QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb[self.qb_id]}", :error_message => "update_qb_sync failed: #{e}")
       end
     end
     
