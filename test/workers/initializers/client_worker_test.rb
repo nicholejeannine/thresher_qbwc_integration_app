@@ -20,13 +20,14 @@ class ClientWorkerTest < ActiveSupport::TestCase
     Client.initialize_sync(qb_hash_with_full_name_match, :Cust_CompanyAbr, qb_hash_with_full_name_match['full_name'])
     assert_equal(1, Client.count)
     assert_equal("4444-4444", Client.first.list_id)
-    assert_equal(0, QbwcError.count)
+    assert_equal(0, QbwcError.count) # Make sure there are no errors
   end
   
   test "initialize sync creates new row when no full name matches" do
     assert_equal(1, Client.count) # Make sure our setup method ran
     Client.initialize_sync(qb_hash_with_no_full_name_match, :Cust_CompanyAbr, qb_hash_with_no_full_name_match['full_name'])
     assert_equal(2, Client.count) # Make sure initialization succeeded
+    assert_equal(0, QbwcError.count) # Make sure there are no errors
   end
   
   test "creating a new row updates the created at and created by fields" do
