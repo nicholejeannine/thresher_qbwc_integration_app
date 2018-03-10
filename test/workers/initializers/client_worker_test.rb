@@ -11,8 +11,8 @@ class ClientWorkerTest < ActiveSupport::TestCase
   end
   
   test "qb_hashes are correctly classifed as Clients according to their full name" do
-    assert_equal(Customer.customer_type(qb_hash_with_full_name_match['full_name']), 'Client')
-    assert_equal(Customer.customer_type(qb_hash_with_no_full_name_match['full_name']), 'Client')
+    assert_equal('Client', Customer.customer_type(qb_hash_with_full_name_match['full_name']))
+    assert_equal('Client', Customer.customer_type(qb_hash_with_no_full_name_match['full_name']))
   end
   
   test "initialize_sync updates existing row when full name matches" do
