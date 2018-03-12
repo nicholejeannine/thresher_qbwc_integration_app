@@ -14,7 +14,7 @@ class Initializers::JobWorker < QBWC::Worker
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     begin
       r['customer_ret']&.each {|qb|
-        if Customer.customer_type(qb['full_name']) == 'Job'
+        if Customer.customer_type(qb['full_name']) == Job
           Job.initialize_sync(qb, :full_name, qb['full_name'])
         end
       }

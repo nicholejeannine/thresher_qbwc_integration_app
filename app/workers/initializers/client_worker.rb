@@ -17,7 +17,7 @@ class Initializers::ClientWorker < QBWC::Worker
     complete = r['xml_attributes']['iteratorRemainingCount'] == '0'
     begin
       r['customer_ret']&.each {|qb|
-        if Customer.customer_type(qb['full_name']) == 'Client'
+        if Customer.customer_type(qb['full_name']) == Client
           Client.initialize_sync(qb, PORTAL_MATCHING_FIELD, qb[QB_MATCHING_FIELD])
         end
       }
