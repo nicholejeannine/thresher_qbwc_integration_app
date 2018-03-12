@@ -4,20 +4,17 @@ class Customer < ApplicationRecord
 	include QbCanPushToPortal
 
   # Determines whether the Quickbooks Customer is a Thresher client, job, or project
-	def self.customer_type(key)
-		if key.match(/P-\d+$/)
-			"Project"
-		elsif key.match(/:/)
-			"Job"
-		else "Client"
-		end
+	def self.customer_type(full_name)
+		return Project if full_name.match(/P-\d+$/)
+		return Job if full_name.match(/:/)
+		Client
 	end
 	
 	# Activate quickbooks sync to portal for Client model. Ignore jobs and projects for now.
 	def self.parse_customer_response(qb)
 		klass = self.customer_type(qb['full_name'])
-		if klass == 'Client'
-			klass.constantize.qb_push_to_portal(qb)
+		if klass == Client
+			klass.qb_push_to_portal(qb)
 		end
 	end
 end
