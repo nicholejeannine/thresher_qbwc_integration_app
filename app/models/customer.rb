@@ -17,7 +17,7 @@ class Customer < ApplicationRecord
 	def self.parse_customer_response(qb)
 		klass = self.customer_type(qb['full_name'])
 		if klass == 'Client'
-			klass.constantize.update_qb_sync(qb)
+			klass.constantize.qb_push_to_portal(qb)
 		end
 	end
 end

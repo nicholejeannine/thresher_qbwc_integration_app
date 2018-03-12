@@ -8,11 +8,11 @@ module QbCanPushToPortal
       row = self.find_or_initialize_by(portal_field => qb_value)
       row[self.qb_id] = qb[self.qb_id]
       row.save
-      self.update_qb_sync(qb)
+      self.qb_push_to_portal(qb)
     end
   
     ## TODO: CREATIONUSER FOR NEW RECORDS
-    def self.update_qb_sync qb
+    def self.qb_push_to_portal qb
       begin
         row = self.find_or_initialize_by(self.qb_id => qb[self.qb_id])
         # save the qb fields to their corresponding Thresher fields.
@@ -34,7 +34,7 @@ module QbCanPushToPortal
         end
         row.save
       rescue StandardError => e
-        QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb[self.qb_id]}", :error_message => "update_qb_sync failed: #{e}")
+        QbwcError.create(:worker_class => "#{self.name}", :model_id => "#{qb[self.qb_id]}", :error_message => "qb_push_to_portal failed: #{e}")
       end
     end
     
@@ -50,16 +50,11 @@ module QbCanPushToPortal
 
 
     def self.qb_id
-      if self::FIELD_MAP.keys.include?(:list_id)
-        "list_id"
-      elsif self::FIELD_MAP.keys.include?(:txn_id)
-        "txn_id"
-      elsif self::FIELD_MAP.keys.include?(:txn_line_id)
-        "txn_line_id"
-      end
+      return "list_id" if self::FIELD_MAP.keys.include?(:list_id)
+      return "txn_id" if self::FIELD_MAP.keys.include?(:txn_id)
+      return "txn_line_id" if self::FIELD_MAP.keys.include?(:txn_line_id)
     end
   end
-
 end
 
 
