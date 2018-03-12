@@ -122,9 +122,6 @@
   GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`Vendor` TO 'dblord'@'%';
   GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`weekly_crew_notes` TO 'dblord'@'%';
   <br/><hr>
-  <h2><small>After Customers AND Jobs Table Revisions:</small></h2>
-  GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
-  GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `Thresher`.`Jobs` TO 'dblord'@'%';
 </div>
 
 
