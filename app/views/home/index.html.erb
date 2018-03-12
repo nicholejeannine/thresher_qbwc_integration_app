@@ -126,3 +126,9 @@
   GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
   GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `Thresher`.`Jobs` TO 'dblord'@'%';
 </div>
+
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - qb user</h4>
+  <p>GRANT USAGE ON `Thresher`.* TO 'qb'@'%'; GRANT SELECT ON `Thresher`.* TO 'qb'@'%'; GRANT SELECT ON `Thresher`.* TO 'qb'@'%'; GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qbwc_errors` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qbwc_history` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qbwc_jobs` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qbwc_sessions` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qbwc_timecard_errors` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qb_customers` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`qb_employees` TO 'qb'@'%';GRANT SELECT, INSERT, UPDATE, DELETE, REFERENCES ON `Thresher`.`time_trackings` TO 'qb'@'%';</p>
+</div>

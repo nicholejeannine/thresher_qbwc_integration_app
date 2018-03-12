@@ -226,6 +226,10 @@
   GRANT SELECT, INSERT, UPDATE (`LastModificationUser`, `CreationUser`, `LastModificationTimeStamp`, `CreationTimeStamp`, `Cust_BillTo_Address1`, `Cust_BillTo_Address2`, `Cust_BillTo_City`, `Cust_BillTo_Company`, `Cust_BillTo_Name`, `Cust_BillTo_State`, `Cust_BillTo_Zip`, `Cust_Company`, `Cust_CompanyAbr`, `Cust_EmailCC`, `Cust_EmailTo`, `Cust_InactiveFlag`, `Cust_NameFirst`, `Cust_NameLast`, `Cust_NameMiddle`, `Cust_NameSalutation`, `Cust_PhoneAlt`, `Cust_PhoneCell`, `Cust_PhoneFax`, `Cust_PhoneOffice`, `Cust_ShipTo_Address1`, `Cust_ShipTo_Address2`, `Cust_ShipTo_City`, `Cust_ShipTo_Company`, `Cust_ShipTo_Name`, `Cust_ShipTo_State`, `Cust_ShipTo_Zip`,`list_id`,  `sales_rep`, `site_contact`, `site_email`, `site_phone`) ON `ThresherSB`.`Customers` TO 'qb'@'%';
   GRANT SELECT, INSERT, UPDATE (`LastModificationUser`, `CreationUser`, `LastModificationTimeStamp`, `CreationTimeStamp`, `Cust_BillTo_Address1`, `Cust_BillTo_Address2`, `Cust_BillTo_City`, `Cust_BillTo_Company`, `Cust_BillTo_Name`, `Cust_BillTo_State`, `Cust_BillTo_Zip`, `Cust_Company`, `Cust_CompanyAbr`, `Cust_EmailCC`, `Cust_EmailTo`, `Cust_InactiveFlag`, `Cust_NameFirst`, `Cust_NameLast`, `Cust_NameMiddle`, `Cust_NameSalutation`, `Cust_PhoneAlt`, `Cust_PhoneCell`, `Cust_PhoneFax`, `Cust_PhoneOffice`, `Cust_ShipTo_Address1`, `Cust_ShipTo_Address2`, `Cust_ShipTo_City`, `Cust_ShipTo_Company`, `Cust_ShipTo_Name`, `Cust_ShipTo_State`, `Cust_ShipTo_Zip`,`list_id`,  `sales_rep`, `site_contact`, `site_email`, `site_phone`) ON `Thresher`.`Customers` TO 'qb'@'%';
 </div>
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - dblord user on Thresher Customers table</h4>
+  GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
+</div>
 
 
 
