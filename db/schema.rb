@@ -380,12 +380,8 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "qb_customers", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "list_id", limit: 209, null: false
     t.string "full_name", limit: 209
-    t.integer "sublevel", default: 0, null: false
-    t.string "sales_rep", limit: 5
     t.index ["full_name"], name: "full_name", unique: true
     t.index ["list_id"], name: "list_id", unique: true
-    t.index ["sales_rep"], name: "sales_rep"
-    t.index ["sublevel"], name: "sublevel"
   end
 
   create_table "qb_employees", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
