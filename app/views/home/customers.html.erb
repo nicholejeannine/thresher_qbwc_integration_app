@@ -228,7 +228,7 @@
 </div>
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Grant Statement - dblord user on Thresher Customers table</h4>
-  GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
+  REVOKE ALL PRIVILEGES ON `Thresher`.`Customers` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Cust_BillTo_Email`, `Cust_AP_Name`, `Cust_BillTo_Phone`) ON `Thresher`.`Customers` TO 'dblord'@'%';
 </div>
 
 
