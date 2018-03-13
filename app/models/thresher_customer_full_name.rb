@@ -1,5 +1,4 @@
 class ThresherCustomerFullName < ActiveRecord::Base
-  # belongs_to :nameable, polymorphic: true
-  # has_many :timecard_transactions
+  self.table_name = 'qb.thresher_customer_full_names'
   
 end
