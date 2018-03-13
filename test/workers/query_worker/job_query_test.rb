@@ -1,15 +1,15 @@
 require 'test_helper'
-require 'fixtures/job_hash'
+require 'workers/query_worker/fixtures/job_hash'
 
 class JobQueryTest < ActiveSupport::TestCase
   include JobHash
   
   
   # after sending a test pass of "silly data", grab the customer where the full name matches, and assert that all of the fields names were correctly updated
-  test "when initializing, it updates the correct fields" do
+  test "Customer.parse_customer_response matches on list_id and updates the appropriate record" do
     # first assert we have one client in the database, that our sql method in "setup" worked
     assert_equal(1, Job.count)
-    Job.initialize_sync(qb_hash, :full_name, qb_hash['full_name'])
+    Customer.parse_customer_response(qb_hash)
     assert_equal(1, Job.count)
     j = Job.first
     # assert that the ship to address is the fake value we assigned it, BEFORE we run the update, so then we can assert that it becomes nil afterward.
@@ -47,8 +47,8 @@ class JobQueryTest < ActiveSupport::TestCase
     # assert_equal("1982-12-30", j.Job_DateEndActual)
     assert_equal("800006BC-1257534763", j.list_id)
   end
-  
-  test "sending a nonmatching client name writes another customer" do
+
+  test "Customer.parse_customer_response creates a new record when the list id is not found" do
     Job.destroy_all
     Customer.parse_customer_response(qb_hash)
     Customer.parse_customer_response(no_matching_name)
@@ -56,9 +56,12 @@ class JobQueryTest < ActiveSupport::TestCase
   end
   
   def setup
+    Client.destroy_all
     Job.destroy_all
     QbwcError.destroy_all
-    sql = "INSERT INTO `Jobs` (`Jobs_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) VALUES (41, '2010-03-02 21:20:01', 'user', '2018-03-02 21:53:54', NULL, 6, 2, 'Google, Inj.', 'Google', 'Mr. John Sheldon ', '', '2000-01-01', '2000-01-01', '2000-01-01', '2000-01-01', 'Charleston 2000Moutain View,  CA', 'Charleston 2000', '', 'sheldonj@google.com', '', 'John', 'Sheldon', '', 'Mr.', '', '', '', 'Charleston 2000', 'In Progress', '', 'Facebook:Construction', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');"
+    sql = "INSERT INTO `Customers` (`Customers_PKEY`, `Cust_CompanyAbr`) VALUES (13, 'Facebook')"
+    ActiveRecord::Base.connection.execute(sql)
+    sql = "INSERT INTO `Jobs` (`list_id`, `Jobs_PKEY`, `Job_QB_JobName`, `full_name`) VALUES ('800006BC-1257534763', 2, 'Construction', 'Facebook:Construction');"
     ActiveRecord::Base.connection.execute(sql)
   end
 end
