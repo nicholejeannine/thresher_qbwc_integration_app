@@ -93,6 +93,8 @@ class TimecardTransaction < ActiveRecord::Base
       "Hourly PTO Rate"
     elsif project_id == 913
       "Hourly TWOP Rate"
+    elsif self.employee.is_salary == 1
+      "Salary Level 1"
     else
     "Hourly Level 1"
     end

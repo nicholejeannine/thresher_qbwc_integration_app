@@ -1,6 +1,10 @@
 # "TimeTracking" is what Quickbooks calls a TimecardTransaction. A "TimeTracking" is therefore a Thresher TimecardTransaction that has been properly handled by Quickbooks. After the entry is imported into Quickbooks, it returns the record as the response, which gets stored in the time_trackings table.
 
 class TimeTracking < ApplicationRecord
+  
+  FIELD_MAP = {
+  
+  }
 
   # grab all time tracking entries between a specified start and end date
   def self.between(start_date, end_date)

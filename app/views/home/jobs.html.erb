@@ -1,0 +1,256 @@
+<h1>Jobs</h1>
+
+<table class="table table-striped">
+
+  <thead>
+  <tr>
+    <th>QB</th>
+    <th>Portal</th>
+    <th>Label</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="table-primary">
+    <td>full_name</td>
+    <td>(some crazy match)</td>
+    <td>(Breadcrumb)</td>
+  </tr>
+  <tr>
+    <td>name</td>
+    <td>Job_QB_JobName</td>
+    <td>- (breadcrub)</td>
+  </tr>
+  <tr>
+    <td>salutation</td>
+    <td>Job_NameSalutation</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>first_name</td>
+    <td>Job_NameFirst</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>middle_name</td>
+    <td>Job_NameMiddle</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>last_name</td>
+    <td>Job_NameLast</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>phone</td>
+    <td>Job_PhoneOffice</td>
+    <td>Main Phone</td>
+  </tr>
+  <tr>
+    <td>email</td>
+    <td>Job_EmailTo</td>
+    <td>Main Email</td>
+  </tr>
+  <tr>
+    <td>alt_phone</td>
+    <td>Job_PhoneAlt</td>
+    <td>Alt. Phone</td>
+  </tr>
+  <tr>
+    <td>cc</td>
+    <td>Job_EmailCC</td>
+    <td>CC Email</td>
+  </tr>
+  <tr class="table-danger">
+    <td>additional_contact_ref[contact_value] where additional_contact_ref['contact_name = 'mobile]</td>
+    <td>mobile</td>
+    <td>Mobile</td>
+  </tr>
+  <tr>
+    <td>fax</td>
+    <td>Job_PhoneFax</td>
+    <td>Fax</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_addr1</td>
+    <td></td>
+    <td>Invoice/BillTo['Company']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_addr2</td>
+    <td></td>
+    <td>Invoice/BillTo['Att. Name']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_addr3</td>
+    <td></td>
+    <td>Invoice/BillTo['Address']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_addr4</td>
+    <td></td>
+    <td>Invoice/BillTo['Address2']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_city</td>
+    <td></td>
+    <td>Invoice/BillTo['City']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_state</td>
+    <td></td>
+    <td>Invoice/BillTo['State']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>bill_postal_code</td>
+    <td></td>
+    <td>Invoice/BillTo['Zip']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_addr1</td>
+    <td></td>
+    <td>Ship To['Company']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_addr2</td>
+    <td></td>
+    <td>Ship To['Name']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_addr3</td>
+    <td></td>
+    <td>Ship To['Address']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_addr4</td>
+    <td></td>
+    <td>Ship To['Address2']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_city</td>
+    <td></td>
+    <td>Ship To['City']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_state</td>
+    <td></td>
+    <td>Ship To['State']</td>
+  </tr>
+  <tr class="table-danger">
+    <td>ship_postal_code</td>
+    <td></td>
+    <td>Ship To['Zip']</td>
+  </tr>
+  <tr>
+    <td>(case is_active when 0 then "X" else "" end)</td>
+    <td>Job_InactiveFlag</td>
+    <td>Job is inactive</td>
+  </tr>
+  <tr class="table-danger">
+    <td>sales_rep</td>
+    <td>sales_rep</td>
+    <td>Rep</td>
+  </tr>
+  <tr>
+    <td>job_status</td>
+    <td>Job_Status</td>
+    <td>Status</td>
+  </tr>
+  <tr>
+    <td>job_start_date</td>
+    <td>Job_DateStartActual</td>
+    <td>Actual Start Date</td>
+  </tr>
+  <tr>
+    <td>job_projected_end_date</td>
+    <td>Job_DateEndProjected</td>
+    <td>Project End Date</td>
+  </tr>
+  <tr>
+    <td>job_end_date</td>
+    <td>Job_DateEndActual</td>
+    <td>Actual End Date</td>
+  </tr>
+  <tr class="table-danger">
+    <td>list_id</td>
+    <td>list_id</td>
+    <td>-</td>
+  </tr>
+  <tr class="table-danger">
+    <td>full_name</td>
+    <td>full_name</td>
+    <td>- (maybe use for breadcrumbs)</td>
+  </tr>
+
+
+  </tbody>
+</table>
+
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Alter Tables Statements - Jobs</h4>
+  <p>ALTER TABLE `Jobs` DROP COLUMN `Job_Company_QBName_Display.calc`;
+    ALTER TABLE Jobs DROP COLUMN 	Job_ContactName;
+    ALTER TABLE Jobs DROP COLUMN Job_CustCLNo;
+    ALTER TABLE Jobs DROP COLUMN Job_CustPoNo;
+    ALTER TABLE Jobs DROP COLUMN Job_DefaultJob;
+    ALTER TABLE Jobs DROP COLUMN Job_DisplayIndent;
+    ALTER TABLE Jobs DROP COLUMN Job_ExpiryDate;
+    ALTER TABLE Jobs DROP COLUMN Job_HoursAmount_Default;
+    ALTER TABLE Jobs DROP COLUMN Job_HoursAmount_Lock;
+    ALTER TABLE Jobs DROP COLUMN Job_HoursAmount_Max;
+    ALTER TABLE Jobs DROP COLUMN Job_HourType;
+    ALTER TABLE Jobs DROP COLUMN Job_Notes;
+    ALTER TABLE `Jobs` DROP COLUMN `Job_Number.calc`;
+    ALTER TABLE `Jobs` DROP COLUMN `Job_QB_JobName_Hierarc.calc`;
+    ALTER TABLE Jobs DROP COLUMN Job_Type;
+    ALTER TABLE Jobs DROP COLUMN Job_PhoneCell;
+    ALTER TABLE Jobs ADD list_id varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD full_name varchar(209) DEFAULT NULL;
+    ALTER TABLE Jobs ADD mobile varchar(255) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr1 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr2 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr3 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_addr4 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_city varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_state varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD bill_postal_code varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr1 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr2 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr3 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_addr4 varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_city varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_state varchar(41) DEFAULT NULL;
+    ALTER TABLE Jobs ADD ship_postal_code varchar(31) DEFAULT NULL;
+    ALTER TABLE Jobs ADD sales_rep varchar(5) DEFAULT NULL; ALTER TABLE Jobs ADD UNIQUE KEY `list_id` (`list_id`) USING BTREE; ALTER TABLE Jobs ADD UNIQUE KEY `full_name` (`full_name`) USING BTREE;
+  </p>
+  <hr>
+</div>
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - qb user on Thresher and ThresherSB</h4>
+  REVOKE ALL PRIVILEGES ON `ThresherSB`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `ThresherSB`.`Jobs` TO 'qb'@'%'; REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `Thresher`.`Jobs` TO 'qb'@'%';
+</div>
+
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher and ThresherSB</h4>
+  <p>REVOKE ALL PRIVILEGES ON `ThresherSB`.`Jobs` FROM 'sblord'@'%'; GRANT SELECT, UPDATE (`FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `ThresherSB`.`Jobs` TO 'sblord'@'%';</p>
+  <p>REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `Thresher`.`Jobs` TO 'dblord'@'%';</p>
+
+</div>
+
+
+<h4 class="bg-warning text-center">WHEN going live:</h4>
+<ol class="bg-warning">
+  <li>Run the "alter table" statement on Jobs table.</li>
+  <li>Export the FullName view to a real table, jobs2.</li>
+  <li>IMPORTANT! RUN THIS COMMAND TO FIND DUPLICATE JOBS - HAVE TO FIX THE DUPLICATE JOBS BEFORE PROCEEDING: SELECT count(*) AS count, FullName FROM jobs2 GROUP BY FullName HAVING count > 1. This will show jobs where there are 2 rows in the portal that match on full_name. Delete/move dupes before proceeding.</li>
+  <li>Run this command:  UPDATE `Jobs` INNER JOIN `jobs2`
+    ON `Jobs`.`Jobs_PKEY` = `jobs2`.`Jobs_PKEY`
+    SET `Jobs`.`full_name` = `jobs2`.`FullName`</li>
+  <li>Delete the jobs2 table.</li>
+  <li>Run the web connector inital query for Customers/Jobs</li>
+  <li>Run permissions commands</li>
+  <li>Turn off the "initial" job and start using the "query" job.</li>
+  <li>Make the portal branches with the new QB interface live.</li>
+</ol>

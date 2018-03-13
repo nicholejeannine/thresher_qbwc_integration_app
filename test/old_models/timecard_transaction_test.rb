@@ -72,7 +72,9 @@ class TimecardTransactionTest < ActiveSupport::TestCase
     assert_equal("Hourly Holiday Rate", TimecardTransaction.find(179753).qb_payroll_ref)
     assert_equal("Hourly PTO Rate", TimecardTransaction.find(179540).qb_payroll_ref)
     assert_equal("Hourly TWOP Rate", TimecardTransaction.find(178825).qb_payroll_ref)
-    assert_equal("Hourly Level 1", TimecardTransaction.find(178505).qb_payroll_ref)
+    # An hourly person should return "Hourly Level 1"
+    assert_equal("Hourly Level 1", TimecardTransaction.find(160995).qb_payroll_ref)
+    assert_equal("Salary Level 1", TimecardTransaction.find(18906).qb_payroll_ref)
   end
   
   test "build request for PTO, regular, and holiday types" do
