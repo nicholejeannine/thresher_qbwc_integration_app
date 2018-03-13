@@ -1,4 +1,5 @@
 class Ticket < ActiveRecord::Base
+  self.table_name = 'qb.tickets'
   self.primary_key= :id
   has_many :timecard_transactions
   belongs_to :ticket_type, class_name: "TicketType", foreign_key: "ticket_type_id"

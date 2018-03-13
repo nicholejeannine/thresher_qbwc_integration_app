@@ -1,6 +1,5 @@
 class QbCustomer < ApplicationRecord
   
-  
   def self.parse_qb_customer_response(qb)
     begin
       c = self.find_or_initialize_by("list_id" => qb['list_id'])
