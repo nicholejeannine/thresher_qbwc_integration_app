@@ -1,5 +1,5 @@
 class Job < Customer
-  before_save :titleize_job_status
+  before_save :titleize_job_status, :lookup_foreign_keys
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"
 
@@ -42,6 +42,19 @@ class Job < Customer
   # job_status fields come back like "InProgress" - make it save as two separate words.
   def titleize_job_status
     self.Job_Status = self['Job_Status']&.titleize
+  end
+  
+  def lookup_foreign_keys
+    # Lookup customer foreign key
+    customer = self.full_name.split(":")[0]
+    self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
+    
+    # Lookup job parent id
+    if self.full_name.scan(/:/).count > 1
+      name = ":#{self.Job_QB_JobName}"
+      parent_job_name = self.full_name.remove(name)
+      self.FK_JobID_Parent = Job.where(:full_name => parent_job_name).first&.Jobs_PKEY
+    end
   end
   
 end
