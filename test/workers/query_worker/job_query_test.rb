@@ -43,9 +43,9 @@ class JobQueryTest < ActiveSupport::TestCase
     assert_equal("X", j.Job_InactiveFlag)
     assert_equal("AAA", j.sales_rep)
     assert_equal("Job", j.Job_Status)
-    # assert_equal("1982-12-30", j.Job_DateStartActual.to_s)
-    # assert_equal("1982-12-30", j.Job_DateEndProjected)
-    # assert_equal("1982-12-30", j.Job_DateEndActual)
+    assert_equal("1982-12-30", j.Job_DateStartActual.to_s)
+    assert_equal("1982-12-30", j.Job_DateEndProjected.to_s)
+    assert_equal("1982-12-30", j.Job_DateEndActual.to_s)
     assert_equal("800006BC-1257534763", j.list_id)
   end
 
