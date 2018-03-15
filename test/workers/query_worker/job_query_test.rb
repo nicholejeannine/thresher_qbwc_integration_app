@@ -15,6 +15,7 @@ class JobQueryTest < ActiveSupport::TestCase
     # assert that the ship to address is the fake value we assigned it, BEFORE we run the update, so then we can assert that it becomes nil afterward.
     # Reassign the value c and check the fields were all updated
     assert_equal("NAME", j.Job_QB_JobName)
+    assert_equal("COMPANYNAME", j.Job_Company)
     assert_equal("SA", j.Job_NameSalutation)
     assert_equal("FIRST", j.Job_NameFirst)
     assert_equal("M", j.Job_NameMiddle	)
