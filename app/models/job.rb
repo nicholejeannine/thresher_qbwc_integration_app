@@ -1,5 +1,5 @@
 class Job < Customer
-  before_save :titleize_job_status, :lookup_foreign_keys
+  before_save :titleize_job_status, :fk_customer_pkey, :fk_jobid_parent
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"
 
@@ -44,12 +44,17 @@ class Job < Customer
     self.Job_Status = self['Job_Status']&.titleize
   end
   
-  def lookup_foreign_keys
     # Lookup customer foreign key
+  def fk_customer_pkey
     customer = self.full_name.split(":")[0]
-    self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
+    if customer
+      self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
+    else
+      QbwcError.create(:worker_class => "fk_customer_pkey", :model_id => self.Jobs_PKEY, :error_message => "#{self.full_name}")
+  end
     
     # Lookup job parent id
+  def fk_jobid_parent
     if self.full_name.scan(/:/).count > 1
       name = ":#{self.Job_QB_JobName}"
       parent_job_name = self.full_name.remove(name)
