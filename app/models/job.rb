@@ -5,6 +5,7 @@ class Job < Customer
 
   FIELD_MAP = {
       :Job_QB_JobName => 'name',
+      :Job_Company => 'company_name',
       :Job_NameSalutation => 'salutation',
       :Job_NameFirst => 'first_name',
       :Job_NameMiddle => 'middle_name',
