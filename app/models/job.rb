@@ -51,6 +51,7 @@ class Job < Customer
       self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
     else
       QbwcError.create(:worker_class => "fk_customer_pkey", :model_id => self.Jobs_PKEY, :error_message => "#{self.full_name}")
+    end
   end
     
     # Lookup job parent id
