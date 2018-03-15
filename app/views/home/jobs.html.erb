@@ -243,12 +243,12 @@
   <li>Run the "alter table" statement on Jobs table.</li>
   <li>Export the FullName view to a real table, jobs2.</li>
   <li>IMPORTANT! RUN THIS COMMAND TO FIND DUPLICATE JOBS - HAVE TO FIX THE DUPLICATE JOBS BEFORE PROCEEDING: SELECT count(*) AS count, FullName FROM jobs2 GROUP BY FullName HAVING count > 1. This will show jobs where there are 2 rows in the portal that match on full_name. Delete/move dupes before proceeding.</li>
+  <li>Run permissions commands for qb user</li>
   <li>Run this command:  UPDATE `Jobs` INNER JOIN `jobs2`
     ON `Jobs`.`Jobs_PKEY` = `jobs2`.`Jobs_PKEY`
     SET `Jobs`.`full_name` = `jobs2`.`FullName`</li>
   <li>Delete the jobs2 table.</li>
   <li>Run the web connector inital query for Customers/Jobs</li>
-  <li>Run permissions commands</li>
-  <li>Turn off the "initial" job and start using the "query" job.</li>
+  <li>Run permissions commands for dblord</li>
   <li>Make the portal branches with the new QB interface live.</li>
 </ol>
