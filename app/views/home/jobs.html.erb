@@ -234,7 +234,7 @@
 
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher and ThresherSB</h4>
-  <p>REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'sblord'@'%'; GRANT SELECT, UPDATE (`Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `Thresher`.`Jobs` TO 'dblord'@'%';</p>
+  <p>REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`), REFERENCES ON `Thresher`.`Jobs` TO 'dblord'@'%';</p>
 </div>
 
 
