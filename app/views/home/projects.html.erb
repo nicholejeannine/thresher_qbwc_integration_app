@@ -1,0 +1,185 @@
+<h1>Jobs</h1>
+
+<table class="table table-striped">
+
+  <thead>
+  <tr>
+    <th>QB</th>
+    <th>Portal</th>
+    <th>Label</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr class="table-primary">
+    <td>full_name</td>
+    <td>full_name</td>
+    <td>(Breadcrumb)</td>
+  </tr>
+  <tr>
+    <td>job_start_date</td>
+    <td>Project_DateStartActual</td>
+    <td>Actual Start Date</td>
+  </tr>
+  <tr>
+    <td>job_projected_end_date</td>
+    <td>Project_DateEndEstimated</td>
+    <td>Project End Date</td>
+  </tr>
+  <tr>
+    <td>job_end_date</td>
+    <td>Project_DateEndActual</td>
+    <td>Actual End Date</td>
+  </tr>
+  <tr>
+    <td>salutation</td>
+    <td>Project_NameSalutation</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>first_name</td>
+    <td>Project_NameFirst</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>middle_name</td>
+    <td>Project_NameMiddle</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>last_name</td>
+    <td>Project_NameLast</td>
+    <td>Full Name[]</td>
+  </tr>
+  <tr>
+    <td>phone</td>
+    <td>Project_PhoneMain</td>
+    <td>Main Phone</td>
+  </tr>
+  <tr>
+    <td>email</td>
+    <td>Project_EmailMain</td>
+    <td>Main Email</td>
+  </tr>
+  <tr>
+    <td>alt_phone</td>
+    <td>Project_PhoneAlternate</td>
+    <td>Alt. Phone</td>
+  </tr>
+  <tr>
+    <td>cc</td>
+    <td>Project_EmailCC</td>
+    <td>CC Email</td>
+  </tr>
+  <tr class="table-danger">
+    <td>additional_contact_ref[contact_value] where additional_contact_ref['contact_name = 'mobile]</td>
+    <td>Project_PhoneCell</td>
+    <td>Mobile</td>
+  </tr>
+  <tr>
+    <td>fax</td>
+    <td>Project_PhoneFax</td>
+    <td>Fax</td>
+  </tr>
+  <tr>
+    <td>bill_addr1</td>
+    <td>bill_addr1</td>
+    <td>Invoice/BillTo['Company']</td>
+  </tr>
+  <tr>
+    <td>bill_addr2</td>
+    <td>bill_addr2</td>
+    <td>Invoice/BillTo['Att. Name']</td>
+  </tr>
+  <tr>
+    <td>bill_addr3</td>
+    <td>bill_addr3</td>
+    <td>Invoice/BillTo['Address']</td>
+  </tr>
+  <tr>
+    <td>bill_addr4</td>
+    <td>bill_addr4</td>
+    <td>Invoice/BillTo['Address2']</td>
+  </tr>
+  <tr>
+    <td>bill_city</td>
+    <td>bill_city</td>
+    <td>Invoice/BillTo['City']</td>
+  </tr>
+  <tr>
+    <td>bill_state</td>
+    <td>bill_state</td>
+    <td>Invoice/BillTo['State']</td>
+  </tr>
+  <tr>
+    <td>bill_postal_code</td>
+    <td>bill_postal_code</td>
+    <td>Invoice/BillTo['Zip']</td>
+  </tr>
+  <tr>
+    <td>ship_addr1</td>
+    <td>Project_Address1</td>
+    <td>Ship To['Company']</td>
+  </tr>
+  <tr>
+    <td>ship_addr2</td>
+    <td>Project_Address2</td>
+    <td>Ship To['Name']</td>
+  </tr>
+  <tr>
+    <td>ship_addr3</td>
+    <td>ship_addr3</td>
+    <td>Ship To['Address']</td>
+  </tr>
+  <tr>
+    <td>ship_addr4</td>
+    <td>ship_addr4</td>
+    <td>Ship To['Address2']</td>
+  </tr>
+  <tr>
+    <td>ship_city</td>
+    <td>Project_City</td>
+    <td>Ship To['City']</td>
+  </tr>
+  <tr>
+    <td>ship_state</td>
+    <td>Project_State</td>
+    <td>Ship To['State']</td>
+  </tr>
+  <tr>
+    <td>ship_postal_code</td>
+    <td>Project_Zip</td>
+    <td>Ship To['Zip']</td>
+  </tr>
+  <tr>
+    <td>(case is_active when 0 then "X" else "" end)</td>
+    <td>Project_IsClosed (rename to is_active)</td>
+    <td>Job is inactive</td>
+  </tr>
+  <tr>
+    <td>sales_rep</td>
+    <td>sales_rep</td>
+    <td>sales_rep</td>
+  </tr>
+
+  </tbody>
+</table>
+<hr/>
+
+
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Alter Tables Statements - Projects</h4>
+  <p>
+  </p>
+  <hr>
+</div>
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - qb user on Thresher and ThresherSB</h4>
+
+</div>
+
+
+<div class="alert alert-info">
+  <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher and ThresherSB</h4>
+</div>

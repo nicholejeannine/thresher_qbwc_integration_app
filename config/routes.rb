@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # Time trackings are successfully exported time card transactions - we can just view those
   resources :time_trackings, only: [:index, :create]
   
+  get '/projects' => 'home#projects'
   get '/customers' => 'home#customers'
   get '/jobs' => 'home#jobs'
   root to: 'home#index'

@@ -11,4 +11,8 @@ class HomeController < ApplicationController
   def jobs
   
   end
+  
+  def projects
+    
+  end
 end
