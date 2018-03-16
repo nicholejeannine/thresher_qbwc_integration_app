@@ -1,5 +1,8 @@
 class Initializers::JobWorker < QBWC::Worker
   
+  PORTAL_MATCHING_FIELD = :full_name
+  QB_MATCHING_FIELD = 'full_name'
+  
   def requests(job, session, data)
     {:customer_query_rq => {
         :xml_attributes => {:requestID => 1, :iterator => "Start"},
@@ -15,7 +18,7 @@ class Initializers::JobWorker < QBWC::Worker
     begin
       r['customer_ret']&.each {|qb|
         if Customer.customer_type(qb['full_name']) == Job
-          Job.initialize_sync(qb, :full_name, qb['full_name'])
+          Job.initialize_sync(qb, PORTAL_MATCHING_FIELD, qb[QB_MATCHING_FIELD])
         end
       }
       QBWC.delete_job(job) if complete

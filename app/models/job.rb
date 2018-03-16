@@ -1,10 +1,11 @@
 class Job < Customer
-  before_save :titleize_job_status
+  before_save :titleize_job_status, :fk_customer_pkey, :fk_jobid_parent
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"
 
   FIELD_MAP = {
       :Job_QB_JobName => 'name',
+      :Job_Company => 'company_name',
       :Job_NameSalutation => 'salutation',
       :Job_NameFirst => 'first_name',
       :Job_NameMiddle => 'middle_name',
@@ -42,6 +43,25 @@ class Job < Customer
   # job_status fields come back like "InProgress" - make it save as two separate words.
   def titleize_job_status
     self.Job_Status = self['Job_Status']&.titleize
+  end
+  
+    # Lookup customer foreign key
+  def fk_customer_pkey
+    customer = self.full_name.split(":")[0]
+    if customer
+      self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
+    else
+      QbwcError.create(:worker_class => "fk_customer_pkey", :model_id => self.Jobs_PKEY, :error_message => "#{self.full_name}")
+    end
+  end
+    
+    # Lookup job parent id
+  def fk_jobid_parent
+    if self.full_name.scan(/:/).count > 1
+      name = ":#{self.Job_QB_JobName}"
+      parent_job_name = self.full_name.remove(name)
+      self.FK_JobID_Parent = Job.where(:full_name => parent_job_name).first&.Jobs_PKEY
+    end
   end
   
 end

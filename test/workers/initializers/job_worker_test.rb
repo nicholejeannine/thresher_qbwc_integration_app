@@ -5,8 +5,11 @@ class JobWorkerTest < ActiveSupport::TestCase
   # Start with a single customer record with no list_id value
   def setup
     QbwcError.destroy_all
+    Client.destroy_all
     Job.destroy_all
-    sql = "INSERT INTO `Jobs`(`list_id`, `Jobs_PKEY`, `full_name`) VALUES (NULL, 41, 'Facebook:Construction')"
+    sql = "INSERT INTO `Customers` (`Customers_PKEY`, `Cust_CompanyAbr`) VALUES (13, 'Facebook')"
+    ActiveRecord::Base.connection.execute(sql)
+    sql = "INSERT INTO `Jobs`(`list_id`, `Jobs_PKEY`, `Job_QB_JobName`,`full_name`) VALUES (NULL, 41, 'Construction', 'Facebook:Construction')"
     ActiveRecord::Base.connection.execute(sql)
   end
   
@@ -46,6 +49,15 @@ class JobWorkerTest < ActiveSupport::TestCase
     assert_nil(j.CreationTimeStamp)
   end
   
+  test "foreign keys are properly updated after save" do
+    Job.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
+    Job.initialize_sync(qb_hash_with_job_sublevel_2, :full_name, qb_hash_with_job_sublevel_2['full_name'])
+    assert_equal(13, Job.where(:full_name => "Facebook:Construction").first.FK_Customers_PKEY)
+    assert_equal(13, Job.where(:full_name => "Facebook:Construction:Bld 40").first.FK_Customers_PKEY)
+    assert_nil(Job.where(:full_name => "Facebook:Construction").first.FK_JobID_Parent)
+    assert_equal(41, Job.where(:full_name => "Facebook:Construction:Bld 40").first.FK_JobID_Parent)
+  end
+  
   
   
   protected
@@ -55,6 +67,10 @@ class JobWorkerTest < ActiveSupport::TestCase
   
   def qb_hash_with_no_full_name_match
     {"list_id" => "4444-4444", "full_name" => "Client:Job1"}
+  end
+  
+  def qb_hash_with_job_sublevel_2
+    {"list_id" => "222-222", "name" => "Bld 40", "full_name" => "Facebook:Construction:Bld 40"}
   end
 
 

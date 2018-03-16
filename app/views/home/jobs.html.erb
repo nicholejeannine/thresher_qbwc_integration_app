@@ -21,6 +21,11 @@
     <td>- (breadcrub)</td>
   </tr>
   <tr>
+    <td>company_name</td>
+    <td>Job_Company</td>
+    <td>Company Name</td>
+  </tr>
+  <tr>
     <td>salutation</td>
     <td>Job_NameSalutation</td>
     <td>Full Name[]</td>
@@ -180,10 +185,12 @@
     <td>full_name</td>
     <td>- (maybe use for breadcrumbs)</td>
   </tr>
-
-
   </tbody>
 </table>
+<hr/>
+<h4 class="text-danger">3 fields we appear not to be using:
+<small>`Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`</small></h4>
+
 
 
 <div class="alert alert-info">
@@ -228,15 +235,13 @@
 
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Grant Statement - qb user on Thresher and ThresherSB</h4>
-  REVOKE ALL PRIVILEGES ON `ThresherSB`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `ThresherSB`.`Jobs` TO 'qb'@'%'; REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `Thresher`.`Jobs` TO 'qb'@'%';
+  REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'qb'@'%'; GRANT SELECT, INSERT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_DateEndActual`, `Job_DateEndProjected`, `Job_DateStartActual`, `Job_EmailCC`, `Job_EmailTo`, `Job_InactiveFlag`, `Job_NameFirst`, `Job_NameLast`, `Job_NameMiddle`, `Job_NameSalutation`, `Job_PhoneAlt`, `Job_PhoneFax`, `Job_PhoneOffice`, `Job_QB_JobName`, `Job_Status`, `list_id`, `full_name`, `mobile`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr1`, `ship_addr2`, `ship_addr3`, `ship_addr4`, `ship_city`, `ship_state`, `ship_postal_code`, `sales_rep`) ON `Thresher`.`Jobs` TO 'qb'@'%';
 </div>
 
 
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher and ThresherSB</h4>
-  <p>REVOKE ALL PRIVILEGES ON `ThresherSB`.`Jobs` FROM 'sblord'@'%'; GRANT SELECT, UPDATE (`FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `ThresherSB`.`Jobs` TO 'sblord'@'%';</p>
-  <p>REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`FK_JobID_Parent`, `FK_Customers_PKEY`, `Job_Company`, `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateEndProjected`, `Job_Description_Long`, `Job_Description_Short`) ON `Thresher`.`Jobs` TO 'dblord'@'%';</p>
-
+  <p>REVOKE ALL PRIVILEGES ON `Thresher`.`Jobs` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`,  `Job_CompanyAbr`, `Job_Contact`, `Job_ContactAlt`, `Job_DateStartProjected`, `Job_Description_Long`, `Job_Description_Short`), REFERENCES ON `Thresher`.`Jobs` TO 'dblord'@'%';</p>
 </div>
 
 
@@ -245,12 +250,12 @@
   <li>Run the "alter table" statement on Jobs table.</li>
   <li>Export the FullName view to a real table, jobs2.</li>
   <li>IMPORTANT! RUN THIS COMMAND TO FIND DUPLICATE JOBS - HAVE TO FIX THE DUPLICATE JOBS BEFORE PROCEEDING: SELECT count(*) AS count, FullName FROM jobs2 GROUP BY FullName HAVING count > 1. This will show jobs where there are 2 rows in the portal that match on full_name. Delete/move dupes before proceeding.</li>
+  <li>Run permissions commands for qb user</li>
   <li>Run this command:  UPDATE `Jobs` INNER JOIN `jobs2`
     ON `Jobs`.`Jobs_PKEY` = `jobs2`.`Jobs_PKEY`
     SET `Jobs`.`full_name` = `jobs2`.`FullName`</li>
   <li>Delete the jobs2 table.</li>
   <li>Run the web connector inital query for Customers/Jobs</li>
-  <li>Run permissions commands</li>
-  <li>Turn off the "initial" job and start using the "query" job.</li>
+  <li>Run permissions commands for dblord</li>
   <li>Make the portal branches with the new QB interface live.</li>
 </ol>
