@@ -170,6 +170,19 @@
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Alter Tables Statements - Projects</h4>
   <p>
+    ALTER TABLE Project DROP COLUMN FK_ProgMan_Employees_PKEY;
+    ALTER TABLE Project DROP COLUMN FK_ProjMan_Employees_PKEY;
+    ALTER TABLE Project DROP COLUMN FK_TechLead_Employees_PKEY;
+    ALTER TABLE Project DROP COLUMN FK_Foreman_Employees_PKEY;
+    ALTER TABLE Project DROP COLUMN FK_TechForeman_Employees_PKEY;
+    ALTER TABLE Project DROP COLUMN Project_IsClosed;
+    ALTER TABLE Project DROP COLUMN Project_UseCase;
+    ALTER TABLE Project ADD list_id varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD full_name varchar(209) DEFAULT NULL;
+    ALTER TABLE Project ADD is_active tinyint(1) DEFAULT true;
+    ALTER TABLE Project ADD sales_rep varchar(5) DEFAULT NULL;
+    ALTER TABLE Project ADD UNIQUE KEY `list_id` (`list_id`) USING BTREE;
+    ALTER TABLE Project ADD UNIQUE KEY `full_name` (`full_name`) USING BTREE;
   </p>
   <hr>
 </div>
