@@ -167,6 +167,15 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "full_name", limit: 209
     t.boolean "is_active", default: true
     t.string "sales_rep", limit: 5
+    t.string "bill_addr1", limit: 41
+    t.string "bill_addr2", limit: 41
+    t.string "bill_addr3", limit: 41
+    t.string "bill_addr4", limit: 41
+    t.string "bill_city", limit: 31
+    t.string "bill_state", limit: 41
+    t.string "bill_postal_code", limit: 31
+    t.string "ship_addr3", limit: 41
+    t.string "ship_addr4", limit: 41
     t.index ["FK_Customers_PKEY"], name: "FK_Customers_PKEY"
     t.index ["FK_Jobs_PKEY"], name: "FK_Jobs_PKEY"
     t.index ["Project_Status"], name: "Project_Status"
