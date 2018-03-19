@@ -204,5 +204,6 @@
 
 
 <div class="alert alert-info">
-  <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher and ThresherSB</h4>
+  <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher</h4>
+  REVOKE ALL PRIVILEGES ON `Thresher`.`Project` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`LastModificationTimeStamp`, `LastModificationUser`, `Project_Name`, `Project_Type`, `Project_DateStartEstimated`, `Project_RoughInStart`, `Project_RoughInEnd`, `Project_DeviceInstallStart`, `Project_DeviceInstallEnd`, `Project_CommissioningStart`, `Project_CommissioningEnd`, `Project_ScopeText`, `Project_Address_Parking1`, `Project_Address_Parking2`, `Project_Park_1_Address`, `Project_Park_1_Address_City`, `Project_Park_1_Address_State`, `Project_Park_1_Address_Zip`, `Project_Park_2_Address`, `Project_Park_2_Address_City`, `Project_Park_2_Address_State`, `Project_Park_2_Address_Zip`, `Project_PercentComplete`, `Project_Status`, `Project_QuotedTechLabor`, `Project_QuotedRILabor`, `Project_QuotedDILabor`, `Project_QuotedCOLabor`, `Project_QuotedEngLabor`, `Project_QuotedPMLabor`, `Project_QuotedLgstLabor`, `Project_QuotedMaintLabor`) ON `Thresher`.`Project` TO 'dblord'@'%';
 </div>
