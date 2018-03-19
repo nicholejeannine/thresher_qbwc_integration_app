@@ -177,6 +177,15 @@
     ALTER TABLE Project DROP COLUMN FK_TechForeman_Employees_PKEY;
     ALTER TABLE Project DROP COLUMN Project_IsClosed;
     ALTER TABLE Project DROP COLUMN Project_UseCase;
+    ALTER TABLE Project ADD bill_addr1 varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD bill_addr2 varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD bill_addr3 varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD bill_addr4 varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD bill_city varchar(31) DEFAULT NULL;
+    ALTER TABLE Project ADD bill_state varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD bill_postal_code varchar(31) DEFAULT NULL;
+    ALTER TABLE Project ADD ship_addr3 varchar(41) DEFAULT NULL;
+    ALTER TABLE Project ADD ship_addr4 varchar(41) DEFAULT NULL;
     ALTER TABLE Project ADD list_id varchar(41) DEFAULT NULL;
     ALTER TABLE Project ADD full_name varchar(209) DEFAULT NULL;
     ALTER TABLE Project ADD is_active tinyint(1) DEFAULT true;
@@ -189,7 +198,8 @@
 
 <div class="alert alert-info">
   <h4 class="alert-heading">Mysql Grant Statement - qb user on Thresher and ThresherSB</h4>
-
+  REVOKE ALL PRIVILEGES ON `Thresher`.`Project` FROM 'qb'@'%';
+  GRANT SELECT, INSERT (`Project_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_Customers_PKEY`, `FK_Jobs_PKEY`, `full_name`, `is_active`), UPDATE (`Project_PKEY`, `CreationTimeStamp`, `CreationUser`, `LastModificationTimeStamp`, `LastModificationUser`, `FK_Customers_PKEY`, `FK_Jobs_PKEY`, `Project_DateEndEstimated`, `Project_DateStartActual`, `Project_DateEndActual`, `Project_NameSalutation`, `Project_NameFirst`, `Project_NameMiddle`, `Project_NameLast`, `Project_PhoneMain`, `Project_EmailMain`, `Project_PhoneAlternate`, `Project_EmailCC`, `Project_PhoneCell`, `Project_PhoneFax`, `Project_Address1`, `Project_Address2`, `Project_City`, `Project_State`, `Project_Zip`, `list_id`, `full_name`, `is_active`, `sales_rep`, `bill_addr1`, `bill_addr2`, `bill_addr3`, `bill_addr4`, `bill_city`, `bill_state`, `bill_postal_code`, `ship_addr3`, `ship_addr4`) ON  `Thresher`.`Project` TO 'qb'@'%';
 </div>
 
 
