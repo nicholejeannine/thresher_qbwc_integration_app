@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.text "CreationUser", limit: 16777215
     t.timestamp "LastModificationTimeStamp"
     t.text "LastModificationUser", limit: 16777215
-    t.integer "FK_Customers_PKEY", null: false
+    t.integer "FK_Customers_PKEY"
     t.integer "FK_Jobs_PKEY"
     t.text "Project_Name"
     t.text "Project_Type"
