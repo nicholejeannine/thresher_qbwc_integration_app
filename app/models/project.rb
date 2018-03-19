@@ -36,5 +36,9 @@ class Project < ApplicationRecord
       :is_active => "is_active",
       :sales_rep => {"sales_rep_ref" => "full_name"}
   }
+  
+  def build_request(name, parent_full_name)
+    {:customer_add_rq=>{:customer_add=>{:name=>"#{name}"}, :parent_ref=>{:full_name=>"#{parent_full_name}"}}}
+  end
 
 end
