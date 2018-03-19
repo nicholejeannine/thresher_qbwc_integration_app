@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.text "Cust_BillTo_Address2"
     t.text "Cust_BillTo_City"
     t.text "Cust_BillTo_Company"
-    t.text "Cust_BillTo_Email"
+    t.text "Cust_BillTo_Email", comment: "A/P Email"
     t.text "Cust_BillTo_Name"
     t.text "Cust_AP_Name", comment: "A/P Name"
     t.text "Cust_BillTo_Phone", comment: "A/P Phone"
@@ -40,7 +40,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.text "Cust_PhoneCell"
     t.text "Cust_PhoneFax", comment: "A/P FAX"
     t.text "Cust_PhoneOffice"
-    t.string "sales_rep", limit: 5, default: ""
     t.text "Cust_ShipTo_Address1"
     t.text "Cust_ShipTo_Address2"
     t.text "Cust_ShipTo_City"
@@ -48,11 +47,12 @@ ActiveRecord::Schema.define(version: 0) do
     t.text "Cust_ShipTo_Name"
     t.text "Cust_ShipTo_State"
     t.integer "Cust_ShipTo_Zip"
+    t.string "list_id", limit: 41
+    t.string "sales_rep", limit: 5
     t.string "site_contact"
     t.string "site_email"
     t.string "site_phone"
-    t.string "list_id", limit: 41
-    t.index ["CreationTimeStamp", "list_id"], name: "CreationTimeStamp", unique: true
+    t.index ["list_id"], name: "list_id", unique: true
   end
 
   create_table "Jobs", primary_key: "Jobs_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -108,57 +108,69 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["list_id"], name: "list_id", unique: true
   end
 
-  create_table "clients", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "list_id", default: "", null: false
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string "edit_sequence", limit: 16
+  create_table "Project", primary_key: "Project_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.timestamp "CreationTimeStamp"
+    t.text "CreationUser", limit: 16777215
+    t.timestamp "LastModificationTimeStamp"
+    t.text "LastModificationUser", limit: 16777215
+    t.integer "FK_Customers_PKEY", null: false
+    t.integer "FK_Jobs_PKEY"
+    t.text "Project_Name"
+    t.text "Project_Type"
+    t.date "Project_DateStartEstimated"
+    t.date "Project_DateEndEstimated"
+    t.date "Project_DateStartActual"
+    t.date "Project_DateEndActual"
+    t.date "Project_RoughInStart"
+    t.date "Project_RoughInEnd"
+    t.date "Project_DeviceInstallStart"
+    t.date "Project_DeviceInstallEnd"
+    t.date "Project_CommissioningStart"
+    t.date "Project_CommissioningEnd"
+    t.text "Project_ScopeText"
+    t.text "Project_NameSalutation"
+    t.text "Project_NameFirst"
+    t.text "Project_NameMiddle"
+    t.text "Project_NameLast"
+    t.text "Project_PhoneMain"
+    t.text "Project_EmailMain"
+    t.text "Project_PhoneAlternate"
+    t.text "Project_EmailCC"
+    t.text "Project_PhoneCell"
+    t.text "Project_PhoneFax"
+    t.text "Project_Address1", comment: "Project Site Address"
+    t.text "Project_Address2"
+    t.text "Project_Address_Parking1", comment: "Project Primary Parking"
+    t.text "Project_Address_Parking2", comment: "Project Secondary Parking"
+    t.text "Project_City"
+    t.text "Project_State"
+    t.text "Project_Zip"
+    t.text "Project_Park_1_Address", comment: "Primary Parking"
+    t.text "Project_Park_1_Address_City", comment: "Primary Parking City"
+    t.text "Project_Park_1_Address_State", comment: "Primary Parking State"
+    t.integer "Project_Park_1_Address_Zip", comment: "Primary Parking Zip Code"
+    t.text "Project_Park_2_Address", comment: "Secondary Parking Address"
+    t.text "Project_Park_2_Address_City", comment: "Secondary Parking City"
+    t.text "Project_Park_2_Address_State", comment: "Secondary Parking State"
+    t.integer "Project_Park_2_Address_Zip", comment: "Secondary Parking Zip Code"
+    t.integer "Project_PercentComplete"
+    t.integer "Project_Status", limit: 1
+    t.integer "Project_QuotedTechLabor"
+    t.integer "Project_QuotedRILabor"
+    t.integer "Project_QuotedDILabor"
+    t.integer "Project_QuotedCOLabor"
+    t.integer "Project_QuotedEngLabor"
+    t.integer "Project_QuotedPMLabor"
+    t.integer "Project_QuotedLgstLabor"
+    t.integer "Project_QuotedMaintLabor"
+    t.string "list_id", limit: 41
     t.string "full_name", limit: 209
-    t.boolean "is_active", default: true, null: false
-    t.string "company_name", limit: 41
-    t.string "salutation", limit: 15
-    t.string "first_name", limit: 25
-    t.string "middle_name", limit: 25
-    t.string "last_name", limit: 25
-    t.string "job_title", limit: 41
-    t.string "bill_addr1", limit: 41
-    t.string "bill_addr2", limit: 41
-    t.string "bill_addr3", limit: 41
-    t.string "bill_addr4", limit: 41
-    t.string "bill_city", limit: 31
-    t.string "bill_state", limit: 21
-    t.string "bill_postal_code", limit: 13
-    t.string "bill_country", limit: 31
-    t.string "bill_note", limit: 41
-    t.string "ship_addr1", limit: 41
-    t.string "ship_addr2", limit: 41
-    t.string "ship_addr3", limit: 41
-    t.string "ship_addr4", limit: 41
-    t.string "ship_city", limit: 31
-    t.string "ship_state", limit: 21
-    t.string "ship_postal_code", limit: 13
-    t.string "ship_country", limit: 31
-    t.string "ship_note", limit: 41
-    t.string "phone", limit: 21
-    t.string "alt_phone", limit: 21
-    t.string "fax", limit: 21
-    t.string "email", limit: 1023
-    t.string "cc", limit: 1023
-    t.string "contact", limit: 41
-    t.string "alt_contact", limit: 41
-    t.string "customer_type", limit: 159
-    t.string "terms", limit: 31
+    t.boolean "is_active", default: true
     t.string "sales_rep", limit: 5
-    t.decimal "total_balance", precision: 20, scale: 5, default: "0.0", null: false
-    t.string "sales_tax_code", limit: 3
-    t.string "item_sales_tax", limit: 31
-    t.string "account_number", limit: 99
-    t.string "preferred_delivery_method", limit: 41
-    t.string "site_contact"
-    t.string "site_email"
-    t.string "site_phone"
+    t.index ["FK_Customers_PKEY"], name: "FK_Customers_PKEY"
+    t.index ["FK_Jobs_PKEY"], name: "FK_Jobs_PKEY"
+    t.index ["Project_Status"], name: "Project_Status"
     t.index ["full_name"], name: "full_name", unique: true
-    t.index ["is_active"], name: "is_active"
     t.index ["list_id"], name: "list_id", unique: true
   end
 
@@ -263,69 +275,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["txn_id"], name: "txn_id", unique: true
   end
 
-  create_table "projects", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "list_id"
-    t.datetime "time_created"
-    t.datetime "time_modified"
-    t.string "edit_sequence", limit: 16
-    t.string "name", limit: 41
-    t.string "full_name", limit: 209
-    t.boolean "is_active", default: true, null: false
-    t.string "parent_list_id"
-    t.string "company_name", limit: 41
-    t.string "salutation", limit: 15
-    t.string "first_name", limit: 25
-    t.string "middle_name", limit: 25
-    t.string "last_name", limit: 25
-    t.string "job_title", limit: 41
-    t.string "bill_addr1", limit: 41
-    t.string "bill_addr2", limit: 41
-    t.string "bill_addr3", limit: 41
-    t.string "bill_addr4", limit: 41
-    t.string "bill_city", limit: 31
-    t.string "bill_state", limit: 21
-    t.string "bill_postal_code", limit: 13
-    t.string "bill_country", limit: 31
-    t.string "bill_note", limit: 41
-    t.string "ship_addr1", limit: 41
-    t.string "ship_addr2", limit: 41
-    t.string "ship_addr3", limit: 41
-    t.string "ship_addr4", limit: 41
-    t.string "ship_city", limit: 31
-    t.string "ship_state", limit: 21
-    t.string "ship_postal_code", limit: 13
-    t.string "ship_country", limit: 31
-    t.string "ship_note", limit: 41
-    t.string "phone", limit: 21
-    t.string "alt_phone", limit: 21
-    t.string "fax", limit: 21
-    t.string "email", limit: 1023
-    t.string "cc", limit: 1023
-    t.string "contact", limit: 41
-    t.string "alt_contact", limit: 41
-    t.string "customer_type", limit: 159
-    t.string "terms", limit: 31
-    t.string "sales_rep", limit: 5
-    t.decimal "total_balance", precision: 20, scale: 5, default: "0.0"
-    t.string "sales_tax_code", limit: 3
-    t.string "item_sales_tax", limit: 31
-    t.string "account_number", limit: 99
-    t.string "job_status", limit: 41
-    t.date "job_start_date"
-    t.date "job_projected_end_date"
-    t.date "job_end_date"
-    t.string "job_desc", limit: 99
-    t.string "job_type", limit: 159
-    t.string "preferred_delivery_method", limit: 41
-    t.string "site_contact"
-    t.string "site_email"
-    t.string "site_phone"
-    t.index ["full_name"], name: "full_name", unique: true
-    t.index ["is_active"], name: "is_active"
-    t.index ["list_id"], name: "list_id", unique: true
-    t.index ["parent_list_id"], name: "parent_list_id"
-  end
-
   create_table "purchase_orders", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", default: "", null: false
     t.datetime "time_created"
@@ -380,8 +329,12 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "qb_customers", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "list_id", limit: 209, null: false
     t.string "full_name", limit: 209
+    t.integer "sublevel", default: 0, null: false
+    t.string "sales_rep", limit: 5
     t.index ["full_name"], name: "full_name", unique: true
     t.index ["list_id"], name: "list_id", unique: true
+    t.index ["sales_rep"], name: "sales_rep"
+    t.index ["sublevel"], name: "sublevel"
   end
 
   create_table "qb_employees", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -595,4 +548,5 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["name"], name: "name", unique: true
   end
 
+  add_foreign_key "Jobs", "Customers", column: "FK_Customers_PKEY", primary_key: "Customers_PKEY", name: "Jobs_ibfk_1", on_update: :cascade, on_delete: :cascade
 end
