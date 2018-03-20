@@ -1,4 +1,4 @@
-class Project < ApplicationRecord
+class Project < Customer
 
   self.table_name = "Project"
   self.primary_key = "Project_PKEY"
