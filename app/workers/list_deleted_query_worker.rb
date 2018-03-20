@@ -4,16 +4,11 @@ class ListDeletedQueryWorker < QBWC::Worker
          {:xml_attributes=> {"requestID"=>"1"},
           :list_del_type=>'Customer'
          }
-    },
-     {:list_deleted_query_rq =>
-          {:xml_attributes=> {"requestID"=>"1"},
-           :list_del_type=>'Vendor'
-          }
-     }]
+    }]
   end
 
   def handle_response(r, session, job, request, data)
-    Rails.logger.warn(r)
+    r['list_deleted_ret']&.each{|qb|QbwcError.create(:worker_class => "Deleted Customer", :model_id => qb['list_id'], :error_message => qb)}
   end
   
   def should_run?(job, session, data)
