@@ -1,5 +1,5 @@
 class Project < Customer
-
+  before_save :fk_customer_pkey, :fk_job_pkey
   self.table_name = "Project"
   self.primary_key = "Project_PKEY"
 
@@ -39,6 +39,20 @@ class Project < Customer
   
   def build_request(name, parent_full_name)
     {:customer_add_rq=>{:customer_add=>{:name=>"#{name}"}, :parent_ref=>{:full_name=>"#{parent_full_name}"}}}
+  end
+
+  # Lookup customer foreign key
+  def fk_customer_pkey
+    customer = self.full_name.split(":")[0]
+    if customer
+      self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
+    else
+      QbwcError.create(:worker_class => "fk_customer_pkey", :model_id => self.Jobs_PKEY, :error_message => "#{self.full_name}")
+    end
+  end
+  
+  def fk_job_pkey
+    nil
   end
 
 end
