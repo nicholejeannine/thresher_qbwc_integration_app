@@ -20,14 +20,14 @@ class ProjectWorkerTest < ActiveSupport::TestCase
     assert_equal(Project, Project.customer_type(qb_hash_with_full_name_match['full_name']))
     assert_equal(Project, Project.customer_type(qb_hash_with_no_full_name_match['full_name']))
   end
-  #
-  # test "initialize_sync updates existing row when full name matches" do
-  #   assert_equal(1, Project.count) # Make sure our setup method ran
-  #   Project.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
-  #   assert_equal(1, Job.count)
-  #   assert_equal("4444-4444", Project.first.list_id)
-  #   assert_equal(0, QbwcError.count) # Make sure there are no errors
-  # end
+  
+  test "initialize_sync updates existing row when full name matches" do
+    assert_equal(1, Project.count) # Make sure our setup method ran
+    Project.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
+    assert_equal(1, Job.count)
+    assert_equal("4444-4444", Project.first.list_id)
+    assert_equal(0, QbwcError.count) # Make sure there are no errors
+  end
   #
   # test "initialize sync creates new row when no full name matches" do
   #   assert_equal(1, Project.count) # Make sure our setup method ran
