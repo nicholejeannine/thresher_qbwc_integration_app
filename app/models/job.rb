@@ -46,17 +46,16 @@ class Job < Customer
     self.Job_Status = self['Job_Status']&.titleize
   end
   
-    # Lookup customer foreign key
+    # Lookup customer foreign key. If we cannot find the customer foreign key, write an error in the errors table.
   def fk_customer_pkey
     customer = self.full_name.split(":")[0]
     if customer
       self.FK_Customers_PKEY = Client.where(:Cust_CompanyAbr => customer).first&.Customers_PKEY
     else
-      QbwcError.create(:worker_class => "fk_customer_pkey", :model_id => self.Jobs_PKEY, :error_message => "#{self.full_name}")
+      QbwcError.create(:worker_class => "Job.fk_customer_pkey", :model_id => self.Jobs_PKEY, :error_message => "#{self.full_name}")
     end
   end
     
-   # Lookup job parent id. If the full name only has one ":" in it, there is NO job parent, so FK_JobID_Parent should be nil. If the "sublevel" is greater than 1 (e.g., the full_name path looks like "Client:Subjob1:Subjob2"), we need to look up the foreign key of that job parent.
   def fk_jobid_parent
     if self.full_name.scan(/:/).count > 1
       parent_job_name = self.full_name.rpartition(":")[0]
