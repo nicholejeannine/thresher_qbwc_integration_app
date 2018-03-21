@@ -42,15 +42,15 @@ class ProjectWorkerTest < ActiveSupport::TestCase
     assert_equal("QB", Project.last.CreationUser)
     assert_equal(Time.now.to_formatted_s(:short), Project.last.CreationTimeStamp.to_formatted_s(:short))
   end
-  #
-  # test "updating a row updates the last modified fields but does not touch created at/by fields" do
-  #   Project.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
-  #   p = Project.where(:full_name => "Facebook:Construction:P-3333").first
-  #   assert_equal("QB", p.LastModificationUser)
-  #   assert_equal(Time.now.to_formatted_s(:short), p.LastModificationTimeStamp.to_formatted_s(:short)) # The timestamps won't match on the exact second, so let's just make sure the date part is the same.
-  #   assert_nil(p.CreationUser)
-  #   assert_nil(p.CreationTimeStamp)
-  # end
+  
+  test "updating a row updates the last modified fields but does not touch created at/by fields" do
+    Project.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
+    p = Project.where(:full_name => "Facebook:Construction:P-3333").first
+    assert_equal("QB", p.LastModificationUser)
+    assert_equal(Time.now.to_formatted_s(:short), p.LastModificationTimeStamp.to_formatted_s(:short)) # The timestamps won't match on the exact second, so let's just make sure the date part is the same.
+    assert_nil(p.CreationUser)
+    assert_nil(p.CreationTimeStamp)
+  end
   #
   # test "foreign keys are properly updated after save" do
   #   Project.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
