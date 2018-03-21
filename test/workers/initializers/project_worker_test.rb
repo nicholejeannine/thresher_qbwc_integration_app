@@ -29,12 +29,12 @@ class ProjectWorkerTest < ActiveSupport::TestCase
     assert_equal(0, QbwcError.count) # Make sure there are no errors
   end
   #
-  # test "initialize sync creates new row when no full name matches" do
-  #   assert_equal(1, Project.count) # Make sure our setup method ran
-  #   Project.initialize_sync(qb_hash_with_no_full_name_match, :full_name, qb_hash_with_no_full_name_match['full_name'])
-  #   assert_equal(2, Project.count) # Make sure initialization succeeded
-  #   assert_equal(0, QbwcError.count) # Make sure there are no errors
-  # end
+  test "initialize sync creates new row when no full name matches" do
+    assert_equal(1, Project.count) # Make sure our setup method ran
+    Project.initialize_sync(qb_hash_with_no_full_name_match, :full_name, qb_hash_with_no_full_name_match['full_name'])
+    assert_equal(2, Project.count) # Make sure initialization succeeded
+    assert_equal(0, QbwcError.count) # Make sure there are no errors
+  end
   #
   # test "creating a new row updates the created at and created by fields" do
   #   Project.initialize_sync(qb_hash_with_no_full_name_match, :full_name, qb_hash_with_no_full_name_match['full_name'])
