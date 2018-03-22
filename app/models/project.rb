@@ -1,5 +1,6 @@
 class Project < Customer
   before_save :fk_customer_pkey, :fk_job_pkey
+  attr_accessor :name
   self.table_name = "Project"
   self.primary_key = "Project_PKEY"
 
@@ -36,6 +37,13 @@ class Project < Customer
       :is_active => "is_active",
       :sales_rep => {"sales_rep_ref" => "full_name"}
   }
+  
+  # Return just the "P-xxxx" portion without having to use the QB hash
+  # TODO: maybe just grab this from the QB hash and compare to primary key? Roll back if no match
+  def name
+    names = self.full_name.split(":")
+    names[names.count - 1]
+  end
   
   def build_request(name, parent_full_name)
     {:customer_add_rq=>{:customer_add=>{:name=>"#{name}"}, :parent_ref=>{:full_name=>"#{parent_full_name}"}}}
