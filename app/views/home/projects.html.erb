@@ -207,3 +207,16 @@
   <h4 class="alert-heading">Mysql Grant Statement - dblord/sblord users on Thresher</h4>
   REVOKE ALL PRIVILEGES ON `Thresher`.`Project` FROM 'dblord'@'%'; GRANT SELECT, UPDATE (`LastModificationTimeStamp`, `LastModificationUser`, `Project_Name`, `Project_Type`, `Project_DateStartEstimated`, `Project_RoughInStart`, `Project_RoughInEnd`, `Project_DeviceInstallStart`, `Project_DeviceInstallEnd`, `Project_CommissioningStart`, `Project_CommissioningEnd`, `Project_ScopeText`, `Project_Address_Parking1`, `Project_Address_Parking2`, `Project_Park_1_Address`, `Project_Park_1_Address_City`, `Project_Park_1_Address_State`, `Project_Park_1_Address_Zip`, `Project_Park_2_Address`, `Project_Park_2_Address_City`, `Project_Park_2_Address_State`, `Project_Park_2_Address_Zip`, `Project_PercentComplete`, `Project_Status`, `Project_QuotedTechLabor`, `Project_QuotedRILabor`, `Project_QuotedDILabor`, `Project_QuotedCOLabor`, `Project_QuotedEngLabor`, `Project_QuotedPMLabor`, `Project_QuotedLgstLabor`, `Project_QuotedMaintLabor`) ON `Thresher`.`Project` TO 'dblord'@'%';
 </div>
+
+<h4 class="bg-warning text-center">WHEN going live:</h4>
+<ol class="bg-warning">
+  <li>Run the "alter table" statement on Project table.</li>
+  <li>Export the project_full_names view to a real table, Project2.</li>
+  <li>IMPORTANT! RUN THIS COMMAND TO FIND DUPLICATE projects - HAVE TO FIX THE DUPLICATE projects BEFORE PROCEEDING: SELECT count(*) AS count, project_full_name FROM Project2 GROUP BY project_full_name HAVING count > 1. This will show projects where there are 2 rows in the portal that match on full_name. Delete/move dupes before proceeding.</li>
+  <li>Run permissions commands for qb user</li>
+  <li>Run this command:  UPDATE `Project` INNER JOIN `Project2` ON `Project2`.`project_id` = `Project`.`Project_PKEY` SET `Project`.`full_name` = Project2.project_full_name</li>
+  <li>Delete the Project2 table.</li>
+  <li>Run the web connector inital query for Projects</li>
+  <li>Run permissions commands for dblord</li>
+  <li>Make the portal branches with the new QB interface live.</li>
+</ol>
