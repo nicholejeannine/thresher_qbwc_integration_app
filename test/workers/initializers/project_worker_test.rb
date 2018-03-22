@@ -56,7 +56,7 @@ class ProjectWorkerTest < ActiveSupport::TestCase
     Project.initialize_sync(qb_hash_with_full_name_match, :full_name, qb_hash_with_full_name_match['full_name'])
     assert_equal(1, Project.count)
     assert_equal(1, Project.first.FK_Customers_PKEY)
-    # assert_equal(41, Project.first.FK_Jobs_PKEY)
+    assert_equal(41, Project.first.FK_Jobs_PKEY)
   end
   #
   # test "duplicate primary key writes error to error table instead of creating new row in the database" do
