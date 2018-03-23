@@ -8,7 +8,7 @@ class ProjectQueryTest < ActiveSupport::TestCase
   test "Customer.parse_customer_response matches on list_id and updates the appropriate record" do
     # first assert we have one client in the database, that our sql method in "setup" worked
     assert_equal(1, Project.count)
-    Project.parse_customer_response(qb_hash)
+    Customer.parse_customer_response(qb_hash)
     assert_equal(1, Project.count)
     p = Project.first
     # assert that the ship to address is the fake value we assigned it, BEFORE we run the update, so then we can assert that it becomes nil afterward.
@@ -58,11 +58,11 @@ class ProjectQueryTest < ActiveSupport::TestCase
     Job.destroy_all
     Project.destroy_all
     QbwcError.destroy_all
-    sql = "INSERT INTO `Customers` (`Customers_PKEY`, `Cust_CompanyAbr`, `list_id`) VALUES (1, 'Client')"
+    sql = "INSERT INTO `Customers` (`Customers_PKEY`, `Cust_CompanyAbr`, `list_id`) VALUES (1, 'Client', '222-2222')"
     ActiveRecord::Base.connection.execute(sql)
     sql = "INSERT INTO `Jobs` (`list_id`, `Jobs_PKEY`, `Job_QB_JobName`, `full_name`) VALUES ('800006BC-1257534763', 2, 'Construction', 'Client:Job');"
     ActiveRecord::Base.connection.execute(sql)
-    sql = "INSERT INTO `Project` (`list_id`, `Project_PKEY`, `full_name`) VALUES ('800006BC-1257534768', 3333, 'Client:Job:P-3333');"
+    sql = "INSERT INTO `Project` (`list_id`, `Project_PKEY`, `full_name`) VALUES ('1234-1234', 1234, 'Client:Job:P-1234');"
     ActiveRecord::Base.connection.execute(sql)
   end
   
