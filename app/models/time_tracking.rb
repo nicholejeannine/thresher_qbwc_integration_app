@@ -12,7 +12,6 @@ class TimeTracking < ApplicationRecord
     :txn_date => 'txn_date',
     :employee_list_id => {"entity_ref" => "list_id"},
     :employee_full_name => {"entity_ref" => "full_name"},
-    :employee_full_name => {"entity_ref" => "full_name"},
     :customer_full_name => {"customer_ref" => "full_name"},
     :item_service => {"item_service_ref" => "full_name"},
     :duration => "duration",
