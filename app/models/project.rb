@@ -61,8 +61,7 @@ class Project < Customer
   
   # Lookup parent job foreign key - this is clunky but might work to start off
   def fk_job_pkey
-    name = ":P-#{self.Project_PKEY}" # the "name" part to strip off full name
-    parent_job_name = self.full_name.remove(name)
+    parent_job_name = self.full_name.rpartition(":")[0]
     self.FK_Jobs_PKEY = Job.where(:full_name => parent_job_name).first&.Jobs_PKEY
   end
 
