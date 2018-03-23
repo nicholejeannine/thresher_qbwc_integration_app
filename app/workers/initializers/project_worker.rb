@@ -1,4 +1,4 @@
-class Initializers::ClientWorker < QBWC::Worker
+class Initializers::ProjectWorker < QBWC::Worker
   
   PORTAL_MATCHING_FIELD = :full_name
   QB_MATCHING_FIELD = 'full_name'
