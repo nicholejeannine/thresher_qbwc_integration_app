@@ -42,7 +42,7 @@ class ProjectQueryTest < ActiveSupport::TestCase
     assert_equal("CITY", p.Project_City)
     assert_equal("AA", p.Project_State)
     assert_equal("99999", p.Project_Zip)
-    assert_equal(1, p.is_active)
+    assert_equal(true, p.is_active)
     assert_equal("AAA", p.sales_rep)
   end
   
