@@ -2,7 +2,8 @@ class Job < Customer
   before_save :titleize_job_status, :fk_customer_pkey, :fk_jobid_parent
   self.table_name = "Jobs"
   self.primary_key = "Jobs_PKEY"
-
+  
+  
   FIELD_MAP = {
       :Job_QB_JobName => 'name',
       :Job_Company => 'company_name',
@@ -55,11 +56,10 @@ class Job < Customer
     end
   end
     
-    # Lookup job parent id
+   # Lookup job parent id. If the full name only has one ":" in it, there is NO job parent, so FK_JobID_Parent should be nil. If the "sublevel" is greater than 1 (e.g., the full_name path looks like "Client:Subjob1:Subjob2"), we need to look up the foreign key of that job parent.
   def fk_jobid_parent
     if self.full_name.scan(/:/).count > 1
-      name = ":#{self.Job_QB_JobName}"
-      parent_job_name = self.full_name.remove(name)
+      parent_job_name = self.full_name.rpartition(":")[0]
       self.FK_JobID_Parent = Job.where(:full_name => parent_job_name).first&.Jobs_PKEY
     end
   end
