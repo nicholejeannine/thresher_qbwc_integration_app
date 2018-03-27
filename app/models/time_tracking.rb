@@ -4,21 +4,22 @@ class TimeTracking < ApplicationRecord
   
   self.table_name = 'qb.time_trackings'
   
-  FIELD_MAP = {
-    :txn_id => 'txn_id',
-    :time_created => 'time_created',
-    :time_modified => 'time_modified',
-    :edit_sequence => 'edit_sequence',
-    :txn_date => 'txn_date',
-    :employee_list_id => {"entity_ref" => "list_id"},
-    :employee_full_name => {"entity_ref" => "full_name"},
-    :customer_full_name => {"customer_ref" => "full_name"},
-    :item_service => {"item_service_ref" => "full_name"},
-    :duration => "duration",
-    :payroll_item_wage => {"payroll_item_wage_ref" => "full_name"},
-    :notes => "notes",
-    :billable_status => "billable_status"
-  }
+
+  # FIELD_MAP = {
+  #   :txn_id => 'txn_id',
+  #   :time_created => 'time_created',
+  #   :time_modified => 'time_modified',
+  #   :edit_sequence => 'edit_sequence',
+  #   :txn_date => 'txn_date',
+  #   :employee_list_id => {"entity_ref" => "list_id"},
+  #   :employee_full_name => {"entity_ref" => "full_name"},
+  #   :customer_full_name => {"customer_ref" => "full_name"},
+  #   :item_service => {"item_service_ref" => "full_name"},
+  #   :duration => "duration",
+  #   :payroll_item_wage => {"payroll_item_wage_ref" => "full_name"},
+  #   :notes => "notes",
+  #   :billable_status => "billable_status"
+  # }
 
   # grab all time tracking entries between a specified start and end date
   def self.between(start_date, end_date)
