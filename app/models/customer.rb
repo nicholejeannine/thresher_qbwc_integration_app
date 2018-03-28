@@ -5,7 +5,7 @@ class Customer < ApplicationRecord
 
   # Determines whether the Quickbooks Customer is a Thresher client, job, or project
 	def self.customer_type(full_name)
-		return Project if full_name.match(/P-\d+$/)
+		return Project if full_name.upcase.match(/P-\d+$/)
 		return Job if full_name.match(/:/)
 		Client
 	end
