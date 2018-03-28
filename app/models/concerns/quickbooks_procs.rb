@@ -43,6 +43,10 @@ module QuickbooksProcs
 			"X" unless data
 		}
 		
+		PROJECT_PKEY_CAST = Proc.new{|name|
+			name.remove("P-")
+		}
+		
 	end
 
 	end

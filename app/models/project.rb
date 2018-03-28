@@ -5,6 +5,7 @@ class Project < Customer
   self.primary_key = "Project_PKEY"
 
   FIELD_MAP = {
+      :Project_PKEY => {'name' => PROJECT_PKEY_CAST},
       :list_id => "list_id",
       :full_name => 'full_name',
       :Project_DateStartActual => 'job_start_date',
