@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "site_contact"
     t.string "site_email"
     t.string "site_phone"
-    t.decimal "total_balance", precision: 10, scale: 2, default: "0.0", null: false
+    t.decimal "total_balance", precision: 10, scale: 2, default: "0.0"
     t.index ["list_id"], name: "list_id", unique: true
   end
   

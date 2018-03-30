@@ -48,6 +48,7 @@ class ClientQueryTest < ActiveSupport::TestCase
     assert_equal("EMAIL@EMAIL.COM", c.site_email)
     assert_equal("999-999-9999", c.site_phone)
     assert_equal("AAA", c.sales_rep)
+    assert_equal(99.99, c.total_balance.to_f)
     assert_equal(0, QbwcError.count)
   end
 
