@@ -12,7 +12,7 @@ class CustomerQueryWorker < QBWC::Worker
             :max_returned => 100,
             :active_status => "All",
             :from_modified_date => last_ran,
-          :include_ret_element => ['ListID', 'Name', 'FullName']
+            :include_ret_element => ['ListID', 'Name', 'FullName']
         }
         }]
   end
