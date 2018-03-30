@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 0) do
-
+  
   create_table "Customers", primary_key: "Customers_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.timestamp "CreationTimeStamp"
     t.text "CreationUser"
@@ -52,9 +52,10 @@ ActiveRecord::Schema.define(version: 0) do
     t.string "site_contact"
     t.string "site_email"
     t.string "site_phone"
+    t.decimal "total_balance", precision: 10, scale: 2, default: "0.0", null: false
     t.index ["list_id"], name: "list_id", unique: true
   end
-
+  
   create_table "Jobs", primary_key: "Jobs_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.timestamp "CreationTimeStamp"
     t.text "CreationUser"
@@ -107,7 +108,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["full_name"], name: "full_name", unique: true
     t.index ["list_id"], name: "list_id", unique: true
   end
-
+  
   create_table "Project", primary_key: "Project_PKEY", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.timestamp "CreationTimeStamp"
     t.text "CreationUser", limit: 16777215
@@ -182,7 +183,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["full_name"], name: "full_name", unique: true
     t.index ["list_id"], name: "list_id", unique: true
   end
-
+  
   create_table "estimates", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", default: "", null: false
     t.datetime "time_created"
@@ -230,7 +231,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["ref_number"], name: "ref_number"
     t.index ["txn_id"], name: "txn_id", unique: true
   end
-
+  
   create_table "invoices", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", null: false
     t.datetime "time_created"
@@ -283,7 +284,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["sales_order_id"], name: "sales_order_id"
     t.index ["txn_id"], name: "txn_id", unique: true
   end
-
+  
   create_table "purchase_orders", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", default: "", null: false
     t.datetime "time_created"
@@ -334,7 +335,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["txn_id"], name: "txn_id", unique: true
     t.index ["vendor_name"], name: "vendor"
   end
-
+  
   create_table "qb_customers", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "list_id", limit: 209, null: false
     t.string "full_name", limit: 209
@@ -345,7 +346,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["sales_rep"], name: "sales_rep"
     t.index ["sublevel"], name: "sublevel"
   end
-
+  
   create_table "qb_employees", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "list_id", limit: 209, null: false
     t.string "name", limit: 41
@@ -355,7 +356,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.boolean "is_active", default: true, null: false
     t.index ["list_id"], name: "list_id", unique: true
   end
-
+  
   create_table "qbwc_errors", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "worker_class", null: false
     t.string "model_id"
@@ -363,7 +364,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+  
   create_table "qbwc_history", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "began_at"
     t.string "ticket"
@@ -375,7 +376,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "updated_at", null: false
     t.index ["status_code_id"], name: "status_code_id"
   end
-
+  
   create_table "qbwc_jobs", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "company", limit: 1000
@@ -390,7 +391,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["company"], name: "index_qbwc_jobs_on_company", length: { company: 150 }
     t.index ["name"], name: "index_qbwc_jobs_on_name", unique: true
   end
-
+  
   create_table "qbwc_sessions", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "ticket"
     t.string "user"
@@ -403,7 +404,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+  
   create_table "qbwc_timecard_errors", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "worker_class", null: false
     t.string "model_id"
@@ -411,7 +412,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
+  
   create_table "receive_payments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", default: "", null: false
     t.datetime "time_created"
@@ -431,7 +432,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["ref_number"], name: "ref_number"
     t.index ["txn_id"], name: "txn_id", unique: true
   end
-
+  
   create_table "sales_orders", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", default: "", null: false
     t.datetime "time_created"
@@ -484,7 +485,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["ref_number"], name: "ref_number"
     t.index ["txn_id"], name: "txn_id", unique: true
   end
-
+  
   create_table "time_trackings", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "txn_id", null: false
     t.datetime "time_created"
@@ -504,7 +505,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["item_service"], name: "item_service_full_name"
     t.index ["txn_id"], name: "txn_id", unique: true
   end
-
+  
   create_table "vendors", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "list_id", default: "", null: false
     t.datetime "time_created"
@@ -556,6 +557,6 @@ ActiveRecord::Schema.define(version: 0) do
     t.index ["list_id"], name: "list_id", unique: true
     t.index ["name"], name: "name", unique: true
   end
-
+  
   add_foreign_key "Jobs", "Customers", column: "FK_Customers_PKEY", primary_key: "Customers_PKEY", name: "Jobs_ibfk_1", on_update: :cascade, on_delete: :cascade
 end

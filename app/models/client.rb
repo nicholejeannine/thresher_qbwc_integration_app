@@ -35,7 +35,8 @@ class Client < Customer
       :site_phone => {"data_ext_ret" => SITE_PHONE_CAST},
       :site_email => {"data_ext_ret" => SITE_EMAIL_CAST},
       :Cust_PhoneCell => {"additional_contact_ref" => MOBILE_CAST},
-      :Cust_InactiveFlag => {"is_active" => INACTIVE_FLAG_CAST}
+      :Cust_InactiveFlag => {"is_active" => INACTIVE_FLAG_CAST},
+      :total_balance => "total_balance"
   }
   
   
