@@ -38,7 +38,8 @@ class Job < Customer
       :Job_DateEndProjected => "job_projected_end_date",
       :Job_DateEndActual => "job_end_date",
       :list_id => "list_id",
-      :full_name => "full_name"
+      :full_name => "full_name",
+      :Job_Description_Short => "job_desc"
   }
   
   # job_status fields come back like "InProgress" - make it save as two separate words.
