@@ -5,8 +5,6 @@ class QbCustomer < ApplicationRecord
       c = self.find_or_initialize_by("list_id" => qb['list_id'])
       c['full_name'] = qb['full_name']
       c['name'] = qb['name']
-      c['balance'] = qb['balance']
-      c['total_balance'] = qb['total_balance']
       c.save
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
