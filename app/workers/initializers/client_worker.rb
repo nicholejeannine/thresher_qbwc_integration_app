@@ -8,7 +8,7 @@ class Initializers::ClientWorker < QBWC::Worker
         :xml_attributes => {:requestID => 1, :iterator => "Start"},
         :max_returned => 100,
         :active_status => "All",
-        :include_ret_element => ['ListID', 'FullName', 'IsActive', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'BillAddress', 'ShipAddress', 'Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'AdditionalContactRef', 'SalesRepRef', 'DataExtRet'], :owner_id => 0
+        :include_ret_element => ['ListID', 'FullName', 'IsActive', 'CompanyName', 'Salutation', 'FirstName', 'MiddleName', 'LastName', 'BillAddress', 'ShipAddress', 'Phone', 'AltPhone', 'Fax', 'Email', 'Cc', 'AdditionalContactRef', 'SalesRepRef', 'TotalBalance', 'DataExtRet'], :owner_id => 0
     }
   }
   end
