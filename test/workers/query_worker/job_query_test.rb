@@ -47,6 +47,7 @@ class JobQueryTest < ActiveSupport::TestCase
     assert_equal("1982-12-30", j.Job_DateEndProjected.to_s)
     assert_equal("1982-12-30", j.Job_DateEndActual.to_s)
     assert_equal("800006BC-1257534763", j.list_id)
+    assert_equal("Some Description", j.Job_Description_Short)
   end
 
   test "Customer.parse_customer_response creates a new record when the list id is not found" do
