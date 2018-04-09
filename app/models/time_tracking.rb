@@ -2,7 +2,7 @@
 
 class TimeTracking < ApplicationRecord
   
-  self.table_name = 'qb.time_trackings'
+  self.table_name = 'time_trackings'
   
 
   # FIELD_MAP = {
