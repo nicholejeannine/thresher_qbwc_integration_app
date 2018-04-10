@@ -3,7 +3,7 @@
 class TimecardTransaction < ActiveRecord::Base
   # We're using a view, so tell the view to treat "id" as a primary key
   self.primary_key= :id
-  self.table_name = 'qb.timecard_transactions'
+  self.table_name = 'view_timecard_transactions'
   
   # belongs_to has optional: true attributes to protect for nulls (in the case of an inactive employee who still has a time card entry, a non-holiday, or hours logged to a project without a ticket)
   belongs_to :employee, optional: true
