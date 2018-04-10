@@ -43,9 +43,9 @@ module QuickbooksProcs
 			"X" unless data
 		}
 		
-		PROJECT_PKEY_CAST = Proc.new{|name|
-			name.upcase.remove("P-")
-		}
+		# PROJECT_PKEY_CAST = Proc.new{|name|
+		# 	name.upcase.remove("P-")
+		# }
 		
 	end
 
