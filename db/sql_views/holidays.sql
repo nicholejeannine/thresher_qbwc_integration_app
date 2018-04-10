@@ -1,1 +1,1 @@
-CREATE OR REPLACE ALGORITHM = UNDEFINED SQL SECURITY INVOKER VIEW `holidays` AS select `Thresher`.`Holidays`.`Holidays_PKEY` AS `id`, `Thresher`.`Holidays`.`Holiday_Date` AS `date`, `Thresher`.`Holidays`.`Holiday_Name` AS `name` from `Thresher`.`Holidays`
+CREATE OR REPLACE ALGORITHM = UNDEFINED SQL SECURITY INVOKER VIEW `view_holidays` AS select `Thresher`.`Holidays`.`Holidays_PKEY` AS `id`, `Thresher`.`Holidays`.`Holiday_Date` AS `date`, `Thresher`.`Holidays`.`Holiday_Name` AS `name` from `Thresher`.`Holidays`

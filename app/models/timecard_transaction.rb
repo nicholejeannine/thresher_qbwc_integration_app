@@ -3,7 +3,7 @@
 class TimecardTransaction < ActiveRecord::Base
   # We're using a view, so tell the view to treat "id" as a primary key
   self.primary_key= :id
-  self.table_name = 'qb.timecard_transactions'
+  self.table_name = 'view_timecard_transactions'
   
   # belongs_to has optional: true attributes to protect for nulls (in the case of an inactive employee who still has a time card entry, a non-holiday, or hours logged to a project without a ticket)
   belongs_to :employee, optional: true
@@ -32,8 +32,9 @@ class TimecardTransaction < ActiveRecord::Base
   # grab all timecards between a specified start and end date - only query active employees
   # CLEANUP: Create a separate scope for "is active employees", or rename "between" to be more clear that only ACTIVE employees are returned in the scope.
   # THe "includes" command preloads all relevant table table, allowing faster data processing
+  # FIXME:::: VIEW_EMPLOYEES???? THIS SHOULD NOT DEPEND ON THE VIEW NAME!
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(employees: { is_active: 1 })
+    includes(:employee, :holiday, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(view_employees: { is_active: 1 })
   end
 
   # TODO: CHANGE METHOD TO thresher_full_name
