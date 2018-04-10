@@ -32,8 +32,9 @@ class TimecardTransaction < ActiveRecord::Base
   # grab all timecards between a specified start and end date - only query active employees
   # CLEANUP: Create a separate scope for "is active employees", or rename "between" to be more clear that only ACTIVE employees are returned in the scope.
   # THe "includes" command preloads all relevant table table, allowing faster data processing
+  # FIXME:::: VIEW_EMPLOYEES???? THIS SHOULD NOT DEPEND ON THE VIEW NAME!
   def self.between(start_date, end_date)
-    includes(:employee, :holiday, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(employees: { is_active: 1 })
+    includes(:employee, :holiday, :ticket).where('`tc_date` >= ?', start_date).where('`tc_date` <= ?', end_date).where(view_employees: { is_active: 1 })
   end
 
   # TODO: CHANGE METHOD TO thresher_full_name
