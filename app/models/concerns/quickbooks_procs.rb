@@ -44,7 +44,7 @@ module QuickbooksProcs
 		}
 		
 		PROJECT_PKEY_CAST = Proc.new{|name|
-			name.remove("P-")
+			name.upcase.remove("P-")
 		}
 		
 	end
