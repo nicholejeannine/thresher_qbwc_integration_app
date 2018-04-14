@@ -2,6 +2,7 @@ class Client < Customer
   
   self.table_name = "Customers"
   self.primary_key = "Customers_PKEY"
+  alias_attribute :full_name, :Cust_CompanyAbr
   
   FIELD_MAP = {
       :list_id => "list_id",
