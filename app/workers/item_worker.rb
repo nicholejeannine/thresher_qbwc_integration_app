@@ -16,11 +16,8 @@ class ItemWorker < QBWC::Worker
     begin
       r['item_inventory_ret']&.each do |qb|
         item = Item.new
-        item[:name] = qb["name"]
         item[:full_name] = qb["full_name"]
-        # item[:sales_desc] = qb["sales_desc"]
         item[:sales_price] = qb["sales_price"]
-        # item[:purchase_desc] = qb["purchase_desc"]
         item[:purchase_cost] = qb["purchase_cost"]
         item[:is_inventory] = 1
         item.save
