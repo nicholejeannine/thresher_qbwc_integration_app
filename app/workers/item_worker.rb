@@ -18,7 +18,7 @@ class ItemWorker < QBWC::Worker
         item = Item.new
         item[:name] = qb["name"]
         item[:full_name] = qb["full_name"]
-        item[:sales_desc] = qb["sales_desc"]
+        # item[:sales_desc] = qb["sales_desc"]
         item[:sales_price] = qb["sales_price"]
         item[:purchase_desc] = qb["purchase_desc"]
         item[:purchase_cost] = qb["purchase_cost"]
