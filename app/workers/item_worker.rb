@@ -22,7 +22,14 @@ class ItemWorker < QBWC::Worker
         item[:is_inventory] = 1
         item.save
       end
-      # r['item_non_inventory_ret']&.each{|qb|Rails.logger.warn(qb)}
+      r['item_non_inventory_ret']&.each do |qb|
+        item = Item.new
+        item[:full_name] = qb["full_name"]
+        item[:sales_price] = qb["sales_and_purchase"]["sales_price"]
+        item[:purchase_cost] = qb["purchase_cost"]
+        item[:is_inventory] = 0
+        item.save
+      end
     rescue StandardError => e
       QbwcError.create(:worker_class => self.class.name, :error_message => e)
     end
