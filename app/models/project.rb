@@ -40,13 +40,19 @@ class Project < Customer
   }
   
   # Return just the "P-xxxx" portion without having to use the QB hash
-  # TODO: maybe just grab this from the QB hash and compare to primary key? Roll back if no match
+  # TODO: maybe just grab this from the QB hash and compare to qprimary key? Roll back if no match
   def name
     names = self.full_name.split(":")
     names[names.count - 1]
   end
   
-  def build_request(name, parent_full_name)
+  def add_customer_request(parent_full_name)
+    # make sure the parent full name points to a value job (not client), and grab the client and job PKEY fields.
+    job_id = Job.where(:full_name => parent_full_name).first&.Jobs_PKEY
+    client_id = Client.where(:full_name => parent_full_name.split(":")[0]).first&.Customers_PKEY
+    if job_id && client_id
+    
+    end
     {:customer_add_rq=>{:customer_add=>{:name=>"#{name}"}, :parent_ref=>{:full_name=>"#{parent_full_name}"}}}
   end
 
@@ -65,5 +71,7 @@ class Project < Customer
     parent_job_name = self.full_name.rpartition(":")[0]
     self.FK_Jobs_PKEY = Job.where(:full_name => parent_job_name).first&.Jobs_PKEY
   end
+  
+ 
 
 end
