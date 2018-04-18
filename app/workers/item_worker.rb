@@ -22,7 +22,7 @@ class ItemWorker < QBWC::Worker
         item[:sales_price] = qb["sales_price"]
         item[:purchase_desc] = qb["purchase_desc"]
         item[:purchase_cost] = qb["purchase_cost"]
-        item[:is_invetory] = 1
+        item[:is_inventory] = 1
         item.save
       end
       # r['item_inventory_ret']&.each{|qb|Rails.logger.warn(qb)}
