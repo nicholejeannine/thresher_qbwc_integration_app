@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/qbwc/qbwc.git
-  revision: e74e63a327993778342d95442640ebd40830b60d
+  remote: https://github.com/qbwc/qbwc.git
+  revision: 2931f54248aa8078cb565040f36f4ac06af8edae
   specs:
     qbwc (1.1.0)
       actionpack (>= 5.0.1)
@@ -95,7 +95,7 @@ GEM
       activesupport (>= 4.1.0)
       builder (~> 3.0)
       nokogiri (~> 1.5)
-    rack (2.0.3)
+    rack (2.2.4)
     rack-cors (1.0.2)
     rack-test (0.8.2)
       rack (>= 1.0, < 3)
