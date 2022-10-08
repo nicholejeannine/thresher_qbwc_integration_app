@@ -1,3 +1,8 @@
+# WHAT IS THIS?
+
+This is a (formerly) fully functioning application I built between 2016 and 2018 for a now-defunct audiovisual integration company in the Silicon Valley. The goal of this application was to integrate our gigantic (100+ tables!) mysql database (which supported the Employee Portal, which I also worked on developing and maintaining) with our Quickbooks Desktop financial tracking system, in order to eliminate the need for double data entry. The application leaned heavily on the [Rails interface for the Quickbooks Web Connector](https://github.com/qbwc/qbwc) and is one of the finest examples of my work to date, owing largely to its success.
+
+
 # HOW DO I USE THIS THING?
 
 The web connector has different "things it can do" at this point. 
@@ -188,12 +193,6 @@ type 99 service code =
 
 # Put this error on a title attribute in HTML on views/timecard_transactions/new
 QbwcTimecardError.create(:worker_class => "TimeTrackingsController#create", :model_id => t.id, :error_message => "No Quickbooks customer found for request TimecardTrans #{t.id}, project_id #{t.project_id}, job_id #{t.job_id}, customer #{t.client_id}, employee #{t&.employee&.employee_list_id}, date #{t.tc_date}")
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream
-=======
->>>>>>> master
-
 
 
 ## HOW TO SELECT/GROUP BY CLIENTS (OUT OF ALL CUSTOMERS/JOBS/PROJECTS):
